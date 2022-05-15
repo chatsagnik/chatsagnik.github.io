@@ -1,0 +1,66 @@
+baseURL: "chatsagnik/"
+languageCode: en-us
+title: Sagnik Chatterjee
+theme: PaperMod
+
+params:
+  profileMode:
+    enabled: true
+    title: "<Title>" # optional default will be site title
+    subtitle: Hi, I am a doctoral candidate at IIIT-Delhi.
+    imageUrl: img/einstein.png # optional
+    # imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: About Me
+        url: "/posts/aboutme/"
+      - name: Research
+        url: "/posts/research/"
+      - name: Talks and Resources
+        url: "/posts/talks/"
+      - name: Blog Posts
+        url: "/archives/"
+
+
+  # homeInfoParams:
+  #     Title: Hi there wave
+  #     Content: Can be Info, links, about...
+
+  socialIcons: # optional
+      - name: twitter
+        url: "https://twitter.com/chatsagnik"
+      - name: github
+        url: "https://github.com/chatsagnik"
+      - name: linkedin
+        url: "https://www.linkedin.com/in/chatsagnik/"
+      - name: stackoverflow
+        url: "https://cs.stackexchange.com/users/35520/sagnik"
+
+menu:
+    main:
+        # - identifier: categories
+        #   name: categories
+        #   url: /categories/
+        #   weight: 10
+
+        - identifier: about
+          name: About Me
+          url: /posts/aboutme/
+          weight: 10
+        - identifier: research
+          name: Research
+          url: /posts/research
+          weight: 20
+        - identifier: archive
+          name: Blog Posts
+          url: /archives/
+          weight: 30
+        - identifier: resources
+          name: Talks and Resources
+          url: /posts/talks/
+          weight: 40
+        # - identifier: tags
+        #   name: tags
+        #   url: /tags/
+        #   weight: 50
