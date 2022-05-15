@@ -1,0 +1,52 @@
+baseURL: http://example.org/
+languageCode: en-us
+title: Sagnik Chatterjee
+theme: PaperMod
+math: true
+
+params:
+  defaultTheme: auto
+  profileMode:
+      enabled: true
+      title: "<Title>" # optional default will be site title
+      subtitle: Hi, I am a doctoral candidate at IIIT-Delhi.
+      # imageUrl: "/static/einstein.png" # optional
+      # imageTitle: "My photo" # optional
+      # imageWidth: 120 # custom size
+      # imageHeight: 120 # custom size
+      # buttons:
+      #   - name: Archive
+      #     url: "/archive"
+      #     - name: Github
+      #         url: "https://github.com/"
+
+  socialIcons:
+  - name: twitter
+    url: 'https://twitter.com/chatsagnik'
+  - name: github
+    url: 'https://github.com/chatsagnik'
+  - name: other
+    url: 'https://scholar.google.com/citations?user=TVzLYlAAAAAJ&hl=en'
+
+
+  ShowReadingTime: true
+  ShowToc: true
+  ShowBreadCrumbs: true
+  comments: true
+
+menu:
+  main:
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 10
+
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
+
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 30
