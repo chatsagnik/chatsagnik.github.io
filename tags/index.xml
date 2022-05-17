@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Sagnik Chatterjee</title>
+    <link>https://chatsagnik.github.io/tags/</link>
+    <description>Recent content in Tags on Sagnik Chatterjee</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 May 2022 21:11:36 +0530</lastBuildDate><atom:link href="https://chatsagnik.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>personal</title>
+      <link>https://chatsagnik.github.io/tags/personal/</link>
+      <pubDate>Sun, 15 May 2022 21:11:36 +0530</pubDate>
+      
+      <guid>https://chatsagnik.github.io/tags/personal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>code</title>
+      <link>https://chatsagnik.github.io/tags/code/</link>
+      <pubDate>Sun, 15 May 2022 20:28:39 +0530</pubDate>
+      
+      <guid>https://chatsagnik.github.io/tags/code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://chatsagnik.github.io/tags/git/</link>
+      <pubDate>Sun, 15 May 2022 20:28:39 +0530</pubDate>
+      
+      <guid>https://chatsagnik.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://chatsagnik.github.io/tags/hugo/</link>
+      <pubDate>Sun, 15 May 2022 20:28:39 +0530</pubDate>
+      
+      <guid>https://chatsagnik.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
