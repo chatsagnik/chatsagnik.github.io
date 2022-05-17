@@ -26,6 +26,16 @@ Research Interests  My primary area of research is Quantum Ensemble Learning whi
       <description>  git clone personal_website target_folder_name   hugo new site --force target_folder_name -f yml   cd target_folder_name   git submodule add &amp;lt;url&amp;gt; themes/theme_name --depth=1 </description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://chatsagnik.github.io/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chatsagnik.github.io/talks/</guid>
+      <description>Talks and Resources  Shallow Quantum Circuits This was a talk I gave for Evariste – IIITD’s Theory and Math club.
+Abstract: Shallow Quantum Circuits are the quantum analogs of constant depth classical circuits. In 2018, Bravyi et al. showed that there is a relational problem that provides an unconditional separation between SQC’s and constant depth bounded fan-in classical circuits. This started a flurry of research which led to a lot of separation results between SQC’s and stronger classes of classical circuits.</description>
+    </item>
+    
     
   </channel>
 </rss>
