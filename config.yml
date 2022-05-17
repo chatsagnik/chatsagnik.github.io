@@ -1,0 +1,94 @@
+baseURL: "chatsagnik/"
+languageCode: en-us
+title: Sagnik Chatterjee
+theme: PaperMod
+
+params:
+  keywords: [Blog, Portfolio, Quantum Computing]
+  author: Sagnik Chatterjee
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: ture
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+  math: true
+
+  label:
+    text: "Sagnik Chatterjee"
+    icon: "img/logo.png"
+    iconHeight: 35
+
+  profileMode:
+    enabled: true
+    title: "Welcome! \U0001F44B" # optional default will be site title
+    subtitle: I am a doctoral candidate at IIIT-Delhi.
+    imageUrl: img/dp.jpg # optional
+    imageTitle: "Quantum Nerd" # optional
+    imageWidth: 336 # custom size
+    imageHeight: 336 # custom size
+    buttons:
+      - name: About Me
+        url: "/about/"
+      - name: Research
+        url: "/research/"
+      - name: Talks and Resources
+        url: "/talks/"
+      - name: Blog Posts
+        url: "/posts/"
+
+
+  # homeInfoParams:
+  #     Title: Hi there wave
+  #     Content: Can be Info, links, about...
+
+  socialIcons: # optional
+      - name: twitter
+        url: "https://twitter.com/chatsagnik"
+      - name: github
+        url: "https://github.com/chatsagnik"
+      - name: linkedin
+        url: "https://www.linkedin.com/in/chatsagnik/"
+      - name: stackoverflow
+        url: "https://cs.stackexchange.com/users/35520/sagnik"
+      - name: youtube
+        url: "https://www.youtube.com/channel/UCWXGoY-QGBhzJJft0rFEwPQ"
+      - name: rss
+
+menu:
+    main:
+        # - identifier: categories
+        #   name: categories
+        #   url: /categories/
+        #   weight: 10
+
+        - identifier: about
+          name: About Me
+          url: /about/
+          weight: 10
+        - identifier: research
+          name: Research
+          url: /research/
+          weight: 20
+        - identifier: posts
+          name: Blog Posts
+          url: /posts/
+          weight: 30
+        - identifier: resources
+          name: Talks and Resources
+          url: /talks/
+          weight: 40
+        # - identifier: tags
+        #   name: tags
+        #   url: /tags/
+        #   weight: 50

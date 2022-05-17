@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>chatsagnik/about/</loc>
+    <lastmod>2022-05-15T21:11:36+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/tags/personal/</loc>
+    <lastmod>2022-05-15T21:11:36+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/</loc>
+    <lastmod>2022-05-15T21:11:36+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/tags/</loc>
+    <lastmod>2022-05-15T21:11:36+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/tags/code/</loc>
+    <lastmod>2022-05-15T20:28:39+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/tags/git/</loc>
+    <lastmod>2022-05-15T20:28:39+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/tags/hugo/</loc>
+    <lastmod>2022-05-15T20:28:39+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/posts/</loc>
+    <lastmod>2022-05-15T20:28:39+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/posts/settingup/</loc>
+    <lastmod>2022-05-15T20:28:39+05:30</lastmod>
+  </url><url>
+    <loc>chatsagnik/archives/</loc>
+  </url><url>
+    <loc>chatsagnik/categories/</loc>
+  </url>
+</urlset>
