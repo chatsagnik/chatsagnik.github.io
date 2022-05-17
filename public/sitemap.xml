@@ -2,35 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>chatsagnik/about/</loc>
+    <loc>https://chatsagnik.github.io/about/</loc>
     <lastmod>2022-05-15T21:11:36+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/tags/personal/</loc>
+    <loc>https://chatsagnik.github.io/tags/personal/</loc>
     <lastmod>2022-05-15T21:11:36+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/</loc>
+    <loc>https://chatsagnik.github.io/</loc>
     <lastmod>2022-05-15T21:11:36+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/tags/</loc>
+    <loc>https://chatsagnik.github.io/tags/</loc>
     <lastmod>2022-05-15T21:11:36+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/tags/code/</loc>
+    <loc>https://chatsagnik.github.io/tags/code/</loc>
     <lastmod>2022-05-15T20:28:39+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/tags/git/</loc>
+    <loc>https://chatsagnik.github.io/tags/git/</loc>
     <lastmod>2022-05-15T20:28:39+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/tags/hugo/</loc>
+    <loc>https://chatsagnik.github.io/tags/hugo/</loc>
     <lastmod>2022-05-15T20:28:39+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/posts/</loc>
+    <loc>https://chatsagnik.github.io/posts/</loc>
     <lastmod>2022-05-15T20:28:39+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/posts/settingup/</loc>
+    <loc>https://chatsagnik.github.io/posts/settingup/</loc>
     <lastmod>2022-05-15T20:28:39+05:30</lastmod>
   </url><url>
-    <loc>chatsagnik/archives/</loc>
+    <loc>https://chatsagnik.github.io/archives/</loc>
   </url><url>
-    <loc>chatsagnik/categories/</loc>
+    <loc>https://chatsagnik.github.io/categories/</loc>
   </url>
 </urlset>
