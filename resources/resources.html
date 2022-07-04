@@ -25,28 +25,33 @@
 			<nav class="primary-nav flex">
 				<ul id="navul" data-visible="false" class="navul flex">
 					<li >
+						<a href="../index.html#landing-page">
+							<span>~</span>
+						</a>
+					</li>
+					<li >
 						<a href="#quantum-boosting-domain">
-							<span aria-hidden="true">/</span>boosting
+							./<span>boosting</span>
 						</a>
 					</li>
 					<li>
 						<a href="#shallow-circuits">
-							<span aria-hidden="true">/</span>shallow_circuit
+							./<span>shallow_circuit</span>
 						</a>
 					</li>
 					<li>
 						<a href="#hhl">
-							<span aria-hidden="true">/</span>resources
+							./<span>hhl</span>
 						</a>
 					</li>
 					<li>
 						<a href="#others">
-							<span aria-hidden="true">/</span>others
+						./<span>others</span>
 						</a>
 					</li>
 					<li>
 						<a href="#footer">
-							<span aria-hidden="true">/</span>links
+							./<span aria-hidden="true">links</span>
 						</a>
 					</li>
 				</ul>
@@ -61,13 +66,14 @@
 				<h1 id="quantum-boosting-domain">Quantum Boosting of Domain Partitioning Hypotheses</h1>
 				<p>This was a talk at the weekly Theoretical CS seminar at IIT Delhi on a joint work I did with my advisor, Rohan, and Parmeet. <br>
 				<strong>Abstract:</strong>
-				Boosting is an ensemble learning method that converts a weak learner into a strong learner in the PAC learning framework. Freund and Schapire designed the Godel prize-winning algorithm named AdaBoost that can boost learners which output binary hypotheses. Recently, Arunachalam and Maity presented the first quantum boosting algorithm with similar theoretical guarantees. Their algorithm, which we refer to as QAdaBoost henceforth, is a quantum adaptation of AdaBoost, and only works for the binary hypothesis case. QAdaBoost is quadratically faster than AdaBoost in terms of the VC-dimension of the hypothesis class of the weak learner but polynomially worse in the bias of the weak learner.
-				<br>
-Izdebski et al.\ posed an open question on whether we can boost quantum weak learners that output non-binary hypothesis. In this work, we address this open question by developing the QRealBoost algorithm which was motivated by the classical RealBoost algorithm. The main technical challenge was to provide provable guarantees for convergence, generalization bounds, and quantum speedup, given that quantum subroutines are noisy and probabilistic. We prove that QRealBoost retains the quadratic speedup of QAdaBoost over AdaBoost and further achieves a polynomial speedup over QAdaBoost in terms of both the bias of the learner and the time taken by the learner to learn the target concept class.
-<br>
-Finally, we perform empirical evaluations on QRealBoost and report encouraging observations on quantum simulators by benchmarking the convergence performance of QRealBoost against QAdaBoost, AdaBoost, and RealBoost on a subset of the MNIST dataset and Breast Cancer Wisconsin dataset.
-				<br>
-				<a href="https://drive.google.com/file/d/1trJZWTQNqjm6zJjy4L7wZAviP7NJe0Ob/view?usp=sharing">Slides</a>. 
+				Boosting is an ensemble learning method that converts a weak learner into a strong learner in the PAC learning framework. 
+				Freund and Schapire designed the Godel prize-winning algorithm named AdaBoost that can boost learners which output binary hypotheses.
+				Recently, Arunachalam and Maity presented the first quantum boosting algorithm with similar theoretical guarantees. 
+				Their algorithm, QAdaBoost, is a quantum adaptation of AdaBoost, and only works for the binary hypothesis case. QAdaBoost is quadratically faster than AdaBoost in terms of the VC-dimension of the hypothesis class of the weak learner but polynomially worse in the bias of the weak learner. <br>
+				Izdebski et al. posed an open question on whether we can boost quantum weak learners that output non-binary hypothesis. 
+				In this work, we address this open question by developing the QRealBoost algorithm which was motivated by the classical RealBoost algorithm. 
+				The main technical challenge was to provide provable guarantees for convergence, generalization bounds, and quantum speedup, given that quantum subroutines are noisy and probabilistic. 
+				We prove that QRealBoost retains the quadratic speedup of QAdaBoost over AdaBoost and further achieves a polynomial speedup over QAdaBoost in terms of both the bias of the learner and the time taken by the learner to learn the target concept class. We also perform empirical evaluations on QRealBoost and report encouraging observations on quantum simulators by benchmarking the convergence performance of QRealBoost against QAdaBoost, AdaBoost, and RealBoost on a subset of the MNIST dataset and Breast Cancer Wisconsin dataset. These are the <a href="https://drive.google.com/file/d/1trJZWTQNqjm6zJjy4L7wZAviP7NJe0Ob/view?usp=sharing">Slides</a> for the talk. 
 				</p>
 				<h2>Papers</h2>
 				<ul>

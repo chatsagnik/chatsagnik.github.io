@@ -2,7 +2,7 @@ const primaryNav = document.querySelector('.navul');
 const navToggle = document.querySelector('.mobile-nav-toggle');
 const navigationHeight = document.querySelector('.primary-nav').offsetHeight;
 
-document.documentElement.style.setProperty('--scroll-padding', navigationHeight - 1 + "px");
+document.documentElement.style.setProperty('--scroll-padding', navigationHeight - 2.5 + "px");
 
 navToggle.addEventListener('click', () => {
 	const visibility = primaryNav.getAttribute("data-visible");
