@@ -156,6 +156,7 @@ nav li.forward a:hover:before{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* width: 100vw; */
   /* background-color: red; */
 }
 
@@ -339,7 +340,7 @@ footer {
   bottom: 0;
   width: 200%;
   /* height: 100%; */
-  border: red;
+  /* border: red; */
 }
 
 .wave1 {
@@ -393,8 +394,134 @@ footer {
   }
 }
 
+@media only screen and (max-width: 28em) {
+
+  header {
+    background-color: var(--bg-color);
+  }
+  /* body  { */
+  /*   overflow-x: scroll; */
+  /* } */
+
+  .logo{
+    padding-top: 1.5rem;
+  }
+
+  .navul {
+    position: fixed;
+    /* font-size: 1.5rem; */
+    inset: 0 0 0 30%;
+    background-color: var(--txt-color);
+    color: var(--bg-color);
+    flex-direction: column;
+    transform: translateX(100%);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    transition: transform 350ms ease-out;
+  }
+
+  .navul[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    width: 2rem;
+    top: 2rem;
+    background-color: transparent;
+    background-image: url("../assets/img/hamburger-32.png");
+    background-repeat: no-repeat;
+    right: 0.75rem;
+    aspect-ratio: 1;
+    border: 0;
+    z-index: 999;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  nav li { 
+    color: var(--bg-color);
+    font-family: "Source Code Pro", monospace;
+  }
+
+  nav ul a {
+    color: inherit;
+  }
+  .landing-page {
+    /* background-color: red; */
+    max-width: 100vw;
+  }
+  .landing-page h1 {
+    /* padding-top: 3rem; */
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+
+  .landing-page p {
+    font-size: 1rem;
+    font-weight: 600;
+    width: 90%;
+  }
+
+  .aboutme {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    max-width: 100vw;
+  }
+
+  .aboutme img {
+    width: 90vw;
+  }
+
+  .aboutme h1 {
+    font-size: 1.15rem;
+    font-size: 800;
+  }
+
+  .aboutme h2 {
+    font-size: 1rem;
+    font-size: 600;
+  }
+  .inneraboutme {
+    flex-direction: column;
+  }
+
+  .inneraboutme p {
+    font-size: 0.95rem;
+    font-size: 400;
+  }
+
+  footer {
+    max-width: 100vw;
+    max-height: 40vh;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+
+  .wave {
+    width: 400%;
+  }
+  .social-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+  }
+
+  .bi {
+    width: 16px;
+    height: 16px;   
+  }
+}
+
 @media only screen and (max-width: 39em) and (min-width: 28em) {
-/* @media (min-width:31em and max-width: 39em) { */
+  /* @media (min-width:31em and max-width: 39em) { */
   header {
     background-color: var(--bg-color);
   }
@@ -442,18 +569,40 @@ footer {
     font-weight: 400;
   }
 
-  .landing-page h1 {
-    padding-top: 5rem;
+  .landing-page {
+    max-width: 100vw;
+    /* background-color: red; */
   }
- nav li { 
-  color: var(--bg-color);
-  font-family: "Source Code Pro", monospace;
-}
+
+  .landing-page h1 {
+    padding-top: 1rem;
+  }
+
+  .landing-page p {
+    width: 90%;
+    font-weight: 600;
+  }
+
+  nav li { 
+    color: var(--bg-color);
+    font-family: "Source Code Pro", monospace;
+  }
 
   nav ul a {
     color: inherit;
   }
 
+  .aboutme {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    max-width: 100vw;
+  }
+
+  .aboutme img {
+    width: 90vw;
+  }
   .inneraboutme {
     flex-direction: column;
   }
