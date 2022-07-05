@@ -8,6 +8,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--scroll-padding, 50px);
+  min-width: 28em;
 }
 
 .flex {
@@ -35,18 +36,19 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
+  min-width: 490px;
 }
-
 header {
   flex-direction: row;
+  /* Now we push menu to the right. */
   justify-content: space-between;
-  /* padding: 0.5rem 2rem; */
+  align-content: center;
   position: fixed;
   z-index: 999;
-  background: #5E81AC;
-  width: 100%;
-  border-radius: 1.5rem;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background: var(--bg-color);
+  flex-grow: 1;
+  width: 98%;
+  /* align-content: center; */
 }
 
 .mobile-nav-toggle {
@@ -77,37 +79,28 @@ header {
     transform:rotate(-15deg)
   }
 }
-.primary-nav {
-  position: sticky;
-  top:0;
-  padding-bottom: 0;
-  font-size: 1.25rem;
-}
+
+/* .primary-nav { */
+/*   margin-left: auto; */
+/* } */
+
 .navul {
-  margin-right: 2rem;
   flex-direction: row;
   list-style-type: none;
-  justify-content: space-between;
-  width: 100%;
-  flex-grow: 1;
+  /* font-size: 2rem; */
+  margin-left: auto;
 }
 
 nav li {
-  /* color: #ECEFF4; */
-  color: var(--bg-color);
-  /* font-size: 400; */
-}
-
-nav a > span {
-  font-weight: 800;
-  /* margin-inline-end: 0.5em; */
+  color: var(--txt-color);
+  font-family: "Source Code Pro", monospace;
 }
 
 nav li a{
   position: relative;
   color: inherit;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -118,7 +111,7 @@ nav li a:before{
   left: 0;
   height: 3px;
   width: 0%;
-  background: var(--bg-color);
+  background: var(--txt-color);
   border-radius: 12px;
   transition: all 0.4s ease;
 }
@@ -155,6 +148,7 @@ nav li.forward a:hover:before{
 }
 
 .landing-page {
+  margin-top: 3rem;
   padding: 0;
   font-family: "Source Code Pro", monospace;
   min-height: 100vh;
@@ -241,73 +235,6 @@ nav li.forward a:hover:before{
     transform: translateY(0);
   }
 }
-
-/* @media (max-width: 35em) { */
-/*   header { */
-/*     background-color: var(--bg-color); */
-/*   } */
-
-/*   body{ */
-/*     overflow-x: hidden; */
-/*   } */
-
-/*   .logo{ */
-/*     padding-top: 1.5rem; */
-/*   } */
-
-/*   .navul { */
-/*     margin-top: 0; */
-/*     position: fixed; */
-/*     display: flex; */
-/*     font-size: 1.5rem; */
-/*     z-index: 800; */
-/*     inset: 0 0 0 30%; */
-/*     --gap: 2em; */
-/*     background-color: var(--txt-color); */
-/*     flex-direction: column; */
-/*     padding: min(20vh, 7.5rem) 2em; */
-/*     /1* background: hsl(0 0% 5% / 1); *1/ */
-/* background: hsl(0, 0%, 100% / 0.1); */
-/*     /1* backdrop-filter: blur(1rem); *1/ */
-/*     transform: translateX(100%); */
-/*     transition: transform 350ms ease-out; */
-/*   } */
-
-/*   .navul[data-visible="true"] { */
-/*     transform: translateX(0%); */
-/*   } */
-
-/*   .mobile-nav-toggle { */
-/*     display: block; */
-/*     position: absolute; */
-/*     width: 2.5rem; */
-/*     top: 2rem; */
-/*     background-color: transparent; */
-/*     background-image: url("../resources/hamburger-32.png"); */
-/*     background-repeat: no-repeat; */
-/*     right: 2rem; */
-/*     aspect-ratio: 1; */
-/*     border: 0; */
-/*     z-index: 999; */
-/*     font-size: 2rem; */
-/*     font-weight: 400; */
-/*   } */
-
-/*   .landing-page h1 { */
-/*     padding-top: 2rem; */
-/*   } */
-
-/*   /1* nav ul a { *1/ */
-/*   /1*   color: #e5e9f0; *1/ */
-/*   /1* } *1/ */
-
-/*   @supports (backdrop-filter: blur(1rem)) { */
-/*     nav ul { */
-/*       background: hsl(0, 0%, 100% / 0.1); */
-/*       backdrop-filter: blur(1rem); */
-/*     } */
-/*   } */
-/* } */
 
 
 .aboutme {
@@ -465,6 +392,74 @@ footer {
     transform: translateX(20%);
   }
 }
-/* .boldface { */
-/*   font-weight: 900; */
-/* } */
+
+@media only screen and (max-width: 39em) and (min-width: 28em) {
+/* @media (min-width:31em and max-width: 39em) { */
+  header {
+    background-color: var(--bg-color);
+  }
+
+  /* body{ */
+  /*   overflow-x: scroll; */
+  /* } */
+
+  .logo{
+    padding-top: 1.5rem;
+  }
+
+  .navul {
+    position: fixed;
+    /* font-size: 1.5rem; */
+    inset: 0 0 0 30%;
+    background-color: var(--txt-color);
+    color: var(--bg-color);
+    flex-direction: column;
+    transform: translateX(100%);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    transition: transform 350ms ease-out;
+  }
+
+  .navul[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    width: 2.5rem;
+    top: 2rem;
+    background-color: transparent;
+    background-image: url("../assets/img/hamburger-32.png");
+    background-repeat: no-repeat;
+    right: 2rem;
+    aspect-ratio: 1;
+    border: 0;
+    z-index: 999;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .landing-page h1 {
+    padding-top: 5rem;
+  }
+ nav li { 
+  color: var(--bg-color);
+  font-family: "Source Code Pro", monospace;
+}
+
+  nav ul a {
+    color: inherit;
+  }
+
+  .inneraboutme {
+    flex-direction: column;
+  }
+
+  .bi {
+    width: 30px;
+    height: 30px;   
+  }
+}

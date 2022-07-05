@@ -37,14 +37,15 @@ body {
 }
 header {
   flex-direction: row;
+  /* Now we push menu to the right. */
   justify-content: space-between;
-  /* padding: 0.5rem 2rem; */
+  align-content: center;
   position: fixed;
   z-index: 999;
-  background: #5E81AC;
-  width: 100%;
-  border-radius: 1.5rem;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background: var(--bg-color);
+  flex-grow: 1;
+  width: 98%;
+  /* align-content: center; */
 }
 
 .mobile-nav-toggle {
@@ -76,31 +77,26 @@ header {
   }
 }
 
-.primary-nav {
-  position: sticky;
-  top:0;
-  padding-bottom: 0;
-  font-size: 1.25rem;
-}
+/* .primary-nav { */
+/*   margin-left: auto; */
+/* } */
+
 .navul {
-  margin-right: 2rem;
   flex-direction: row;
   list-style-type: none;
-  justify-content: space-between;
-  width: 100%;
-  flex-grow: 1;
+  font-size: 1.25rem;
+  margin-left: auto;
 }
 
 nav li {
-  /* color: #ECEFF4; */
-  color: var(--bg-color);
-  /* font-size: 400; */
+  color: var(--txt-color);
+  font-family: "Source Code Pro", monospace;
 }
 
 nav li a{
   position: relative;
   color: inherit;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 500;
   text-decoration: none;
 }
@@ -112,7 +108,7 @@ nav li a:before{
   left: 0;
   height: 3px;
   width: 0%;
-  background: var(--bg-color);
+  background: var(--txt-color);
   border-radius: 12px;
   transition: all 0.4s ease;
 }
@@ -143,12 +139,6 @@ nav li.forward a:hover:before{
   transform: scaleX(1);
   transform-origin: left;
 }
-/* nav a { */
-/*   text-decoration: none; */
-/*   color: inherit; */
-/*   font-size: 1.25rem; */
-/*   font-weight: 400; */
-/* } */
 
 nav a > span {
   font-weight: 800;
@@ -164,32 +154,23 @@ nav a > span {
   padding: 0;
   gap: 0;
   font-family: "Source Code Pro", monospace;
+  color: var(--txt-color);
 }
 
 .post {
-  /* margin-top: 1rem; */
-  /* margin-bottom: 1rem; */
-  /* padding-top: 5rem; */
-  /* padding-bottom: auto; */
   margin-left: 5rem;
   margin-right: auto;
   flex-direction: column;
-  /* justify-content: space-around; */
   align-items: center;
-  /* gap:0; */
-  /* flex-grow: 1; */
-  /* border: medium; */
   min-height: 100vh;
 }
 
 .post h1 {
   margin: 1rem 0 0 0;
   padding: 0;
-  /* padding-top: 4rem; */
   font-size: clamp(1rem, 2vw + 1rem, 3rem);
   position: relative;
   font-family: "Source Code Pro", monospace;
-  /* width: max-content; */
 }
 
 .post h2 {
@@ -198,7 +179,6 @@ nav a > span {
   font-family: "Source Code Pro", monospace;
   margin: 0;
   padding: 0;
-  /* border: medium; */
 }
 .bottompost {
   min-height: 50vh;
@@ -207,15 +187,11 @@ nav a > span {
 
 footer {
   margin-top: auto;
-  /* position: fixed; */
-  /* margin-bottom: 2rem; */
-  /* padding-bottom: 2rem; */
   justify-content: center;
   align-items: center;
   position: relative;
   color: var(--txt-color);
   min-height: 45vh;
-  /* background-color: red; */
 }
 
 .bi {
@@ -230,7 +206,6 @@ footer {
 .wave {
   position: absolute;
   z-index: -1;
-  /* left: 0; */
   bottom: 0;
   width: 200%;
   /* height: 100%; */
@@ -244,10 +219,8 @@ footer {
 
 .wave2 {
   z-index: -2;
-  /* left:50%; */
   left: 0;
   width: 300%;
-  /* height: 100%; */
   opacity: 0.35;
   animation: wave2 linear 25s infinite;
   animation-delay: -5s;
@@ -259,7 +232,6 @@ footer {
   left: 0;
   opacity: 0.25;
   animation: wave3 linear 30s infinite;
-  /* animation-delay: 5s; */
 }
 
 @keyframes wave1 {
@@ -285,5 +257,71 @@ footer {
   }
   100% {
     transform: translateX(20%);
+  }
+}
+
+@media (max-width: 52em) {
+  header {
+    background-color: var(--bg-color);
+  }
+
+  /* body{ */
+  /*   overflow-x: hidden; */
+  /* } */
+
+  .logo{
+    padding-top: 1.5rem;
+  }
+
+  .navul {
+    position: fixed;
+    /* font-size: 1.5rem; */
+    inset: 0 0 0 30%;
+    background-color: var(--txt-color);
+    color: var(--bg-color);
+    flex-direction: column;
+    transform: translateX(100%);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    transition: transform 350ms ease-out;
+  }
+
+  .navul[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    width: 2.5rem;
+    top: 2rem;
+    background-color: transparent;
+    background-image: url("../../assets/img/hamburger-32.png");
+    background-repeat: no-repeat;
+    right: 2rem;
+    aspect-ratio: 1;
+    border: 0;
+    z-index: 999;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .landing-page h1 {
+    padding-top: 2rem;
+  }
+ nav li { 
+  color: var(--bg-color);
+  font-family: "Source Code Pro", monospace;
+}
+
+  nav ul a {
+    color: inherit;
+  }
+
+  .bi {
+    width: 20px;
+    height: 20px;
   }
 }
