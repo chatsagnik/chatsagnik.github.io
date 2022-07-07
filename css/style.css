@@ -92,3 +92,78 @@ img, picture, svg {
   display: flex;
   gap: var(--gap, 1rem);
 }
+
+.container {
+  max-width: 95rem;
+  background-color: var(--clr-bg);
+  margin: 0 auto;
+  padding: 0 4rem;
+  position: relative;
+  z-index: 5;
+}
+
+/* Start of design */
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-txt);
+  flex-direction: column;
+}
+
+header {
+  background-color: var(--clr-bg);
+  width: 100%;
+  overflow: hidden;
+  height: 5rem;
+}
+
+header .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  position: fixed;
+  z-index: 999;
+  /* background: var(--bg-color); */
+  background: red;
+  flex-grow: 1;
+}
+
+.logo {
+  width: 20vw;
+}
+
+.button-menu-toggle {
+}
+
+nav {
+  background-color: var(--clr-bg);
+  /* position: sticky; */
+  /* z-index: 50; */
+}
+
+.navul {
+  list-style: none;
+}
+
+.navul a {
+  text-decoration: none;
+}
+
+
+/* .lsidebar { */
+/*   flex-direction: column; */
+/*   max-width: 10vw; */
+/* } */
+
+/* .rsidebar { */
+/*   max-width: 10vw; */
+/* } */
+
+/* .inner-container { */
+/*   max-width: 80vw; */
+/*   flex-direction: column; */
+/* } */
+
+/* .landing-page { */
+/* } */
