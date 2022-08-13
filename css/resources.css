@@ -129,12 +129,12 @@ body {
 }
 
 .primary-header {
-  background-color: transparent;
+  background-color: var(--clr-bg);
   color: var(--clr-txt);
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  height: 20vh;
+  height: 10vh;
   position: fixed;
   padding: 0 3rem;
   z-index: 999;
@@ -428,7 +428,7 @@ body {
     z-index: 999;
     cursor: pointer;
     width: 2.5rem;
-    top: 3.8rem;
+    top: 3rem;
     right: 5rem;
     background-color: transparent;
     border: transparent;

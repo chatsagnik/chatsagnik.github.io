@@ -27,8 +27,8 @@
   --clr-objects-object-shadow-inverse: #ebcb8b;
   --clr-objects-alt1: #81a1c1;
 
-  --typewriterSpeed: 3s;
-  --typewriterCharacters: 25;
+  --typewriterSpeed: 0.5s;
+  --typewriterCharacters: 15;
 
   --ff-primary: "Source Code Pro", monospace;
   --ff-body: var(--ff-primary);
@@ -140,12 +140,12 @@ body {
 }
 
 .primary-header {
-  background-color: transparent;
+  background-color: var(--clr-bg);
   color: var(--clr-txt);
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  height: 20vh;
+  height: 10vh;
   position: fixed;
   padding: 0 3rem;
   z-index: 999;
@@ -799,6 +799,7 @@ body {
   .primary-header {
     margin-top: 2rem;
     padding: 2rem 2rem;
+    background-color: transparent;
   }
 
   .primary-navigation {
@@ -831,7 +832,7 @@ body {
     z-index: 999;
     cursor: pointer;
     width: 2.5rem;
-    top: 3.8rem;
+    top: 3rem;
     right: 5rem;
     background-color: transparent;
     border: transparent;
