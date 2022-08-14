@@ -128,6 +128,15 @@ body {
   /* background-color: blue; */
 }
 
+ul {
+  list-style: disc url(../assets/svgs/atom.svg) inside;
+}
+
+a {
+  text-decoration: underline;
+  color: var(--clr-objects);
+}
+
 .primary-header {
   background-color: var(--clr-bg);
   color: var(--clr-txt);
@@ -157,10 +166,6 @@ body {
   min-height: 100vh;
   /* min-height: max-content; */
   /* width: 100%; */
-}
-
-.mobile-nav-toggle {
-  display: none;
 }
 
 .sr-only {
@@ -312,6 +317,15 @@ body {
   margin-top: 0.5rem;
 }
 
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  width: 80%;
+  gap: 1rem;
+  padding-block: 2rem;
+  margin-inline: auto;
+}
+
 .publication-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -393,11 +407,42 @@ body {
   color: var(--clr-objects);
 }
 
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.socials svg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.cv {
+  width: 12rem;
+  height: 2rem;
+  background-color: var(--clr-objects);
+  border-radius: 2rem;
+  border-color: transparent;
+  color: var(--clr-txt-inverse);
+  font-size: clamp(var(--fs-300), 2vw, var(--fs-500));
+  font-weight: var(--fw-light);
+}
+
+.cv:hover {
+  background-color: #bf616a;
+  cursor: pointer;
+  animation: grow-animation 1s linear infinite;
+}
+
 @media (max-width: 850px) {
-  .primary-header {
-    margin-top: 2rem;
-    padding: 2rem 2rem;
+  .post h1 {
+    font-size: var(--fs-700);
+    width: max-content;
   }
+
   .primary-navigation {
     position: fixed;
     /* font-size: 1.5rem; */
@@ -428,7 +473,7 @@ body {
     z-index: 999;
     cursor: pointer;
     width: 2.5rem;
-    top: 3rem;
+    height: 2.5rem;
     right: 5rem;
     background-color: transparent;
     border: transparent;
@@ -469,7 +514,12 @@ body {
   .grid-col-span-2 {
     grid-column: span 1;
   }
-
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 95%;
+    gap: 1rem;
+  }
   .publication-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -487,5 +537,14 @@ body {
     grid-template-columns: 1fr;
     width: 95%;
     gap: 1rem;
+  }
+
+  .socials {
+    justify-content: space-around;
+    gap: 0.5rem;
+  }
+  .socials svg {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
