@@ -341,7 +341,7 @@ a {
 
 .talks-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   width: 65%;
   gap: 1rem;
   padding-block: 2rem;
