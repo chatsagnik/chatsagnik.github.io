@@ -190,10 +190,36 @@ a {
   opacity: 0;
   animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.3s) forwards;
   /* background-color: red; */
+  /* margin-left: auto; */
 }
 
 .logo img:hover {
   animation: rotating 0.2s linear alternate infinite none;
+}
+
+.primary-header .herotext {
+  font-size: var(--fs-600);
+  font-weight: var(--fw-bold);
+  color: var(--clr-objects);
+  text-decoration: none;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+.herotext a {
+  text-decoration: none;
+}
+
+@keyframes grow-animation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes rotating {
@@ -358,6 +384,15 @@ a {
   margin-inline: auto;
 }
 
+.miscellaneous-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 85%;
+  gap: 1rem;
+  padding-block: 2rem;
+  margin-inline: auto;
+}
+
 .publication-grid .card {
   aspect-ratio: 1.5 / 1;
   border: 3px solid var(--clr-objects-alt1);
@@ -421,6 +456,12 @@ a {
   height: 2.5rem;
 }
 
+.cvdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cv {
   width: 12rem;
   height: 2rem;
@@ -439,6 +480,12 @@ a {
 }
 
 @media (max-width: 850px) {
+  .primary-header .herotext {
+    font-size: var(--fs-600);
+    font-weight: var(--fw-regular);
+    margin-right: auto;
+  }
+
   .post h1 {
     font-size: var(--fs-700);
     width: max-content;
@@ -534,6 +581,12 @@ a {
     gap: 1rem;
   }
   .activities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 95%;
+    gap: 1rem;
+  }
+  .miscellaneous-grid {
     display: grid;
     grid-template-columns: 1fr;
     width: 95%;
