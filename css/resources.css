@@ -564,6 +564,12 @@ a {
   .grid-col-span-2 {
     grid-column: span 1;
   }
+
+  .stacked {
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
   .about-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -574,8 +580,14 @@ a {
     display: grid;
     grid-template-columns: 1fr;
     width: 95%;
-    gap: 1rem;
+    gap: 1.5rem;
   }
+
+  .publication-grid .card {
+    /* aspect-ratio: 1 / 1; */
+    border: 3px solid var(--clr-objects-alt1);
+  }
+
   .talks-grid {
     display: grid;
     grid-template-columns: 1fr;
