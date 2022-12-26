@@ -213,8 +213,9 @@ a:hover {
 }
 
 .primary-header .herotext {
-  font-family: "Unbounded", cursive;
-  font-size: var(--fs-600);
+  /* font-family: "Unbounded", cursive; */
+  font-family: "Tangerine", serif;
+  font-size: var(--fs-800);
   font-weight: var(--fw-bold);
   color: var(--clr-objects);
   text-decoration: none;
@@ -548,8 +549,9 @@ a:hover {
     height: 2vh;
   }
   .primary-header .herotext {
-    font-family: "Unbounded", cursive;
-    font-size: var(--fs-600);
+    /* font-family: "Unbounded", cursive; */
+    font-family: "Tangerine", serif;
+    font-size: var(--fs-800);
     font-weight: var(--fw-regular);
     margin-right: auto;
   }
@@ -605,8 +607,8 @@ a:hover {
     width: 2.5rem;
     height: 2.5rem;
     /* right: 5rem; */
-    right: 0.9rem;
-    bottom: 3rem;
+    right: 3rem;
+    /* bottom: 3rem; */
     background-color: transparent;
     border: transparent;
     opacity: 0;
