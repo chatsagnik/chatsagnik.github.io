@@ -30,7 +30,8 @@
   /* --ff-primary: "Montserrat", sans-serif; */
   --ff-primary: "Inter", "Inter var", sans-serif;
   --ff-body: var(--ff-primary);
-  --ff-heading: "Roboto", sans-serif;
+  --ff-heading: var(--ff-primary);
+  /* --ff-heading: "Roboto", sans-serif; */
 
   --fw-light: 400;
   --fw-regular: 500;
@@ -265,6 +266,8 @@ a:hover {
 .post h1 {
   font-size: var(--fs-800);
   width: max-content;
+  font-family: var(--ff-heading);
+  color: var(--clr-objects);
 }
 
 .primary-navigation {
@@ -568,7 +571,7 @@ a:hover {
     padding-top: 5rem;
   }
   .post h1 {
-    font-size: 3rem;
+    font-size: 2.9rem;
     width: max-content;
   }
   #about-me h1 {
