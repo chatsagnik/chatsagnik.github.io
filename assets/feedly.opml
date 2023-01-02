@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Sagnik subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Journals" title="Journals">
+            <outline type="rss" text="Quantum" title="Quantum" xmlUrl="http://quantum-journal.org/feed/" htmlUrl="https://quantum-journal.org"/>
+            <outline type="rss" text="JMLR" title="JMLR" xmlUrl="https://www.jmlr.org/jmlr.xml" htmlUrl="http://www.jmlr.org"/>
+        </outline>
+        <outline text="Blog" title="Blog">
+            <outline type="rss" text="Lil'Log" title="Lil'Log" xmlUrl="https://lilianweng.github.io/index.xml" htmlUrl="https://lilianweng.github.io/"/>
+            <outline type="rss" text="Victor Lecomte" title="Victor Lecomte" xmlUrl="https://victorlecomte.com/feed.xml" htmlUrl="https://victorlecomte.com/"/>
+            <outline type="rss" text="Quanta Magazine" title="Quanta Magazine" xmlUrl="http://www.quantamagazine.org/feed/" htmlUrl="https://www.quantamagazine.org"/>
+            <outline type="rss" text="Windows On Theory" title="Windows On Theory" xmlUrl="http://windowsontheory.org/feed/" htmlUrl="https://windowsontheory.org"/>
+            <outline type="rss" text="Recent Questions - Quantum Computing Stack Exchange" title="Recent Questions - Quantum Computing Stack Exchange" xmlUrl="https://quantumcomputing.stackexchange.com/feeds" htmlUrl="https://quantumcomputing.stackexchange.com/questions"/>
+            <outline type="rss" text="Shtetl-Optimized" title="Shtetl-Optimized" xmlUrl="http://scottaaronson.com/blog/?feed=rss2" htmlUrl="https://scottaaronson.blog"/>
+            <outline type="rss" text="in   theory" title="in   theory" xmlUrl="http://lucatrevisan.wordpress.com/feed/" htmlUrl="https://lucatrevisan.wordpress.com"/>
+            <outline type="rss" text="Sebastian Nowozins slow blog" title="Sebastian Nowozins slow blog" xmlUrl="http://www.nowozin.net/sebastian/blog/feeds/all.rss.xml" htmlUrl="http://www.nowozin.net/sebastian/blog/"/>
+            <outline type="rss" text="Adventures in Computation" title="Adventures in Computation" xmlUrl="http://aaronsadventures.blogspot.com/feeds/posts/default" htmlUrl="http://aaronsadventures.blogspot.com/"/>
+            <outline type="rss" text="Property Testing Review" title="Property Testing Review" xmlUrl="http://ptreview.sublinear.info/?feed=rss2" htmlUrl="https://ptreview.sublinear.info"/>
+            <outline type="rss" text="My Choices (Oded Goldreich)" title="My Choices (Oded Goldreich)" xmlUrl="http://www.wisdom.weizmann.ac.il/~oded/mychoice.rss" htmlUrl="http://www.wisdom.weizmann.ac.il/~oded/my-choice.html"/>
+        </outline>
+        <outline text="arXiv" title="arXiv">
+            <outline type="rss" text="stat.ML updates on arXiv.org" title="stat.ML updates on arXiv.org" xmlUrl="http://arxiv.org/rss/stat.ML" htmlUrl="http://arxiv.org/"/>
+            <outline type="rss" text="quant-ph updates on arXiv.org" title="quant-ph updates on arXiv.org" xmlUrl="http://export.arxiv.org/rss/quant-ph/" htmlUrl="http://arxiv.org/"/>
+            <outline type="rss" text="cs.LG updates on arXiv.org" title="cs.LG updates on arXiv.org" xmlUrl="http://export.arxiv.org/rss/cs.LG/" htmlUrl="http://arxiv.org/"/>
+        </outline>
+        <outline text="Jobs" title="Jobs">
+            <outline type="rss" text="Quantiki - Quantum Information Portal and Wiki" title="Quantiki - Quantum Information Portal and Wiki" xmlUrl="http://www.quantiki.org/rss.xml" htmlUrl="https://www.quantiki.org/frontpage"/>
+            <outline type="rss" text="Theoretical Computer Science Jobs" title="Theoretical Computer Science Jobs" xmlUrl="http://cstheory-jobs.org/feed/" htmlUrl="https://cstheory-jobs.org"/>
+            <outline type="rss" text="CS Theory Events" title="CS Theory Events" xmlUrl="https://cstheoryevents.wordpress.com/feed/" htmlUrl="https://cstheory-events.org"/>
+        </outline>
+    </body>
+</opml>

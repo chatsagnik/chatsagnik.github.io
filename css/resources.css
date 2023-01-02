@@ -30,7 +30,7 @@
   /* --ff-primary: "Montserrat", sans-serif; */
   --ff-primary: "Inter", "Inter var", sans-serif;
   --ff-body: var(--ff-primary);
-  --ff-heading: var(--ff-primary);
+  --ff-heading: font-family: "Fira Sans", sans-serif;
   /* --ff-heading: "Roboto", sans-serif; */
 
   --fw-light: 400;
@@ -267,7 +267,7 @@ a:hover {
   font-size: var(--fs-800);
   width: max-content;
   font-family: var(--ff-heading);
-  color: var(--clr-objects);
+  color: #333;
 }
 
 .primary-navigation {
@@ -479,9 +479,9 @@ a:hover {
 }
 
 .card__content h2 {
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   line-height: 1.5;
-  color: var(--clr-objects);
+  color: #333;
 }
 .card__content h3 {
   font-size: 1.25rem;
@@ -522,7 +522,7 @@ a:hover {
 .cv:hover {
   background-color: #bf616a;
   cursor: pointer;
-  animation: grow-animation 3s linear infinite;
+  /* animation: grow-animation 3s linear infinite; */
 }
 
 .footer {
