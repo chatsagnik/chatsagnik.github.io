@@ -401,7 +401,7 @@ a:hover {
 
 .talks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   /* grid-template-columns: 1fr 1fr; */
   width: 90%;
   gap: 1rem;
@@ -412,7 +412,7 @@ a:hover {
 .activities-grid {
   display: grid;
   /* grid-template-columns: 1fr 1fr; */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   width: 85%;
   gap: 1rem;
   padding-block: 2rem;
