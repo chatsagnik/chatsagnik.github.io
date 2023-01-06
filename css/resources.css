@@ -373,7 +373,7 @@ a:hover {
 .about-grid {
   display: grid;
   /* grid-template-columns: 1.45fr 0.5fr; */
-  width: 60%;
+  width: 40%;
   gap: 1rem;
   padding-block: 2rem;
   margin-inline: auto;
@@ -428,10 +428,10 @@ a:hover {
   margin-inline: auto;
 }
 
-.publication-grid .card {
+/* .publication-grid .card { */
   /* aspect-ratio: 1 / 1; */
   /* border: 3px solid var(--clr-objects-alt1); */
-}
+/* } */
 
 .card-title {
   padding: 0 0.75rem;
@@ -670,10 +670,10 @@ a:hover {
     gap: 1.5rem;
   }
 
-  .publication-grid .card {
+  /* .publication-grid .card { */
     /* aspect-ratio: 1 / 1; */
     /* border: 3px solid var(--clr-objects-alt1); */
-  }
+  /* } */
 
   .talks-grid {
     display: grid;
