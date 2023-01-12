@@ -158,11 +158,11 @@ a:hover {
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  height: 10vh;
+  height: 5vh;
   position: fixed;
-  padding: 3rem 3rem;
+  padding: 2rem 3rem;
   z-index: 999;
-  box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1);
+  /* box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1); */
 }
 
 .section-even {
@@ -260,7 +260,7 @@ a:hover {
   min-height: max-content;
   margin: 0 auto;
   padding: 5rem 0;
-  padding-top: 7rem;
+  padding-top: 5rem;
 }
 
 .post h1 {
@@ -290,7 +290,7 @@ a:hover {
 .primary-navigation a {
   text-decoration: none;
   color: inherit;
-  font-size: var(--fs-500);
+  font-size: var(--fs-400);
   font-weight: var(--fw-light);
   position: relative;
 }
@@ -372,8 +372,8 @@ a:hover {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 0.7fr 0.3fr;
-  width: 60%;
+  grid-template-columns: 0.75fr 0.25fr;
+  width: 80%;
   gap: 1rem;
   padding-block: 2rem;
   margin-inline: auto;
