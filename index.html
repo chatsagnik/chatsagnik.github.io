@@ -198,68 +198,30 @@
                                         rel="noopener noreferrer"> Debajyoti Bera</a>
 
                                     <br><br>
-                                    <!-- <span style="font-weight: 900; ">Abstract:</span>
-                                    This work answers <span style="color: var(--clr-objects);">two open
-                                        questions</span>. We give the <span style="color: var(--clr-objects);">first
-                                        efficient quantum boosting algorithms in the agnostic setting </span>by
-                                    providing a quantum version of the Kalai-Kanade potential boosting algorithm. This
-                                    algorithm shows the standard quadratic speedup in the VC dimension of the weak
-                                    learner compared to the classical case.
-                                    Using our boosting algorithm as a subroutine, we give the <span
-                                        style="color: var(--clr-objects);">first quantum algorithm for agnostically
-                                        learning decision trees in polynomial running time without using membership
-                                        queries</span>. To the best of our knowledge, this is the first algorithm
-                                    (quantum or classical) to do so. Learning decision trees without membership queries
-                                    is hard (and an open problem) in the
-                                    standard classical realizable setting. In general, even coming up with weak learners
-                                    in the agnostic setting is a challenging task. We <span
-                                        style="color: var(--clr-objects);">show how to construct a quantum agnostic weak
-                                        learner using standard quantum algorithms</span>, which is
-                                    of independent interest for designing ensemble learning setups.<br><br> -->
-                                    We show how to efficiently learn <span style="color: var(--clr-objects);">decision
-                                        trees</span> in the
-                                    <span style="color: var(--clr-objects);">agnostic</span> quantum PAC setting,
-                                    particularly <span style="color: var(--clr-objects);">without membership
-                                        queries</span>.
-                                    To the best of our knowledge,
-                                    this is the first algorithm (quantum or classical) to learn decision trees in
-                                    polynomial time without membership queries. We also give quantum decision tree
-                                    learning algorithms for both
-                                    the <span style="color: var(--clr-objects);">realizable setting</span> and <span
-                                        style="color: var(--clr-objects);">random classification noise model</span>,
-                                    again without
-                                    membership queries.
-
-                                <ul>
-                                    <li>We construct the first
-                                        efficient quantum
-                                        agnostic boosting algorithms by giving a quantum generalization of the
-                                        potential-based boosting algo-
-                                        rithm by Kalai and Kanade. Our algorithm shows the standard quadratic speedup
-                                        in
-                                        the VC dimension
-                                        of the weak learner compared to the classical case. It also has the lowest
-                                        dependence on the bias of the
-                                        learner out of all current quantum boosting algorithms.</li>
-                                    <li>Next, we show construct a
-                                        quantum agnostic weak learner by designing a quantum
-                                        version of the
-                                        classical Goldreich-Levin algorithm that works with biased function oracles. In
-                                        general, even coming
-                                        up with weak learners in the agnostic setting is a challenging task, which makes
-                                        our
-                                        construction of
-                                        independent interest for designing quantum ensemble learning setups.</li>
-                                    <li>Finally, we use our boosting algorithm to convert the agnostic quantum weak
-                                        learner into
-                                        a
-                                        polynomial-time
-                                        quantum algorithm for improper agnostic learning of decision trees.</li>
-
-                                </ul>
-
-
-
+                                    The agnostic setting is the hardest generalization of the PAC model since it is akin
+                                    to learning with adversarial noise.
+                                    In this paper, we give a polynomial quantum algorithm for learning size $t$ decision
+                                    trees with uniform marginal over
+                                    instances, in the agnostic setting, without membership queries. Our algorithm is the
+                                    first algorithm (classical or
+                                    quantum) for learning decision trees in polynomial time without membership queries.
+                                    We show how to construct a quantum
+                                    agnostic weak learner by designing a quantum version of the classical
+                                    Goldreich-Levin algorithm that works with strongly
+                                    biased function oracles. We show how to quantize the agnostic boosting algorithm by
+                                    Kalai and Kanade (NIPS 2009) to
+                                    obtain the first efficient quantum agnostic boosting algorithm. Our quantum boosting
+                                    algorithm has a polynomial
+                                    improvement in the dependence of the bias of the weak learner over all adaptive
+                                    quantum boosting algorithms while
+                                    retaining the standard speedup in the VC dimension over classical boosting
+                                    algorithms. We then use our quantum boosting
+                                    algorithm to boost the weak quantum learner we obtained in the previous step to
+                                    obtain a quantum agnostic learner for
+                                    decision trees. Using the above framework, we also give quantum decision tree
+                                    learning algorithms for both the
+                                    realizable setting and random classification noise model, again without membership
+                                    queries.
                                 </p>
 
                                 <h3>
@@ -270,7 +232,7 @@
                                     </a>
                                     ] -->
                                     <i class="uil uil-file-download"></i>
-                                    [<a href="https://drive.google.com/file/d/1Bd5zXf0BHqz3M9ZQq3M5wJugiKWlO4tG/view?usp=sharing"
+                                    [<a href="https://drive.google.com/file/d/1Bd5zXf0BHqz3M9ZQq3M5wJugiKWlO4tG/view?usp=share_link"
                                         title="pdf" target="_blank" rel="noopener noreferrer me">PDF
                                     </a>]
 
@@ -434,7 +396,38 @@
                 <div id="talks" class="post delay6 flex">
                     <h1>Talks</h1>
                     <div class="talks-grid grid">
+                        <div class="card">
+                            <div class="card__content">
+                                <h2 class="card-title">IIIT-Delhi Lattices in Computer Science, Winter 2023</h2>
+                                <p class="card-description">
+                                    Here are <a
+                                        href="https://drive.google.com/file/d/1pyVb3wzr6fhukoQqEg_8O8Sz2tTbx6GE/view?usp=share_link"
+                                        target="_blank" rel="noopener noreferrer">my notes</a> on "Generating Hard
+                                    Instances for the Short Basis problem" by M. Ajtai (ICALP 1999) for the oral
+                                    component of the endsem exams for LCS.
+                                </p>
+                                <ul>
+                                    <h3>Reference papers</h3>
+                                    <li>
+                                        <a href="https://link.springer.com/chapter/10.1007/3-540-48523-6_1"
+                                            target="_blank" rel="noopener noreferrer me">Ajtai</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://cims.nyu.edu/~regev/papers/pqc.pdf" target="_blank"
+                                            rel="noopener noreferrer me">Micciancio=Regev</a>
+                                    </li>
+                                    <li>
+                                        <a href=https://eprint.iacr.org/2008/521" target="_blank"
+                                            rel="noopener noreferrer me">Alwen-Peikert</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="https://drive.google.com/file/d/1pyVb3wzr6fhukoQqEg_8O8Sz2tTbx6GE/view?usp=share_link"
+                                            target="_blank" rel="noopener noreferrer">My notes.</a>
+                                    </li> -->
+                                </ul>
 
+                            </div>
+                        </div>
                         <div class="card">
                             <div class="card__content">
                                 <h2 class="card-title">IIIT-Delhi Theory Reading Group Talk, 2023</h2>
@@ -463,7 +456,7 @@
                             <div class="card__content">
                                 <h2 class="card-title">IIIT-Delhi CSE Seminar, 2023</h2>
                                 <p class="card-description">
-                                    This was a talk at the weekly Theoretical CS seminar at IIT Delhi on the joint work
+                                    This was a talk at the IIIT-Delhi CSE Seminar on the joint work
                                     with my advisor, Rohan Bhatia, and Parmeet Singh Chani. See <a
                                         href="#Domain">above</a> for details.
                                     <br>
@@ -479,6 +472,7 @@
 
                             </div>
                         </div>
+
 
                         <div class="card">
                             <div class="card__content">
@@ -549,8 +543,8 @@
                                     circuits, which became a focal point of interest following the proof of
                                     unconditional
                                     separation between SQC’s and constant depth bounded fan-in classical circuits by
-                                    Bravyi et al. <br>
-                                    We discussed the motivations behind research on SQC’s and some interesting
+                                    Bravyi et al. We discussed the motivations behind research on SQC’s and some
+                                    interesting
                                     separation results (noisy as well as noiseless)
                                     between SQC’s and strictly local classical circuits, geometrically local classical
                                     circuits, and constant
