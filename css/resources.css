@@ -23,6 +23,10 @@
   --clr-objects-object-shadow: #b48ead;
   --clr-objects-object-shadow-inverse: #ebcb8b;
   --clr-objects-alt1: #81a1c1;
+  --clr-link: #0000EE;
+  --clr-paper: #0074D9;
+  --clr-venue: #D4357F;
+  --clr-highlight: #856294;
 
   --typewriterSpeed: 0s;
   --typewriterCharacters: 25;
@@ -147,7 +151,7 @@ a {
   /* text-decoration: underline; */
   text-decoration: none;
   /* color: var(--clr-objects); */
-  color: #0000EE;
+  color: var(--clr-link);
 }
 
 a:hover {
@@ -481,9 +485,18 @@ a:hover {
   box-shadow: 0 5px 5px var(--clr-bg-inverse);
 }
 
+.list_timeline {
+  list-style: none;
+}
+
 .highlight {
-  font-weight: var(--fw-regular);
-  color: var(--clr-objects);
+  /* font-weight: var(--fw-semi-bold); */
+  color: var(--clr-highlight);
+}
+
+.highlight-bold {
+  font-weight: var(--fw-semi-bold);
+  color: var(--clr-venue);
 }
 
 .date {
@@ -491,13 +504,21 @@ a:hover {
     font-weight: var(--fw-bold);
 }
 
+.paper {
+  color: var(--clr-paper);
+}
+
+.venue {
+  color: var(--clr-venue);
+}
+
 .card__timeline {
   font-size: smaller;
   overflow-y: auto;
-  max-height: 60vh;
+  max-height: 80vh;
 
 }
-#timeline li {
+.list_timeline li {
    margin-bottom:10px;   
 }
 
