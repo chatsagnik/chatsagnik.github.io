@@ -377,8 +377,8 @@ a:hover {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 0.25fr 0.75fr;
-  width: 60%;
+  grid-template-columns: 0.2fr 0.55fr 0.25fr;
+  width: 90%;
   gap: 1rem;
   padding-block: 2rem;
   margin-inline: auto;
@@ -479,6 +479,26 @@ a:hover {
   /* box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1); */
   box-shadow: 0 5px 5px #333333;
   box-shadow: 0 5px 5px var(--clr-bg-inverse);
+}
+
+.highlight {
+  font-weight: var(--fw-regular);
+  color: var(--clr-objects);
+}
+
+.date {
+    color: var(--clr-bg-inverse-darker);
+    font-weight: var(--fw-bold);
+}
+
+.card__timeline {
+  font-size: smaller;
+  overflow-y: auto;
+  max-height: 60vh;
+
+}
+#timeline li {
+   margin-bottom:10px;   
 }
 
 .publication-grid .card__content {
