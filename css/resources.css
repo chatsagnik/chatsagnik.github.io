@@ -27,6 +27,9 @@
   --clr-paper: #0074D9;
   --clr-venue: #D4357F;
   --clr-highlight: #856294;
+  --clr-content-header:#333;
+  --clr-hover: #bf616a;
+
 
   --typewriterSpeed: 0s;
   --typewriterCharacters: 25;
@@ -155,9 +158,22 @@ a {
 }
 
 a:hover {
-  color: #bf616a;
+  color: var(--clr-hover);
   text-decoration: underline;
 }
+
+/* .primary-header {
+  position: sticky;
+  z-index: 999;
+  height: 5vh;
+  padding: 3rem 3rem;
+  top: 0;
+  background-color: var(--clr-bg);
+  color: var(--clr-txt);
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+} */
 
 .primary-header {
   background-color: var(--clr-bg);
@@ -167,9 +183,17 @@ a:hover {
   align-items: center;
   height: 5vh;
   position: fixed;
-  padding: 3rem 3rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-bottom: 3rem;
+  padding-top:1.5rem;
   z-index: 999;
-  /* box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1); */
+  transition: box-shadow 200ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.sticking {
+  box-shadow: hsla(0 0% 0% / 0.1) 0 0.5rem 1rem;
+  transition-duration: 400ms;
 }
 
 .section-even {
@@ -186,9 +210,7 @@ a:hover {
 }
 
 .full-page-slide {
-  min-height: 100vh;
-  /* min-height: max-content; */
-  /* width: 100%; */
+  min-height: 70vh;
 }
 
 .sr-only {
@@ -212,8 +234,6 @@ a:hover {
   font-weight: var(--fw-bold);
   opacity: 0;
   animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.3s) forwards;
-  /* background-color: red; */
-  /* margin-left: auto; */
 }
 
 .logo img:hover {
@@ -221,14 +241,11 @@ a:hover {
 }
 
 .primary-header .herotext {
-  /* font-family: "Unbounded", cursive; */
   font-family: "Tangerine", serif;
-  font-size: var(--fs-800);
-  font-weight: var(--fw-bold);
+  font-size: var(--fs-700);
+  font-weight: var(--fw-regular);
   color: var(--clr-objects);
   text-decoration: none;
-  /* margin-left: auto;
-  margin-right: auto; */
 }
 
 .herotext a {
@@ -237,7 +254,7 @@ a:hover {
 }
 
 .herotext a:hover {
-  color: var(--clr-objects-alt1);
+  color: var(--clr-bg-inverse-darker);
 }
 
 @keyframes grow-animation {
@@ -268,7 +285,8 @@ a:hover {
   min-height: max-content;
   margin: 0 auto;
   padding: 5rem 0;
-  padding-top: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .post h1 {
@@ -276,7 +294,7 @@ a:hover {
   width: max-content;
   /* font-family: var(--ff-heading); */
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color: #333;
+  color: var(--clr-content-header);
 }
 
 .primary-navigation {
@@ -344,24 +362,6 @@ a:hover {
   color: var(--clr-objects);
 }
 
-/* .primary-navigation a::after {
-  position: absolute;
-  content: "";
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #bf616a;
-
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 250ms ease-in;
-}
-
-.primary-navigation a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-} */
 
 @keyframes fadeInUp {
   to {
@@ -388,8 +388,6 @@ a:hover {
   margin-inline: auto;
   align-items: center;
 }
-
-
 
 .dp {
   display: flex;
@@ -481,7 +479,6 @@ a:hover {
   border-radius: 9px;
   /* margin: 0.5rem 0.5rem 2rem; */
   /* box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1); */
-  box-shadow: 0 5px 5px #333333;
   box-shadow: 0 5px 5px var(--clr-bg-inverse);
 }
 
@@ -536,11 +533,17 @@ a:hover {
 .card__content h2 {
   font-size: 1.55rem;
   line-height: 1.5;
-  color: #333;
+  color: var(--clr-content-header);
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .card__content h3 {
   font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--clr-objects);
+}
+
+.card__content h4 {
+  font-size: 1.05rem;
   line-height: 1.2;
   color: var(--clr-objects);
 }
@@ -576,13 +579,13 @@ a:hover {
 }
 
 .cv:hover {
-  background-color: #bf616a;
+  background-color: var(--clr-hover);
   cursor: pointer;
   /* animation: grow-animation 3s linear infinite; */
 }
 
 .footer {
-  position: fixed;
+  /* position: sticky; */
   bottom: 0;
   left: 0;
   right: 0;
@@ -591,7 +594,7 @@ a:hover {
   width: 100vw;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1);
+  box-shadow: hsla(0 0% 0% / 0.1) 0 0.5rem 1rem;
   /* color: #fff; */
 }
 
@@ -610,7 +613,7 @@ a:hover {
   .primary-header .herotext {
     /* font-family: "Unbounded", cursive; */
     font-family: "Tangerine", serif;
-    font-size: var(--fs-800);
+    font-size: var(--fs-700);
     font-weight: var(--fw-regular);
     margin-right: auto;
   }
@@ -636,7 +639,6 @@ a:hover {
 
   .primary-navigation {
     position: fixed;
-    /* font-size: 1.5rem; */
     inset: 0 0 0 20%;
     background-color: var(--txt-color);
     color: var(--bg-color);
