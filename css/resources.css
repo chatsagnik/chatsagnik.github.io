@@ -447,8 +447,27 @@ a:hover {
   padding: 0 0.75rem;
 }
 
+
 .card-description {
   padding: 0 1rem;
+}
+
+.about-me h2:first-letter {
+
+    font-family: var(--ff-heading);
+    /* border: 1px solid var(--clr-objects); */
+    color: var(--clr-objects);
+    /* padding: 0.25rem; */
+    /* margin: 0 0.25rem 0 0; */
+}
+
+.publication-grid h2:first-letter {
+
+    font-family: var(--ff-heading);
+    /* border: 1px solid var(--clr-objects); */
+    color: var(--clr-objects);
+    /* padding: 0.25rem; */
+    /* margin: 0 0.25rem 0 0; */
 }
 
 .stacked {
