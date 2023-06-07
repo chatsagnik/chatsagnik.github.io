@@ -438,12 +438,33 @@ a:hover {
   margin-inline: auto;
 }
 
+.publication-grid .card__content:hover {
+  transition: transform 500ms ease-in-out;
+  transform: scale(1.025);
+  transform-origin: 0% 0% 0px;
+  box-shadow: 0 5px 5px var(--clr-hover);
+}
+
+.talks-grid .card__content:hover {
+  transition: transform 500ms ease-in-out;
+  transform: scale(1.025);
+  transform-origin: 0% 0% 0px;
+  box-shadow: 0 5px 5px var(--clr-hover);
+}
+
+.card__timeline:hover {
+  transition: transform 500ms ease-in-out;
+  transform: scale(1.025);
+  transform-origin: 0% 0% 0px;
+  box-shadow: 0 5px 5px var(--clr-objects);
+}
+
 /* .publication-grid .card { */
   /* aspect-ratio: 1 / 1; */
   /* border: 3px solid var(--clr-objects-alt1); */
 /* } */
 
-.card-title {
+.card-title,.card-venue {
   padding: 0 0.75rem;
 }
 
@@ -533,7 +554,7 @@ a:hover {
 .card__timeline {
   font-size: smaller;
   overflow-y: auto;
-  max-height: 80vh;
+  max-height: 70vh;
 
 }
 .list_timeline li {
