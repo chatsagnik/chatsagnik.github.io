@@ -1,0 +1,195 @@
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --clr-bg: #d8dee9;
+  --clr-bg-inverse-darker: #434c5e;
+  --clr-bg-inverse: #4c566a;
+  --clr-txt: #3b4252;
+  --clr-txt-inverse: #e5e9f0;
+  --clr-objects: #5e81ac;
+  --clr-objects-object-shadow: #b48ead;
+  --clr-objects-object-shadow-inverse: #ebcb8b;
+  --clr-objects-alt1: #81a1c1;
+  --clr-link: #0000EE;
+  --clr-paper: #0074D9;
+  --clr-venue: #D4357F;
+  --clr-highlight: #856294;
+  --clr-content-header:#333;
+  --clr-hover: #bf616a;
+
+
+  --typewriterSpeed: 0s;
+  --typewriterCharacters: 25;
+
+  /* --ff-primary: "Montserrat", sans-serif; */
+  --ff-primary: "Inter", "Inter var", sans-serif;
+  --ff-body: var(--ff-primary);
+  --ff-heading: font-family: "Fira Sans", sans-serif;
+   --ff-nav: "Roboto", sans-serif;
+
+  --fw-light: 400;
+  --fw-regular: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+
+  --fs-100: 5;
+  --fs-300: 0.8125rem;
+  --fs-400: 1rem;
+  --fs-500: 1.15rem;
+  --fs-550: 1.5rem;
+  --fs-600: 1.875rem;
+  --fs-650: 2rem;
+  --fs-700: 2.5rem;
+  --fs-800: 3.5rem;
+}
+
+@media (min-width: 50em) {
+  :root {
+    --fs-body: var(--fs-500);
+    --fs-h1: var(--fs-800);
+    --fs-h2: var(--fs-700);
+    --fs-nav: var(--fs-600);
+    --fs-button: var(--fs-300);
+  }
+}
+
+/* CSS reset*/
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--scroll-padding)-2rem);
+  height: 100%;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  overflow-x: hidden;
+  font-family: var(--ff-body);
+  font-size: var(--fs-400);
+  background-color: var(--clr-bg);
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.sticking {
+  box-shadow: hsla(0 0% 0% / 0.1) 0 0.5rem 1rem;
+  transition-duration: 400ms;
+}
+
+.herotext {
+  float: left;
+  font-family: "Tangerine", serif;
+  font-size: var(--fs-700);
+  font-weight: var(--fw-bold);
+  color: var(--clr-objects);
+  text-decoration: none;
+}
+
+.herotext a {
+  text-decoration: none;
+  color: var(--clr-objects);
+}
+
+.herotext a:hover {
+  color: var(--clr-bg-inverse-darker);
+}
+
+nav {
+  float: right;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block; /* Use this if we do not  want space: float: left; */
+  margin-left: 5rem;
+  padding-top: 25px;
+}
+
+nav li a {
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--ff-nav);
+  font-size: var(--fs-400);
+  font-weight: var(--fw-light);
+}
+
+nav li a i {
+  font-size: var(--fs-500);
+  font-weight: var(--fw-bold);
+  color: var(--clr-objects);
+}
+
+nav li a:hover {
+  color: var(--clr-objects);
+}
+
+.delay1 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.5s) forwards;
+}
+
+.delay2 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.6s) forwards;
+}
+
+.delay3 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.7s) forwards;
+}
+
+.delay4 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.8s) forwards;
+}
+
+.delay5 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 0.9s) forwards;
+}
+
+.delay6 {
+  opacity: 0;
+  animation: fadeInUp 0.3s ease calc(var(--typewriterSpeed) + 1s) forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(1rem);
+  }
+}
