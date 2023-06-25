@@ -25,8 +25,10 @@
   --clr-objects-alt1: #81a1c1;
   --clr-link: #0000EE;
   --clr-paper: #0074D9;
-  --clr-venue: #D4357F;
-  --clr-highlight: #856294;
+  --clr-venue:#BE2F72; 
+  /* #D4357F; */
+  --clr-highlight: #803FAF;
+  /* #856294; */
   --clr-content-header:#333;
   --clr-hover: #bf616a;
 
@@ -406,6 +408,26 @@ a:hover {
   margin-inline: auto;
 }
 
+.absbutton {
+    cursor: pointer;
+    color: var(--clr-objects);
+    text-decoration: none;
+}
+
+.absbutton:hover{
+  text-decoration: none;
+}
+
+.abstract {
+  font-size: var(--fs-300);
+  width: 90%;
+  border: 1px dashed var(--clr-bg-inverse-darker);
+  background-color: var(--clr-bg);
+  margin-inline: auto;
+  padding: 10px;
+  display: none;
+}
+
 .grid-col-span-2 {
   grid-column: span 2;
 }
@@ -439,26 +461,30 @@ a:hover {
   margin-inline: auto;
 }
 
-.publication-grid .card__content:hover {
+.titleh1 {
+  margin: 15px;
+}
+
+/* .publication-grid .card__content:hover {
   transition: transform 500ms ease-in-out;
   transform: scale(1.025);
   transform-origin: 0% 0% 0px;
   box-shadow: 0 5px 5px var(--clr-hover);
-}
+} */
 
-.talks-grid .card__content:hover {
+/* .talks-grid .card__content:hover {
   transition: transform 500ms ease-in-out;
   transform: scale(1.025);
   transform-origin: 0% 0% 0px;
   box-shadow: 0 5px 5px var(--clr-hover);
-}
+} */
 
-.card__timeline:hover {
+/* .card__timeline:hover {
   transition: transform 500ms ease-in-out;
   transform: scale(1.025);
   transform-origin: 0% 0% 0px;
   box-shadow: 0 5px 5px var(--clr-objects);
-}
+} */
 
 /* .publication-grid .card { */
   /* aspect-ratio: 1 / 1; */
@@ -474,14 +500,11 @@ a:hover {
   padding: 0 1rem;
 }
 
-.about-me h2:first-letter {
+/* .about-me h2:first-letter {
 
     font-family: var(--ff-heading);
-    /* border: 1px solid var(--clr-objects); */
     color: var(--clr-objects);
-    /* padding: 0.25rem; */
-    /* margin: 0 0.25rem 0 0; */
-}
+} */
 
 .publication-grid h2:first-letter {
 
@@ -546,7 +569,7 @@ a:hover {
 .card__timeline {
   font-size: smaller;
   overflow-y: auto;
-  max-height: 70vh;
+  max-height: 50%;
 
 }
 .list_timeline li {
@@ -754,8 +777,8 @@ a:hover {
   .publication-grid {
     display: grid;
     grid-template-columns: 1fr;
-    width: 95%;
-    gap: 1.5rem;
+    width: 85%;
+    gap: 1rem;
   }
 
   /* .publication-grid .card { */

@@ -34,3 +34,12 @@ const navObserver = new IntersectionObserver((entries)=>{
 });
 
 navObserver.observe(scrollWatcher);
+
+function mytoggle(iden) {
+  var x = document.getElementById(iden);
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}

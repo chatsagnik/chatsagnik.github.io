@@ -102,7 +102,7 @@
       <!-- <section class="full-page-slide"> -->
       <section>
         <div id="about-me" class="post delay6 about-me flex">
-          <h1>Sagnik Chatterjee</h1>
+          <h1 class="titleh1">Sagnik Chatterjee</h1>
 
           <div class="about-grid grid">
 
@@ -126,11 +126,10 @@
                 <h2 class="card-title">My research</h2>
                 <p class="card-description">
                   My main area of research lies at the intersection of <span class="highlight-bold">quantum
-                    computing</span> and <span class="highlight-bold">learning
+                    computing</span> and <span class="highlight-bold">computational learning
                     theory</span>, and involves developing algorithms for discriminative and
-                  generative
-                  tasks under various noise models and proving theoretical bounds for
-                  convergence, generalization, and speedups.
+                  generative tasks under various noise models and proving theoretical bounds for convergence,
+                  generalization, and speedups.
                 </p><br>
 
                 <!-- <div class="card-description cvdiv">
@@ -168,6 +167,10 @@
             <div class="card__content card__timeline">
               <h2 class="card-title">News</h2>
               <ul class="list_timeline">
+                <li><i class="uil uil-graduation-cap"></i><span class="date">Jun'23:</span>
+                  <span class="paper">Quantum boosting using domain-partitioning
+                    hypotheses</span> accepted at <span class="venue">Quantum Machine Intelligence</span>.
+                </li>
                 <li><i class="uil uil-users-alt"></i><span class="date">Jun'23:</span>
                   Attended
                   the <span class="highlight">JTG Summer School</span> at IISc Bangalore.
@@ -183,7 +186,7 @@
                       class="uil uil-external-link-alt"></i></a>.
                 </li>
                 <li><i class="uil uil-graduation-cap"></i><span class="date">Nov'22:</span>
-                  Paper on <span class="paper">Quantum boosting using domain-partitioning
+                  <span class="paper">Quantum boosting using domain-partitioning
                     hypotheses</span> accepted at <span class="venue">QTML'22</span> for a short
                   talk.
                 </li>
@@ -288,16 +291,15 @@
                   </a>
                   and
                   <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
-                    Bera</a>
-
+                    Bera</a><br>
+                  <span class="highlight">Submitted</span>.
                   <br><br>
-                  <span class="date">Abstract:</span>
-                  We give the first polynomial-time and sample quantum algorithm for learning size-t
+
+                  We give the first polynomial-time and sample quantum algorithm for learning size-\(t\)
                   decision
                   trees with uniform marginal over
                   instances, in the agnostic setting, without membership queries.
-                </p>
-
+                </p><br>
                 <h4>
 
                   <i class="uil uil-file-download"></i>
@@ -306,6 +308,49 @@
 
                 </h4>
 
+                <a class="absbutton" onclick="mytoggle('abs3')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+                <a class="absbutton" onclick="mytoggle('bib3')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+                <div class="abstract" id="abs3">
+                  The agnostic setting is the hardest generalization of the PAC model since it is akin to learning with
+                  adversarial noise.
+                  In this paper, we give a \(\mathrm{poly}\left(n,{t},{\frac{1}{\varepsilon}}\right)\) time quantum
+                  algorithm for learning
+                  size \(t\) decision trees with uniform marginal over instances, in the agnostic setting, without
+                  membership
+                  queries. Our algorithm is the first algorithm (classical or quantum) for learning decision trees in
+                  polynomial time
+                  without membership queries. We show how to construct a quantum agnostic weak learner by designing a
+                  quantum version of
+                  the classical Goldreich-Levin algorithm that works with strongly biased function oracles. We
+                  show how to
+                  quantize the agnostic boosting algorithm by <span class="highlight">Kalai-Kanade (NIPS'09)</span> to
+                  obtain the first
+                  efficient quantum agnostic
+                  boosting algorithm. Our quantum boosting algorithm has a polynomial improvement in the
+                  dependence of the bias
+                  of the weak learner over all adaptive quantum boosting algorithms while retaining the standard speedup
+                  in the VC
+                  dimension over classical boosting algorithms. We then use our quantum boosting algorithm to boost the
+                  weak quantum
+                  learner we obtained in the previous step to obtain a quantum agnostic learner for decision trees.
+                  Using the above
+                  framework, we also give quantum decision tree learning algorithms for both the realizable setting and
+                  random
+                  classification noise model, again without membership queries.
+                </div>
+                <div class="abstract" id="bib3">
+
+                  @article{chatterjee2023efficient,<br>
+                  title={Efficient Quantum Agnostic Improper Learning of Decision Trees},<br>
+                  author={Chatterjee, Sagnik and SAPV, Tharrmashastha and Bera, Debajyoti},<br>
+                  journal={arXiv preprint arXiv:2210.00212},<br>
+                  year=2022<br>
+                  }
+
+                </div>
 
                 <!-- <a href="https://slidemodel.com/free-powerpoint-templates/free-animated-horizontal-decision-tree/"
                                     target="_blank" rel="noopener noreferrer"
@@ -328,13 +373,12 @@
                   <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
                     Bera</a><br>
 
-                  <span class="highlight">Accepted at <span class="venue">QTML'22</span>
-                    for a short talk. Poster accepted at <span class="venue">QIP'22</span>.</span><br>
+                  <span class="highlight">Accepted at <span class="venue">QMI</span>. Short talk at <span
+                      class="venue">QTML'22</span>. Poster at <span class="venue">QIP'22</span>.</span><br><br>
 
-                  <span class="date">Abstract:</span>
-                  This work answers an open question
-                  regarding the existence of quantum boosting algorithms for weak learners with
-                  non-binary hypotheses.<br>
+                  We answer an open question
+                  on the existence of quantum boosting algorithms for weak learners with
+                  non-binary hypotheses.<br><br>
                 </p>
 
                 <h4>
@@ -345,7 +389,7 @@
                   [<a href="https://arxiv.org/abs/2110.12793" title="arxiv link" target="_blank"
                     rel="noopener noreferrer">arXiv</a>]
                   <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://github.com/braqiiit/QRealBoost/" title="github repo" target="_blank"
+                  [<a href="https://github.com/braqiiit/  \(\mathrm{QRealBoost}\)/" title="github repo" target="_blank"
                     rel="noopener noreferrer">code</a>]
                   <i class="uil uil-presentation"></i>
                   [<a href="https://drive.google.com/file/d/13FvLU8n2J3DfhMhcJax4FLlDxMmUyo9j/view?usp=sharing"
@@ -355,6 +399,69 @@
                   [<a href="https://drive.google.com/file/d/1lTdPxd08XKxTLV9XMDtxQ6xCoDILa94f/view?usp=sharing"
                     title="slides" target="_blank" rel="noopener noreferrer">slides</a>]
                 </h4>
+                <a class="absbutton" onclick="mytoggle('abs2')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+                <a class="absbutton" onclick="mytoggle('bib2')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+                <div class="abstract" id="abs2">
+                  Boosting is an ensemble learning method that converts a weak learner into a strong learner in the PAC
+                  learning
+                  framework. The \(\mathrm{AdaBoost}\) algorithm is a well-known classical boosting algorithm for weak
+                  learners with
+                  binary hypotheses.
+                  Recently, <span class="highlight">Arunachalam and Maity (ICML'20)</span> presented the first quantum
+                  boosting algorithm by quantizing
+                  \(\mathrm{AdaBoost}\).
+                  Their algorithm,
+                  which we refer to as \(\mathrm{QAdaBoost}\) hereafter, is a quantum adaptation of
+                  \(\mathrm{AdaBoost}\) and only
+                  works for the
+                  binary hypothesis
+                  case. \(\mathrm{QAdaBoost}\) is quadratically faster than \(\mathrm{AdaBoost}\) in terms
+                  of the VC dimension of the
+                  hypothesis
+                  class of the weak
+                  learner while it is polynomially worse in the bias of the weak learner.
+                  <br>
+                  In this work, we address an open question by Izdebski et al. on the existence of boosting algorithms
+                  for quantum weak
+                  learners with non-binary hypotheses. We answer this question in the affirmative by developing the
+                  \(\mathrm{QRealBoost}\) algorithm
+                  motivated by the classical \(\mathrm{RealBoost}\) algorithm. The main technical challenge was to
+                  provide provable
+                  guarantees for
+                  convergence, generalization bounds, and quantum speedup, given that quantum subroutines are noisy and
+                  probabilistic. We
+                  prove that \(\mathrm{QRealBoost}\) retains the quadratic speedup of
+                  \(\mathrm{QAdaBoost}\) over \(\mathrm{AdaBoost}\) and
+                  further achieves a
+                  polynomial speedup
+                  over \(\mathrm{QAdaBoost}\) in terms of both the bias \(\gamma\) of the learner and the
+                  time taken by the learner
+                  to learn the
+                  target concept
+                  class.
+                  <br>
+                  Finally, we perform empirical evaluations on \(\mathrm{QRealBoost}\) and report
+                  encouraging observations on quantum
+                  simulators by
+                  benchmarking the convergence performance of \(\mathrm{QRealBoost}\) against \(\mathrm{QAdaBoost}\),
+                  \(\mathrm{AdaBoost}\),
+                  \(\mathrm{RealBoost}\), and
+                  \(\mathrm{SmoothBoost}\) on a
+                  subset of the \(\mathrm{MNIST}\) dataset and \(\mathrm{Breast Cancer Wisconsin}\) dataset.
+                </div>
+                <div class="abstract" id="bib2">
+
+                  @article{chatterjee2023quantum,<br>
+                  title={Quantum Boosting using Domain-Partitioning Hypotheses},<br>
+                  author={Chatterjee, Sagnik and Bhatia, Rohan and Chani, Parmeet Singh and Bera, Debajyoti},<br>
+                  journal={arXiv preprint arXiv:2110.12793},<br>
+                  year={2021}<br>
+                  }
+
+                </div>
 
               </div>
 
@@ -376,15 +483,13 @@
                     Bera</a>
 
                   <br>
-                  <span class="highlight">Extended Abstract accepted at <span class="venue">AQIS'20</span>. Poster
-                    accepted at <span class="venue">QIP'21</span>.</span><br>
-
-                  <span style="font-weight: 900; ">Abstract:</span>
+                  <span class="highlight">Extended Abstract at <span class="venue">AQIS'20</span>. Poster
+                    at <span class="venue">QIP'21</span>.</span><br><br>
                   We obtain non-trivial superpositions over all distinct matchings and all
-                  maximal matchings for 2-regular graphs by designing linear depth QAOA+ style
+                  maximal matchings for \(2\)-regular graphs by designing linear depth \(\mathrm{QAOA}+\) style
                   circuits with novel
                   mixing operators, and empirically evaluate the expected matching size with different
-                  ansatzes.<br>
+                  ansatzes.<br><br>
                 </p>
 
                 <h4>
@@ -400,7 +505,43 @@
                   [<a href="https://www.youtube.com/watch?v=STL0nUJ1YiE&t=7s" title="short talk" target="_blank"
                     rel="noopener noreferrer">slides</a>]
                 </h4>
+                <a class="absbutton" onclick="mytoggle('abs1')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+                <a class="absbutton" onclick="mytoggle('bib1')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
 
+                <div class="abstract" id="abs1">
+                  The Quantum Alternating Operator Ansatz (QAOA+) framework has recently gained attention due to its
+                  ability to solve
+                  discrete optimization problems on noisy intermediate-scale quantum (NISQ) devices in a manner that is
+                  amenable to
+                  derivation of worst-case guarantees. We design a technique in this framework to tackle a few problems
+                  over maximal
+                  matchings in graphs. Even though maximum matching is polynomial-time solvable, most counting and
+                  sampling versions are
+                  #P-hard.
+                  We design a few algorithms that generates superpositions over matchings allowing us to sample from
+                  them. In particular,
+                  we get a superposition over all possible matchings when given the empty state as input and a
+                  superposition over all
+                  maximal matchings when given the \(W\)-states as input.
+                  Our main result is that the expected size of the matchings corresponding to the output states of our
+                  QAOA+ algorithm
+                  when ran on a \(2\)-regular graph is greater than the expected matching size obtained from a uniform
+                  distribution over all
+                  matchings. This algorithm uses a \(W\)-state as input and we prove that this input state is better
+                  compared to using the
+                  empty matching as the input state.
+                </div>
+                <div class="abstract" id="bib1">
+                  @article{chatterjee2020applying,<br>
+                  title={Applying the Quantum Alternating Operator Ansatz to the Graph Matching Problem},<br>
+                  author={Chatterjee, Sagnik and Bera, Debajyoti},<br>
+                  journal={arXiv preprint arXiv:2011.11918},<br>
+                  year={2020}<br>
+                  }
+
+                </div>
 
               </div>
 
@@ -1158,6 +1299,9 @@
   </div>
 
   <script src="js/resources.js" defer></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </body>
 
 </html>

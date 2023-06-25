@@ -22,6 +22,7 @@ navToggle.addEventListener('click', () => {
   
 });
 
+
 // Intersection Observer to change menu text color in different sections
 // const navul = document.querySelector(".primary-navigation");
 // const sectionEven = document.querySelector(".section-even");
