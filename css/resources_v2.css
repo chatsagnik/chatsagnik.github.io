@@ -47,7 +47,7 @@
   --fw-semi-bold: 600;
   --fw-bold: 700;
 
-  --fs-100: 5;
+  --fs-100: 0.25rem;
   --fs-300: 0.8125rem;
   --fs-400: 1rem;
   --fs-500: 1.15rem;
@@ -688,7 +688,7 @@ a:hover {
     padding-top: 5rem;
   }
   .post h1 {
-    font-size: 2.9rem;
+    font-size: 2.5rem;
     width: max-content;
   }
   #about-me h1 {
@@ -768,59 +768,47 @@ a:hover {
     grid-column: span 1;
   }
 
-  .stacked {
-    grid-template-columns: 1fr;
-    aspect-ratio: 1 / 1;
+  .card__timeline {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    min-height: 25vh;
+    max-height: 35vh;
+    overflow-y: auto;
   }
 
   .about-grid {
     display: grid;
-    min-height: max-content;
+    font-size: smaller;
+    grid-template-columns: 1fr;
+    width: 95%;
+    gap: 1rem;
+    margin-bottom: 30vh;
+  }
+
+  .publication-grid {
+    font-size: smaller;
+    display: grid;
     grid-template-columns: 1fr;
     width: 95%;
     gap: 1rem;
   }
-
-  .card__timeline {
-  font-size: smaller;
-  overflow-y: visible;
-  max-height: 100%;
-}
-
-main{
-  display: flex;
-  flex-direction: column;
-}
-  .publication-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 85%;
-    gap: 1rem;
-  }
-
-  /* .publication-grid .card { */
-    /* aspect-ratio: 1 / 1; */
-    /* border: 3px solid var(--clr-objects-alt1); */
-  /* } */
 
   .talks-grid {
+    font-size: smaller;
     display: grid;
     grid-template-columns: 1fr;
     width: 95%;
     gap: 1rem;
   }
-  .activities-grid {
+
+   .miscellaneous-grid {
     display: grid;
+    font: var(--fs-100);
     grid-template-columns: 1fr;
     width: 95%;
     gap: 1rem;
   }
-  .miscellaneous-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 95%;
-    gap: 1rem;
-  }
+  
 
   .socials {
     justify-content: space-around;
