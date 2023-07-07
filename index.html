@@ -97,15 +97,16 @@
   </div>
 
 
-  <div class="mainbody">
-    <main>
+  <div>
+
+    <main class="mainbody">
       <!-- <section class="full-page-slide"> -->
+
       <section>
+
         <div id="about-me" class="post delay6 about-me flex">
           <h1 class="titleh1">Sagnik Chatterjee</h1>
-
           <div class="about-grid grid">
-
             <div class="card__content dp card__img">
               <img loading="lazy" src="/assets/dp_new.jpeg">
             </div>
@@ -129,7 +130,9 @@
                     computing</span> and <span class="highlight-bold">computational learning
                     theory</span>, and involves developing algorithms for discriminative and
                   generative tasks under various noise models and proving theoretical bounds for convergence,
-                  generalization, and speedups.
+                  generalization, and speedups. Recently, I have also started gaining an interest in <span
+                    class="highlight-bold">provably secure and private</span> models from a quantum learning theoretic
+                  perspective.
                 </p><br>
 
                 <!-- <div class="card-description cvdiv">
@@ -167,6 +170,10 @@
             <div class="card__content card__timeline">
               <h2 class="card-title">News</h2>
               <ul class="list_timeline">
+                <li><i class="uil uil-graduation-cap"></i><span class="date">Jul'23:</span> New preprint on
+                  <span class="paper">Quantum Solutions to the Privacy vs. Utility Tradeoff</span> out on arXiv<a
+                    href="https://arxiv.org/abs/2307.03118"><i class="uil uil-external-link-alt"></i></a>.
+                </li>
                 <li><i class="uil uil-graduation-cap"></i><span class="date">Jun'23:</span>
                   <span class="paper">Quantum boosting using domain-partitioning
                     hypotheses</span> accepted at <span class="venue">Quantum Machine Intelligence</span>.
@@ -282,6 +289,73 @@
                                     class="card__img" /></a> -->
 
               <div class="card__content">
+                <h2 class="card-title">Quantum Solutions to the Privacy vs. Utility Tradeoff.
+                </h2>
+                <p class="card-description" id="QuantGAN">
+                  with
+                  <a href="https://dblp.org/pid/149/2722.html" target="_blank" rel="noopener noreferrer">
+                    Vyacheslav Kungurtsev
+                  </a>
+                  <br>
+                  <span class="highlight">Submitted</span>.
+                  <br><br>
+
+                  We propose a novel architecture (and several variants thereof) based on quantum
+                  cryptographic primitives
+                  with provable privacy and security guarantees regarding membership inference attacks on generative
+                  models.
+                </p><br>
+                <h4>
+
+                  <i class="uil uil-file-info-alt"></i>
+                  [<a href="https://arxiv.org/abs/2307.03118" title="pdf" target="_blank"
+                    rel="noopener noreferrer me">arXiv</a>]
+
+                </h4>
+
+                <a class="absbutton" onclick="mytoggle('abs4')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+                <a class="absbutton" onclick="mytoggle('bib4')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+                <div class="abstract" id="abs4">
+                  In this work, we propose a novel architecture (and several variants thereof) based on quantum
+                  cryptographic primitives
+                  with provable privacy and security guarantees regarding membership inference attacks on generative
+                  models. Our
+                  architecture can be used on top of any existing classical or quantum generative models. We argue that
+                  the use of quantum
+                  gates associated with unitary operators provides inherent advantages compared to standard Differential
+                  Privacy based
+                  techniques for establishing guaranteed security from all polynomial-time adversaries.
+                </div>
+                <div class="abstract" id="bib4">
+
+                  @misc{chatterjee2023quantum,<br>
+                  title={Quantum Solutions to the Privacy vs. Utility Tradeoff},<br>
+                  author={Sagnik Chatterjee and Vyacheslav Kungurtsev},<br>
+                  year={2023},<br>
+                  eprint={2307.03118},<br>
+                  archivePrefix={arXiv},<br>
+                  primaryClass={quant-ph}<br>
+                  }
+
+                </div>
+
+                <!-- <a href="https://slidemodel.com/free-powerpoint-templates/free-animated-horizontal-decision-tree/"
+                                    target="_blank" rel="noopener noreferrer"
+                                    style="font-weight: var(--fs-100); text-decoration: none;">[Image
+                                    Credit]</a> -->
+              </div>
+            </div>
+
+            <div class="card stacked ">
+
+              <!-- <a href="https://arxiv.org/abs/2210.00212" target="_blank" rel="noopener noreferrer"><img
+                                                            loading="lazy" src="/assets/decision.png" alt="Decision Trees"
+                                                            class="card__img" /></a> -->
+
+              <div class="card__content">
                 <h2 class="card-title">Efficient Quantum Agnostic Improper Learning of Decision Trees.
                 </h2>
                 <p class="card-description" id="QuantAgDT">
@@ -302,9 +376,9 @@
                 </p><br>
                 <h4>
 
-                  <i class="uil uil-file-download"></i>
-                  [<a href="https://drive.google.com/file/d/1Bd5zXf0BHqz3M9ZQq3M5wJugiKWlO4tG/view?usp=share_link"
-                    title="pdf" target="_blank" rel="noopener noreferrer me">arXiv</a>]
+                  <i class="uil uil-file-info-alt"></i>
+                  [<a href="https://arxiv.org/abs/2210.00212" title="pdf" target="_blank"
+                    rel="noopener noreferrer me">arXiv</a>]
 
                 </h4>
 
@@ -353,9 +427,9 @@
                 </div>
 
                 <!-- <a href="https://slidemodel.com/free-powerpoint-templates/free-animated-horizontal-decision-tree/"
-                                    target="_blank" rel="noopener noreferrer"
-                                    style="font-weight: var(--fs-100); text-decoration: none;">[Image
-                                    Credit]</a> -->
+                                                            target="_blank" rel="noopener noreferrer"
+                                                            style="font-weight: var(--fs-100); text-decoration: none;">[Image
+                                                            Credit]</a> -->
               </div>
             </div>
 
