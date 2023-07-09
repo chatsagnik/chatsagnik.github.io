@@ -541,13 +541,15 @@ a:hover {
     font-weight: var(--fw-bold);
 }
 
+#asdas
+
 .paper {
   color: var(--clr-paper);
 }
  
 .venue {
   color: var(--clr-venue);
-}
+} 
 
 .card__timeline {
   font-size: smaller;
