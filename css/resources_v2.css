@@ -527,6 +527,11 @@ a:hover {
   list-style: none;
 }
 
+.upcoming {
+  font-weight: var(--fw-semi-bold);
+  color: var(--clr-hover);
+}
+
 .highlight {
   color: var(--clr-highlight);
 }
