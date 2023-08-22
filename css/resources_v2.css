@@ -557,7 +557,7 @@ a:hover {
 .card__timeline {
   font-size: smaller;
   overflow-y: auto;
-  max-height: 35vh;
+  max-height: 45vh;
 }
 .list_timeline li {
    margin-bottom:10px;   
