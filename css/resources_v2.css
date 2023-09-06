@@ -449,7 +449,7 @@ a:hover {
 }
 
 .titleh2{
-  font-size: var(--fs-650);
+  font-size: var(--fs-700);
   width: max-content;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: var(--clr-content-header);
