@@ -361,7 +361,7 @@ a:hover {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 0.2fr 0.5fr 0.3fr;
+  grid-template-columns: 0.2fr 0.5fr 0.4fr;
   width: 90%;
   gap: 1rem;
   margin-inline: auto;
