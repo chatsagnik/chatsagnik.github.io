@@ -161,20 +161,24 @@
             <div class="card__content card__timeline">
               <h2 class="card-title">News</h2>
               <ul class="list_timeline">
+                <li><i class="uil uil-users-alt"></i><span class="date">June'24:</span>
+                  Gave a talk on quantum learning at the ACMU seminar series in Indian Statistical Institute, Kolkata.
+                </li>
+                <li><i class="uil uil-users-alt"></i><span class="date">May'24:</span>
+                  Presented our work at <span class="venue">AISTATS'24</span> in Valencia.
+                </li>
                 <li><i class="uil uil-microphone"></i><span class="date">Feb'24:</span> Gave 3
-                  invited lectures on <span class="paper">Quantum algorithms for Linear Algebra</span> and <span
-                    class="paper"> Frameworks for Quantum algorithms</span> at the <a
-                    href="https://www.cmi.ac.in/activities/kohli-centre/quantum-semester-2024/" target="_blank"
-                    rel="noopener noreferrer">Quantum Computing Semester</a> at the Chennai Mathematical Institute
-                  (CMI).
+                  invited lectures on advanced quantum algorithms at
+                  the <a href="https://www.cmi.ac.in/activities/kohli-centre/quantum-semester-2024/" target="_blank"
+                    rel="noopener noreferrer">Quantum Computing Semester</a> in Chennai Mathematical Institute,
+                  Chennai.
                 </li>
                 <li><i class="uil uil-graduation-cap"></i><span class="date">Jan'24:</span>
                   <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span> accepted at
                   <span class="venue">AISTATS'24</span>.
                 </li>
                 <li><i class="uil uil-users-alt"></i><span class="date">Jan'24:</span>
-                  Presented our poster on <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision
-                    Trees</span> at <span class="venue">QIP'24</span> in Taipei, Taiwan.
+                  Presented our work at <span class="venue">QIP'24</span> in Taipei, Taiwan.
                 </li>
 
                 <li><i class="uil uil-book-reader"></i><span class="date">Jan'24:</span>
@@ -188,14 +192,11 @@
                 </li>
                 <li>
                   <i class="uil uil-microphone"></i><span class="date">Sep'23:</span>
-                  Gave an invited talk on our paper on learning decision trees at the <span class="highlight">Czech
-                    Technical University,
-                    Prague</span> at the IDA seminar.
+                  Gave an invited talk at the IDA seminar in Czech Technical University, Prague.
                 </li>
                 <li>
                   <i class="uil uil-microphone"></i><span class="date">Sep'23:</span>
-                  Gave an invited talk on our paper on learning decision trees at the <span class="highlight">University
-                    of Latvia, Riga</span>.
+                  Gave an invited talk at the University of Latvia, Riga.
                 </li>
                 <li><i class="uil uil-graduation-cap"></i><span class="date">Jul-Sep'23:</span> Visiting
                   <span class="venue">Czech Technical University, Prague</span> for a research internship.
@@ -316,7 +317,91 @@
           <h1>Research <a href="#footnote2"><span class="highlight-bold" style="font-size: 2rem;">&sect;</span></a></h1>
           <div class="publication-grid grid">
 
+            <div class="card stacked ">
 
+              <!-- <a href="https://arxiv.org/abs/2210.00212" target="_blank" rel="noopener noreferrer"><img
+                                                                        loading="lazy" src="/assets/decision.png" alt="Decision Trees"
+                                                                        class="card__img" /></a> -->
+
+              <div class="card__content">
+                <h2 class="card-title">Generalization Bounds for Dependent Data using
+                  Online-to-Batch Conversion.
+                </h2><br>
+                <p class="card-description" id="QuantAgDT">
+                  with
+                  <a href="https://sites.google.com/view/manuj-mukherjee/home?pli=1" target="_blank"
+                    rel="noopener noreferrer">
+                    Manuj Mukherjee
+                  </a>
+                  and
+                  <a href="https://www.linkedin.com/in/alhad-sethi/?originalSubdomain=in" target="_blank"
+                    rel="noopener noreferrer"> Alhad
+                    Sethi</a>.<br><br>
+                  <class class="highlight">Under submission.</class> <br><br>
+
+                  We give generalization error bounds for statistical learning algorithms trained on non-i.i.d. data in
+                  the Online-to-Batch setting.
+                </p><br>
+                <h4>
+                  <i class="uil uil-file-info-alt"></i>[
+
+                  <!-- <a href="https://proceedings.mlr.press/v238/chatterjee24a.html" target="_blank"
+                    rel="noopener noreferrer">proceedings</a>
+                  |  -->
+
+                  <a href="https://arxiv.org/abs/2210.00212" title="pdf" target="_blank"
+                    rel="noopener noreferrer me">arXiv</a>
+
+
+                  <!-- | 
+                  
+                  <a href="https://drive.google.com/file/d/1QBQxtUddGCEc0jyjyffHbIDUhAtYd9wT/view?usp=sharing"
+                    title="slides" target="_blank" rel="noopener noreferrer">slides</a> 
+                    
+                  |
+
+                  <a href="https://drive.google.com/file/d/1hBnrF9YkbsS_XiRJ0JZVeH6YIALxb8ol/view?usp=sharing"
+                    title="poster" target="_blank" rel="noopener noreferrer me">poster</a>
+                   -->
+                  ]
+
+                </h4>
+
+                <a class="absbutton" onclick="mytoggle('abs3')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+                <a class="absbutton" onclick="mytoggle('bib3')"><i
+                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+                <div class="abstract" id="abs3">
+                  In this work, we give generalization bounds of statistical learning algorithms trained on samples
+                  drawn
+                  from a dependent data source both in expectation and with high probability, using the Online-to-Batch
+                  conversion paradigm. We show that the generalization error of statistical learners in the dependent
+                  data setting is equivalent to the generalization error of statistical learners in the i.i.d. setting
+                  up to a
+                  term that depends on the decay rate of the underlying mixing stochastic process, and is independent
+                  of the complexity of the statistical learner. Our proof techniques involve defining a new notion of
+                  stability of online learning algorithms based on Wasserstein distances, and employing
+                  ”near-martingale”
+                  concentration bounds for dependent random variables to arrive at appropriate upper bounds for the
+                  generalization error of statistical learners trained on dependent data.
+
+                </div>
+                <div class="abstract" id="bib3">
+                  @misc{pmlr-v238-chatterjee24a,<br>
+                  title = {Generalization Bounds for Dependent Data using Online-to-Batch Conversion},<br>
+                  author = {Chatterjee, Sagnik and Mukherjee, Manuj and Sethi, Alhad},<br>
+                  year={2024}, <br>
+                  eprint={2405.13666}, <br>
+                  archivePrefix={arXiv}, <br>
+                  }
+
+
+                </div>
+
+
+              </div>
+            </div>
 
             <div class="card stacked ">
 
