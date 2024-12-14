@@ -350,23 +350,16 @@ a:hover {
   }
 }
 
-#particles-js1,
-#particles-js2,
-#particles-js3 {
-  z-index: -99;
-  position: absolute;
-  width: 100vw;
-  margin-top: 0.5rem;
-}
-
 .about-grid {
   display: grid;
-  grid-template-columns: 0.2fr 0.6fr 0.2fr;
+  grid-template-columns: 1fr 3fr;
   width: 90%;
   gap: 1rem;
   margin-inline: auto;
   align-items: center;
 }
+
+
 
 .dp {
   display: flex;
@@ -410,7 +403,7 @@ a:hover {
 
 .talks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   /* grid-template-columns: 1fr 1fr; */
   width: 90%;
   gap: 1rem;
@@ -564,9 +557,15 @@ a:hover {
 } 
 
 .card__timeline {
+  display: grid;
+  grid-column: span 2;
+  width: 90%;
+  gap: 1rem;
+  margin-inline: auto;
   font-size: smaller;
   overflow-y: auto;
-  max-height: 45vh;
+  max-height: 30vh;
+  /* align-items: center; */
 }
 .list_timeline li {
    margin-bottom:10px;   
@@ -680,13 +679,13 @@ a:hover {
   .card__content {
     border-radius: 1%;
   }
-  .card__img,
+  /* .card__img,
   .dp {
     display: none;
-  }
+  } */
   .post {
     padding: 1rem 0;
-    padding-top: 5rem;
+    padding-top: 2rem;
   }
 
   #about-me h1 {
@@ -768,9 +767,12 @@ a:hover {
 
   .card__timeline {
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    width: 90%;
+    max-height: 60vh;
     overflow-y: auto;
   }
+  
 
   .about-grid {
     display: grid;
