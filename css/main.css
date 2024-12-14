@@ -18,6 +18,8 @@
   /* --clr-bg: #fcfcfc; */
   --clr-bg-inverse-darker: #434c5e;
   --clr-bg-inverse: #4c566a;
+   --clr-bg-inverse-darker-trans: #434c5e30;
+  --clr-bg-inverse-trans: #4c566a30;
   --clr-txt: #3b4252;
   --clr-txt-inverse: #e5e9f0;
   --clr-objects: #5e81ac;
@@ -199,7 +201,6 @@ a:hover {
 .primary-navigation {
   list-style: none;
 }
-
 
 .sr-only {
   border: 0;
@@ -484,6 +485,15 @@ a:hover {
   padding: 0 1rem;
 }
 
+hr {
+    height: 1px;
+    color: var(--clr-bg-inverse-trans);
+    background: var(--clr-bg-inverse-darker-trans);
+    font-size: 0;
+    border: 0;
+    margin: 0 1rem;
+}
+
 /* .about-me h2:first-letter {
 
     font-family: var(--ff-heading);
@@ -577,8 +587,8 @@ a:hover {
 }
 
 .card__content ul {
-  padding: 0.5rem;
-  margin: 0.5rem;
+  padding: 0.25rem;
+  margin: 0.25rem;
 }
 
 .card__content h2 {
