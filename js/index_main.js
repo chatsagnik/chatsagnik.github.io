@@ -23,13 +23,28 @@ navToggle.addEventListener('click', () => {
 });
 
 
-const filterList = document.querySelector('.filter');
+// Intersection Observer to change menu text color in different sections
+// const navul = document.querySelector(".primary-navigation");
+// const sectionEven = document.querySelector(".section-even");
 
-const filterButtons = filterList.querySelectorAll('.filter-btn');
+// const sectionEvenOptions = {
+//   rootMargin: "-80px",
+//   threshold: 0.15
+// };
 
-const papers = document.querySelectorAll('.paper');
+// const sectionEvenObserver = new IntersectionObserver(function(
+//   entries,
+//   sectionEvenObserver
+// ) {
+//   entries.forEach(entry => {
+//     if (!entry.isIntersecting) {
+//       navul.classList.remove("nav-scrolled");
+//     } else {
+//       navul.classList.add("nav-scrolled");
+//       // console.log(entry.target);
+//     }
+//   });
+// },
+// sectionEvenOptions);
 
-function updateActiveButton(newButton) {
-  newButton.classList.add('active');
-  // filterList.querySelector('.active').classList.remove('active');
-}
+// sectionEvenObserver.observe(sectionEven);
