@@ -586,6 +586,10 @@ hr {
   line-height: 1.6;
 }
 
+.emailid {
+  color: var(--clr-highlight);
+}
+
 .absbutton {
   cursor: pointer;
   margin-bottom: 2rem;
