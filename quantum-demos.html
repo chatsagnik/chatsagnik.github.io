@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quantum Measurement &amp; Evolution — Interactive Demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Nord palette from main.css ─────────────────────────────── */
+    :root {
+      --bg: #d8dee9;
+      --card: #eceff4;
+      --surface: #e5e9f0;
+      --muted: #d0d6e2;
+      --inv: #4c566a;
+      --inv-dark: #434c5e;
+      --txt: #3b4252;
+      --txt2: #4c566a;
+      --txt3: #81a1c1;
+      --inv-txt: #e5e9f0;
+      --blue: #5e81ac;
+      --blue-lt: #81a1c1;
+      --red: #bf616a;
+      --green: #a3be8c;
+      --orange: #d08770;
+      --mauve: #b48ead;
+      --yellow: #ebcb8b;
+      --ff: "Inter", system-ui, sans-serif;
+      --r: 10px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: var(--ff);
+      background: var(--bg);
+      color: var(--txt);
+      padding: 28px 16px 48px;
+    }
+
+    /* ── Page header ─────────────────────────────────────────────── */
+    .page-hd {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .page-hd h1 {
+      font-size: 1.45rem;
+      font-weight: 600;
+      color: var(--txt);
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -0.01em;
+    }
+
+    .page-hd p {
+      font-size: 0.82rem;
+      color: var(--txt3);
+      margin-top: 5px;
+    }
+
+    /* ── Tab bar ─────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--inv-dark);
+      border-radius: var(--r) var(--r) 0 0;
+      overflow: hidden;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 6px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      font-family: var(--ff);
+      color: var(--blue-lt);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.14s, color 0.14s;
+      letter-spacing: 0.01em;
+    }
+
+    .tab-btn:hover {
+      background: var(--inv);
+      color: var(--inv-txt);
+    }
+
+    .tab-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ── Card ────────────────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      max-width: 780px;
+      margin: 0 auto;
+      border-radius: 0 0 var(--r) var(--r);
+      padding: 22px 24px 26px;
+      box-shadow: 0 2px 10px rgba(46, 52, 64, 0.13), 0 0 0 1px rgba(46, 52, 64, 0.06);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* ── Demo header ─────────────────────────────────────────────── */
+    .demo-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--txt);
+      margin-bottom: 3px;
+      font-family: Georgia, serif;
+    }
+
+    .demo-sub {
+      font-size: 0.78rem;
+      color: var(--txt3);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    /* ── Layout ──────────────────────────────────────────────────── */
+    .layout {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .ctrl {
+      flex: 1;
+      min-width: 190px;
+    }
+
+    /* ── Sliders ─────────────────────────────────────────────────── */
+    .row {
+      margin-bottom: 12px;
+    }
+
+    .row-lbl {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--txt2);
+      margin-bottom: 5px;
+    }
+
+    .row-lbl .val {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--muted);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--card);
+      box-shadow: 0 0 0 1.5px var(--blue);
+      cursor: pointer;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid var(--card);
+      cursor: pointer;
+    }
+
+    /* ── Section labels ──────────────────────────────────────────── */
+    .sec {
+      font-size: 0.67rem;
+      font-weight: 600;
+      color: var(--txt3);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin: 14px 0 8px;
+    }
+
+    /* ── Probability bars ────────────────────────────────────────── */
+    .prob-row {
+      margin-bottom: 8px;
+    }
+
+    .prob-hd {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      margin-bottom: 3px;
+    }
+
+    .prob-hd .pval {
+      font-weight: 600;
+    }
+
+    .prob-track {
+      height: 6px;
+      background: var(--muted);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .prob-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width .2s ease;
+    }
+
+    /* ── Info boxes ──────────────────────────────────────────────── */
+    .state-box {
+      margin-top: 12px;
+      padding: 9px 12px;
+      background: var(--surface);
+      border-radius: 7px;
+      font-size: 0.75rem;
+      color: var(--txt2);
+      line-height: 1.6;
+      border: 1px solid var(--muted);
+    }
+
+    .state-box strong {
+      color: var(--txt);
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 0.7rem;
+      color: var(--txt3);
+      margin-top: 9px;
+      line-height: 1.55;
+    }
+
+    /* ── SVG text classes (inline SVGs) ──────────────────────────── */
+    text.t {
+      font-family: var(--ff);
+      font-size: 14px;
+      font-weight: 400;
+      fill: #3b4252;
+    }
+
+    text.ts {
+      font-family: var(--ff);
+      font-size: 12px;
+      font-weight: 400;
+      fill: #4c566a;
+    }
+
+    text.th {
+      font-family: var(--ff);
+      font-size: 14px;
+      font-weight: 600;
+      fill: #3b4252;
+    }
+
+    /* SVG override from main.css global reset */
+    svg {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ── Unitary: matrix input ───────────────────────────────────── */
+    .mat-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 8px 0 14px;
+    }
+
+    .mat-brk {
+      font-size: 3rem;
+      font-weight: 200;
+      color: var(--txt3);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .mat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .mat-cell {
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-radius: 7px;
+      padding: 7px 9px;
+    }
+
+    .mat-cell-lbl {
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+    }
+
+    .cx-inputs {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .cx-inputs input {
+      width: 50px;
+      padding: 3px 6px;
+      font-size: 0.74rem;
+      font-family: var(--ff);
+      background: var(--card);
+      border: 1px solid var(--muted);
+      border-radius: 5px;
+      color: var(--txt);
+      outline: none;
+      transition: border-color 0.14s;
+      -moz-appearance: textfield;
+    }
+
+    .cx-inputs input::-webkit-inner-spin-button,
+    .cx-inputs input::-webkit-outer-spin-button {
+      display: none;
+    }
+
+    .cx-inputs input:focus {
+      border-color: var(--blue);
+    }
+
+    .cx-sep {
+      font-size: 0.7rem;
+      color: var(--txt3);
+      flex-shrink: 0;
+    }
+
+    /* ── Presets ─────────────────────────────────────────────────── */
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .preset {
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: var(--ff);
+      background: var(--surface);
+      border: 1px solid var(--muted);
+      border-radius: 5px;
+      color: var(--txt2);
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+
+    .preset:hover {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    /* ── Unitarity badge ─────────────────────────────────────────── */
+    .u-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 7px;
+      font-size: 0.74rem;
+      border: 1px solid;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .u-badge.ok {
+      background: #f0f4ee;
+      border-color: #a3be8c;
+      color: #3d5a38;
+    }
+
+    .u-badge.fail {
+      background: #f8eeee;
+      border-color: #bf616a;
+      color: #7a2d34;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 560px) {
+      .layout {
+        flex-direction: column;
+      }
+
+      .tabs {
+        border-radius: var(--r) var(--r) 0 0;
+      }
+
+      .tab-btn {
+        font-size: 0.68rem;
+        padding: 9px 3px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .mat-cell-lbl {
+        display: none;
+      }
+
+      .cx-inputs input {
+        width: 44px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page-hd">
+    <h1>Quantum Measurement &amp; Evolution</h1>
+    <p>Interactive visualizations — drag sliders and edit matrix entries to explore</p>
+  </div>
+
+  <!-- ── TABS ──────────────────────────────────────────────────── -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab(0)">Bloch Sphere</button>
+    <button class="tab-btn" onclick="showTab(1)">Projective</button>
+    <button class="tab-btn" onclick="showTab(2)">POVM</button>
+    <button class="tab-btn" onclick="showTab(3)">Unitary Evolution</button>
+    <!-- <button class="tab-btn" onclick="showTab(4)">Bell Entanglement</button> -->
+  </div>
+
+  <div class="card">
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TAB 0 — BLOCH SPHERE                                        -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="tab-panel active" id="tab0">
+      <div class="demo-title">Bloch sphere — orthogonal projection</div>
+      <div class="demo-sub">Measuring in the Z-basis projects the state vector onto the Z-axis. The squared projection
+        length gives the Born probability. φ encodes relative phase but is invisible to Z-basis measurement.</div>
+      <div class="layout">
+
+        <svg viewBox="0 0 300 345" style="width:265px;flex-shrink:0">
+          <defs>
+            <marker id="bah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
+              orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <circle cx="150" cy="166" r="116" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.8" />
+          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#c8d0df" stroke-width="0.6"
+            stroke-dasharray="5 4" />
+          <line x1="150" y1="22" x2="150" y2="318" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#bah)" />
+          <line x1="18" y1="166" x2="290" y2="166" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#bah)" />
+          <line x1="185" y1="198" x2="108" y2="131" stroke="#81a1c1" stroke-width="0.5" stroke-dasharray="5 3"
+            marker-end="url(#bah)" />
+          <text class="ts" x="153" y="18" fill="#81a1c1">|0⟩</text>
+          <text class="ts" x="153" y="334" fill="#81a1c1">|1⟩</text>
+          <text class="ts" x="292" y="170" fill="#81a1c1">x</text>
+          <text class="ts" x="101" y="128" fill="#81a1c1">y</text>
+          <!-- Z-axis glow -->
+          <line x1="150" y1="38" x2="150" y2="300" stroke="#5e81ac" stroke-width="6" stroke-linecap="round"
+            opacity="0.11" />
+          <text class="ts" x="158" y="54" fill="#5e81ac" opacity="0.85" font-weight="500">Z-basis</text>
+          <!-- dynamic -->
+          <line id="b-proj" stroke="#bf616a" stroke-width="1" stroke-dasharray="4 3" opacity="0.8" />
+          <line id="b-sv" x1="150" y1="166" x2="150" y2="50" stroke="#5e81ac" stroke-width="2.8" marker-end="url(#bah)"
+            stroke-linecap="round" />
+          <circle id="b-zpt" r="6" fill="#bf616a" cx="150" cy="50" />
+          <circle id="b-tip" r="5" fill="#5e81ac" cx="150" cy="50" />
+          <text id="b-ang" class="ts" fill="#81a1c1" x="0" y="0"></text>
+        </svg>
+
+        <div class="ctrl">
+          <div class="row">
+            <div class="row-lbl"><span>θ — polar angle from |0⟩</span><span class="val" id="b-tv">0°</span></div>
+            <input type="range" id="b-ts" min="0" max="180" value="0">
+          </div>
+          <div class="row">
+            <div class="row-lbl"><span>φ — azimuthal angle</span><span class="val" id="b-pv"
+                style="color:var(--txt3)">0°</span></div>
+            <input type="range" id="b-ps" min="0" max="360" value="0">
+          </div>
+          <div class="sec">Z-basis outcome probabilities</div>
+          <div class="prob-row">
+            <div class="prob-hd">
+              <span style="color:var(--blue)">P(|0⟩) = cos²(θ/2)</span>
+              <span class="pval" style="color:var(--blue)" id="b-p0">1.000</span>
+            </div>
+            <div class="prob-track">
+              <div class="prob-fill" id="b-p0b" style="background:var(--blue);width:100%"></div>
+            </div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-hd">
+              <span style="color:var(--red)">P(|1⟩) = sin²(θ/2)</span>
+              <span class="pval" style="color:var(--red)" id="b-p1">0.000</span>
+            </div>
+            <div class="prob-track">
+              <div class="prob-fill" id="b-p1b" style="background:var(--red);width:0%"></div>
+            </div>
+          </div>
+          <div class="state-box"><strong>|ψ⟩</strong> = <span id="b-state">|0⟩</span></div>
+          <p class="hint">The red dot marks the projection of |ψ⟩ onto the Z-axis. φ affects only the relative phase —
+            invisible to Z-basis measurement. Try θ = 90° for the equator: both outcomes become equally likely.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TAB 1 — PROJECTIVE MEASUREMENT                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab1">
+      <div class="demo-title">Projective (von Neumann) measurement</div>
+      <div class="demo-sub">A projective measurement is a rotatable orthonormal basis {|m₀⟩, |m₁⟩}. The outcome
+        probability equals the squared projection of |ψ⟩ onto that axis. The two axes are always perpendicular — this is
+        the fundamental constraint projective measurement cannot break.</div>
+      <div class="layout">
+
+        <svg viewBox="0 0 310 310" style="width:275px;flex-shrink:0">
+          <defs>
+            <marker id="pah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
+              orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <circle cx="155" cy="155" r="118" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.8" />
+          <line x1="155" y1="28" x2="155" y2="282" stroke="#c8d0df" stroke-width="0.5" />
+          <line x1="28" y1="155" x2="282" y2="155" stroke="#c8d0df" stroke-width="0.5" />
+          <text class="ts" x="158" y="25" fill="#81a1c1">|0⟩</text>
+          <text class="ts" x="158" y="298" fill="#81a1c1">|1⟩</text>
+          <text class="ts" x="284" y="159" fill="#81a1c1">|+⟩</text>
+          <text class="ts" x="6" y="159" fill="#81a1c1">|−⟩</text>
+          <!-- basis axes -->
+          <line id="p-m0a" stroke="#a3be8c" stroke-width="1.5" marker-end="url(#pah)" />
+          <line id="p-m0b" stroke="#a3be8c" stroke-width="0.6" stroke-dasharray="5 3" />
+          <line id="p-m1a" stroke="#bf616a" stroke-width="1.5" marker-end="url(#pah)" />
+          <line id="p-m1b" stroke="#bf616a" stroke-width="0.6" stroke-dasharray="5 3" />
+          <!-- projection footprints -->
+          <line id="p-j0" stroke="#a3be8c" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
+          <line id="p-j1" stroke="#bf616a" stroke-width="1" stroke-dasharray="3 3" opacity="0.7" />
+          <circle id="p-c0" r="5" fill="#a3be8c" />
+          <circle id="p-c1" r="5" fill="#bf616a" />
+          <!-- state -->
+          <line id="p-sv" x1="155" y1="155" stroke="#5e81ac" stroke-width="2.8" marker-end="url(#pah)"
+            stroke-linecap="round" />
+          <circle id="p-st" r="5" fill="#5e81ac" />
+          <text id="p-m0l" class="ts" fill="#a3be8c" font-weight="600">|m₀⟩</text>
+          <text id="p-m1l" class="ts" fill="#bf616a" font-weight="600">|m₁⟩</text>
+          <text id="p-stl" class="ts" fill="#5e81ac" font-weight="600">|ψ⟩</text>
+        </svg>
+
+        <div class="ctrl">
+          <div class="row">
+            <div class="row-lbl"><span>State angle α</span><span class="val" id="p-av">60°</span></div>
+            <input type="range" id="p-as" min="0" max="360" value="60">
+          </div>
+          <div class="row">
+            <div class="row-lbl"><span>Basis angle β — rotate measurement</span><span class="val" id="p-bv"
+                style="color:#a3be8c">0°</span></div>
+            <input type="range" id="p-bs" min="0" max="180" value="0">
+          </div>
+          <div class="sec">Outcome probabilities</div>
+          <div class="prob-row">
+            <div class="prob-hd">
+              <span style="color:#a3be8c">P(m₀) = cos²(α − β)</span>
+              <span class="pval" style="color:#a3be8c" id="p-p0">0.750</span>
+            </div>
+            <div class="prob-track">
+              <div class="prob-fill" id="p-p0b" style="background:#a3be8c;width:75%"></div>
+            </div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-hd">
+              <span style="color:#bf616a">P(m₁) = sin²(α − β)</span>
+              <span class="pval" style="color:#bf616a" id="p-p1">0.250</span>
+            </div>
+            <div class="prob-track">
+              <div class="prob-fill" id="p-p1b" style="background:#bf616a;width:25%"></div>
+            </div>
+          </div>
+          <div class="state-box">Post-measurement collapse → <strong id="p-col">|m₀⟩</strong></div>
+          <p class="hint">Dashed lines drop perpendiculars from |ψ⟩ to each axis. Rotating β to align with |ψ⟩ gives
+            P(m₀) → 1. The basis axes are always 90° apart — the defining constraint that the POVM tab relaxes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TAB 2 — POVM                                               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab2">
+      <div class="demo-title">POVM — trine measurement</div>
+      <div class="demo-sub">A POVM replaces orthogonal projectors with positive operators {Eₖ} satisfying only ΣEₖ = I.
+        The trine has 3 non-orthogonal outcome directions at 120° apart — more outcomes than dimensions, impossible
+        projectively.</div>
+
+      <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <div style="display:flex;gap:10px">
+
+            <div style="flex:1">
+              <div
+                style="font-size:0.69rem;font-weight:600;color:var(--txt3);text-align:center;margin-bottom:6px;letter-spacing:0.05em">
+                PROJECTIVE (2 outcomes)</div>
+              <svg viewBox="0 0 230 230" style="width:100%">
+                <defs>
+                  <marker id="vah1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
+                    orient="auto-start-reverse">
+                    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </marker>
+                </defs>
+                <circle cx="115" cy="115" r="96" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.7" />
+                <line x1="115" y1="13" x2="115" y2="217" stroke="#5e81ac" stroke-width="1.2" stroke-dasharray="6 3"
+                  marker-end="url(#vah1)" />
+                <line x1="13" y1="115" x2="217" y2="115" stroke="#bf616a" stroke-width="1.2" stroke-dasharray="6 3"
+                  marker-end="url(#vah1)" />
+                <text class="ts" x="118" y="11" fill="#5e81ac" font-weight="600">Π₀</text>
+                <text class="ts" x="219" y="119" fill="#bf616a" font-weight="600">Π₁</text>
+                <text class="ts" x="50" y="45" fill="#c8d0df">Π₀²=Π₀</text>
+                <text class="ts" x="50" y="59" fill="#c8d0df">Π₀⊥Π₁</text>
+                <line id="vp-j0" stroke="#5e81ac" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.7" />
+                <line id="vp-j1" stroke="#bf616a" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.7" />
+                <circle id="vp-c0" r="5" fill="#5e81ac" />
+                <circle id="vp-c1" r="5" fill="#bf616a" />
+                <line id="vp-sv" x1="115" y1="115" stroke="#434c5e" stroke-width="2.4" marker-end="url(#vah1)"
+                  stroke-linecap="round" />
+                <circle id="vp-st" r="4" fill="#434c5e" />
+                <text id="vp-stl" class="ts" fill="#434c5e" font-weight="600">|ψ⟩</text>
+              </svg>
+            </div>
+
+            <div style="flex:1">
+              <div
+                style="font-size:0.69rem;font-weight:600;color:var(--txt3);text-align:center;margin-bottom:6px;letter-spacing:0.05em">
+                TRINE POVM (3 outcomes)</div>
+              <svg viewBox="0 0 230 230" style="width:100%">
+                <defs>
+                  <marker id="vah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
+                    orient="auto-start-reverse">
+                    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </marker>
+                </defs>
+                <circle cx="115" cy="115" r="96" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.7" />
+                <!-- trine axes: 90°, 210°, 330° -->
+                <line x1="115" y1="13" x2="115" y2="217" stroke="#a3be8c" stroke-width="1" stroke-dasharray="6 3"
+                  marker-end="url(#vah2)" />
+                <line x1="32" y1="163" x2="198" y2="67" stroke="#d08770" stroke-width="1" stroke-dasharray="6 3"
+                  marker-end="url(#vah2)" />
+                <line x1="198" y1="163" x2="32" y2="67" stroke="#b48ead" stroke-width="1" stroke-dasharray="6 3"
+                  marker-end="url(#vah2)" />
+                <text class="ts" x="118" y="11" fill="#a3be8c" font-weight="600">E₀</text>
+                <text class="ts" x="14" y="176" fill="#d08770" font-weight="600">E₁</text>
+                <text class="ts" x="196" y="176" fill="#b48ead" font-weight="600">E₂</text>
+                <text class="ts" x="43" y="44" fill="#c8d0df">Eₖ=⅔|φₖ⟩⟨φₖ|</text>
+                <text class="ts" x="43" y="58" fill="#c8d0df">Eₖ²≠Eₖ</text>
+                <line id="vv-j0" stroke="#a3be8c" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.7" />
+                <line id="vv-j1" stroke="#d08770" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.7" />
+                <line id="vv-j2" stroke="#b48ead" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.7" />
+                <circle id="vv-c0" r="5" fill="#a3be8c" />
+                <circle id="vv-c1" r="5" fill="#d08770" />
+                <circle id="vv-c2" r="5" fill="#b48ead" />
+                <line id="vv-sv" x1="115" y1="115" stroke="#434c5e" stroke-width="2.4" marker-end="url(#vah2)"
+                  stroke-linecap="round" />
+                <circle id="vv-st" r="4" fill="#434c5e" />
+                <text id="vv-stl" class="ts" fill="#434c5e" font-weight="600">|ψ⟩</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="ctrl" style="min-width:175px">
+          <div class="row">
+            <div class="row-lbl"><span>State angle α</span><span class="val" id="v-av">45°</span></div>
+            <input type="range" id="v-as" min="0" max="360" value="45">
+          </div>
+          <div class="sec">Projective outcomes</div>
+          <div class="prob-row">
+            <div class="prob-hd"><span style="color:#5e81ac">P(Π₀)</span><span class="pval" style="color:#5e81ac"
+                id="v-pp0">—</span></div>
+            <div class="prob-track">
+              <div class="prob-fill" id="v-pp0b" style="background:#5e81ac"></div>
+            </div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-hd"><span style="color:#bf616a">P(Π₁)</span><span class="pval" style="color:#bf616a"
+                id="v-pp1">—</span></div>
+            <div class="prob-track">
+              <div class="prob-fill" id="v-pp1b" style="background:#bf616a"></div>
+            </div>
+          </div>
+          <div class="sec">POVM outcomes</div>
+          <div class="prob-row">
+            <div class="prob-hd"><span style="color:#a3be8c">P(E₀)</span><span class="pval" style="color:#a3be8c"
+                id="v-vp0">—</span></div>
+            <div class="prob-track">
+              <div class="prob-fill" id="v-vp0b" style="background:#a3be8c"></div>
+            </div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-hd"><span style="color:#d08770">P(E₁)</span><span class="pval" style="color:#d08770"
+                id="v-vp1">—</span></div>
+            <div class="prob-track">
+              <div class="prob-fill" id="v-vp1b" style="background:#d08770"></div>
+            </div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-hd"><span style="color:#b48ead">P(E₂)</span><span class="pval" style="color:#b48ead"
+                id="v-vp2">—</span></div>
+            <div class="prob-track">
+              <div class="prob-fill" id="v-vp2b" style="background:#b48ead"></div>
+            </div>
+          </div>
+          <p class="hint" style="margin-top:10px">Three outcomes from a 2-level system: no clean post-measurement
+            eigenstate. P(E₀)+P(E₁)+P(E₂) = 1 always, but notice none ever saturates to 1 — the non-orthogonality is the
+            cost.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TAB 3 — UNITARY EVOLUTION                                  -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab3">
+      <div class="demo-title">Unitary evolution on the Bloch sphere</div>
+      <div class="demo-sub">Enter a 2×2 unitary U. The dashed arrow is the initial state |ψ⟩; the solid arrow is U|ψ⟩.
+        The arc traces the geodesic rotation. Select a preset or type custom complex entries.</div>
+      <div class="layout">
+
+        <svg viewBox="0 0 300 345" style="width:265px;flex-shrink:0">
+          <defs>
+            <marker id="uah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5"
+              orient="auto-start-reverse">
+              <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <circle cx="150" cy="166" r="116" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.8" />
+          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#c8d0df" stroke-width="0.6"
+            stroke-dasharray="5 4" />
+          <line x1="150" y1="22" x2="150" y2="318" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#uah)" />
+          <line x1="18" y1="166" x2="290" y2="166" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#uah)" />
+          <line x1="185" y1="198" x2="108" y2="131" stroke="#81a1c1" stroke-width="0.5" stroke-dasharray="5 3"
+            marker-end="url(#uah)" />
+          <text class="ts" x="153" y="18" fill="#81a1c1">|0⟩</text>
+          <text class="ts" x="153" y="334" fill="#81a1c1">|1⟩</text>
+          <text class="ts" x="292" y="170" fill="#81a1c1">x</text>
+          <text class="ts" x="101" y="128" fill="#81a1c1">y</text>
+          <!-- rotation axis -->
+          <line id="u-axis" stroke="#ebcb8b" stroke-width="1.4" stroke-dasharray="6 4" opacity="0" />
+          <!-- geodesic arc -->
+          <path id="u-arc" fill="none" stroke="#ebcb8b" stroke-width="1.3" stroke-dasharray="4 3" opacity="0" />
+          <!-- initial state (dashed, muted) -->
+          <line id="u-sv0" x1="150" y1="166" x2="150" y2="50" stroke="#81a1c1" stroke-width="1.6" stroke-dasharray="5 3"
+            marker-end="url(#uah)" stroke-linecap="round" opacity="0.65" />
+          <circle id="u-t0" r="5" fill="#81a1c1" cx="150" cy="50" opacity="0.65" />
+          <text id="u-l0" class="ts" fill="#81a1c1">|ψ⟩</text>
+          <!-- final state (solid) -->
+          <line id="u-sv1" x1="150" y1="166" x2="150" y2="50" stroke="#5e81ac" stroke-width="2.8" marker-end="url(#uah)"
+            stroke-linecap="round" />
+          <circle id="u-t1" r="5" fill="#5e81ac" cx="150" cy="50" />
+          <text id="u-l1" class="ts" fill="#5e81ac" font-weight="600">U|ψ⟩</text>
+        </svg>
+
+        <div class="ctrl">
+          <div class="row">
+            <div class="row-lbl"><span>Initial state θ</span><span class="val" id="u-tv">90°</span></div>
+            <input type="range" id="u-ts" min="0" max="180" value="90">
+          </div>
+          <div class="row">
+            <div class="row-lbl"><span>Initial state φ</span><span class="val" id="u-pv"
+                style="color:var(--txt3)">0°</span></div>
+            <input type="range" id="u-ps" min="0" max="360" value="0">
+          </div>
+
+          <div class="sec">Gate presets</div>
+          <div class="presets">
+            <button class="preset" onclick="setGate('I')">I</button>
+            <button class="preset" onclick="setGate('X')">X</button>
+            <button class="preset" onclick="setGate('Y')">Y</button>
+            <button class="preset" onclick="setGate('Z')">Z</button>
+            <button class="preset" onclick="setGate('H')">H</button>
+            <button class="preset" onclick="setGate('S')">S</button>
+            <button class="preset" onclick="setGate('T')">T</button>
+            <button class="preset" onclick="setGate('Rx')">Rx(π/2)</button>
+            <button class="preset" onclick="setGate('Ry')">Ry(π/2)</button>
+            <button class="preset" onclick="setGate('Rz')">Rz(π/2)</button>
+          </div>
+
+          <div class="sec">Matrix entries — Re + i·Im</div>
+          <div class="mat-wrap">
+            <div class="mat-brk">[</div>
+            <div class="mat-grid">
+              <div class="mat-cell">
+                <div class="mat-cell-lbl">U₀₀</div>
+                <div class="cx-inputs">
+                  <input type="number" id="r00" value="1" step="0.001">
+                  <span class="cx-sep">+i</span>
+                  <input type="number" id="i00" value="0" step="0.001">
+                </div>
+              </div>
+              <div class="mat-cell">
+                <div class="mat-cell-lbl">U₀₁</div>
+                <div class="cx-inputs">
+                  <input type="number" id="r01" value="0" step="0.001">
+                  <span class="cx-sep">+i</span>
+                  <input type="number" id="i01" value="0" step="0.001">
+                </div>
+              </div>
+              <div class="mat-cell">
+                <div class="mat-cell-lbl">U₁₀</div>
+                <div class="cx-inputs">
+                  <input type="number" id="r10" value="0" step="0.001">
+                  <span class="cx-sep">+i</span>
+                  <input type="number" id="i10" value="0" step="0.001">
+                </div>
+              </div>
+              <div class="mat-cell">
+                <div class="mat-cell-lbl">U₁₁</div>
+                <div class="cx-inputs">
+                  <input type="number" id="r11" value="1" step="0.001">
+                  <span class="cx-sep">+i</span>
+                  <input type="number" id="i11" value="0" step="0.001">
+                </div>
+              </div>
+            </div>
+            <div class="mat-brk">]</div>
+          </div>
+
+          <div id="u-badge" class="u-badge ok">
+            <span id="u-icon">✓</span>
+            <span id="u-err">Unitary — ‖U†U − I‖ = 0.000</span>
+          </div>
+
+          <div class="state-box" style="margin-top:10px">
+            <span style="color:var(--txt3)"> |ψ⟩ =</span> <span id="u-sin">|+⟩</span><br>
+            <span style="color:var(--txt3)">U|ψ⟩ =</span> <strong id="u-sout">|+⟩</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Improved Bell State Tab with sliders and correlations
+
+    <button class="tab-btn" onclick="showTab(4)">Bell Entanglement</button>
+
+    <div class="tab-panel" id="tab4">
+      <div class="demo-title">Bell state entanglement (correlations)</div>
+      <div class="demo-sub">
+        Explore measurement correlations in the Bell state |Φ+⟩ = (|00⟩ + |11⟩)/√2. Rotate measurement bases for each
+        qubit.
+      </div>
+
+      <div class="layout">
+
+        <svg viewBox="0 0 320 200" style="width:300px;flex-shrink:0">
+          <circle cx="80" cy="100" r="40" fill="#e5e9f0" stroke="#5e81ac" stroke-width="2" />
+          <text x="80" y="105" text-anchor="middle" class="th">A</text>
+
+          <circle cx="240" cy="100" r="40" fill="#e5e9f0" stroke="#bf616a" stroke-width="2" />
+          <text x="240" y="105" text-anchor="middle" class="th">B</text>
+
+          <line x1="120" y1="100" x2="200" y2="100" stroke="#b48ead" stroke-width="3" stroke-dasharray="6 4" />
+          <text x="160" y="90" text-anchor="middle" class="ts">entangled</text>
+        </svg>
+
+        <div class="ctrl">
+
+          <div class="row">
+            <div class="row-lbl"><span>θ_A (measurement basis)</span><span class="val" id="bell-a-val">0°</span></div>
+            <input type="range" id="bell-a" min="0" max="180" value="0">
+          </div>
+
+          <div class="row">
+            <div class="row-lbl"><span>θ_B (measurement basis)</span><span class="val" id="bell-b-val">0°</span></div>
+            <input type="range" id="bell-b" min="0" max="180" value="0">
+          </div>
+
+          <div class="sec">Correlation</div>
+
+          <div class="prob-row">
+            <div class="prob-hd">
+              <span style="color:var(--mauve)">⟨A ⊗ B⟩ = cos(θ_A − θ_B)</span>
+              <span id="bell-corr" class="pval">1.000</span>
+            </div>
+            <div class="prob-track">
+              <div id="bell-corr-bar" class="prob-fill" style="background:var(--mauve);width:100%"></div>
+            </div>
+          </div>
+
+          <div class="state-box">
+            When θ_A = θ_B → perfect correlation.<br>
+            When θ_A − θ_B = 90° → zero correlation.
+          </div>
+
+          <button class="preset" onclick="measureBell()">Sample outcome</button>
+
+          <div class="state-box">
+            Outcome: <strong id="bell-out">—</strong>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateBell() {
+        const a = +document.getElementById('bell-a').value * Math.PI / 180;
+        const b = +document.getElementById('bell-b').value * Math.PI / 180;
+
+        document.getElementById('bell-a-val').textContent = Math.round(a * 180 / Math.PI) + '°';
+        document.getElementById('bell-b-val').textContent = Math.round(b * 180 / Math.PI) + '°';
+
+        const corr = Math.cos(a - b);
+
+        document.getElementById('bell-corr').textContent = corr.toFixed(3);
+        document.getElementById('bell-corr-bar').style.width = ((corr + 1) / 2 * 100).toFixed(1) + '%';
+      }
+
+      function measureBell() {
+        const r = Math.random();
+        const out = r < 0.5 ? '+ + (correlated)' : '- - (correlated)';
+        document.getElementById('bell-out').textContent = out;
+      }
+
+      document.getElementById('bell-a')?.addEventListener('input', updateBell);
+      document.getElementById('bell-b')?.addEventListener('input', updateBell);
+
+      updateBell();
+    </script> -->
+
+
+  </div><!-- .card -->
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────────── -->
+  <script>
+    /* ── utilities ─────────────────────────────────────────────── */
+    const $ = id => document.getElementById(id);
+    const r2d = r => Math.round(r * 180 / Math.PI);
+    const fmt = x => x.toFixed(3);
+
+    // Complex number ops
+    const C = (r, i) => ({ r: +r || 0, i: +i || 0 });
+    const Cadd = (a, b) => ({ r: a.r + b.r, i: a.i + b.i });
+    const Cmul = (a, b) => ({ r: a.r * b.r - a.i * b.i, i: a.r * b.i + a.i * b.r });
+    const Cconj = a => ({ r: a.r, i: -a.i });
+    const Cabs2 = a => a.r * a.r + a.i * a.i;
+    const Cabs = a => Math.sqrt(Cabs2(a));
+
+    // Bloch vector from state amplitudes [alpha, beta] complex
+    function bloch(a, b) {
+      const p = Cmul(Cconj(a), b);
+      return { x: 2 * p.r, y: 2 * p.i, z: Cabs2(a) - Cabs2(b) };
+    }
+
+    // Oblique 3D → 2D projection for Bloch sphere (cx,cy centre, R radius)
+    function proj(bx, by, bz, cx, cy, R) {
+      return [cx + R * (bx - 0.3 * by), cy + R * (-bz + 0.25 * by)];
+    }
+
+    // Place a text label just outside the sphere tip
+    function placeLbl(el, bx, by, bz, cx, cy, R, off) {
+      const [lx, ly] = proj(bx, by, bz, cx, cy, R + off);
+      el.setAttribute('x', lx.toFixed(1));
+      el.setAttribute('y', (ly + 4).toFixed(1));
+      el.setAttribute('text-anchor', (bx - 0.3 * by) >= 0 ? 'start' : 'end');
+    }
+
+    /* ── Tab switching ──────────────────────────────────────────── */
+    function showTab(n) {
+      document.querySelectorAll('.tab-panel').forEach((p, i) => p.classList.toggle('active', i === n));
+      document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === n));
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 0 — BLOCH SPHERE
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      const cx = 150, cy = 166, R = 116;
+
+      function upd() {
+        const t = +$('b-ts').value * Math.PI / 180;
+        const p = +$('b-ps').value * Math.PI / 180;
+        $('b-tv').textContent = r2d(t) + '°';
+        $('b-pv').textContent = r2d(p) + '°';
+
+        const bx = Math.sin(t) * Math.cos(p), by = Math.sin(t) * Math.sin(p), bz = Math.cos(t);
+        const [sx, sy] = proj(bx, by, bz, cx, cy, R);
+        const zpy = cy - R * Math.cos(t);
+
+        $('b-sv').setAttribute('x2', sx.toFixed(1));
+        $('b-sv').setAttribute('y2', sy.toFixed(1));
+        $('b-tip').setAttribute('cx', sx.toFixed(1));
+        $('b-tip').setAttribute('cy', sy.toFixed(1));
+        $('b-proj').setAttribute('x1', sx.toFixed(1));
+        $('b-proj').setAttribute('y1', sy.toFixed(1));
+        $('b-proj').setAttribute('x2', cx);
+        $('b-proj').setAttribute('y2', zpy.toFixed(1));
+        $('b-zpt').setAttribute('cy', zpy.toFixed(1));
+
+        const p0 = Math.cos(t / 2) ** 2, p1 = Math.sin(t / 2) ** 2;
+        $('b-p0').textContent = fmt(p0);
+        $('b-p1').textContent = fmt(p1);
+        $('b-p0b').style.width = (p0 * 100).toFixed(1) + '%';
+        $('b-p1b').style.width = (p1 * 100).toFixed(1) + '%';
+
+        const td = r2d(t), pd = r2d(p);
+        let lbl = td === 0 ? '|0⟩' : td === 180 ? '|1⟩'
+          : (pd === 0 || pd === 360) ? `cos(${(td / 2).toFixed(1)}°)|0⟩ + sin(${(td / 2).toFixed(1)}°)|1⟩`
+            : `cos(${(td / 2).toFixed(1)}°)|0⟩ + e^(i${pd}°)·sin(${(td / 2).toFixed(1)}°)|1⟩`;
+        $('b-state').textContent = lbl;
+
+        if (t > 0.06) {
+          const h = t / 2;
+          $('b-ang').setAttribute('x', (cx + 42 * Math.sin(h) * 0.35 + 7).toFixed(1));
+          $('b-ang').setAttribute('y', (cy - 42 * Math.cos(h) + 4).toFixed(1));
+          $('b-ang').textContent = 'θ=' + r2d(t) + '°';
+        } else { $('b-ang').textContent = ''; }
+      }
+
+      $('b-ts').addEventListener('input', upd);
+      $('b-ps').addEventListener('input', upd);
+      upd();
+    })();
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 1 — PROJECTIVE
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      const cx = 155, cy = 155, R = 118;
+
+      function setLbl(id, beta, offR) {
+        const lx = cx + (R + offR) * Math.cos(beta);
+        const ly = cy - (R + offR) * Math.sin(beta);
+        $(id).setAttribute('x', lx.toFixed(1));
+        $(id).setAttribute('y', (ly + 4).toFixed(1));
+        $(id).setAttribute('text-anchor', Math.cos(beta) >= 0 ? 'start' : 'end');
+      }
+
+      function upd() {
+        const alpha = +$('p-as').value * Math.PI / 180;
+        const beta = +$('p-bs').value * Math.PI / 180;
+        $('p-av').textContent = r2d(alpha) + '°';
+        $('p-bv').textContent = r2d(beta) + '°';
+
+        // state
+        const sx = cx + R * Math.cos(alpha), sy = cy - R * Math.sin(alpha);
+        $('p-sv').setAttribute('x2', sx.toFixed(1));
+        $('p-sv').setAttribute('y2', sy.toFixed(1));
+        $('p-st').setAttribute('cx', sx.toFixed(1));
+        $('p-st').setAttribute('cy', sy.toFixed(1));
+        setLbl('p-stl', alpha, 16);
+
+        // basis m0
+        const m0x = cx + R * Math.cos(beta), m0y = cy - R * Math.sin(beta);
+        ['p-m0a', 'p-m0b'].forEach(id => {
+          $(id).setAttribute('x1', cx); $(id).setAttribute('y1', cy);
+        });
+        $('p-m0a').setAttribute('x2', m0x.toFixed(1)); $('p-m0a').setAttribute('y2', m0y.toFixed(1));
+        $('p-m0b').setAttribute('x2', (cx - R * Math.cos(beta)).toFixed(1));
+        $('p-m0b').setAttribute('y2', (cy + R * Math.sin(beta)).toFixed(1));
+        setLbl('p-m0l', beta, 16);
+
+        // basis m1
+        const b1 = beta + Math.PI / 2;
+        const m1x = cx + R * Math.cos(b1), m1y = cy - R * Math.sin(b1);
+        ['p-m1a', 'p-m1b'].forEach(id => {
+          $(id).setAttribute('x1', cx); $(id).setAttribute('y1', cy);
+        });
+        $('p-m1a').setAttribute('x2', m1x.toFixed(1)); $('p-m1a').setAttribute('y2', m1y.toFixed(1));
+        $('p-m1b').setAttribute('x2', (cx - R * Math.cos(b1)).toFixed(1));
+        $('p-m1b').setAttribute('y2', (cy + R * Math.sin(b1)).toFixed(1));
+        setLbl('p-m1l', b1, 16);
+
+        // projections
+        const d0 = Math.cos(alpha - beta), d1 = Math.sin(alpha - beta);
+        const px0 = cx + d0 * R * Math.cos(beta), py0 = cy - d0 * R * Math.sin(beta);
+        const px1 = cx + d1 * R * Math.cos(b1), py1 = cy - d1 * R * Math.sin(b1);
+        $('p-j0').setAttribute('x1', sx.toFixed(1)); $('p-j0').setAttribute('y1', sy.toFixed(1));
+        $('p-j0').setAttribute('x2', px0.toFixed(1)); $('p-j0').setAttribute('y2', py0.toFixed(1));
+        $('p-c0').setAttribute('cx', px0.toFixed(1)); $('p-c0').setAttribute('cy', py0.toFixed(1));
+        $('p-j1').setAttribute('x1', sx.toFixed(1)); $('p-j1').setAttribute('y1', sy.toFixed(1));
+        $('p-j1').setAttribute('x2', px1.toFixed(1)); $('p-j1').setAttribute('y2', py1.toFixed(1));
+        $('p-c1').setAttribute('cx', px1.toFixed(1)); $('p-c1').setAttribute('cy', py1.toFixed(1));
+
+        const p0 = d0 * d0, p1 = d1 * d1;
+        $('p-p0').textContent = fmt(p0); $('p-p0b').style.width = (p0 * 100).toFixed(1) + '%';
+        $('p-p1').textContent = fmt(p1); $('p-p1b').style.width = (p1 * 100).toFixed(1) + '%';
+        $('p-col').textContent = p0 >= p1 ? `|m₀⟩ (P=${fmt(p0)})` : `|m₁⟩ (P=${fmt(p1)})`;
+      }
+
+      $('p-as').addEventListener('input', upd);
+      $('p-bs').addEventListener('input', upd);
+      upd();
+    })();
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 2 — POVM
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      const pcx = 115, pcy = 115, pR = 96;
+      const vcx = 115, vcy = 115, vR = 96;
+
+      function setState(prefix, cx, cy, R, a) {
+        const sx = cx + R * Math.cos(a), sy = cy - R * Math.sin(a);
+        $(prefix + '-sv').setAttribute('x2', sx.toFixed(1));
+        $(prefix + '-sv').setAttribute('y2', sy.toFixed(1));
+        $(prefix + '-st').setAttribute('cx', sx.toFixed(1));
+        $(prefix + '-st').setAttribute('cy', sy.toFixed(1));
+        const lx = cx + (R + 14) * Math.cos(a), ly = cy - (R + 14) * Math.sin(a);
+        $(prefix + '-stl').setAttribute('x', lx.toFixed(1));
+        $(prefix + '-stl').setAttribute('y', (ly + 4).toFixed(1));
+        $(prefix + '-stl').setAttribute('text-anchor', Math.cos(a) >= 0 ? 'start' : 'end');
+        return [sx, sy];
+      }
+
+      function upd() {
+        const a = +$('v-as').value * Math.PI / 180;
+        $('v-av').textContent = r2d(a) + '°';
+
+        // projective: Π₀ = |0⟩⟨0| axis=90°, Π₁ = |+⟩⟨+| axis=0°
+        const [psx, psy] = setState('vp', pcx, pcy, pR, a);
+        const pd0 = Math.sin(a), pd1 = Math.cos(a);
+        const ppx0 = pcx, ppy0 = pcy - pd0 * pR;
+        const ppx1 = pcx + pd1 * pR, ppy1 = pcy;
+        $('vp-j0').setAttribute('x1', psx.toFixed(1)); $('vp-j0').setAttribute('y1', psy.toFixed(1));
+        $('vp-j0').setAttribute('x2', ppx0.toFixed(1)); $('vp-j0').setAttribute('y2', ppy0.toFixed(1));
+        $('vp-c0').setAttribute('cx', ppx0.toFixed(1)); $('vp-c0').setAttribute('cy', ppy0.toFixed(1));
+        $('vp-j1').setAttribute('x1', psx.toFixed(1)); $('vp-j1').setAttribute('y1', psy.toFixed(1));
+        $('vp-j1').setAttribute('x2', ppx1.toFixed(1)); $('vp-j1').setAttribute('y2', ppy1.toFixed(1));
+        $('vp-c1').setAttribute('cx', ppx1.toFixed(1)); $('vp-c1').setAttribute('cy', ppy1.toFixed(1));
+        const pp0 = pd0 * pd0, pp1 = pd1 * pd1;
+        $('v-pp0').textContent = fmt(pp0); $('v-pp0b').style.width = (pp0 * 100).toFixed(1) + '%';
+        $('v-pp1').textContent = fmt(pp1); $('v-pp1b').style.width = (pp1 * 100).toFixed(1) + '%';
+
+        // POVM trine: directions at π/2, π/2+2π/3, π/2+4π/3
+        const [vsx, vsy] = setState('vv', vcx, vcy, vR, a);
+        const dirs = [Math.PI / 2, Math.PI / 2 + 2 * Math.PI / 3, Math.PI / 2 + 4 * Math.PI / 3];
+        [['vv-j0', 'vv-c0', 'v-vp0', 'v-vp0b'],
+        ['vv-j1', 'vv-c1', 'v-vp1', 'v-vp1b'],
+        ['vv-j2', 'vv-c2', 'v-vp2', 'v-vp2b']].forEach(([ji, ci, pvi, pbi], k) => {
+          const d = dirs[k];
+          const dot = Math.cos(a) * Math.cos(d) + Math.sin(a) * Math.sin(d);
+          const vpx = vcx + dot * vR * Math.cos(d), vpy = vcy - dot * vR * Math.sin(d);
+          $(ji).setAttribute('x1', vsx.toFixed(1)); $(ji).setAttribute('y1', vsy.toFixed(1));
+          $(ji).setAttribute('x2', vpx.toFixed(1)); $(ji).setAttribute('y2', vpy.toFixed(1));
+          $(ci).setAttribute('cx', vpx.toFixed(1)); $(ci).setAttribute('cy', vpy.toFixed(1));
+          const prob = (2 / 3) * dot * dot;
+          $(pvi).textContent = fmt(prob);
+          $(pbi).style.width = (prob * 100).toFixed(1) + '%';
+        });
+      }
+
+      $('v-as').addEventListener('input', upd);
+      upd();
+    })();
+
+    /* ══════════════════════════════════════════════════════════════
+       TAB 3 — UNITARY EVOLUTION
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      const cx = 150, cy = 166, R = 116;
+      const s2 = 1 / Math.sqrt(2);
+      const s4 = Math.sin(Math.PI / 4);
+      const c4 = Math.cos(Math.PI / 4);
+
+      // [re00,im00, re01,im01, re10,im10, re11,im11]
+      const GATES = {
+        I: [1, 0, 0, 0, 0, 0, 1, 0],
+        X: [0, 0, 1, 0, 1, 0, 0, 0],
+        Y: [0, 0, 0, -1, 0, 1, 0, 0],
+        Z: [1, 0, 0, 0, 0, 0, -1, 0],
+        H: [s2, 0, s2, 0, s2, 0, -s2, 0],
+        S: [1, 0, 0, 0, 0, 0, 0, 1],
+        T: [1, 0, 0, 0, 0, 0, s2, s2],
+        Rx: [c4, 0, 0, -s4, 0, -s4, c4, 0],
+        Ry: [c4, 0, -s4, 0, s4, 0, c4, 0],
+        Rz: [c4, -s4, 0, 0, 0, 0, c4, s4],
+      };
+
+      window.setGate = function (name) {
+        const v = GATES[name];
+        ['r00', 'i00', 'r01', 'i01', 'r10', 'i10', 'r11', 'i11'].forEach((id, i) => {
+          $(id).value = +v[i].toFixed(6);
+        });
+        updU();
+      };
+
+      function getU() {
+        return {
+          a: C($('r00').value, $('i00').value),
+          b: C($('r01').value, $('i01').value),
+          c: C($('r10').value, $('i10').value),
+          d: C($('r11').value, $('i11').value),
+        };
+      }
+
+      function checkUnitary(U) {
+        const { a, b, c, d } = U;
+        // U†U: diagonal = |a|²+|c|², |b|²+|d|²
+        // off-diag = conj(a)b + conj(c)d
+        const c00 = Cabs2(a) + Cabs2(c);
+        const c11 = Cabs2(b) + Cabs2(d);
+        const off = Cadd(Cmul(Cconj(a), b), Cmul(Cconj(c), d));
+        return Math.sqrt((c00 - 1) ** 2 + (c11 - 1) ** 2 + 2 * (off.r ** 2 + off.i ** 2));
+      }
+
+      function applyU(U, alpha, beta) {
+        return {
+          a2: Cadd(Cmul(U.a, alpha), Cmul(U.b, beta)),
+          b2: Cadd(Cmul(U.c, alpha), Cmul(U.d, beta)),
+        };
+      }
+
+      function stateStr(a, b) {
+        const an = Cabs(a), bn = Cabs(b);
+        if (an < 0.01) return '|1⟩';
+        if (bn < 0.01) return '|0⟩';
+        const ph = Math.atan2(b.i, b.r) - Math.atan2(a.i, a.r);
+        const phd = Math.round(ph * 180 / Math.PI);
+        const td = Math.round(2 * Math.acos(Math.min(1, an)) * 180 / Math.PI);
+        const h = (td / 2).toFixed(0);
+        if (Math.abs(phd) === 0 || Math.abs(phd) === 360)
+          return `cos(${h}°)|0⟩ + sin(${h}°)|1⟩`;
+        return `cos(${h}°)|0⟩ + e^(i${phd}°)sin(${h}°)|1⟩`;
+      }
+
+      function setArrow(svId, tipId, lblId, bv, offR, opac) {
+        const [sx, sy] = proj(bv.x, bv.y, bv.z, cx, cy, R);
+        $(svId).setAttribute('x2', sx.toFixed(1));
+        $(svId).setAttribute('y2', sy.toFixed(1));
+        $(tipId).setAttribute('cx', sx.toFixed(1));
+        $(tipId).setAttribute('cy', sy.toFixed(1));
+        $(svId).setAttribute('opacity', opac);
+        $(tipId).setAttribute('opacity', opac);
+        placeLbl($(lblId), bv.x, bv.y, bv.z, cx, cy, R, offR);
+      }
+
+      function updU() {
+        const theta = +$('u-ts').value * Math.PI / 180;
+        const phi = +$('u-ps').value * Math.PI / 180;
+        $('u-tv').textContent = r2d(theta) + '°';
+        $('u-pv').textContent = r2d(phi) + '°';
+
+        // initial state
+        const alpha = { r: Math.cos(theta / 2), i: 0 };
+        const beta = { r: Math.sin(theta / 2) * Math.cos(phi), i: Math.sin(theta / 2) * Math.sin(phi) };
+        const bv0 = bloch(alpha, beta);
+        setArrow('u-sv0', 'u-t0', 'u-l0', bv0, 14, 0.65);
+
+        // gate + unitarity check
+        const U = getU();
+        const err = checkUnitary(U);
+        const ok = err < 0.05;
+        $('u-badge').className = 'u-badge ' + (ok ? 'ok' : 'fail');
+        $('u-icon').textContent = ok ? '✓' : '✗';
+        $('u-err').textContent = (ok ? 'Unitary' : 'Not unitary') + ` — ‖U†U − I‖ = ${err.toFixed(3)}`;
+
+        // apply U
+        const { a2, b2 } = applyU(U, alpha, beta);
+        const n = Math.sqrt(Cabs2(a2) + Cabs2(b2));
+        const an = n > 1e-10 ? { r: a2.r / n, i: a2.i / n } : { r: 1, i: 0 };
+        const bn = n > 1e-10 ? { r: b2.r / n, i: b2.i / n } : { r: 0, i: 0 };
+        const bv1 = bloch(an, bn);
+        setArrow('u-sv1', 'u-t1', 'u-l1', bv1, 20, 1);
+
+        // geodesic arc
+        const dist = Math.sqrt((bv0.x - bv1.x) ** 2 + (bv0.y - bv1.y) ** 2 + (bv0.z - bv1.z) ** 2);
+        if (dist > 0.06) {
+          const mx = (bv0.x + bv1.x) / 2, my = (bv0.y + bv1.y) / 2, mz = (bv0.z + bv1.z) / 2;
+          const mn = Math.sqrt(mx * mx + my * my + mz * mz);
+          if (mn > 0.01) {
+            const sc = 1 / mn;
+            const [ax, ay] = proj(bv0.x, bv0.y, bv0.z, cx, cy, R);
+            const [bx, by] = proj(bv1.x, bv1.y, bv1.z, cx, cy, R);
+            const [qx, qy] = proj(mx * sc, my * sc, mz * sc, cx, cy, R);
+            $('u-arc').setAttribute('d', `M${ax.toFixed(1)},${ay.toFixed(1)} Q${qx.toFixed(1)},${qy.toFixed(1)} ${bx.toFixed(1)},${by.toFixed(1)}`);
+            $('u-arc').setAttribute('opacity', '0.65');
+          }
+        } else { $('u-arc').setAttribute('opacity', '0'); }
+
+        $('u-sin').textContent = stateStr(alpha, beta);
+        $('u-sout').textContent = stateStr(an, bn);
+      }
+
+      ['u-ts', 'u-ps', 'r00', 'i00', 'r01', 'i01', 'r10', 'i10', 'r11', 'i11']
+        .forEach(id => $(id).addEventListener('input', updU));
+
+      setGate('H'); // default: Hadamard
+    })();
+  </script>
+</body>
+
+</html>
