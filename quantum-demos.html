@@ -84,7 +84,7 @@
     /* ── Tab bar ─────────────────────────────────────────────────── */
     .tabs {
       display: flex;
-      max-width: 780px;
+      max-width: min(1100px, 92vw);
       margin: 0 auto;
       background: var(--inv-dark);
       border-radius: var(--r) var(--r) 0 0;
@@ -118,12 +118,14 @@
     /* ── Card ────────────────────────────────────────────────────── */
     .card {
       background: var(--card);
-      max-width: 780px;
+      max-width: min(1100px, 92vw);
+      min-height: 650px;
       margin: 0 auto;
       border-radius: 0 0 var(--r) var(--r);
       padding: 22px 24px 26px;
       box-shadow: 0 2px 10px rgba(46, 52, 64, 0.13), 0 0 0 1px rgba(46, 52, 64, 0.06);
     }
+
 
     .tab-panel {
       display: none;
@@ -155,6 +157,8 @@
       gap: 22px;
       align-items: flex-start;
       flex-wrap: wrap;
+      min-height: 500px;
+      align-items: center;
     }
 
     .ctrl {
@@ -425,6 +429,7 @@
       border-color: #bf616a;
       color: #7a2d34;
     }
+
 
     /* ── Responsive ──────────────────────────────────────────────── */
     @media (max-width: 560px) {
