@@ -474,7 +474,8 @@
     <button class="tab-btn" onclick="showTab(1)">Projective</button>
     <button class="tab-btn" onclick="showTab(2)">POVM</button>
     <button class="tab-btn" onclick="showTab(3)">Unitary Evolution</button>
-    <!-- <button class="tab-btn" onclick="showTab(4)">Bell Entanglement</button> -->
+    <button class="tab-btn" onclick="showTab(4)">QFT</button>
+    <!-- <button class="tab-btn" onclick="showTab(5)">Bell Entanglement</button> -->
   </div>
 
   <div class="card">
@@ -485,7 +486,7 @@
     <div class="tab-panel active" id="tab0">
       <div class="demo-title">Bloch sphere — orthogonal projection</div>
       <div class="demo-sub">Measuring in the Z-basis projects the state vector onto the Z-axis. The squared projection
-        length gives the Born probability. φ encodes relative phase but is invisible to Z-basis measurement.</div>
+        length gives the Born probability. φ encodes relative phase and invisible to Z-basis measurement.</div>
       <div class="layout">
 
         <svg viewBox="0 0 300 345" style="width:265px;flex-shrink:0">
@@ -497,11 +498,11 @@
             </marker>
           </defs>
           <circle cx="150" cy="166" r="116" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.8" />
-          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#c8d0df" stroke-width="0.6"
+          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#7d98b3" stroke-width="1.1"
             stroke-dasharray="5 4" />
           <line x1="150" y1="22" x2="150" y2="318" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#bah)" />
           <line x1="18" y1="166" x2="290" y2="166" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#bah)" />
-          <line x1="185" y1="198" x2="108" y2="131" stroke="#81a1c1" stroke-width="0.5" stroke-dasharray="5 3"
+          <line x1="185" y1="198" x2="108" y2="131" stroke="#6d8faa" stroke-width="0.9" stroke-dasharray="5 3"
             marker-end="url(#bah)" />
           <text class="ts" x="153" y="18" fill="#81a1c1">|0⟩</text>
           <text class="ts" x="153" y="334" fill="#81a1c1">|1⟩</text>
@@ -562,8 +563,7 @@
     <div class="tab-panel" id="tab1">
       <div class="demo-title">Projective (von Neumann) measurement</div>
       <div class="demo-sub">A projective measurement is a rotatable orthonormal basis {|m₀⟩, |m₁⟩}. The outcome
-        probability equals the squared projection of |ψ⟩ onto that axis. The two axes are always perpendicular — this is
-        the fundamental constraint projective measurement cannot break.</div>
+        probability equals the squared projection of |ψ⟩ onto that axis. In projective measurement, the two axes are always perpendicular.</div>
       <div class="layout">
 
         <svg viewBox="0 0 310 310" style="width:275px;flex-shrink:0">
@@ -631,7 +631,7 @@
           </div>
           <div class="state-box">Post-measurement collapse → <strong id="p-col">|m₀⟩</strong></div>
           <p class="hint">Dashed lines drop perpendiculars from |ψ⟩ to each axis. Rotating β to align with |ψ⟩ gives
-            P(m₀) → 1. The basis axes are always 90° apart — the defining constraint that the POVM tab relaxes.</p>
+            P(m₀) → 1.</p>
         </div>
       </div>
     </div>
@@ -642,8 +642,7 @@
     <div class="tab-panel" id="tab2">
       <div class="demo-title">POVM — trine measurement</div>
       <div class="demo-sub">A POVM replaces orthogonal projectors with positive operators {Eₖ} satisfying only ΣEₖ = I.
-        The trine has 3 non-orthogonal outcome directions at 120° apart — more outcomes than dimensions, impossible
-        projectively.</div>
+        The trine has 3 non-orthogonal outcome directions, thereby producing more outcomes than dimensions.</div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
         <div style="flex:1;min-width:280px">
@@ -764,8 +763,7 @@
             </div>
           </div>
           <p class="hint" style="margin-top:10px">Three outcomes from a 2-level system: no clean post-measurement
-            eigenstate. P(E₀)+P(E₁)+P(E₂) = 1 always, but notice none ever saturates to 1 — the non-orthogonality is the
-            cost.</p>
+            eigenstate. P(E₀)+P(E₁)+P(E₂) = 1 always, but notice none ever saturates to 1.</p>
         </div>
       </div>
     </div>
@@ -788,11 +786,11 @@
             </marker>
           </defs>
           <circle cx="150" cy="166" r="116" fill="#e5e9f0" stroke="#c8d0df" stroke-width="0.8" />
-          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#c8d0df" stroke-width="0.6"
+          <ellipse cx="150" cy="166" rx="116" ry="30" fill="none" stroke="#7d98b3" stroke-width="1.1"
             stroke-dasharray="5 4" />
           <line x1="150" y1="22" x2="150" y2="318" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#uah)" />
           <line x1="18" y1="166" x2="290" y2="166" stroke="#81a1c1" stroke-width="0.7" marker-end="url(#uah)" />
-          <line x1="185" y1="198" x2="108" y2="131" stroke="#81a1c1" stroke-width="0.5" stroke-dasharray="5 3"
+          <line x1="185" y1="198" x2="108" y2="131" stroke="#6d8faa" stroke-width="0.9" stroke-dasharray="5 3"
             marker-end="url(#uah)" />
           <text class="ts" x="153" y="18" fill="#81a1c1">|0⟩</text>
           <text class="ts" x="153" y="334" fill="#81a1c1">|1⟩</text>
@@ -892,9 +890,70 @@
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TAB 4 — QUANTUM FOURIER TRANSFORM                          -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <div class="tab-panel" id="tab4">
+      <div class="demo-title">Quantum Fourier Transform — change of basis</div>
+      <div class="demo-sub">Build any superposition in the computational basis (left) and watch its Fourier-basis image appear (right). Both axes are labeled with the <em>same</em> ket notation |binary⟩ but their amplitudes encode entirely different information. Phasors show the complex phase of each output amplitude.</div>
+
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;margin-top:4px">
+
+        <!-- ── LEFT: input ──────────────────────────────────────── -->
+        <div style="flex:1;min-width:260px">
+          <div class="sec" style="margin-top:0">Computational basis — input state</div>
+
+          <!-- N selector + presets -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+            <span style="font-size:0.72rem;color:var(--txt2)">N =</span>
+            <select id="qft-n" onchange="qftSetN()" style="font-size:0.72rem;font-family:var(--ff);background:var(--surface);border:1px solid var(--muted);border-radius:5px;color:var(--txt);padding:2px 6px;cursor:pointer">
+              <option value="4">4 (2 qubits)</option>
+              <option value="8" selected>8 (3 qubits)</option>
+            </select>
+          </div>
+
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;align-items:center">
+            <button class="preset" onclick="qftPreset('basis')">Basis</button>
+            <select id="qft-j" style="font-size:0.72rem;font-family:var(--ff);background:var(--surface);border:1px solid var(--muted);border-radius:5px;color:var(--txt);padding:2px 5px;cursor:pointer" onchange="qftPreset('basis')"></select>
+            <button class="preset" onclick="qftPreset('uniform')">Uniform</button>
+            <button class="preset" onclick="qftPreset('alt')">Alt ±1</button>
+            <button class="preset" onclick="qftPreset('ramp')">Ramp</button>
+            <button class="preset" onclick="qftPreset('random')">Random</button>
+          </div>
+
+          <!-- amplitude grid -->
+          <div style="font-size:0.67rem;color:var(--txt3);margin-bottom:6px">Amplitudes (auto-normalised):</div>
+          <div id="qft-ampgrid" style="display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;margin-bottom:12px"></div>
+
+          <!-- input probability chart -->
+          <div style="font-size:0.67rem;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px">|amplitude|² in computational basis</div>
+          <div style="position:relative;height:145px"><canvas id="qft-cin"></canvas></div>
+        </div>
+
+        <!-- ── RIGHT: output ────────────────────────────────────── -->
+        <div style="flex:2;min-width:300px">
+          <div class="sec" style="margin-top:0">Fourier basis — QFT output</div>
+
+          <!-- legend -->
+          <div style="display:flex;gap:14px;margin-bottom:5px;font-size:0.7rem;color:var(--txt2)">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#a3be8c;display:inline-block"></span>Re⟨k|QFT|ψ⟩</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:#d08770;display:inline-block"></span>Im⟨k|QFT|ψ⟩</span>
+          </div>
+          <div style="position:relative;height:145px;margin-bottom:12px"><canvas id="qft-cout"></canvas></div>
+
+          <!-- phasors -->
+          <div style="font-size:0.67rem;color:var(--txt3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Complex amplitudes ⟨k|QFT|ψ⟩ on the unit circle — phasor for each output |k⟩</div>
+          <div id="qft-prow" style="display:flex;flex-wrap:wrap;gap:3px"></div>
+
+          <!-- insight -->
+          <div id="qft-insight" class="state-box" style="margin-top:12px;font-size:0.74rem;line-height:1.65"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Improved Bell State Tab with sliders and correlations
 
-    <button class="tab-btn" onclick="showTab(4)">Bell Entanglement</button>
+    <button class="tab-btn" onclick="showTab(5)">Bell Entanglement</button>
 
     <div class="tab-panel" id="tab4">
       <div class="demo-title">Bell state entanglement (correlations)</div>
@@ -955,7 +1014,7 @@
       </div>
     </div>
 
-    <script>
+    <!-- <script>
       function updateBell() {
         const a = +document.getElementById('bell-a').value * Math.PI / 180;
         const b = +document.getElementById('bell-b').value * Math.PI / 180;
@@ -1339,6 +1398,264 @@
         .forEach(id => $(id).addEventListener('input', updU));
 
       setGate('H'); // default: Hadamard
+    })();
+  </script>
+
+  <!-- Chart.js for QFT tab -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+    /* ══════════════════════════════════════════════════════════════
+       TAB 4 — QUANTUM FOURIER TRANSFORM
+    ══════════════════════════════════════════════════════════════ */
+    (function () {
+      let N = 8;
+      let chartIn = null, chartOut = null;
+
+      /* ── helpers ─────────────────────────────────────────────── */
+      function binLabel(k) {
+        const n = Math.round(Math.log2(N));
+        return '|' + k.toString(2).padStart(n, '0') + '\u27E9'; // ⟩
+      }
+
+      function normalize(v) {
+        const norm = Math.sqrt(v.reduce((s, x) => s + x * x, 0));
+        return norm < 1e-10 ? v.map(() => 1 / Math.sqrt(N)) : v.map(x => x / norm);
+      }
+
+      function computeQFT(ampVec) {
+        const sqN = Math.sqrt(N);
+        return Array.from({ length: N }, (_, k) => {
+          let re = 0, im = 0;
+          for (let j = 0; j < N; j++) {
+            const angle = 2 * Math.PI * j * k / N;
+            re += ampVec[j] * Math.cos(angle);
+            im += ampVec[j] * Math.sin(angle);
+          }
+          return { re: re / sqN, im: im / sqN };
+        });
+      }
+
+      function getAmps() {
+        const vals = Array.from({ length: N }, (_, j) => {
+          const el = document.getElementById('qft-a' + j);
+          return el ? (parseFloat(el.value) || 0) : 0;
+        });
+        return normalize(vals);
+      }
+
+      /* ── build amplitude grid ────────────────────────────────── */
+      function buildGrid() {
+        const grid = document.getElementById('qft-ampgrid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        for (let j = 0; j < N; j++) {
+          const cell = document.createElement('div');
+          cell.style.cssText = 'display:flex;align-items:center;gap:5px';
+          const lbl = document.createElement('span');
+          lbl.style.cssText = 'font-size:0.74rem;color:var(--blue);min-width:40px;font-family:Georgia,serif;letter-spacing:-0.01em';
+          lbl.textContent = binLabel(j);
+          const inp = document.createElement('input');
+          inp.type = 'number';
+          inp.id = 'qft-a' + j;
+          inp.value = j === 0 ? '1' : '0';
+          inp.step = '0.1';
+          inp.style.cssText = 'width:52px;padding:2px 5px;font-size:0.72rem;font-family:var(--ff);background:var(--surface);border:1px solid var(--muted);border-radius:5px;color:var(--txt);outline:none;-moz-appearance:textfield';
+          inp.addEventListener('input', qftUpdate);
+          cell.appendChild(lbl);
+          cell.appendChild(inp);
+          grid.appendChild(cell);
+        }
+
+        // rebuild j selector
+        const jSel = document.getElementById('qft-j');
+        if (jSel) {
+          jSel.innerHTML = '';
+          for (let j = 0; j < N; j++) {
+            const opt = document.createElement('option');
+            opt.value = j;
+            opt.textContent = binLabel(j);
+            jSel.appendChild(opt);
+          }
+        }
+      }
+
+      /* ── chart helpers ───────────────────────────────────────── */
+      const tc = '#4c566a', gc = 'rgba(67,76,94,0.15)';
+      const cBlue = '#5e81ac', cGreen = '#a3be8c', cOrange = '#d08770';
+
+      function mkChartOpts(yMin, yMax, gridColor) {
+        return {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y.toFixed(3) } } },
+          scales: {
+            x: { ticks: { color: tc, font: { size: 10 }, maxRotation: 0, autoSkip: false }, grid: { color: gridColor || gc }, border: { color: gc } },
+            y: { min: yMin, max: yMax, ticks: { color: tc, font: { size: 10 }, maxTicksLimit: 5 }, grid: { color: gridColor || gc }, border: { color: gc } }
+          },
+          animation: { duration: 140 }
+        };
+      }
+
+      function initCharts(labels) {
+        if (chartIn) { chartIn.destroy(); chartIn = null; }
+        if (chartOut) { chartOut.destroy(); chartOut = null; }
+
+        const cinCtx = document.getElementById('qft-cin');
+        const coutCtx = document.getElementById('qft-cout');
+        if (!cinCtx || !coutCtx) return;
+
+        chartIn = new Chart(cinCtx, {
+          type: 'bar',
+          data: { labels, datasets: [{ data: Array(N).fill(0), backgroundColor: cBlue, borderWidth: 0, borderRadius: 3 }] },
+          options: mkChartOpts(0, 1.1)
+        });
+
+        const yb = parseFloat((1 / Math.sqrt(N) * 1.4).toFixed(3));
+        chartOut = new Chart(coutCtx, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              { data: Array(N).fill(0), backgroundColor: cGreen, borderWidth: 0, borderRadius: 3 },
+              { data: Array(N).fill(0), backgroundColor: cOrange, borderWidth: 0, borderRadius: 3 }
+            ]
+          },
+          options: mkChartOpts(-yb, yb)
+        });
+      }
+
+      /* ── phasors ─────────────────────────────────────────────── */
+      function drawPhasors(qft) {
+        const row = document.getElementById('qft-prow');
+        if (!row) return;
+        row.innerHTML = '';
+        const R = 24, cx = 30, cy = 30, W = 60, H = 70;
+        for (let k = 0; k < N; k++) {
+          const { re, im } = qft[k];
+          const mag = Math.sqrt(re * re + im * im);
+          const angle = Math.atan2(im, re);
+          const hue = Math.round(((angle + 2 * Math.PI) % (2 * Math.PI)) / (2 * Math.PI) * 360);
+          const col = `hsl(${hue},62%,50%)`;
+          const ex = (cx + R * Math.cos(angle)).toFixed(1);
+          const ey = (cy - R * Math.sin(angle)).toFixed(1);
+          const armX = (cx + R * mag * Math.cos(angle)).toFixed(1);
+          const armY = (cy - R * mag * Math.sin(angle)).toFixed(1);
+          const ring = 'rgba(67,76,94,0.2)';
+          const ax = 'rgba(67,76,94,0.25)';
+          const lt = '#81a1c1';
+          row.insertAdjacentHTML('beforeend', `
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+                <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${ring}" stroke-width="0.8"/>
+                <line x1="${cx - R - 2}" y1="${cy}" x2="${cx + R + 2}" y2="${cy}" stroke="${ax}" stroke-width="0.5"/>
+                <line x1="${cx}" y1="${cy - R - 2}" x2="${cx}" y2="${cy + R + 2}" stroke="${ax}" stroke-width="0.5"/>
+                <line x1="${cx}" y1="${cy}" x2="${armX}" y2="${armY}" stroke="${col}" stroke-width="2.2"/>
+                <circle cx="${armX}" cy="${armY}" r="3.5" fill="${col}"/>
+                <text x="${cx}" y="${H - 2}" text-anchor="middle" font-size="9" fill="${lt}" font-family="Georgia,serif">${binLabel(k)}</text>
+              </svg>
+            </div>`);
+        }
+      }
+
+      /* ── insight text ────────────────────────────────────────── */
+      function setInsight(ampVec, qft) {
+        const el = document.getElementById('qft-insight');
+        if (!el) return;
+        const sqN = Math.sqrt(N);
+        const amp = (1 / sqN).toFixed(3);
+        const nonzero = ampVec.filter(a => Math.abs(a) > 0.01).length;
+        const mags = qft.map(c => Math.sqrt(c.re * c.re + c.im * c.im));
+        const maxMag = Math.max(...mags);
+        const minMag = Math.min(...mags);
+        const isFlat = (maxMag - minMag) < 0.02;
+
+        if (nonzero === 1) {
+          const j = ampVec.findIndex(a => Math.abs(a) > 0.5);
+          if (j === 0) {
+            el.innerHTML = `<strong>Basis state ${binLabel(0)} (j=0):</strong> All phases are 0. Every output ket ${binLabel(0)},…,${binLabel(N - 1)} gets equal real amplitude ${amp}. The QFT of the “zero” state is the uniform superposition on the Fourier Basis.`;
+          } else {
+            el.innerHTML = `<strong>Basis state ${binLabel(j)} (j=${j}):</strong> All output magnitudes are equal (${amp}), but each step in k advances the phasor by ${(360 * j / N).toFixed(0)}°. A single spike in position space → a uniform wave in Fourier space.`;
+          }
+        } else if (isFlat) {
+          el.innerHTML = `<strong>Uniform superposition:</strong> All output magnitudes are equal — this input is already "spread out" in the computational basis, so its QFT concentrates weight. The QFT of the uniform state is the basis state ${binLabel(0)}.`;
+        } else {
+          el.innerHTML = `<strong>Superposition of ${nonzero} basis states:</strong> Output magnitudes now vary since some Fourier components are larger than others. The QFT reveals the <em>frequency content</em> of your input. States with stronger periodicity give more concentrated Fourier peaks.`;
+        }
+      }
+
+      /* ── main update ─────────────────────────────────────────── */
+      function qftUpdate() {
+        if (!chartIn || !chartOut) return;
+        const ampVec = getAmps();
+        const labels = Array.from({ length: N }, (_, k) => binLabel(k));
+        const probIn = ampVec.map(a => parseFloat((a * a).toFixed(4)));
+        const qft = computeQFT(ampVec);
+        const reOut = qft.map(c => parseFloat(c.re.toFixed(4)));
+        const imOut = qft.map(c => parseFloat(c.im.toFixed(4)));
+
+        chartIn.data.labels = labels;
+        chartIn.data.datasets[0].data = probIn;
+        chartIn.update('none');
+
+        const yb = parseFloat((1 / Math.sqrt(N) * 1.4).toFixed(3));
+        chartOut.data.labels = labels;
+        chartOut.data.datasets[0].data = reOut;
+        chartOut.data.datasets[1].data = imOut;
+        chartOut.options.scales.y.min = -yb;
+        chartOut.options.scales.y.max = yb;
+        chartOut.update('none');
+
+        drawPhasors(qft);
+        setInsight(ampVec, qft);
+      }
+
+      /* ── presets ─────────────────────────────────────────────── */
+      window.qftPreset = function (type) {
+        let vals = Array(N).fill(0);
+        if (type === 'basis') {
+          const j = parseInt((document.getElementById('qft-j') || { value: 0 }).value) || 0;
+          vals[j] = 1;
+        } else if (type === 'uniform') {
+          vals = Array(N).fill(1);
+        } else if (type === 'alt') {
+          vals = Array.from({ length: N }, (_, j) => j % 2 === 0 ? 1 : -1);
+        } else if (type === 'ramp') {
+          vals = Array.from({ length: N }, (_, j) => j + 1);
+        } else if (type === 'random') {
+          vals = Array.from({ length: N }, () => Math.random() * 2 - 1);
+        }
+        const normed = normalize(vals);
+        for (let j = 0; j < N; j++) {
+          const el = document.getElementById('qft-a' + j);
+          if (el) el.value = normed[j].toFixed(3);
+        }
+        qftUpdate();
+      };
+
+      /* ── N change ────────────────────────────────────────────── */
+      window.qftSetN = function () {
+        N = parseInt(document.getElementById('qft-n').value);
+        buildGrid();
+        const labels = Array.from({ length: N }, (_, k) => binLabel(k));
+        initCharts(labels);
+        qftPreset('basis');
+      };
+
+      /* expose update for inline oninput on dynamically-built inputs */
+      window.qftUpdate = qftUpdate;
+
+      /* ── init on tab activation ──────────────────────────────── */
+      let initialized = false;
+      const origShowTab = window.showTab;
+      window.showTab = function (n) {
+        origShowTab(n);
+        if (n === 4 && !initialized) {
+          initialized = true;
+          buildGrid();
+          const labels = Array.from({ length: N }, (_, k) => binLabel(k));
+          initCharts(labels);
+          qftPreset('basis');
+        }
+      };
     })();
   </script>
 </body>
