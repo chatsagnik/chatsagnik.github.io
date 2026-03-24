@@ -20,938 +20,446 @@
   <link rel="stylesheet" href="css/main.css">
   <title>Sagnik Chatterjee</title>
   <link rel="icon" href="/assets/cat.png" type="image/x-icon">
-  <!-- <a href="https://www.flaticon.com/free-icons/strawberry" title="strawberry icons">Strawberry icons created by Freepik -
-        Flaticon</a> -->
+  <script src="js/theme.js"></script>
 </head>
 
 <body class="body flex">
 
-  <div>
-    <header class="primary-header flex">
-      <!-- <a class="logo" href="./index.html#">
-                <img src="/assets/svgs/estate.svg" />
-            </a> -->
-      <button class="mobile-nav-toggle" aria-controls="navul" aria-expanded="false">
-        <span class="sr-only">Menu</span>
-        <div id="menu" class="hamburgerMenu">
-          <div id="bar1" class="bar"></div>
-          <div id="bar2" class="bar"></div>
-          <div id="bar3" class="bar"></div>
+  <div id="site-header"></div>
+
+  <main class="mainbody">
+
+    <section>
+      <div id="about-me" class="post delay6 about-me flex">
+        <h1 class="titleh1">Sagnik Chatterjee</h1>
+
+        <div class="about-grid grid">
+          <div class="card__content dp card__img">
+            <img src="assets/dp.webp" fetchpriority="high" width="600" height="800" alt="Sagnik Chatterjee">
+          </div>
+          <div class="card">
+            <div class="card__content">
+              <h2 class="card-title">About Me</h2>
+              <hr>
+              <br>
+              <p class="card-description">
+                I am currently a Visiting Fellow (Postdoctoral researcher) at <span class="highlight">STCS, TIFR
+                  Mumbai</span>,
+                hosted by <a href="https://jatinbatra50.github.io/jatinbatra50/" target="_blank"
+                  rel="noopener noreferrer">Prof.
+                  Jatin Batra<i class="uil uil-external-link-alt"></i></a>.<br><br>
+                I obtained my Ph.D. in 2025, under the guidance of <a href="https://www.iiitd.edu.in/~dbera/"
+                  target="_blank" rel="noopener noreferrer me">Prof.
+                  Debajyoti Bera<i class="uil uil-external-link-alt"></i></a> at the
+                <a href="https://braqiiit.github.io/" target="_blank" rel="noopener noreferrer me">BraQIIIT
+                  lab<i class="uil uil-external-link-alt"></i></a> in
+                <span class="highlight">IIIT-Delhi</span>.<br><br>
+                Earlier, I was employed as a software engineer at Oracle Financial Software Services (OFSS) in
+                Bangalore.
+              </p><br>
+
+              <h2 class="card-title">Reach out!</h2>
+              <hr><br>
+              <p class="card-description">
+                <span class="highlight-bold">I am on the job market for tenure-track positions.</span> My research
+                explores the nexus of <span class="highlight">quantum computing</span>,
+                <span class="highlight">computational learning theory</span>,
+                and <span class="highlight">robust statistics</span>. If my
+                research (<a href="./assets/SagnikCV.pdf?v=mar2026">download my CV</a>) interests
+                you, please drop me an email at
+                <span class="venue">chatsagnik <span class="highlight">[at]</span> gmail <span
+                    class="highlight">[dot]</span>
+                  com</span>.
+              </p><br>
+            </div>
+          </div>
         </div>
-      </button>
-      <div class="herotext delay1">
-        <a href="#">Sagnik</a>
+
+        <!-- News block — populated from timeline.html via fetch (Task 5) -->
+        <div class="card__content card__timeline">
+          <h2 class="card-title">News</h2>
+          <hr>
+          <ul class="list_timeline" id="news-list">
+            <li style="color:var(--clr-txt);opacity:0.6;">Loading recent news…</li>
+          </ul>
+          <p style="text-align:right;margin-top:0.5rem;font-size:0.8rem;">
+            <a href="timeline.html">View all →</a>
+          </p>
+        </div>
       </div>
-      <!-- <div class="mobile herotext delay1">
-                <a href="#">Sagnik</a>
-            </div> -->
-      <nav>
-        <ul role="list" class="primary-navigation flex" data-visible="false">
+    </section>
 
-          <!-- <li class="navitem delay1">
-                        <a href="#"><span aria-hidden="true" style="font-family:'Roboto',sans-serif;"><i
-                                    class="uil uil-corner-down-right"></i>/</span>top</a>
-                    </li> -->
-          <li class="navitem delay2">
-            <a href="#papers">
-              <span aria-hidden="true" style="font-family:'Roboto',sans-serif;">
-                <i class="uil uil-corner-down-right"></i>/</span>research
-            </a>
-          </li>
+    <section class="full-page-slide">
+      <div id="papers" class="post delay6 flex">
+        <h1 id="paperh1">Research (selected)</h1>
+        <div class="publication-grid grid">
 
-          <!-- <li class="navitem delay4">
-            <a href="#activities">
-              <span aria-hidden="true" style="font-family:'Roboto',sans-serif;">
-                <i class="uil uil-corner-down-right"></i>/</span>activities
-            </a>
-          </li> -->
+          <!--Gen Bound-->
+          <div class="card stacked">
+            <div class="card__content">
+              <h3 class="paper__title">Generalization Bounds for Dependent Data using
+                Online-to-Batch Conversion.
+              </h3><br>
+              <hr><br>
+              <p class="card-description" id="QuantAgDTpara">
+                with
+                <a href="https://sites.google.com/view/manuj-mukherjee/home?pli=1" target="_blank"
+                  rel="noopener noreferrer">
+                  Manuj Mukherjee
+                </a>
+                and
+                <a href="https://www.linkedin.com/in/alhad-sethi/?originalSubdomain=in" target="_blank"
+                  rel="noopener noreferrer"> Alhad Sethi.</a>
+                <br><br>
+                <span class="highlight">Accepted at <span class="venue">AISTATS 2025</span>.</span> <br><br>
 
-          <li class="navitem delay4">
-            <a href="/misc.html">
-              <span aria-hidden="true" style="font-family:'Roboto',sans-serif;">
-                <i class="uil uil-external-link-alt"></i>/</span>misc.
-            </a>
-          </li>
-          <li class="navitem delay4">
-            <a href="/quantum-demos.html">
-              <span aria-hidden="true" style="font-family:'Roboto',sans-serif;">
-                <i class="uil uil-external-link-alt"></i>/</span>Quantum Demos
-            </a>
-          </li>
-          <li class="navitem delay5">
-            <a href="https://theoretickles.netlify.app/" target="_blank" rel="noopener noreferrer me"><span
-                aria-hidden="true" style="font-family:'Roboto',sans-serif;"><i
-                  class="uil uil-external-link-alt"></i>/</span>Blog</a>
-          </li>
-          <!-- <li class="navitem delay5">
-                        <a href="./assets/Proposal.pdf" target="_blank" rel="noopener noreferrer me"><span
-                                aria-hidden="true" style="font-family:'Roboto',sans-serif;"><i
-                                    class="uil uil-download-alt"></i></span>Research Statement</a>
-                    </li> -->
-          <li class="navitem delay5">
-            <a href="./assets/SagnikCV.pdf?v=march2026" target="_blank" rel="noopener noreferrer me"><span
-                aria-hidden="true" style="font-family:'Roboto',sans-serif;"><i
-                  class="uil uil-download-alt"></i></span>CV</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  </div>
+                We give error bounds for statistical learning algorithms trained on non-i.i.d. data
+                in the Online-to-Batch setting.
+              </p><br>
+              <h4>
+                <i class="uil uil-file-info-alt"></i>
+                [<a href="https://proceedings.mlr.press/v258/chatterjee25b.html" target="_blank"
+                  rel="noopener noreferrer">proceedings</a> |
+                <a href="https://arxiv.org/abs/2405.13666" title="pdf" target="_blank"
+                  rel="noopener noreferrer me">arXiv</a> |
+                <a href="https://drive.google.com/file/d/12mHIaix7teGrJwfH8Zj87St9y2fn0hkl/view?usp=drive_link"
+                  target="_blank" rel="noopener noreferrer">slides</a>]
+              </h4><br>
+              <hr>
+              <a class="absbutton" onclick="mytoggle('abs4')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+              <a class="absbutton" onclick="mytoggle('bib4')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
 
-
-  <div>
-
-    <main class="mainbody">
-      <!-- <section class="full-page-slide"> -->
-
-      <section>
-
-        <div id="about-me" class="post delay6 about-me flex">
-          <h1 class="titleh1">Sagnik Chatterjee</h1>
-
-          <div class="about-grid grid">
-            <div class="card__content dp card__img">
-              <img loading="lazy" src="/assets/dp.jpg">
-            </div>
-            <div class="card">
-
-              <div class="card__content">
-                <h2 class="card-title">About Me</h2>
-                <hr>
-                <br>
-                <p class="card-description">
-                  I am currenly a Visiting Fellow (Postodoctoral researcher) at <span class="highlight">STCS, TIFR
-                    Mumbai</span>,
-                  hosted by <a href="https://jatinbatra50.github.io/jatinbatra50/" target="_blank"
-                    rel="noopener noreferrer">Prof.
-                    Jatin Batra<i class="uil uil-external-link-alt"></i></a>.<br><br>
-                  I obtained my Ph.D. in 2025, under the guidance of <span><a href="https://www.iiitd.edu.in/~dbera/"
-                      target="_blank" rel="noopener noreferrer me">Prof.
-                      Debajyoti Bera<i class="uil uil-external-link-alt"></i></a></span> at the
-                  <span><a href="https://braqiiit.github.io/" target="_blank" rel="noopener noreferrer me">BraQIIIT
-                      lab<i class="uil uil-external-link-alt"></i></a></span> in
-                  <span class="highlight">IIIT-Delhi</span>.<br><br>
-                  Earlier, I was employed as a software engineer at Oracle Financial Software Services (OFSS) in
-                  Bangalore.
-                  <!-- You can find my thesis <span class="paper"><a
-                      href="https://repository.iiitd.edu.in/xmlui/handle/123456789/1758?show=full">here<i
-                        class="uil uil-external-link-alt"></i></a></span>. -->
-
-                </p><br>
-
-
-                <!-- <div class="card-description cvdiv">
-                                    <a href="./assets/Proposal.pdf"><button class="cv"> Research Statement</button></a>
-                                </div> -->
-                <h2 class="card-title">Reach out!</h2>
-                <hr><br>
-                <p class="card-description">
-                  <span class="highlight-bold">I am on the job market for tenure-track positions.</span> My research
-                  explores the nexus of <span class="highlight">quantum computing</span>,
-                  <span class="highlight">computational learning theory</span>,
-                  and <span class="highlight">robust statistics</span>. If my
-                  research (<a href="./assets/SagnikCV.pdf?v=mar2026">download my CV</a>) interests
-                  you, please drop me an email at
-                  <span class="venue">chatsagnik <span class="highlight">[at]</span> gmail <span
-                      class="highlight">[dot]</span>
-                    com</span>.
-                </p><br>
-                <!-- <div class="card-description cvdiv">
-                                    <a href="./assets/Sagnik_CV.pdf"><button class="cv"> Resume</button></a>
-                                </div> -->
-
+              <div class="abstract" id="abs4">
+                In this work, we give generalization bounds of statistical learning algorithms trained on samples
+                drawn from a dependent data source both in expectation and with high probability, using the
+                Online-to-Batch conversion paradigm. We show that the generalization error of statistical learners
+                in the dependent data setting is equivalent to the generalization error of statistical learners in
+                the i.i.d. setting up to a term that depends on the decay rate of the underlying mixing stochastic
+                process, and is independent of the complexity of the statistical learner. Our proof techniques
+                involve defining a new notion of stability of online learning algorithms based on Wasserstein
+                distances, and employing "near-martingale" concentration bounds for dependent random variables to
+                arrive at appropriate upper bounds for the generalization error of statistical learners trained on
+                dependent data.
               </div>
-
+              <div class="abstract" id="bib4">
+                @InProceedings{chatterjee2025Generalization,<br>
+                title = {Generalization Bounds for Dependent Data using Online-to-Batch Conversion.},<br>
+                author = {Chatterjee, Sagnik and Mukherjee, Manuj and Sethi, Alhad},<br>
+                booktitle = {Proceedings of The 28th International Conference on Artificial Intelligence and
+                Statistics},<br>
+                pages = {2152--2160},<br>
+                year = {2025},<br>
+                editor = {Li, Yingzhen and Mandt, Stephan and Agrawal, Shipra and Khan, Emtiyaz},<br>
+                volume = {258},<br>
+                series = {Proceedings of Machine Learning Research},<br>
+                month = {03--05 May},<br>
+                publisher = {PMLR},<br>
+                url = {https://proceedings.mlr.press/v258/chatterjee25b.html},<br>
+                }
+              </div>
             </div>
-
           </div>
-          <div class="card__content card__timeline">
-            <h2 class="card-title">News</h2>
-            <hr>
-            <ul class="list_timeline">
-              <li><i class="uil uil-users-alt"></i><span class="date">Feb'26:</span>
-                Invited poster in <span class="highlight">ACM ARCS 2026</span>
-                at <span class="venue">IIT Hyderabad</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Dec'25:</span>
-                Joined <span class="venue">TIFR Mumbai</span> as a Visiting Fellow (Postodoctoral researcher).
-              </li>
 
-              <li><i class="uil uil-users-alt"></i><span class="date">Oct'25:</span>
-                Invited talk on
-                <span class="paper">Generalization Bounds for Dependent Data using Online-to-Batch Conversion</span> at
-                the
-                <span class="highlight">STCS seminar</span>, <span class="venue">TIFR Mumbai</span>.
-              </li>
-
-              <li><i class="uil uil-award"></i><span class="date">May'25:</span>
-                Defended my <span class="highlight-bold">Ph.D. Thesis</span>.
-              </li>
-
-              <li><i class="uil uil-users-alt"></i><span class="date">May'25:</span>
-                Invited talk on
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span> at the
-                <span class="highlight">CS Colloquium</span>, <span class="venue">Ashoka University</span>.
-              </li>
-
-              <li><i class="uil uil-users-alt"></i><span class="date">Mar'25:</span>
-                Invited to give a full day workshop on qunatum computing by Edunautic at IIT Delhi.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jan'25:</span> Invited to give a talk at the
-                <span class="venue">QAC 2025 Symposium<a href="https://cdac.in/index.aspx?id=ev_QAC-Symposium-2025"><i
-                      class="uil uil-external-link-alt"></i></a></span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Jan'25:</span>
-                <span class="paper">Generalization Bounds for Dependent Data using Online-to-Batch Conversion</span>
-                accepted at <span class="highlight-bold">AISTATS'25</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Oct'24:</span>
-                Invited talk on
-                <span class="paper">Generalization Bounds for Dependent Data using Online-to-Batch Conversion</span> at
-                the
-                <span class="highlight">ACMU seminar</span>, <span class="venue">ISI Kolkata</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Aug-Oct'24:</span>
-                Visiting <span class="highlight">Prof. Sourav Chakraborty<a href="https://www.isical.ac.in/~sourav/"
-                    target="_blank" rel="noopener noreferrer"><i class="uil uil-external-link-alt"></i></a></span> at
-                <span class="venue">ISI Kolkata</span> for a research internship.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jul'24:</span>
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span>
-                presented at the <span class="highlight-bold">RTA'24<a
-                    href="https://cse.iitkgp.ac.in/~palash/Workshops/2024RTA.html">
-                    <i class="uil uil-external-link-alt"></i>
-                  </a></span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jun'24:</span>
-                Invited talk on
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span> at the
-                <span class="highlight">ACMU seminar series</span>, <span class="venue">ISI Kolkata</span>.
-              </li>
-
-              <li><i class="uil uil-microphone"></i><span class="date">Feb'24:</span>
-                Gave 3 invited lectures on advanced quantum algorithms in
-                the <span class="highlight">Quantum Computing
-                  <a
-                    href="https://www.cmi.ac.in/activities/kohli-centre/quantum-semester-2024/#:~:text=The%20Dr.,central%20areas%20of%20quantum%20computing."><i
-                      class="uil uil-external-link-alt"></i></a>
+          <!--Decision Tree-->
+          <div class="card stacked">
+            <div class="card__content">
+              <h3 class="paper__title">Efficient Quantum Agnostic Improper Learning of Decision Trees.
+              </h3><br>
+              <hr><br>
+              <p class="card-description" id="QuantAgDT">
+                with
+                <a href="https://sites.google.com/iiitd.ac.in/tharrma" target="_blank" rel="noopener noreferrer">
+                  Tharrmashastha SAPV
+                </a>
+                and
+                <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
+                  Bera</a>.<br><br>
+                <span class="highlight">Accepted at <span class="venue">AISTATS 2024</span>.<br>
+                  Poster at <span class="venue">QIP 2024</span>.
                 </span>
-                school organized by <span class="venue">CMI, India</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Jan'24:</span>
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span>
-                accepted at <span class="highlight-bold">AISTATS'24</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jan'24:</span>
-                Poster on
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span>
-                at <span class="highlight-bold">QIP'24</span>.
-              </li>
+                <br><br>
 
-              <li><i class="uil uil-book-reader"></i><span class="date">Jan'24:</span>
-                Teaching Assistant for <span class="highlight">Theory of Computaton</span>.
-              </li>
-              <li>
-                <i class="uil uil-microphone"></i><span class="date">Sep'23:</span>
-                Invited talk at the <span class="highlight">IDA seminar</span> on
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span>
-                in <span class="venue">Czech Technical University, Prague</span>.
-              </li>
-              <li>
-                <i class="uil uil-microphone"></i><span class="date">Sep'23:</span>
-                Invited talk on
-                <span class="paper">Efficient Quantum Agnostic Improper Learning of Decision Trees</span>
-                at the <span class="venue">University of Latvia, Riga</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Jul-Sep'23:</span>
-                Visiting <span class="venue">Czech Technical University, Prague</span> for a research internship.
-              </li>
+                We give the first time and sample efficient quantum algorithm for agnostically learning Boolean
+                functions with bounded decision tree representations, w/o membership queries.
+              </p><br>
+              <h4>
+                <i class="uil uil-file-info-alt"></i>
+                [<a href="https://proceedings.mlr.press/v238/chatterjee24a.html" target="_blank"
+                  rel="noopener noreferrer">proceedings</a> |
+                <a href="https://arxiv.org/abs/2210.00212" title="pdf" target="_blank"
+                  rel="noopener noreferrer me">arXiv</a> |
+                <a href="https://drive.google.com/file/d/1QBQxtUddGCEc0jyjyffHbIDUhAtYd9wT/view?usp=sharing"
+                  title="slides" target="_blank" rel="noopener noreferrer">slides</a> |
+                <a href="https://drive.google.com/file/d/1hBnrF9YkbsS_XiRJ0JZVeH6YIALxb8ol/view?usp=sharing"
+                  title="poster" target="_blank" rel="noopener noreferrer me">poster</a>]
+              </h4><br>
+              <hr>
+              <a class="absbutton" onclick="mytoggle('abs3')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+              <a class="absbutton" onclick="mytoggle('bib3')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
 
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Jun'23:</span>
-                <span class="paper">Quantum boosting using domain-partitioning hypotheses</span>
-                accepted at <span class="highlight-bold">Quantum Machine Intelligence</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jun'23:</span>
-                Attended the <span class="highlight">JTG Summer School</span>
-                at <span class="venue">IISc Bangalore</span>.
-              </li>
-              <li>
-                <i class="uil uil-microphone"></i><span class="date">Feb'23:</span>
-                Invited talk on <span class="paper">Quantum boosting using domain-partitioning hypotheses</span>
-                at the <span class="highlight">IIITD CSE Department seminar</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Jan'23:</span>
-                Teaching Assistant for <span class="highlight">Introduction to Quantum Computing</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Nov'22:</span>
-                Short talk on <span class="paper">Quantum boosting using domain-partitioning hypotheses</span>
-                accepted at <span class="highlight-bold">QTML'22</span>.
-              </li>
-              <li><i class="uil uil-award"></i><span class="date">Apr'22:</span>
-                Qualified my <span class="highlight-bold">Ph.D. Comprehensive Exam</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Mar'22:</span>
-                Teaching Assistant for <span class="highlight">Data Structures and Algorithms</span>.
-              </li>
-              <li><i class="uil uil-microphone"></i><span class="date">Mar'22:</span>
-                Invited talk on <span class="paper">Quantum boosting using domain-partitioning hypotheses</span>
-                at the <span class="highlight">IITD Theoretical CS seminar</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Mar'22:</span>
-                Poster on <span class="paper">Quantum boosting using domain-partitioning hypotheses</span>
-                presented at <span class="highlight-bold">QIP'22</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Dec'21:</span>
-                Organized and conducted the <span class="highlight-bold">QISE'21</span> online workshop
-                at <span class="highlight">FSTTCS'21</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Aug'21:</span>
-                Teaching Assistant for <span class="highlight">Modern Algorithm Design</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Jan'21:</span>
-                Teaching Assistant for <span class="highlight">Theory of Computation</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Jan'21:</span>
-                Poster on <span class="paper">Applying QAOA+ to the graph matching problem</span>
-                presented at <span class="highlight-bold">QIP'21</span>.
-              </li>
-              <li><i class="uil uil-microphone"></i><span class="date">Dec'20:</span>
-                Conducted an online FDP on <span class="highlight">Quantum Machine Learning</span>
-                for <span class="venue">JNTU, Anantapur</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Nov'20:</span>
-                Extended Abstract on <span class="paper">Applying QAOA+ to the graph matching problem</span>
-                accepted at <span class="highlight-bold">AQIS'20</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Aug'20:</span>
-                Teaching Assistant for <span class="highlight">Modern Algorithm Design</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Feb'20:</span>
-                Attended the <span class="highlight">Boolean Functions workshop</span>
-                at <span class="venue">ISI-Kolkata</span>.
-              </li>
-              <li><i class="uil uil-award"></i><span class="date">Jan'20:</span>
-                Runners-Up <span class="highlight-bold">IBMQ 2019 Awards [Teach Me Quantum Category]</span>.
-              </li>
-              <li><i class="uil uil-book-reader"></i><span class="date">Jan'20:</span>
-                Teaching Assistant for <span class="highlight">Theory of Computation</span>.
-              </li>
-              <li><i class="uil uil-users-alt"></i><span class="date">Dec'19:</span>
-                Attended the <span class="highlight">4th CS Winter School</span>
-                at <span class="venue">IIAS, HUJI</span>.
-              </li>
-              <li><i class="uil uil-graduation-cap"></i><span class="date">Jul'19:</span>
-                Joined <span class="venue">IIIT-Delhi</span> as a Ph.D. student.
-              </li>
-            </ul>
+              <div class="abstract" id="abs3">
+                The agnostic setting is the hardest generalization of the PAC model since it is akin to learning
+                with adversarial noise. In this paper, we give a
+                \(\mathrm{poly}\left(n,{t},{\frac{1}{\varepsilon}}\right)\) time quantum algorithm for learning
+                size \(t\) decision trees with uniform marginal over instances, in the agnostic setting, without
+                membership queries. Our algorithm is the first algorithm (classical or quantum) for learning
+                decision trees in polynomial time without membership queries. We show how to construct a quantum
+                agnostic weak learner by designing a quantum version of the classical Goldreich-Levin algorithm
+                that works with strongly biased function oracles. We show how to quantize the agnostic boosting
+                algorithm by <span class="highlight">Kalai and Kanade (NIPS'09)</span> to obtain the first
+                efficient quantum agnostic boosting algorithm. Our quantum boosting algorithm has a polynomial
+                improvement in the dependence of the bias of the weak learner over all adaptive quantum boosting
+                algorithms while retaining the standard speedup in the VC dimension over classical boosting
+                algorithms. We then use our quantum boosting algorithm to boost the weak quantum learner we
+                obtained in the previous step to obtain a quantum agnostic learner for decision trees. Using the
+                above framework, we also give quantum decision tree learning algorithms for both the realizable
+                setting and random classification noise model, again without membership queries.
+              </div>
+              <div class="abstract" id="bib3">
+                @InProceedings{chatterjee2024Efficient,<br>
+                title = { Efficient Quantum Agnostic Improper Learning of Decision Trees },<br>
+                author = {Chatterjee, Sagnik and SAPV, Tharrmashastha and Bera, Debajyoti},<br>
+                booktitle = {Proceedings of The 27th International Conference on Artificial Intelligence and
+                Statistics},<br>
+                pages = {514--522},<br>
+                year = {2024},<br>
+                editor = {Dasgupta, Sanjoy and Mandt, Stephan and Li, Yingzhen},<br>
+                volume = {238},<br>
+                series = {Proceedings of Machine Learning Research},<br>
+                month = {02--04 May},<br>
+                publisher = {PMLR},<br>
+                url = {https://proceedings.mlr.press/v238/chatterjee24a.html}
+                }
+              </div>
+            </div>
           </div>
-        </div>
 
-      </section>
-      <!-- <section class="full-page-slide"> -->
-      <section class="full-page-slide">
-        <div id="papers" class="post delay6 flex">
-          <h1 id="paperh1">Research<br>(selected)</h1>
-          <div class="publication-grid grid">
-            <!--Gen Bound-->
-            <!-- <div class="card stacked ">
-              <div class="card__content">
-                <h3 class="paper__title">Realization of maximally-entangling two-qutrit gates using the Cross-Resonance
-                  scheme.
-                </h3><br>
-                <hr><br>
-                <p class="card-description" id="QuantAgDTpara">
-                  with
-                  <a href="" target="_blank" rel="noopener noreferrer">
-                    Yash Saxena
-                  </a>
-                  and
-                  <a href="https://sites.google.com/iiitd.ac.in/tharrma" target="_blank" rel="noopener noreferrer">
-                    Tharrmashastha SAPV
-                  </a>
-                  <br><br>
-                  <span class="highlight">Under Submission.</span> <br><br>
-                  We generalize the CR scheme to directly achieve entanglement on the 1-2 levels,
-                  thereby realizing maximally entangling 2-qutrit gates on fixed-frequency transmons.
-                </p><br>
-                <h4>
-                  <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://arxiv.org/abs/2504.15265" title="pdf" target="_blank"
-                    rel="noopener noreferrer me">arXiv</a> |
-                  <a href="https://github.com/braqiiit/Maximally-Entangling-Two-Qutrit-CR" target="_blank"
-                    rel="noopener noreferrer">code</a>]
+          <!--Domain Partitioning-->
+          <div class="card stacked" id="Domain">
+            <div class="card__content">
+              <h3 class="paper__title">Quantum boosting using domain-partitioning
+                hypotheses.</h3><br>
+              <hr><br>
+              <p class="card-description">
+                with <a href="https://dblp.org/pid/277/6151.html" target="_blank" rel="noopener noreferrer">Rohan
+                  Bhatia</a>,
+                <a href="https://www.linkedin.com/in/parmeet-singh-1471b2211/" target="_blank"
+                  rel="noopener noreferrer">Parmeet Singh-Chani</a>, and
+                <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
+                  Bera</a>.<br><br>
 
-                </h4><br>
-                <hr>
-                <a class="absbutton" onclick="mytoggle('abs5')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
-                <a class="absbutton" onclick="mytoggle('bib5')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+                <span class="highlight">Published in <span class="venue">Quantum Machine Intelligence</span>.<br>
+                  Short talk at <span class="venue">QTML 2022</span>.<br>
+                  Poster at <span class="venue">QIP 2022</span>.</span><br><br>
 
+                We answer an open question on the existence of quantum boosting algorithms for weak learners with
+                non-binary hypotheses.<br><br>
+              </p>
 
-                <div class="abstract" id="abs5">
+              <h4>
+                <i class="uil uil-file-info-alt"></i>
+                [<a href="https://rdcu.be/dhV6T" title="QMI version" target="_blank"
+                  rel="noopener noreferrer">journal</a>
+                | <a href="https://arxiv.org/abs/2110.12793" title="arxiv link" target="_blank"
+                  rel="noopener noreferrer">arXiv</a>
+                | <a href="https://github.com/braqiiit/QRealBoost/" title="github repo" target="_blank"
+                  rel="noopener noreferrer">code</a>
+                | <a href="https://drive.google.com/file/d/13FvLU8n2J3DfhMhcJax4FLlDxMmUyo9j/view?usp=sharing"
+                  title="poster" target="_blank" rel="noopener noreferrer me">poster</a>
+                | <a href="https://drive.google.com/file/d/1lTdPxd08XKxTLV9XMDtxQ6xCoDILa94f/view?usp=sharing"
+                  title="slides" target="_blank" rel="noopener noreferrer">slides</a>]
+              </h4><br>
+              <hr>
+              <a class="absbutton" onclick="mytoggle('abs2')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+              <a class="absbutton" onclick="mytoggle('bib2')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
 
-                  In this letter, we introduce the generalized cross-resonance (GCR) scheme, which is a comprehensive
-                  theoretical framework for realizing maximally
-                  entangling two-qutrit gates on fixed-frequency transmons that generalize the qubit-centric
-                  cross-resonance (CR) interaction beyond the 0-1 subspace.
-                  We use the GCR scheme to design parametric two-qutrit gates that act on the 0-1 and 1-2 energy
-                  transitions of transmons.
-                  Our gates improve upon the existing works in two aspects. Firstly, our gates directly allow for
-                  entanglement on the 1-2 levels, unlike previous works.
-                  Secondly, our gates are parametric in nature, enabling us to construct multiple entangling gates of
-                  interest, whereas the purview of
-                  prior works was limited to the construction of specific qutrit gates.
-                  Using our gates we prepare a two-qutrit Bell state with a fidelity of 98.33 ± 0.01%. We note that in
-                  our setup, the complete Bell state preparation
-                  requires a ∼ 514 ns pulse sequence to prepare the Bell state, which is less than the gate time of
-                  cross-Kerr-based entangling gates.
-                </div>
-                <div class="abstract" id="bib5">
-                  @misc{saxena2025Realization,<br>
-                  title = {Realization of maximally-entangling two-qutrit gates using the Cross-Resonance scheme.},<br>
-                  author = {Saxena, Yash and Chatterjee, Sagnik and {SAPV}, Tharrmashastha},<br>
-                  year = {2025},<br>
-                  eprint={2504.15265},<br>
-                  url={https://arxiv.org/abs/2504.15265},<br>
-                  }
-
-
-
-                </div>
-
-
+              <div class="abstract" id="abs2">
+                Boosting is an ensemble learning method that converts a weak learner into a strong learner in the
+                PAC learning framework. The \(\mathrm{AdaBoost}\) algorithm is a well-known classical boosting
+                algorithm for weak learners with binary hypotheses. Recently,
+                <span class="highlight">Arunachalam and Maity (ICML'20)</span> presented the first quantum boosting
+                algorithm by quantizing \(\mathrm{AdaBoost}\). Their algorithm, which we refer to as
+                \(\mathrm{QAdaBoost}\) hereafter, is a quantum adaptation of \(\mathrm{AdaBoost}\) and only works
+                for the binary hypothesis case. \(\mathrm{QAdaBoost}\) is quadratically faster than
+                \(\mathrm{AdaBoost}\) in terms of the VC dimension of the hypothesis class of the weak learner
+                while it is polynomially worse in the bias of the weak learner.
+                <br>
+                In this work, we address an open question by Izdebski et al. on the existence of boosting
+                algorithms for quantum weak learners with non-binary hypotheses. We answer this question in the
+                affirmative by developing the \(\mathrm{QRealBoost}\) algorithm motivated by the classical
+                \(\mathrm{RealBoost}\) algorithm. The main technical challenge was to provide provable guarantees
+                for convergence, generalization bounds, and quantum speedup, given that quantum subroutines are
+                noisy and probabilistic. We prove that \(\mathrm{QRealBoost}\) retains the quadratic speedup of
+                \(\mathrm{QAdaBoost}\) over \(\mathrm{AdaBoost}\) and further achieves a polynomial speedup over
+                \(\mathrm{QAdaBoost}\) in terms of both the bias \(\gamma\) of the learner and the time taken by
+                the learner to learn the target concept class.
+                <br>
+                Finally, we perform empirical evaluations on \(\mathrm{QRealBoost}\) and report encouraging
+                observations on quantum simulators by benchmarking the convergence performance of
+                \(\mathrm{QRealBoost}\) against \(\mathrm{QAdaBoost}\), \(\mathrm{AdaBoost}\),
+                \(\mathrm{RealBoost}\), and \(\mathrm{SmoothBoost}\) on a subset of the \(\mathrm{MNIST}\)
+                dataset and \(\mathrm{Breast Cancer Wisconsin}\) dataset.
               </div>
-            </div> -->
-
-            <div class="card stacked ">
-              <div class="card__content">
-                <h3 class="paper__title">Generalization Bounds for Dependent Data using
-                  Online-to-Batch Conversion.
-                </h3><br>
-                <hr><br>
-                <p class="card-description" id="QuantAgDTpara">
-                  with
-                  <a href="https://sites.google.com/view/manuj-mukherjee/home?pli=1" target="_blank"
-                    rel="noopener noreferrer">
-                    Manuj Mukherjee
-                  </a>
-                  and
-                  <a href="https://www.linkedin.com/in/alhad-sethi/?originalSubdomain=in" target="_blank"
-                    rel="noopener noreferrer"> Alhad
-                    Sethi.</a>
-                  <br><br>
-                  <span class="highlight">Accepted at <span class="venue">AISTATS 2025</span>.</span> <br><br>
-
-                  We give error bounds for statistical learning algorithms trained on non-i.i.d. data
-                  in the Online-to-Batch setting.
-                </p><br>
-                <h4>
-                  <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://proceedings.mlr.press/v258/chatterjee25b.html" target="_blank"
-                    rel="noopener noreferrer">proceedings</a> |
-                  <a href="https://arxiv.org/abs/2405.13666" title="pdf" target="_blank"
-                    rel="noopener noreferrer me">arXiv</a> |
-                  <a href="https://drive.google.com/file/d/12mHIaix7teGrJwfH8Zj87St9y2fn0hkl/view?usp=drive_link"
-                    target="_blank" rel="noopener noreferrer">slides</a>]
-
-                </h4><br>
-                <hr>
-
-                <a class="absbutton" onclick="mytoggle('abs4')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
-                <a class="absbutton" onclick="mytoggle('bib4')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
-
-                <div class="abstract" id="abs4">
-                  In this work, we give generalization bounds of statistical learning algorithms trained on samples
-                  drawn
-                  from a dependent data source both in expectation and with high probability, using the Online-to-Batch
-                  conversion paradigm. We show that the generalization error of statistical learners in the dependent
-                  data setting is equivalent to the generalization error of statistical learners in the i.i.d. setting
-                  up to a
-                  term that depends on the decay rate of the underlying mixing stochastic process, and is independent
-                  of the complexity of the statistical learner. Our proof techniques involve defining a new notion of
-                  stability of online learning algorithms based on Wasserstein distances, and employing
-                  ”near-martingale”
-                  concentration bounds for dependent random variables to arrive at appropriate upper bounds for the
-                  generalization error of statistical learners trained on dependent data.
-
-                </div>
-                <div class="abstract" id="bib4">
-                  @InProceedings{chatterjee2025Generalization,<br>
-                  title = {Generalization Bounds for Dependent Data using Online-to-Batch Conversion.},<br>
-                  author = {Chatterjee, Sagnik and Mukherjee, Manuj and Sethi, Alhad},<br>
-                  booktitle = {Proceedings of The 28th International Conference on Artificial Intelligence and
-                  Statistics},<br>
-                  pages = {2152--2160},<br>
-                  year = {2025},<br>
-                  editor = {Li, Yingzhen and Mandt, Stephan and Agrawal, Shipra and Khan, Emtiyaz},<br>
-                  volume = {258},<br>
-                  series = {Proceedings of Machine Learning Research},<br>
-                  month = {03--05 May},<br>
-                  publisher = {PMLR},<br>
-                  url = {https://proceedings.mlr.press/v258/chatterjee25b.html},<br>
-                  }
-
-
-
-                </div>
-
-
+              <div class="abstract" id="bib2">
+                @Article{chatterjee2023Quantum,<br>
+                author={Chatterjee, Sagnik and Bhatia, Rohan and Singh Chani, Parmeet and Bera, Debajyoti},<br>
+                title={Quantum boosting using domain-partitioning hypotheses},<br>
+                journal={Quantum Machine Intelligence},<br>
+                year={2023},<br>
+                month={Jul},<br>
+                day={27},<br>
+                volume={5},<br>
+                number={2},<br>
+                pages={33},<br>
+                issn={2524-4914},<br>
+                doi={10.1007/s42484-023-00122-3},<br>
+                url={https://doi.org/10.1007/s42484-023-00122-3}<br>
+                }
               </div>
             </div>
-
-            <!--Decision Tree-->
-            <div class="card stacked ">
-              <div class="card__content">
-                <h3 class="paper__title">Efficient Quantum Agnostic Improper Learning of Decision Trees.
-                </h3><br>
-                <hr><br>
-                <p class="card-description" id="QuantAgDT">
-                  with
-                  <a href="https://sites.google.com/iiitd.ac.in/tharrma" target="_blank" rel="noopener noreferrer">
-                    Tharrmashastha SAPV
-                  </a>
-                  and
-                  <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
-                    Bera</a>.<br><br>
-                  <span class="highlight">Accepted at <span class="venue">AISTATS 2024</span>.<br>
-                    Poster at <span class="venue">QIP 2024</span>.
-                  </span>
-                  <br><br>
-
-                  We give the first time and sample efficient quantum algorithm for agnostically learning Boolean
-                  functions with bounded
-                  decision
-                  trees representations, w/o membership queries.
-                </p><br>
-                <h4>
-                  <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://proceedings.mlr.press/v238/chatterjee24a.html" target="_blank"
-                    rel="noopener noreferrer">proceedings</a> |
-                  <a href="https://arxiv.org/abs/2210.00212" title="pdf" target="_blank"
-                    rel="noopener noreferrer me">arXiv</a> |
-
-                  <!-- <i class="uil uil-presentation-play"></i> -->
-                  <a href="https://drive.google.com/file/d/1QBQxtUddGCEc0jyjyffHbIDUhAtYd9wT/view?usp=sharing"
-                    title="slides" target="_blank" rel="noopener noreferrer">slides</a> |
-
-                  <!-- <i class="uil uil-presentation"></i> -->
-                  <a href="https://drive.google.com/file/d/1hBnrF9YkbsS_XiRJ0JZVeH6YIALxb8ol/view?usp=sharing"
-                    title="poster" target="_blank" rel="noopener noreferrer me">poster</a>]
-
-                </h4><br>
-                <hr>
-
-                <a class="absbutton" onclick="mytoggle('abs3')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
-                <a class="absbutton" onclick="mytoggle('bib3')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
-
-                <div class="abstract" id="abs3">
-                  The agnostic setting is the hardest generalization of the PAC model since it is akin to learning with
-                  adversarial noise.
-                  In this paper, we give a \(\mathrm{poly}\left(n,{t},{\frac{1}{\varepsilon}}\right)\) time quantum
-                  algorithm for learning
-                  size \(t\) decision trees with uniform marginal over instances, in the agnostic setting, without
-                  membership
-                  queries. Our algorithm is the first algorithm (classical or quantum) for learning decision trees in
-                  polynomial time
-                  without membership queries. We show how to construct a quantum agnostic weak learner by designing a
-                  quantum version of
-                  the classical Goldreich-Levin algorithm that works with strongly biased function oracles. We
-                  show how to
-                  quantize the agnostic boosting algorithm by <span class="highlight">Kalai and Kanade (NIPS'09)</span>
-                  to
-                  obtain the first
-                  efficient quantum agnostic
-                  boosting algorithm. Our quantum boosting algorithm has a polynomial improvement in the
-                  dependence of the bias
-                  of the weak learner over all adaptive quantum boosting algorithms while retaining the standard speedup
-                  in the VC
-                  dimension over classical boosting algorithms. We then use our quantum boosting algorithm to boost the
-                  weak quantum
-                  learner we obtained in the previous step to obtain a quantum agnostic learner for decision trees.
-                  Using the above
-                  framework, we also give quantum decision tree learning algorithms for both the realizable setting and
-                  random
-                  classification noise model, again without membership queries.
-                </div>
-                <div class="abstract" id="bib3">
-                  @InProceedings{chatterjee2024Efficient,<br>
-                  title = { Efficient Quantum Agnostic Improper Learning of Decision Trees },<br>
-                  author = {Chatterjee, Sagnik and SAPV, Tharrmashastha and Bera, Debajyoti},<br>
-                  booktitle = {Proceedings of The 27th International Conference on Artificial Intelligence and
-                  Statistics},<br>
-                  pages = {514--522},<br>
-                  year = {2024},<br>
-                  editor = {Dasgupta, Sanjoy and Mandt, Stephan and Li, Yingzhen},<br>
-                  volume = {238},<br>
-                  series = {Proceedings of Machine Learning Research},<br>
-                  month = {02--04 May},<br>
-                  publisher = {PMLR},<br>
-                  url = {https://proceedings.mlr.press/v238/chatterjee24a.html}
-                  }
-
-
-                </div>
-
-                <!-- <a href="https://slidemodel.com/free-powerpoint-templates/free-animated-horizontal-decision-tree/"
-                                                            target="_blank" rel="noopener noreferrer"
-                                                            style="font-weight: var(--fs-100); text-decoration: none;">[Image
-                                                            Credit]</a> -->
-              </div>
-            </div>
-
-            <!--Domain Partitioning-->
-            <div class="card stacked" id="Domain">
-              <div class="card__content">
-                <h3 class="paper__title">Quantum boosting using domain-partitioning
-                  hypotheses.</h3><br>
-                <hr><br>
-                <p class="card-description">
-                  with <a href="https://dblp.org/pid/277/6151.html" target="_blank" rel="noopener noreferrer">Rohan
-                    Bhatia</a>,
-                  <a href="https://www.linkedin.com/in/parmeet-singh-1471b2211/" target="_blank"
-                    rel="noopener noreferrer">Parmeet
-                    Singh-Chani</a>, and
-                  <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
-                    Bera</a>.<br><br>
-
-                  <span class="highlight">Published in <span class="venue">Quantum Machine Intelligence</span>.<br>
-                    Short talk at <span class="venue">QTML 2022</span>.<br>
-                    Poster at <span class="venue">QIP 2022</span>.</span><br><br>
-
-                  We answer an open question
-                  on the existence of quantum boosting algorithms for weak learners with
-                  non-binary hypotheses.<br><br>
-                </p>
-
-                <h4>
-                  <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://rdcu.be/dhV6T" title="QMI version" target="_blank"
-                    rel="noopener noreferrer">journal</a>
-                  <!-- <i class="uil uil-file-info-alt"></i> -->
-                  | <a href="https://arxiv.org/abs/2110.12793" title="arxiv link" target="_blank"
-                    rel="noopener noreferrer">arXiv</a>
-                  <!-- <i class="uil uil-file-info-alt"></i> -->
-                  | <a href="https://github.com/braqiiit/  \(\mathrm{QRealBoost}\)/" title="github repo" target="_blank"
-                    rel="noopener noreferrer">code</a>
-                  <!-- <i class="uil uil-presentation"></i> -->
-                  | <a href="https://drive.google.com/file/d/13FvLU8n2J3DfhMhcJax4FLlDxMmUyo9j/view?usp=sharing"
-                    title="poster" target="_blank" rel="noopener noreferrer me">poster</a>
-                  <!-- <i class="uil uil-presentation-play"></i> -->
-                  | <a href="https://drive.google.com/file/d/1lTdPxd08XKxTLV9XMDtxQ6xCoDILa94f/view?usp=sharing"
-                    title="slides" target="_blank" rel="noopener noreferrer">slides</a>]
-                </h4><br>
-                <hr>
-                <a class="absbutton" onclick="mytoggle('abs2')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
-                <a class="absbutton" onclick="mytoggle('bib2')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
-
-                <div class="abstract" id="abs2">
-                  Boosting is an ensemble learning method that converts a weak learner into a strong learner in the PAC
-                  learning
-                  framework. The \(\mathrm{AdaBoost}\) algorithm is a well-known classical boosting algorithm for weak
-                  learners with
-                  binary hypotheses.
-                  Recently, <span class="highlight">Arunachalam and Maity (ICML'20)</span> presented the first quantum
-                  boosting algorithm by quantizing
-                  \(\mathrm{AdaBoost}\).
-                  Their algorithm,
-                  which we refer to as \(\mathrm{QAdaBoost}\) hereafter, is a quantum adaptation of
-                  \(\mathrm{AdaBoost}\) and only
-                  works for the
-                  binary hypothesis
-                  case. \(\mathrm{QAdaBoost}\) is quadratically faster than \(\mathrm{AdaBoost}\) in terms
-                  of the VC dimension of the
-                  hypothesis
-                  class of the weak
-                  learner while it is polynomially worse in the bias of the weak learner.
-                  <br>
-                  In this work, we address an open question by Izdebski et al. on the existence of boosting algorithms
-                  for quantum weak
-                  learners with non-binary hypotheses. We answer this question in the affirmative by developing the
-                  \(\mathrm{QRealBoost}\) algorithm
-                  motivated by the classical \(\mathrm{RealBoost}\) algorithm. The main technical challenge was to
-                  provide provable
-                  guarantees for
-                  convergence, generalization bounds, and quantum speedup, given that quantum subroutines are noisy and
-                  probabilistic. We
-                  prove that \(\mathrm{QRealBoost}\) retains the quadratic speedup of
-                  \(\mathrm{QAdaBoost}\) over \(\mathrm{AdaBoost}\) and
-                  further achieves a
-                  polynomial speedup
-                  over \(\mathrm{QAdaBoost}\) in terms of both the bias \(\gamma\) of the learner and the
-                  time taken by the learner
-                  to learn the
-                  target concept
-                  class.
-                  <br>
-                  Finally, we perform empirical evaluations on \(\mathrm{QRealBoost}\) and report
-                  encouraging observations on quantum
-                  simulators by
-                  benchmarking the convergence performance of \(\mathrm{QRealBoost}\) against \(\mathrm{QAdaBoost}\),
-                  \(\mathrm{AdaBoost}\),
-                  \(\mathrm{RealBoost}\), and
-                  \(\mathrm{SmoothBoost}\) on a
-                  subset of the \(\mathrm{MNIST}\) dataset and \(\mathrm{Breast Cancer Wisconsin}\) dataset.
-                </div>
-                <div class="abstract" id="bib2">
-                  @Article{chatterjee2023Quantum,<br>
-                  author={Chatterjee, Sagnik
-                  and Bhatia, Rohan
-                  and Singh Chani, Parmeet
-                  and Bera, Debajyoti},<br>
-                  title={Quantum boosting using domain-partitioning hypotheses},<br>
-                  journal={Quantum Machine Intelligence},<br>
-                  year={2023},<br>
-                  month={Jul},<br>
-                  day={27},<br>
-                  volume={5},<br>
-                  number={2},<br>
-                  pages={33},<br>
-                  issn={2524-4914},<br>
-                  doi={10.1007/s42484-023-00122-3},<br>
-                  url={https://doi.org/10.1007/s42484-023-00122-3}<br>
-                  }
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <!--QAOA-->
-            <div class="card stacked " id="QAOA">
-              <div class="card__content">
-                <h3 class="paper__title">Applying QAOA+ to the graph matching problem. </h3><br>
-                <hr><br>
-                <p class="card-description">
-                  with
-                  <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
-                    Bera</a>.
-
-                  <br><br>
-                  <span class="highlight">Extended Abstract at <span class="venue">AQIS'20</span>.<br>
-                    Poster at <span class="venue">QIP'21</span>.
-                  </span><br><br>
-                  We show how to design linear depth \(\mathrm{QAOA}+\) style
-                  circuits to obtain distributions over all distinct matchings and all
-                  maximal matchings for \(2\)-regular graphs through novel
-                  mixing operators. We also empirically evaluate the effect of different
-                  ansatzes on our QAOA+ circuit.<br><br>
-                </p>
-
-                <h4>
-                  <i class="uil uil-file-info-alt"></i>
-                  [<a href="https://arxiv.org/abs/2011.11918" title="arxiv link" target="_blank"
-                    rel="noopener noreferrer">arXiv</a> |
-                  <a href="https://drive.google.com/file/d/1Bpe8F3pppVPfXRySTV40i5fjiIlLe8bP/view?usp=sharing"
-                    title="poster" target="_blank" rel="noopener noreferrer me">poster</a> |
-                  <a href="https://www.youtube.com/watch?v=STL0nUJ1YiE&t=7s" title="short talk" target="_blank"
-                    rel="noopener noreferrer">slides</a>]
-                </h4><br>
-                <hr>
-                <a class="absbutton" onclick="mytoggle('abs1')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
-                <a class="absbutton" onclick="mytoggle('bib1')"><i
-                    class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
-
-                <div class="abstract" id="abs1">
-                  The Quantum Alternating Operator Ansatz (QAOA+) framework has recently gained attention due to its
-                  ability to solve
-                  discrete optimization problems on noisy intermediate-scale quantum (NISQ) devices in a manner that is
-                  amenable to
-                  derivation of worst-case guarantees. We design a technique in this framework to tackle a few problems
-                  over maximal
-                  matchings in graphs. Even though maximum matching is polynomial-time solvable, most counting and
-                  sampling versions are
-                  #P-hard.
-                  We design a few algorithms that generates superpositions over matchings allowing us to sample from
-                  them. In particular,
-                  we get a superposition over all possible matchings when given the empty state as input and a
-                  superposition over all
-                  maximal matchings when given the \(W\)-states as input.
-                  Our main result is that the expected size of the matchings corresponding to the output states of our
-                  QAOA+ algorithm
-                  when ran on a \(2\)-regular graph is greater than the expected matching size obtained from a uniform
-                  distribution over all
-                  matchings. This algorithm uses a \(W\)-state as input and we prove that this input state is better
-                  compared to using the
-                  empty matching as the input state.
-                </div>
-                <div class="abstract" id="bib1">
-                  @article{chatterjee2020Applying,<br>
-                  title={Applying the Quantum Alternating Operator Ansatz to the Graph Matching Problem},<br>
-                  author={Chatterjee, Sagnik and Bera, Debajyoti},<br>
-                  journal={arXiv preprint arXiv:2011.11918},<br>
-                  year={2020}<br>
-                  }
-
-                </div>
-
-              </div>
-
-            </div>
-            <ul class="list_timeline">
-              <li> For a complete list please see <a href="./assets/SagnikCV.pdf?v=mar2026">my CV</a>. </li>
-            </ul>
-
           </div>
+
+          <!--QAOA-->
+          <div class="card stacked" id="QAOA">
+            <div class="card__content">
+              <h3 class="paper__title">Applying QAOA+ to the graph matching problem.</h3><br>
+              <hr><br>
+              <p class="card-description">
+                with
+                <a href="https://www.iiitd.edu.in/~dbera/" target="_blank" rel="noopener noreferrer"> Debajyoti
+                  Bera</a>.
+                <br><br>
+                <span class="highlight">Extended Abstract at <span class="venue">AQIS '20</span>.<br>
+                  Poster at <span class="venue">QIP '21</span>.
+                </span><br><br>
+                We show how to design linear depth \(\mathrm{QAOA}+\) style circuits to obtain distributions over
+                all distinct matchings and all maximal matchings for \(2\)-regular graphs through novel mixing
+                operators. We also empirically evaluate the effect of different ansatzes on our QAOA+ circuit.<br><br>
+              </p>
+
+              <h4>
+                <i class="uil uil-file-info-alt"></i>
+                [<a href="https://arxiv.org/abs/2011.11918" title="arxiv link" target="_blank"
+                  rel="noopener noreferrer">arXiv</a> |
+                <a href="https://drive.google.com/file/d/1Bpe8F3pppVPfXRySTV40i5fjiIlLe8bP/view?usp=sharing"
+                  title="poster" target="_blank" rel="noopener noreferrer me">poster</a> |
+                <a href="https://www.youtube.com/watch?v=STL0nUJ1YiE&t=7s" title="short talk" target="_blank"
+                  rel="noopener noreferrer">slides</a>]
+              </h4><br>
+              <hr>
+              <a class="absbutton" onclick="mytoggle('abs1')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+              <a class="absbutton" onclick="mytoggle('bib1')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+              <div class="abstract" id="abs1">
+                The Quantum Alternating Operator Ansatz (QAOA+) framework has recently gained attention due to its
+                ability to solve discrete optimization problems on noisy intermediate-scale quantum (NISQ) devices
+                in a manner that is amenable to derivation of worst-case guarantees. We design a technique in this
+                framework to tackle a few problems over maximal matchings in graphs. Even though maximum matching
+                is polynomial-time solvable, most counting and sampling versions are #P-hard. We design a few
+                algorithms that generates superpositions over matchings allowing us to sample from them. In
+                particular, we get a superposition over all possible matchings when given the empty state as input
+                and a superposition over all maximal matchings when given the \(W\)-states as input. Our main
+                result is that the expected size of the matchings corresponding to the output states of our QAOA+
+                algorithm when ran on a \(2\)-regular graph is greater than the expected matching size obtained
+                from a uniform distribution over all matchings. This algorithm uses a \(W\)-state as input and we
+                prove that this input state is better compared to using the empty matching as the input state.
+              </div>
+              <div class="abstract" id="bib1">
+                @article{chatterjee2020Applying,<br>
+                title={Applying the Quantum Alternating Operator Ansatz to the Graph Matching Problem},<br>
+                author={Chatterjee, Sagnik and Bera, Debajyoti},<br>
+                journal={arXiv preprint arXiv:2011.11918},<br>
+                year={2020}<br>
+                }
+              </div>
+            </div>
+          </div>
+
+          <p class="card-description" style="margin-top:0.5rem;">
+            For a complete list please see <a href="./assets/SagnikCV.pdf?v=mar2026">my CV</a>.
+          </p>
+
         </div>
+      </div>
+    </section>
 
-      </section>
+  </main>
 
-      <!-- <section class="full-page-slide">
-                <div id="activities" class="post delay6 flex">
-                    <h1>Co-Curriculars</h1>
+  <div id="site-footer"></div>
 
-                    <div class="activities-grid grid">
+  <script src="js/layout.js"></script>
+  <script>
+    initLayout([
+      { href: '#papers', label: 'research', delay: 'delay2', icon: 'uil-corner-down-right' },
+      { href: '/misc.html', label: 'misc.', delay: 'delay4', icon: 'uil-external-link-alt', external: true },
+      { href: '/quantum-demos.html', label: 'Quantum Demos', delay: 'delay4', icon: 'uil-external-link-alt', external: true },
+      { href: 'https://theoretickles.netlify.app/', label: 'Blog', delay: 'delay5', icon: 'uil-external-link-alt', external: true },
+      { href: './assets/SagnikCV.pdf', label: 'CV', delay: 'delay5', icon: 'uil-download-alt', download: true },
+    ]);
+  </script>
 
-                        <div class="card">
-                            <div class="card__content">
-                                <h2 class="card-title">QISE 2021 Workshop</h2>
-                                <p class="card-description">
-                                    I was the only grad student to be a part of the 2021 workshop on Quantum Information
-                                    Science and Engineering (colocated with FSTTCS 2021) organizing committee. This is
-                                    the
-                                    <a href="https://acm-goa.github.io/QISE/" target="_blank"
-                                        rel="noopener noreferrer me">website for the
-                                        workshop</a> (desktop browsers
-                                    recommended).
-                                </p>
-                            </div>
-                        </div>
+  <!-- Task 5: Fetch top-5 news items from timeline.html -->
+  <script>
+    (function () {
+      var iconMap = {
+        talk: 'uil-microphone',
+        paper: 'uil-file-alt',
+        award: 'uil-award',
+        teaching: 'uil-book-reader',
+        visit: 'uil-map-marker',
+      };
 
-                        <div class="card">
-                            <div class="card__content">
-                                <h2 class="card-title">2020 Workshop on Boolean Functions</h2>
-                                <p class="card-description">
-                                    I was selected to attend a <a href="https://bit.ly/isiworkshop20" target="_blank"
-                                        rel="noopener noreferrer me">workshop on Sensitivity, Query Complexity,
-                                        Communication Complexity and Fourier Analysis of Boolean Functions</a> organized
-                                    by the Indian Statistical Institute, Calcutta.
+      function injectIcons(listEl) {
+        listEl.querySelectorAll('li[data-type]').forEach(function (li) {
+          var iconClass = iconMap[li.dataset.type];
+          if (!iconClass) return;
+          var icon = document.createElement('i');
+          icon.className = 'uil ' + iconClass;
+          icon.setAttribute('aria-hidden', 'true');
+          icon.style.marginRight = '0.35em';
+          li.prepend(icon);
+        });
+      }
 
-                                </p>
-                            </div>
-                        </div>
+      fetch('timeline.html')
+        .then(function (res) { return res.text(); })
+        .then(function (html) {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const items = Array.from(doc.querySelectorAll('[data-date]'));
 
-                        <div class="card">
-                            <div class="card__content">
-                                <h2 class="card-title">The 4th Advanced Winter School by IIAS 2019</h2>
-                                <p class="card-description">
-                                    I was one of the two grad students from India to be selected for this <a
-                                        href="https://iias.huji.ac.il/SchoolCSE4" target="_blank"
-                                        rel="noopener noreferrer me">prestigious
-                                        winter school</a> organized by the Israel Institute for Advanced studies, at the
-                                    Hebrew University of
-                                    Jerusalem. The school served as brief introductions to the fields of quantum
-                                    algorithms, quantum error
-                                    correction, quantum supremacy, delegation and verification, interactive proofs,
-                                    cryptography, and
-                                    Hamiltonian complexity along with detailed TA sessions for a week. Check out the
-                                    youtube video of my <a href="https://www.youtube.com/watch?v=SLaX5_WrTKA"
-                                        target="_blank" rel="noopener noreferrer me">Gong
-                                        Talk</a> on the HHL algorithm (starts around the 6 min mark).
-                                </p>
-                            </div>
-                        </div>
+          // Sort descending by data-date (YYYY-MM string comparison is fine)
+          items.sort(function (a, b) {
+            return b.getAttribute('data-date').localeCompare(a.getAttribute('data-date'));
+          });
 
-                        <div class="card">
-                            <div class="card__content">
-                                <h2 class="card-title">IBMQ Awards 2019</h2>
-                                <p class="card-description">
-                                    <a href="https://www.ibm.com/blogs/research/2020/03/2019-ibmq-awards/"
-                                        target="_blank" rel="noopener noreferrer me">We finished runners up</a></span>
-                                    in the “Teach Me Quantum” category of the
-                                    IBMQ awards (2019-2020). Check out the <a
-                                        href="https://github.com/TharrmashasthaPV/Teach_Me_Quantum" target="_blank"
-                                        rel="noopener noreferrer me">Github repo for the course here</a>. We designed an
-                                    11-week undergraduate course covering concepts in quantum physics, quantum
-                                    chemistry, mathematics,
-                                    complexity theory,
-                                    cryptography, and ensemble based learning and much more. The main goal of this
-                                    course is to serve as a starting point for people from backgrounds in physics,
-                                    mathematics, chemistry and computer science with exercises tailored specifically
-                                    towards these domains.
-                                </p>
-                            </div>
-                        </div>
+          const top5 = items.slice(0, 5);
+          const newsList = document.getElementById('news-list');
+          if (!newsList) return;
+          newsList.innerHTML = '';
+          top5.forEach(function (li) {
+            const clone = li.cloneNode(true);
+            newsList.appendChild(clone);
+          });
+          injectIcons(newsList);
+        })
+        .catch(function () {
+          const newsList = document.getElementById('news-list');
+          if (newsList) {
+            newsList.innerHTML = '<li style="opacity:0.6;">News unavailable when opened from the filesystem — serve the site over HTTP to load recent events.</li>';
+          }
+        });
+    })();
+  </script>
 
-
-
-                    </div>
-
-                </div>
-            </section> -->
-
-
-    </main>
-  </div>
-  <div class="footer">
-    <div class="socials card-description">
-      <!-- Use https://iconscout.com/ to find svg's, and then directly edit the code.-->
-      <a href="https://dblp.org/pid/279/3927.html" target="_blank" rel="noopener noreferrer me" title="DBLP"
-        style="color: currentColor;">
-        <svg style="color: rgb(59, 66, 82);" class="bi bi-dblp" role="img" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <title>dblp</title>
-          <path
-            d="M3.075.002c-.096.013-.154.092-.094.31L4.97 7.73 3.1 8.6s-.56.26-.4.85l2.45 9.159s.16.59.72.33l6.169-2.869 1.3-.61s.52-.24.42-.79l-.01-.06-1.13-4.22-.658-2.45-.672-2.49v-.04s-.16-.59-.84-1L3.5.141s-.265-.16-.425-.139zM18.324 5.03a.724.724 0 0 0-.193.06l-5.602 2.6.862 3.2 1.09 4.08.01.06c.05.47-.411.79-.411.79l-1.88.87.5 1.89.04.1c.07.17.28.6.81.91l6.95 4.269s.68.41.52-.17l-1.981-7.4 1.861-.86s.56-.26.4-.85L18.85 5.42s-.116-.452-.526-.39z"
-            fill="#5e81ac"></path>
-        </svg>
-      </a>
-
-      <a href="https://scholar.google.com/citations?hl=en&user=TVzLYlAAAAAJ&view_op=list_works&sortby=pubdate"
-        target="_blank" rel="noopener noreferrer" title="Google Scholar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3b4252" viewBox="0 0 23 23">
-          <path d="M12 2L0 7l12 5 10-4.17V17h2V7L12 2zm0 11L4 9.5V15c0 2.76 3.58 5 8 5s8-2.24 8-5V9.5L12 13z"
-            fill="#5e81ac" />
-        </svg>
-      </a>
-
-      <a href="https://orcid.org/0000-0001-9003-1676" target="_blank" rel="noopener noreferrer me" title="orcid"
-        style="color: currentColor;">
-        <svg class="bi bi-orcid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-80.79 360.76h-29.84v-207.5h29.84zm-14.92-231.14a19.57 19.57 0 1 1 19.57-19.57 19.64 19.64 0 0 1-19.57 19.57zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"
-            fill="#5e81ac"></path>
-        </svg>
-      </a>
-      <a href="https://github.com/chatsagnik" target="_blank" rel="noopener noreferrer me" title="Github">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3b4252" class="bi bi-github"
-          viewBox="0 0 16 16">
-          <path
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            fill="#5e81ac" />
-        </svg>
-      </a>
-
-      <!-- <a href="https://bsky.app/profile/chatsagnik.bsky.social" target="_blank" rel="noopener noreferrer"
-        title="BlueSky">
-        <svg xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 512">
-          <path
-            d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"
-            fill="#5e81ac" />
-        </svg>
-      </a> -->
-
-      <a href="https://www.linkedin.com/in/chatsagnik/" target="_blank" rel="noopener noreferrer me" title="Linkedin">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#3b4252" class="bi bi-linkedin"
-          viewBox="0 0 16 16">
-          <path
-            d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"
-            fill="#5e81ac" />
-        </svg>
-      </a>
-    </div>
-  </div>
-
-  <script src="js/resources.js" defer></script>
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>

@@ -18,7 +18,7 @@
   /* --clr-bg: #fcfcfc; */
   --clr-bg-inverse-darker: #434c5e;
   --clr-bg-inverse: #4c566a;
-   --clr-bg-inverse-darker-trans: #434c5e30;
+  --clr-bg-inverse-darker-trans: #434c5e30;
   --clr-bg-inverse-trans: #4c566a30;
   --clr-txt: #3b4252;
   --clr-txt-inverse: #e5e9f0;
@@ -26,15 +26,14 @@
   --clr-objects-object-shadow: #b48ead;
   --clr-objects-object-shadow-inverse: #ebcb8b;
   --clr-objects-alt1: #81a1c1;
-  --clr-link: #0000EE;
+  --clr-link: #0000ee;
   --clr-paper: #0d16ff;
-  --clr-venue: #aa005b; 
+  --clr-venue: #aa005b;
   /* #D4357F; */
-  --clr-highlight: #803FAF;
+  --clr-highlight: #803faf;
   /* #856294; */
-  --clr-content-header:#333;
+  --clr-content-header: #333;
   --clr-hover: #bf616a;
-
 
   --typewriterSpeed: 0s;
   --typewriterCharacters: 25;
@@ -42,7 +41,7 @@
   /* --ff-primary: "Montserrat", sans-serif; */
   --ff-primary: "Inter", "Inter var", sans-serif;
   --ff-body: var(--ff-primary);
-  --ff-heading: font-family: "Fira Sans", sans-serif;
+  --ff-heading: "Fira Sans", sans-serif;
   /* --ff-heading: "Roboto", sans-serif; */
 
   --fw-light: 400;
@@ -50,15 +49,15 @@
   --fw-semi-bold: 600;
   --fw-bold: 700;
 
-  --fs-100: 0.25rem;
-  --fs-300: 0.8125rem;
-  --fs-400: 1rem;
-  --fs-500: 1.15rem;
-  --fs-550: 1.5rem;
-  --fs-600: 1.875rem;
-  --fs-650: 2rem;
-  --fs-700: 2.5rem;
-  --fs-800: 3.5rem;
+  --fs-100: 0.25rem; /* step 1 — micro; currently used only in .miscellaneous-grid mobile font shorthand */
+  --fs-300: 0.8125rem; /* step 2 — small; used as --fs-button */
+  --fs-400: 1rem; /* step 3 — base body; used as --fs-body (small screens) */
+  --fs-500: 1.15rem; /* step 4 — slightly larger body; used as --fs-body (large) and --fs-nav (small) */
+  --fs-550: 1.5rem; /* step 5 — mid heading; NOT assigned to a semantic token — reserve for subheadings */
+  --fs-600: 1.875rem; /* step 6 — section heading; used as --fs-h2 (small) and --fs-nav (large) */
+  --fs-650: 2rem; /* step 7 — large heading; NOT assigned to a semantic token — reserve for page-level h2 */
+  --fs-700: 2.5rem; /* step 8 — hero heading; used as --fs-h1 (small) */
+  --fs-800: 3.5rem; /* step 9 — display heading; used as --fs-h1 (large) */
 
   --fs-body: var(--fs-400);
   --fs-nav: var(--fs-500);
@@ -66,6 +65,75 @@
   --fs-h2: var(--fs-600);
   --fs-h1: var(--fs-700);
 }
+
+/*
+ * ── Semantic class reference ──────────────────────────────────────────────────
+ *
+ * Layout / structure
+ *   .primary-header        — Fixed top navigation bar
+ *   .primary-navigation    — Horizontal (desktop) / slide-in (mobile) nav list
+ *   .mobile-nav-toggle     — Hamburger button, hidden on desktop
+ *   .hamburgerMenu         — Three-bar icon inside the hamburger button
+ *   .footer                — Sticky bottom bar holding social icon links
+ *   .mainbody              — Flex column wrapper for all <section> content
+ *   .post                  — Section content container (flex column, centred)
+ *   .sticking              — Modifier added to .primary-header on scroll
+ *
+ * Grid helpers
+ *   .about-grid            — 2-column grid: photo | bio
+ *   .publication-grid      — Auto-fit grid for paper cards
+ *   .talks-grid            — Auto-fit grid for talk cards
+ *   .activities-grid       — Auto-fit grid for activity/award cards
+ *   .miscellaneous-grid    — 2-column grid for resource cards
+ *   .grid-col-span-2       — Makes a grid child span both columns
+ *   .stacked               — Single-column grid (used on paper cards to stack img/content)
+ *
+ * Card anatomy
+ *   .card                  — Wrapper for a content card (no visual styles)
+ *   .card__content         — Rounded box with shadow — the visible card surface
+ *   .card__img             — Image container inside a card
+ *   .card__timeline        — News/timeline box spanning both grid columns (news block on index)
+ *   .card-title            — Section header inside a card (h2, e.g. "About Me")
+ *   .card-venue            — Venue / year label inside a talk card
+ *   .card-description      — Body-text paragraph inside a card
+ *   .paper__title          — Individual paper or talk title (h3, visually smaller than card-title)
+ *
+ * Inline text styles
+ *   .highlight             — Purple accent for key terms
+ *   .highlight-bold        — Semibold purple accent for important spans
+ *   .date                  — Bold dark date stamp in timeline items
+ *   .paper                 — Blue colour for paper titles in news items
+ *   .venue                 — Pink/magenta colour for venue names
+ *   .emailid               — Purple colour for email display
+ *   .upcoming              — Red-accent for upcoming events
+ *
+ * Interactive elements
+ *   .absbutton             — Inline toggle link for abstract / citation blocks
+ *   .abstract              — Collapsible abstract or BibTeX block (default hidden)
+ *   .cv                    — CV download button pill
+ *   .cvdiv                 — Centering wrapper for the CV button
+ *
+ * Typography helpers
+ *   .titleh1               — Page-level <h1> heading (hero name)
+ *   .titleh2               — Page-level <h2> heading
+ *   .herotext              — Brand name link in the nav bar (Tangerine script)
+ *
+ * Animation delays (for fade-in-up on page load)
+ *   .delay1 … .delay6      — Staggered opacity-0 → 1 animations
+ *
+ * Social / footer
+ *   .socials               — Flex row of social icon links
+ *   .footer-socials        — Wrapper div inside .footer that contains .socials
+ *
+ * Utility
+ *   .flex                  — display:flex with --gap spacing
+ *   .sr-only               — Visually hidden but accessible to screen readers
+ *   .nav-icon              — Font-family override for nav icon glyphs (Roboto)
+ *   .section-even          — Inverted background for alternating page sections
+ *   .dp                    — Display-picture / avatar container
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 
 /* For larger screens */
 @media (min-width: 50em) {
@@ -119,6 +187,11 @@ svg {
 .flex {
   display: flex;
   gap: var(--gap, 1rem);
+}
+
+/* Nav icon glyph — replaces the inline style="font-family:'Roboto',sans-serif;" that was on every nav <span> */
+.nav-icon {
+  font-family: "Roboto", sans-serif;
 }
 
 /* Actual CSS starts here */
@@ -179,7 +252,7 @@ a:hover {
   padding-left: 3rem;
   padding-right: 3rem;
   padding-bottom: 3rem;
-  padding-top:1.5rem;
+  padding-top: 1.5rem;
   z-index: 999;
   transition: box-shadow 200ms cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -343,7 +416,6 @@ a:hover {
   color: var(--clr-objects);
 }
 
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -357,16 +429,22 @@ a:hover {
   width: 90%;
   gap: 1rem;
   margin-inline: auto;
-  align-items: center;
+  align-items: start;
 }
-
-
 
 .dp {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 0;
+}
+
+.dp img {
+  width: 100%;
+  height: auto;
+  border-radius: 9px;
+  display: block;
 }
 
 .publication-grid {
@@ -377,7 +455,6 @@ a:hover {
   padding-block: 2rem;
   margin-inline: auto;
 }
-
 
 .grid-col-span-2 {
   grid-column: span 2;
@@ -416,23 +493,26 @@ a:hover {
   margin: 2rem;
   padding: 15px;
 }
-.titleh1,.post h1 {
+.titleh1,
+.post h1 {
   font-size: var(--fs-800);
   width: max-content;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: var(--clr-content-header);
   /* font-size: 2.5rem; */
 }
 
-.titleh2{
-  font-size: var(--fs-700);
-  width: max-content;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  color: var(--clr-content-header);
+/* Research section heading — no hardcoded <br>, wraps naturally */
+#paperh1 {
+  width: auto;
+  text-align: center;
 }
 
-.card-title {
-  padding: 0 0.75rem;
+.titleh2 {
+  font-size: var(--fs-700);
+  width: max-content;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--clr-content-header);
 }
 
 .card-venue {
@@ -442,16 +522,16 @@ a:hover {
 }
 
 .card-title li.menu-item {
-  margin:0 0 30px 0;   
+  margin: 0 0 30px 0;
 }
 
 hr {
-    height: 1.05px;
-    color: var(--clr-bg-inverse-trans);
-    background: var(--clr-bg-inverse-darker-trans);
-    font-size: 0;
-    border: 0;
-    margin: 0 1rem;
+  height: 1.05px;
+  color: var(--clr-bg-inverse-trans);
+  background: var(--clr-bg-inverse-darker-trans);
+  font-size: 0;
+  border: 0;
+  margin: 0 1rem;
 }
 
 /* .about-me h2:first-letter {
@@ -461,12 +541,11 @@ hr {
 } */
 
 .publication-grid h2:first-letter {
-
-    font-family: var(--ff-heading);
-    /* border: 1px solid var(--clr-objects); */
-    color: var(--clr-objects);
-    /* padding: 0.25rem; */
-    /* margin: 0 0.25rem 0 0; */
+  font-family: var(--ff-heading);
+  /* border: 1px solid var(--clr-objects); */
+  color: var(--clr-objects);
+  /* padding: 0.25rem; */
+  /* margin: 0 0.25rem 0 0; */
 }
 
 .stacked {
@@ -482,15 +561,15 @@ hr {
 } */
 
 .card__img {
-  padding: 0.25rem;
   border-radius: 9px;
+  overflow: hidden;
 }
 
 .card__content {
   padding: 0.5rem;
   margin: 0.5rem;
   background: #f0f2f3;
-  border-radius: 9px;   
+  border-radius: 9px;
   /* box-shadow: 0 5px 5px var(--clr-bg-inverse); */
   box-shadow: 0px 0px 4px rgba(57, 46, 164, 0.3);
 }
@@ -514,17 +593,17 @@ hr {
 }
 
 .date {
-    color: var(--clr-bg-inverse-darker);
-    font-weight: var(--fw-bold);
+  color: var(--clr-bg-inverse-darker);
+  font-weight: var(--fw-bold);
 }
 
 .paper {
   color: var(--clr-paper);
 }
- 
+
 .venue {
   color: var(--clr-venue);
-} 
+}
 
 .card__timeline {
   display: grid;
@@ -534,17 +613,19 @@ hr {
   line-height: 1.85;
   margin-inline: auto;
   font-size: smaller;
-  overflow-y: auto;
-  max-height: 30vh;
-  /* align-items: center; */
 }
 .list_timeline li {
-   margin-bottom:10px;   
+  margin-bottom: 10px;
 }
 
 .publication-grid .card__content {
-  min-height: 300px;
   align-self: end;
+}
+
+/* When card__content is also the image container, remove padding so image fills edge-to-edge */
+.card__content.dp {
+  padding: 0;
+  margin: 0.5rem;
 }
 
 .card__content ul {
@@ -556,22 +637,33 @@ hr {
   font-size: 1.5rem;
   line-height: 1.5;
   color: var(--clr-content-header);
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+/* card-title: section headers like "About Me", "Research" — larger and heavier than paper__title */
+.card-title {
+  padding: 0 0.75rem;
+  font-size: 1.45rem;
+  font-weight: var(--fw-semi-bold);
+  line-height: 1.3;
+  color: var(--clr-content-header);
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* paper__title: individual paper or talk titles — smaller and lighter than card-title */
 .paper__title {
   padding: 0 0.75rem;
   margin-top: 1rem;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
+  font-weight: var(--fw-regular);
   line-height: 1.2;
   color: var(--clr-content-header);
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .paper__title h3:first-letter {
   color: var(--clr-objects);
 }
-
 
 .card__content h4 {
   padding: 0 0.75rem;
@@ -598,20 +690,19 @@ hr {
   text-decoration: none;
 }
 
-.absbutton:hover{
-text-decoration: none;
+.absbutton:hover {
+  text-decoration: none;
 }
 
 .abstract {
-font-size: 0.8rem;
-width: 90%;
-border: 1px dashed var(--clr-bg-inverse-darker);
-background-color: var(--clr-bg);
-margin-inline: auto;
-padding: 0 0.75rem;
-display: none;
+  font-size: 0.8rem;
+  width: 90%;
+  border: 1px dashed var(--clr-bg-inverse-darker);
+  background-color: var(--clr-bg);
+  margin-inline: auto;
+  padding: 0 0.75rem;
+  display: none;
 }
-
 
 .socials {
   display: flex;
@@ -619,6 +710,103 @@ display: none;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+}
+
+/* footer-socials: wrapper div inside .footer that contains the .socials icon row.
+   Separated from .card-description so that class stays pure body-text only. */
+.footer-socials {
+  padding: 0 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Theme toggle button in header */
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-objects);
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.theme-toggle:hover {
+  color: var(--clr-hover);
+}
+
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+/* ── Dark mode ───────────────────────────────────────────────────────────────
+   Every token that appears as text colour anywhere must be readable on
+   --clr-bg: #2e3440 (Nord polar night, darkest).
+   Tokens NOT listed here keep their light-mode value — audit notes below.
+   ─────────────────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  /* Surfaces */
+  --clr-bg: #2e3440;
+  --clr-bg-inverse: #3b4252;
+  --clr-bg-inverse-darker: #434c5e; /* kept mid-tone so .date text is readable */
+  --clr-bg-inverse-darker-trans: #434c5e30;
+  --clr-bg-inverse-trans: #4c566a40;
+
+  /* Primary text */
+  --clr-txt: #d8dee9;
+  --clr-txt-inverse: #eceff4;
+  --clr-content-header: #e5e9f0; /* h2/h3 Georgia headings */
+
+  /* Accent / interactive */
+  --clr-objects: #81a1c1; /* nav icons, links-within-nav, buttons */
+  --clr-highlight: #b48ead; /* purple accent spans */
+  --clr-hover: #bf616a; /* hover — Nord aurora red, fine on dark */
+
+  /* Inline text colour tokens — these were not overridden before, causing
+     deep-blue / near-black text on a dark background */
+  --clr-link: #88c0d0; /* was #0000EE — now Nord frost cyan */
+  --clr-paper: #88c0d0; /* was #0d16ff — paper titles in news feed */
+  --clr-venue: #d08770; /* was #aa005b — Nord aurora orange, readable */
+}
+
+/* Card surfaces */
+[data-theme="dark"] .card__content {
+  background: #3b4252;
+}
+
+/* Abstract / citation toggle boxes */
+[data-theme="dark"] .abstract {
+  background-color: #2e3440;
+  border-color: #4c566a;
+}
+
+/* Header and footer surface */
+/* .date uses --clr-bg-inverse-darker which is too dark in dark mode */
+[data-theme="dark"] .date {
+  color: #81a1c1;
+}
+
+[data-theme="dark"] .primary-header {
+  background-color: #2e3440;
+}
+
+[data-theme="dark"] .footer {
+  background: #2e3440;
+  box-shadow: #1e222a 0 0.5rem 1rem;
+}
+
+/* Nav link text inherits --clr-txt correctly, but the open nav drawer on
+   mobile needs its own surface colour updated */
+[data-theme="dark"] .primary-navigation[data-visible="true"] {
+  background-color: #3b4252;
+  color: #eceff4;
+}
+
+/* Scrollbar in dark mode */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background-color: #2e3440;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background-color: #4c566a;
+  border-color: #2e3440;
 }
 
 .socials svg {
@@ -661,10 +849,12 @@ display: none;
   box-shadow: var(--clr-bg-inverse-darker) 0 0.5rem 1rem;
 }
 
-.foot-misc{
+.foot-misc {
   position: absolute;
   bottom: 0;
 }
+
+/* ── Talks timeline (Task 6) ─────────────────────────────────────── */
 .mainbody {
   display: flex;
   flex-direction: column;
@@ -736,13 +926,19 @@ display: none;
     cursor: pointer;
     width: 2.5rem;
     height: 2.5rem;
-    /* right: 5rem; */
     right: 3rem;
-    /* bottom: 3rem; */
     background-color: transparent;
     border: transparent;
     opacity: 0;
     animation: fadeInUp 100ms ease calc(var(--typewriterSpeed) + 1.3s) forwards;
+  }
+
+  /* Push theme toggle to the left of the hamburger on mobile */
+  .theme-toggle {
+    position: absolute;
+    right: 6rem;
+    z-index: 999;
+    font-size: 1.25rem;
   }
   .bar {
     height: 4px;
@@ -783,10 +979,7 @@ display: none;
     margin-top: 2rem;
     margin-bottom: 1rem;
     width: 90%;
-    max-height: 60vh;
-    overflow-y: auto;
   }
-  
 
   .about-grid {
     display: grid;
@@ -812,14 +1005,13 @@ display: none;
     gap: 1rem;
   }
 
-   .miscellaneous-grid {
+  .miscellaneous-grid {
     display: grid;
     font: var(--fs-100);
     grid-template-columns: 1fr;
     width: 95%;
     gap: 1rem;
   }
-  
 
   .socials {
     justify-content: space-around;
@@ -829,16 +1021,12 @@ display: none;
     width: 1.25rem;
     height: 1.25rem;
   }
-  
+
   .paper__title {
     font-size: 1.05rem;
   }
 
-  .card__timeline {
-    max-height: 35vh;
-  }
-
-  .list_timeline li{
+  .list_timeline li {
     font-size: 0.6rem;
   }
 
@@ -862,18 +1050,166 @@ display: none;
     text-decoration: none;
   }
 
-  .absbutton:hover{
-  text-decoration: none;
+  .absbutton:hover {
+    text-decoration: none;
   }
 
   .abstract {
-  font-size: 0.7rem;
-  line-height: 1.65rem;
-  width: 90%;
-  border: 1px dashed var(--clr-bg-inverse-darker);
-  background-color: var(--clr-bg);
+    font-size: 0.7rem;
+    line-height: 1.65rem;
+    width: 90%;
+    border: 1px dashed var(--clr-bg-inverse-darker);
+    background-color: var(--clr-bg);
+    margin-inline: auto;
+    padding: 0 0.75rem;
+    display: none;
+  }
+}
+
+/* ── Timeline page (timeline.html) ───────────────────────────────── */
+
+/* Year group header in the full timeline */
+.timeline-year-group {
+  margin-bottom: 2.5rem;
+}
+
+.timeline-year-label {
+  font-size: 1.4rem;
+  font-weight: var(--fw-bold);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--clr-objects);
+  border-bottom: 2px solid var(--clr-bg-inverse-trans);
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  row-gap: 0.65rem;
+}
+
+.timeline-list li {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  padding-left: 0.5rem;
+  border-left: 3px solid var(--clr-objects);
+}
+
+/* ── Grouped talks timeline (misc.html Task 6) ───────────────────── */
+
+.talks-timeline {
+  width: 100%;
   margin-inline: auto;
-  padding: 0 0.75rem;
-  display: none;
+  padding-block: 0.5rem;
+}
+
+.talks-year-group {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.talks-year-rail {
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+  color: var(--clr-objects);
+  font-family: Georgia, serif;
+  padding-top: 0.15rem;
+  text-align: right;
+}
+
+.talks-year-entries {
+  border-left: 2px solid var(--clr-bg-inverse-trans);
+  padding-left: 1.25rem;
+}
+
+.talk-entry {
+  margin-bottom: 1.5rem;
+}
+
+.talk-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.talk-entry-title {
+  font-size: 1.05rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: var(--clr-content-header);
+  font-weight: var(--fw-regular);
+}
+
+.talk-entry-venue {
+  font-size: 0.85rem;
+  color: var(--clr-venue);
+  white-space: nowrap;
+}
+
+.talk-entry-links {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.talk-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 2rem;
+  border: 1px solid var(--clr-objects);
+  color: var(--clr-objects);
+  text-decoration: none;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.talk-pill:hover {
+  background: var(--clr-objects);
+  color: var(--clr-txt-inverse);
+  text-decoration: none;
+}
+
+@media (max-width: 850px) {
+  .talks-timeline {
+    width: 100%;
+  }
+
+  .talks-year-group {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0 0.6rem;
+  }
+
+  .talks-year-rail {
+    font-size: 0.85rem;
+    padding-top: 0.25rem;
+  }
+
+  /* Stack title and venue vertically on small screens */
+  .talk-entry-header {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  /* Venue wraps instead of staying on one line */
+  .talk-entry-venue {
+    white-space: normal;
+    font-size: 0.8rem;
+  }
+
+  .talk-entry-title {
+    font-size: 0.95rem;
+  }
+
+  .talk-pill {
+    font-size: 0.68rem;
+    padding: 0.1rem 0.45rem;
   }
 }
