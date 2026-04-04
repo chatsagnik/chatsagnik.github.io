@@ -40,15 +40,15 @@ We start by relating the eigenvalues of an operator to the entries of any of its
 
 $$p(M_B) = \det(M_B-\lambda\cdot I) = \prod_{i=1}^n (a_{ii} - \lambda) + \text{terms of degree }\leq n-2$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)}  \,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)}  \\,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr}\, M_B)} \,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)\,.\;\; \text{\small(by Definition 2)}$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr}\\, M_B)} \\,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)\\,.\;\; \text{\small(by Definition 2)}$$
 
 > **Exercise:** Check for yourself that the coefficient of the degree 0 term of the characteristic polynomial is indeed $\det M_B$.
 
 Recall that if a polynomial $p(x)$ has roots $\{r_i\}$, then the polynomials $\{x-r_i\}_i$ divide $p(x)$.[^factor] Also recall that by definition, the roots of the characteristic polynomial are the eigenvalues of $A$.[^charpoly] Hence, $p(M_B)=\prod_i (x-\lambda_i)$. By [Vieta's formula](https://en.wikipedia.org/wiki/Vieta%27s_formulas), given a monic polynomial[^monic] $$ p(x)=x^n + \sum_{i<n}c_{i} x^{i}$, $c*{n-1}=-\sum\_{i} r_i.$$ Hence, we have
 
-$$\textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)} = \textcolor{red}{(\mathrm{tr}\, M_B)} = \sum_{i=1}^{n} \lambda_i.\;\; \text{\small(Hence Definitions 1 and 2 are equivalent)}$$
+$$\textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)} = \textcolor{red}{(\mathrm{tr}\\, M_B)} = \sum_{i=1}^{n} \lambda_i.\\;\\; \text{\small(Hence Definitions 1 and 2 are equivalent)}$$
 
 > **Definition 3 (Trace via Characteristic Polynomial):** The trace of a matrix is the coefficient (up to a sign) of the degree $n-1$ term of its characteristic polynomial.
 
@@ -86,9 +86,9 @@ $$B_{\lambda,3} = \begin{bmatrix}\lambda& 1& 0 \\ 0&\lambda& 1 \\ 0&0&\lambda\en
 
 Note that $B_{\lambda,3} e_1 = \lambda e_1$, $B_{\lambda,3} e_2 = e_1+\lambda e_2$, and $B_{\lambda,3} e_3 = e_2+\lambda e_3$. Let $B_\lambda=B_{\lambda,3}-\lambda\cdot I$. This gives us $B_{\lambda} e_1 = 0$, implying that $e_1$ is an eigenvector of $B_{\lambda,3}$ with eigenvalue $\lambda$ (recall [^charpoly]), along with the following relations on $e_2$ and $e_3$.
 
-$$B_{\lambda} e_2 = e_1\,\implies {\big(B_{\lambda}\big)}^2 e_2=0\,,$$
+$$B_{\lambda} e_2 = e_1\\,\implies {\big(B_{\lambda}\big)}^2 e_2=0\\,,$$
 
-$$B_{\lambda} e_3 = e_2\,\implies {\big(B_{\lambda}\big)}^3 e_3=0\,.$$
+$$B_{\lambda} e_3 = e_2\\,\implies {\big(B_{\lambda}\big)}^3 e_3=0\\,.$$
 
 We denote $e_2$ and $e_3$ as _generalized eigenvectors_ of $B_{\lambda,3}$. One can similarly extend the above argument to any $B_{\lambda_i,m_i}$ to obtain a set of generalized eigenvectors $\{e_1,\ldots,e_{m_i}\}$. Note that the set of generalized eigenvectors is independent. This indicates that there is a basis of generalized eigenvectors that spans the subspace on which $B_{\lambda_i,m_i}$ is an operator.[^block]
 
@@ -148,10 +148,10 @@ Let $A, B : V \mapsto V$ be linear operators on a finite-dimensional vector spac
 
 ### Linearity
 
-> **Proposition (Linearity):** $\mathrm{tr}(\alpha A + \beta B) = \alpha\, \mathrm{tr}(A) + \beta\, \mathrm{tr}(B)$.
+> **Proposition (Linearity):** $\mathrm{tr}(\alpha A + \beta B) = \alpha\\, \mathrm{tr}(A) + \beta\\, \mathrm{tr}(B)$.
 
 _Proof._ Fix any basis $B_0$ of $V$ and use Definition 2.
-$$\mathrm{tr}(\alpha A + \beta B) = \sum_i (\alpha A + \beta B)(i,i) = \alpha \sum_i A(i,i) + \beta \sum_i B(i,i) = \alpha\, \mathrm{tr}(A) + \beta\, \mathrm{tr}(B). \quad \square$$
+$$\mathrm{tr}(\alpha A + \beta B) = \sum_i (\alpha A + \beta B)(i,i) = \alpha \sum_i A(i,i) + \beta \sum_i B(i,i) = \alpha\\, \mathrm{tr}(A) + \beta\\, \mathrm{tr}(B). \quad \square$$
 
 Linearity means that the trace is a **linear functional** [^functional] on the space of linear operators on $V$. We now introduce the following intuition, that we deepen later: A linear functional $f: V \mapsto \mathbb{F}$ is a _measurement_, i.e., $f$ takes any element in $V$ and outputs a scalar valued measurement! For example, if we consider the vector space of $n\times n$ matrices, the trace simply returns a scalar valued measurement of any element in this vector space.
 
@@ -206,7 +206,7 @@ The unit trace condition is a normalisation condition, analogous to requiring $\
 
 The **Born rule** is the fundamental postulate that connects the mathematical formalism of quantum mechanics to measurable probabilities. Suppose we perform a measurement on a system described by density matrix $\rho$. A measurement is described by a collection of **measurement operators** $\{M_k\}$ satisfying the completeness relation $\sum_k M_k^\dagger M_k = I$. The probability of obtaining outcome $k$ is:
 
-$$p(k) = \mathrm{tr}(M_k^\dagger M_k \, \rho).$$
+$$p(k) = \mathrm{tr}(M_k^\dagger M_k \\, \rho).$$
 
 In a projective measurement (where $M_k = \Pi_k$ are orthogonal projectors onto eigenspaces of some observable $\hat{O} = \sum_k \lambda_k \Pi_k$). Here, the probability of obtaining outcome $k$ this simplifies to:
 
@@ -214,7 +214,7 @@ $$p(k) = \mathrm{tr}(\Pi_k \rho).$$
 
 The expected value (expectation) of the observable $\hat{O}$ in state $\rho$ is then:
 
-$$\langle \hat{O} \rangle_\rho = \sum_k \lambda_k\, p(k) = \sum_k \lambda_k \, \mathrm{tr}(\Pi_k \rho) = \mathrm{tr}\!\left(\sum_k \lambda_k \Pi_k \cdot \rho \right) = \mathrm{tr}(\hat{O}\,\rho),$$
+$$\langle \hat{O} \rangle_\rho = \sum_k \lambda_k\\, p(k) = \sum_k \lambda_k \\, \mathrm{tr}(\Pi_k \rho) = \mathrm{tr}\!\left(\sum_k \lambda_k \Pi_k \cdot \rho \right) = \mathrm{tr}(\hat{O}\\,\rho),$$
 
 where we used linearity of trace and the definition $\hat{O} = \sum_k \lambda_k \Pi_k$. Every measurable quantity is therefore expressible as a trace. This is precisely why the invariance and linearity of trace are so important in physics: probabilities and expectation values are independent of the choice of basis used to describe the Hilbert space!
 
@@ -225,7 +225,7 @@ One of the most important (and inherently quantum-mechanical) uses of trace is t
 Let $\mathcal{H} = \mathcal{H}_A \otimes \mathcal{H}_B$ be a bipartite Hilbert space (a composite of systems $A$ and $B$), with $\dim \mathcal{H}_A = m$ and $\dim \mathcal{H}_B = n$. Let $\{\ket{i}_A\}$ and $\{\ket{j}_B\}$ be ONBs for $\mathcal{H}_A$ and $\mathcal{H}_B$ respectively. Any operator $\rho$ on $\mathcal{H}$ has a block structure in the basis $\{\ket{i}_A \otimes \ket{j}_B\}$.
 
 > **Definition (Partial Trace over $B$):** The **reduced density matrix** of subsystem $A$, obtained by tracing out $B$, is
-> $$\rho_A = \mathrm{tr}_B(\rho) = \sum_{j=1}^{n} (I_A \otimes \bra{j}_B)\, \rho\, (I_A \otimes \ket{j}_B).$$
+> $$\rho_A = \mathrm{tr}_B(\rho) = \sum_{j=1}^{n} (I_A \otimes \bra{j}_B)\\, \rho\\, (I_A \otimes \ket{j}_B).$$
 
 We "trace over" the $B$ index by setting $j = j'$ and summing just like an ordinary trace, but only over the $B$ subsystem. Note that $\rho_A$ as defined above is itself a valid density matrix (Hermitian, positive semidefinite, unit trace), given that $\rho$ is a valid density matrix.
 
@@ -260,7 +260,7 @@ $$\frac{d}{dt}\det(A(t))\bigg|_{t=0} = \mathrm{tr}\!\left(A'(0)\right).$$
 
 If $A$ is diagonalisable with eigenvalues $\lambda_1, \ldots, \lambda_n$ (counted with multiplicity), the operator stretches its eigenvectors by factors $\lambda_i$. The trace $\sum_i \lambda_i$ is therefore the **total signed stretching** across all eigendirections. The determinant $\prod_i \lambda_i$ is the _multiplicative_ volume distortion; the trace is the _additive_ version of the same idea, to first order.
 
-To see why "first order" is the right frame: note that for a _scalar_ $a$, $(1 + \epsilon a) \approx e^{\epsilon a}$ for small $\epsilon$. For a matrix, the analogous statement is that $\det(e^{\epsilon A}) = e^{\epsilon \,\mathrm{tr}(A)}$, since $\det(e^A) = e^{\mathrm{tr}(A)}$ exactly. Hence, the trace is the **infinitesimal generator** of the determinant under the matrix exponential.
+To see why "first order" is the right frame: note that for a _scalar_ $a$, $(1 + \epsilon a) \approx e^{\epsilon a}$ for small $\epsilon$. For a matrix, the analogous statement is that $\det(e^{\epsilon A}) = e^{\epsilon \\,\mathrm{tr}(A)}$, since $\det(e^A) = e^{\mathrm{tr}(A)}$ exactly. Hence, the trace is the **infinitesimal generator** of the determinant under the matrix exponential.
 
 > **Exercise:** Prove that $\det(e^A) = e^{\mathrm{tr}(A)}$ for any square matrix $A$, using the Jordan normal form.
 
