@@ -2,8 +2,7 @@
 title: "The Matrix Trace"
 date: 2025-03-08T12:03:46+05:30
 draft: false
-tags: [linear algebra, quantum computing, matrix analysis]
-categories: [math]
+tags: [linear algebra, quantum computing, matrix analysis, math]
 ---
 
 # A Prelude to this post

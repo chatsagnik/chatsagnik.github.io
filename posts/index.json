@@ -1,7 +1,7 @@
 [
   {
     "file": "posts/trace/index.md",
-    "excerpt": "Five definitions of the matrix trace — from eigenvalue sums to Jordan forms to Dirac notation — and its role in quantum mechanics via density matrices, the Born rule, and partial trace."
+    "excerpt": "Five definitions of the matrix trace (from eigenvalue sums to Jordan forms to Dirac notation), and its role in quantum mechanics via density matrices, the Born rule, and partial trace."
   },
   {
     "file": "posts/qary/index.md",
@@ -9,7 +9,7 @@
   },
   {
     "file": "posts/srcontinued/index.md",
-    "excerpt": "Part 2: which search problems are not self-reducible, the complexity landscape of TFNP, and the subclasses PLS and PPAD — with a focus on downward self-reducibility and open questions."
+    "excerpt": "A discussion on which search problems are not self-reducible, the complexity landscape of TFNP, and the subclasses PLS and PPAD; with a focus on downward self-reducibility and open questions."
   },
   {
     "file": "posts/selfreductions/index.md",
@@ -17,6 +17,6 @@
   },
   {
     "file": "posts/reductions/index.md",
-    "excerpt": "An introduction to the mathematical technique of reduction — Karp, Truth Table, and Cook reductions — and their role in computability and complexity theory."
+    "excerpt": "An introduction to the mathematical technique of reduction (Karp, Truth Table, and Cook reductions) and their role in computability and complexity theory."
   }
 ]

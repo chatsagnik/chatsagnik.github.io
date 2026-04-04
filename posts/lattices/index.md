@@ -2,8 +2,7 @@
 title: "$q$-ary Lattices"
 date: 2025-03-01T12:03:46+05:30
 draft: false
-tags: [lattices, coding theory, cryptography]
-categories: [cryptography]
+tags: [lattices, coding theory, cryptography, linear algebra]
 ---
 
 In this post, we discuss an important class of algebraic structures known as $q$-ary lattices that are central to lattice-based cryptographic primitives.
