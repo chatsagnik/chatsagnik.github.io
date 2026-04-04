@@ -273,6 +273,32 @@
             color: var(--clr-objects);
         }
 
+        .md-body th {
+            font-weight: var(--fw-semi-bold);
+            color: var(--clr-objects);
+        }
+
+        /* ── MathJax overflow ────────────────────────────────────── */
+        .md-body mjx-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
+            display: block;
+        }
+
+        .md-body mjx-container[display="true"] {
+            margin: 1rem 0;
+            padding-bottom: 0.25rem;
+        }
+
+        .md-body svg[role="math"] {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        /* ── Loading / error states ──────────────────────────────── */
+
         /* ── Loading / error states ──────────────────────────────── */
         .post-state {
             text-align: center;
