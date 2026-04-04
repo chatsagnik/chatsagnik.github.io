@@ -6,8 +6,6 @@ tags: [linear algebra, quantum computing, matrix analysis]
 categories: [math]
 ---
 
-## _This post was revised and expanded with the assistance of Claude. All mathematical content has been reviewed and verified by me._
-
 # A Prelude to this post
 
 I was introduced to the notion of the **trace of a square matrix** as early as the eleventh grade, but never fully appreciated the nuances attached to this seemingly innocuous concept until I took a _second_ course in Linear algebra! Funnily, the reason I even took the second course was because I was struggling **with** the intuition behind certain concepts such as density matrices and measurements in basic quantum computing and quantum information theory!
@@ -266,8 +264,6 @@ If $A$ is diagonalisable with eigenvalues $\lambda_1, \ldots, \lambda_n$ (counte
 To see why "first order" is the right frame: note that for a _scalar_ $a$, $(1 + \epsilon a) \approx e^{\epsilon a}$ for small $\epsilon$. For a matrix, the analogous statement is that $\det(e^{\epsilon A}) = e^{\epsilon \,\mathrm{tr}(A)}$, since $\det(e^A) = e^{\mathrm{tr}(A)}$ exactly. Hence, the trace is the **infinitesimal generator** of the determinant under the matrix exponential.
 
 > **Exercise:** Prove that $\det(e^A) = e^{\mathrm{tr}(A)}$ for any square matrix $A$, using the Jordan normal form.
-
----
 
 [^linmap]: **Linear Operator:** Let $V$ be a vector space over some field $\mathbb{F}$. A function $A:V\mapsto V$ is a linear operator on $V$ if $\forall \lambda,\sigma\in\mathbb{F}$ and $\forall v,w\in V$, $A(\lambda v + \sigma w) = \lambda A(v) + \sigma A(w)$.
 
