@@ -1,0 +1,436 @@
+/*
+ * blog.css — styles for blog.html (post index page)
+ *
+ * Depends on:  css/main.css  (CSS custom properties, reset, .post, .body, etc.)
+ * Loaded by:   blog.html only
+ *
+ * Breakpoints used:
+ *   >  850px  — desktop   (matches main.css threshold)
+ *   ≤  850px  — tablet / large phone
+ *   ≤  480px  — small phone
+ *   ≤  360px  — very small / compact phone
+ */
+
+/* ── Layout ──────────────────────────────────────────────────────────── */
+
+.blog-wrap {
+  max-width: 740px;
+  margin: 0 auto;
+  /* Horizontal padding uses clamp so it scales gracefully from
+     320 px phones up to wide viewports without a hard breakpoint */
+  padding: 2.5rem clamp(1rem, 5vw, 1.5rem) 5rem;
+  width: 100%;
+  /* Prevent any child from bleeding outside on small screens */
+  overflow-x: hidden;
+}
+
+/* ── Page heading ─────────────────────────────────────────────────────── */
+
+.blog-heading {
+  font-family: var(--ff-heading);
+  font-size: clamp(var(--fs-600), 6vw, var(--fs-700));
+  color: var(--clr-txt);
+  margin-bottom: 0.2rem;
+  line-height: 1.15;
+}
+
+.blog-subtitle {
+  color: var(--clr-bg-inverse);
+  font-size: var(--fs-400);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+/* ── Search bar ───────────────────────────────────────────────────────── */
+
+.search-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--clr-bg-inverse);
+  font-size: 1.1rem;
+  pointer-events: none;
+  /* Prevent icon from being hidden under soft-keyboard on iOS */
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  /* Generous touch target — Apple HIG recommends ≥ 44px */
+  padding: 0.75rem 2.75rem 0.75rem 2.5rem;
+  font-family: var(--ff-body);
+  font-size: var(--fs-400);
+  /* Prevent iOS from zooming in when input is focused (requires ≥ 16px) */
+  font-size: max(1rem, 16px);
+  color: var(--clr-txt);
+  background: var(--clr-bg-inverse-trans);
+  border: 1.5px solid transparent;
+  border-radius: 0.5rem;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+  /* Remove iOS default styling */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input::placeholder {
+  color: var(--clr-bg-inverse);
+}
+
+.search-input:focus {
+  border-color: var(--clr-objects);
+  background: var(--clr-bg-inverse-darker-trans);
+}
+
+/* Hide the browser-native clear button on search inputs (we have our own) */
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--clr-bg-inverse);
+  font-size: 1.2rem;
+  cursor: pointer;
+  /* Generous touch target */
+  padding: 0.5rem;
+  display: none;
+  line-height: 1;
+  border-radius: 50%;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+
+.search-clear:hover {
+  color: var(--clr-hover);
+  background: var(--clr-bg-inverse-trans);
+}
+
+.search-clear.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Tag pills ────────────────────────────────────────────────────────── */
+
+.tag-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  /* Allow tag bar to scroll horizontally on very small screens
+     rather than wrapping onto many lines */
+}
+
+.tag-label {
+  font-size: var(--fs-300);
+  color: var(--clr-bg-inverse);
+  margin-right: 0.25rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tag-pill {
+  font-size: var(--fs-300);
+  font-family: var(--ff-body);
+  color: var(--clr-objects);
+  background: transparent;
+  border: 1.5px solid var(--clr-objects);
+  border-radius: 999px;
+  /* Generous touch target */
+  padding: 0.3em 0.85em;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+  white-space: nowrap;
+  /* Prevent text from wrapping inside a pill */
+  flex-shrink: 0;
+  /* Remove iOS button styling */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.tag-pill:hover,
+.tag-pill.active {
+  background: var(--clr-objects);
+  color: var(--clr-txt-inverse);
+}
+
+/* ── Result count / status line ───────────────────────────────────────── */
+
+.result-status {
+  font-size: var(--fs-300);
+  color: var(--clr-bg-inverse);
+  margin-bottom: 1.5rem;
+  /* Reserve space so layout does not jump when text appears */
+  min-height: 1.2em;
+}
+
+/* ── Year group ───────────────────────────────────────────────────────── */
+
+.year-group {
+  margin-bottom: 2.5rem;
+}
+
+.year-rail {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0 1.25rem;
+  align-items: start;
+}
+
+.year-label {
+  font-family: var(--ff-heading);
+  font-size: 1.05rem;
+  font-weight: var(--fw-semi-bold);
+  color: var(--clr-objects);
+  padding-top: 1rem;
+  text-align: right;
+  position: sticky;
+  /*
+   * main.css sets --scroll-padding to the nav height via JS.
+   * We add a small buffer so the year label clears the nav bar
+   * without overlapping it on scroll — matching how misc.html handles this.
+   */
+  top: calc(var(--scroll-padding, 4rem) + 0.5rem);
+}
+
+.year-entries {
+  border-left: 2px solid var(--clr-bg-inverse-trans);
+  padding-left: 1.25rem;
+  /* Clip any overflowing child on small screens */
+  min-width: 0;
+}
+
+/* ── Post card ────────────────────────────────────────────────────────── */
+
+.post-card {
+  display: block;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--clr-bg-inverse-trans);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.18s ease;
+  /* Prevent long titles from overflowing the card */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.post-card:last-child {
+  border-bottom: none;
+}
+
+/* Indent-on-hover only on pointer devices — avoids sticky state on touch */
+@media (hover: hover) and (pointer: fine) {
+  .post-card:hover {
+    padding-left: 0.5rem;
+  }
+}
+
+.post-card-title {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-500);
+  color: var(--clr-objects);
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+  transition: color 0.15s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .post-card:hover .post-card-title {
+    color: var(--clr-hover);
+  }
+}
+
+.post-card-meta {
+  font-size: var(--fs-300);
+  color: var(--clr-bg-inverse);
+  margin-bottom: 0.4rem;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.post-card-tag {
+  font-size: 0.72rem;
+  color: var(--clr-objects);
+  background: var(--clr-bg-inverse-darker-trans);
+  border-radius: 999px;
+  padding: 0.1em 0.55em;
+  font-family: var(--ff-body);
+  /* Prevent tags from overflowing narrow cards */
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-card-excerpt {
+  font-size: var(--fs-300);
+  color: var(--clr-bg-inverse);
+  line-height: 1.6;
+  /* Clamp excerpt to 3 lines on small screens */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* ── Fuzzy match highlight ────────────────────────────────────────────── */
+
+.post-card mark {
+  background: transparent;
+  color: var(--clr-hover);
+  font-weight: var(--fw-semi-bold);
+}
+
+/* ── Empty / loading states ───────────────────────────────────────────── */
+
+.blog-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--clr-bg-inverse);
+  font-size: var(--fs-400);
+  line-height: 1.6;
+}
+
+/* ── Responsive: tablet / large phone (≤ 850px) ───────────────────────── */
+/*    Matches the main.css breakpoint so behaviour is consistent.          */
+
+@media (max-width: 850px) {
+  .blog-wrap {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  .blog-heading {
+    font-size: var(--fs-600);
+  }
+
+  .year-rail {
+    grid-template-columns: 2.75rem 1fr;
+    gap: 0 0.85rem;
+  }
+
+  .year-label {
+    font-size: 0.9rem;
+    padding-top: 1.05rem;
+    /* On mobile the nav is shorter; tighten the sticky offset */
+    top: calc(var(--scroll-padding, 3rem) + 0.25rem);
+  }
+
+  .year-entries {
+    padding-left: 1rem;
+  }
+
+  .post-card-title {
+    font-size: var(--fs-400);
+  }
+
+  .tag-pill {
+    font-size: 0.75rem;
+    padding: 0.25em 0.7em;
+  }
+}
+
+/* ── Responsive: small phone (≤ 480px) ───────────────────────────────── */
+
+@media (max-width: 480px) {
+  .year-rail {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0 0.6rem;
+  }
+
+  .year-label {
+    font-size: 0.78rem;
+    padding-top: 1.1rem;
+  }
+
+  .year-entries {
+    padding-left: 0.75rem;
+  }
+
+  .post-card {
+    padding: 0.75rem 0;
+  }
+
+  .post-card-title {
+    font-size: var(--fs-400);
+    line-height: 1.4;
+  }
+
+  /* On touch screens, remove the hover indent entirely */
+  .post-card:hover {
+    padding-left: 0;
+  }
+
+  /* Let excerpts show one more line on narrow screens */
+  .post-card-excerpt {
+    -webkit-line-clamp: 4;
+  }
+}
+
+/* ── Responsive: very small / compact phone (≤ 360px) ────────────────── */
+
+@media (max-width: 360px) {
+  .year-rail {
+    /* Collapse the year column fully — label goes above entries */
+    grid-template-columns: 1fr;
+  }
+
+  .year-label {
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 0.4rem;
+    font-size: 0.82rem;
+    position: static; /* sticky doesn't help in single-column layout */
+    border-bottom: 1px solid var(--clr-bg-inverse-trans);
+    margin-bottom: 0.5rem;
+  }
+
+  .year-entries {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .post-card {
+    border-bottom: 1px solid var(--clr-bg-inverse-trans);
+    padding: 0.65rem 0;
+  }
+
+  .tag-bar {
+    /* Let tag bar scroll horizontally rather than wrap on tiny screens */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar visually but keep it functional */
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+  }
+
+  .tag-bar::-webkit-scrollbar {
+    display: none;
+  }
+}

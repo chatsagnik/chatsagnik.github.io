@@ -1,0 +1,22 @@
+[
+  {
+    "file": "posts/trace/index.md",
+    "excerpt": "Five definitions of the matrix trace — from eigenvalue sums to Jordan forms to Dirac notation — and its role in quantum mechanics via density matrices, the Born rule, and partial trace."
+  },
+  {
+    "file": "posts/qary/index.md",
+    "excerpt": "An introduction to q-ary lattices and their central role in lattice-based cryptography, including the SIS problem, worst-case to average-case reductions, and collision-resistant hash functions."
+  },
+  {
+    "file": "posts/srcontinued/index.md",
+    "excerpt": "Part 2: which search problems are not self-reducible, the complexity landscape of TFNP, and the subclasses PLS and PPAD — with a focus on downward self-reducibility and open questions."
+  },
+  {
+    "file": "posts/selfreductions/index.md",
+    "excerpt": "An introduction to self-reducibility and search-to-decision reductions, with worked examples for SAT and CLIQUE, downward self-reducibility, Mahaney's theorem, and the TFNP landscape."
+  },
+  {
+    "file": "posts/reductions/index.md",
+    "excerpt": "An introduction to the mathematical technique of reduction — Karp, Truth Table, and Cook reductions — and their role in computability and complexity theory."
+  }
+]

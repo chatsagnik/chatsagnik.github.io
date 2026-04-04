@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800&family=Unbounded:wght@600&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine&effect=emboss">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <title>Blog — Sagnik Chatterjee</title>
+    <link rel="icon" href="/assets/cat.png" type="image/x-icon">
+    <script src="js/theme.js"></script>
+
+    <!-- Fuse.js — lightweight fuzzy search, no build step needed -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+</head>
+
+<body class="body flex">
+
+    <div id="site-header"></div>
+
+    <main class="mainbody">
+        <section class="blog-wrap post delay6">
+
+            <h1 class="blog-heading">Blog</h1>
+            <p class="blog-subtitle">Writing on research, math, and other things.</p>
+
+            <!-- ── Search ──────────────────────────────────────────────── -->
+            <div class="search-wrap">
+                <i class="uil uil-search search-icon" aria-hidden="true"></i>
+                <input id="search-input" class="search-input" type="search" placeholder="Search posts…"
+                    autocomplete="off" aria-label="Search posts" />
+                <button id="search-clear" class="search-clear" aria-label="Clear search">
+                    <i class="uil uil-times"></i>
+                </button>
+            </div>
+
+            <!-- ── Tag bar ─────────────────────────────────────────────── -->
+            <div class="tag-bar" id="tag-bar" role="group" aria-label="Filter by tag">
+                <span class="tag-label">Filter:</span>
+                <!-- tag pills injected by JS -->
+            </div>
+
+            <!-- ── Result status ───────────────────────────────────────── -->
+            <p class="result-status" id="result-status" aria-live="polite"></p>
+
+            <!-- ── Archive ─────────────────────────────────────────────── -->
+            <div id="archive" aria-live="polite">
+                <p class="blog-state">Loading posts…</p>
+            </div>
+
+        </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/layout.js"></script>
+    <script>
+        initLayout([
+            { href: './index.html', label: 'main', delay: 'delay2', icon: 'uil-external-link-alt', external: true },
+            { href: './blog.html', label: 'blog', delay: 'delay3', icon: 'uil-pen' },
+            { href: './misc.html', label: 'misc.', delay: 'delay4', icon: 'uil-external-link-alt', external: true },
+            { href: './assets/SagnikCV.pdf', label: 'CV', delay: 'delay5', icon: 'uil-download-alt', download: true },
+        ]);
+
+        // ── Helpers ───────────────────────────────────────────────────
+
+        // Parse YAML frontmatter block — returns flat key/value object.
+        // Also returns the raw body (everything after the closing ---).
+        function parseFrontmatter(raw) {
+            const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+            if (!match) return { meta: {}, body: raw };
+
+            const body = raw.slice(match[0].length);
+            const meta = {};
+
+            for (const line of match[1].split('\n')) {
+                const sep = line.indexOf(':');
+                if (sep === -1) continue;
+                const key = line.slice(0, sep).trim();
+                const val = line.slice(sep + 1).trim();
+                if (!key) continue;
+                if (val.startsWith('[') && val.endsWith(']')) {
+                    meta[key] = val.slice(1, -1).split(',').map(s =>
+                        s.trim().replace(/^["']|["']$/g, '')
+                    ).filter(Boolean);
+                } else {
+                    meta[key] = val.replace(/^["']|["']$/g, '');
+                }
+            }
+
+            return { meta, body };
+        }
+
+        // Generate a plain-text excerpt from markdown body.
+        // Strips markdown syntax, takes up to maxLen characters,
+        // then trims to the last complete word and appends ellipsis.
+        const AUTO_EXCERPT_LEN = 160;
+
+        function autoExcerpt(body, maxLen = AUTO_EXCERPT_LEN) {
+            // Remove fenced code blocks entirely (not useful as teasers)
+            let text = body.replace(/```[\s\S]*?```/g, '');
+            // Remove inline code
+            text = text.replace(/`[^`]+`/g, '');
+            // Remove blockquote markers
+            text = text.replace(/^>\s*/gm, '');
+            // Remove HTML tags (e.g. <span style="color:red;">)
+            text = text.replace(/<[^>]+>/g, '');
+            // Remove image syntax ![alt](url)
+            text = text.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
+            // Replace link syntax [text](url) with just text
+            text = text.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
+            // Remove heading markers
+            text = text.replace(/^#{1,6}\s+/gm, '');
+            // Remove bold/italic markers
+            text = text.replace(/[*_]{1,3}([^*_]+)[*_]{1,3}/g, '$1');
+            // Collapse whitespace and newlines
+            text = text.replace(/\s+/g, ' ').trim();
+
+            if (text.length <= maxLen) return text;
+
+            // Trim to last word boundary
+            const trimmed = text.slice(0, maxLen);
+            const lastSpace = trimmed.lastIndexOf(' ');
+            return (lastSpace > 0 ? trimmed.slice(0, lastSpace) : trimmed) + '…';
+        }
+
+        function formatDate(iso) {
+            return new Date(iso).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'short', day: 'numeric'
+            });
+        }
+
+        function getYear(iso) {
+            return new Date(iso).getFullYear();
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // ── State ─────────────────────────────────────────────────────
+        let allPosts = [];
+        let activeTag = null;
+        let searchQuery = '';
+
+        // ── Render ───────────────────────────────────────────────────
+        function renderArchive(posts) {
+            const archive = document.getElementById('archive');
+            const status = document.getElementById('result-status');
+
+            if (posts.length === 0) {
+                archive.innerHTML = '<p class="blog-state">No posts match your search.</p>';
+                status.textContent = '0 posts';
+                return;
+            }
+
+            const total = posts.length;
+            status.textContent = total === allPosts.length
+                ? `${total} post${total === 1 ? '' : 's'}`
+                : `${total} of ${allPosts.length} post${allPosts.length === 1 ? '' : 's'}`;
+
+            // Group by year
+            const byYear = new Map();
+            for (const post of posts) {
+                const y = post.date ? getYear(post.date) : 'Undated';
+                if (!byYear.has(y)) byYear.set(y, []);
+                byYear.get(y).push(post);
+            }
+
+            // Sort years descending, undated last
+            const years = [...byYear.keys()].sort((a, b) => {
+                if (a === 'Undated') return 1;
+                if (b === 'Undated') return -1;
+                return b - a;
+            });
+
+            archive.innerHTML = years.map(year => {
+                const entries = byYear.get(year).map(post => {
+                    const url = `post.html?file=${encodeURIComponent(post.file)}`;
+                    const title = post.title || post.file;
+                    const tags = Array.isArray(post.tags) ? post.tags : [];
+                    const dateStr = post.date ? formatDate(post.date) : '';
+                    // excerpt: from index.json if present, else auto-generated from body
+                    const excerpt = post.excerpt || post._autoExcerpt || '';
+
+                    const tagHTML = tags.length
+                        ? `<div class="post-card-tags">${tags.map(t => `<span class="post-card-tag">${escapeHtml(t)}</span>`).join('')
+                        }</div>`
+                        : '';
+
+                    const excerptHTML = excerpt
+                        ? `<p class="post-card-excerpt">${escapeHtml(excerpt)}</p>`
+                        : '';
+
+                    return `
+            <a class="post-card" href="${url}">
+              <div class="post-card-title">${escapeHtml(title)}</div>
+              ${dateStr ? `<div class="post-card-meta">${dateStr}</div>` : ''}
+              ${tagHTML}
+              ${excerptHTML}
+            </a>`;
+                }).join('');
+
+                return `
+          <div class="year-group">
+            <div class="year-rail">
+              <div class="year-label" aria-label="Year ${year}">${year}</div>
+              <div class="year-entries">${entries}</div>
+            </div>
+          </div>`;
+            }).join('');
+        }
+
+        // ── Filter & search pipeline ──────────────────────────────────
+        function applyFilters() {
+            let result = allPosts;
+
+            // 1. Tag filter
+            if (activeTag) {
+                result = result.filter(p =>
+                    Array.isArray(p.tags) && p.tags.includes(activeTag)
+                );
+            }
+
+            // 2. Fuzzy search over the tag-filtered set
+            if (searchQuery.trim()) {
+                const localFuse = new Fuse(result, {
+                    keys: [
+                        { name: 'title', weight: 0.5 },
+                        { name: 'tags', weight: 0.3 },
+                        { name: 'excerpt', weight: 0.1 },
+                        { name: '_autoExcerpt', weight: 0.1 },
+                    ],
+                    threshold: 0.4,
+                    ignoreLocation: true,
+                });
+                result = localFuse.search(searchQuery).map(r => r.item);
+            }
+
+            renderArchive(result);
+        }
+
+        // ── Build tag bar ─────────────────────────────────────────────
+        function buildTagBar() {
+            const tagBar = document.getElementById('tag-bar');
+
+            const freq = new Map();
+            for (const p of allPosts) {
+                for (const t of (p.tags || [])) {
+                    freq.set(t, (freq.get(t) || 0) + 1);
+                }
+            }
+
+            if (freq.size === 0) {
+                tagBar.style.display = 'none';
+                return;
+            }
+
+            const sorted = [...freq.entries()]
+                .sort((a, b) => b[1] - a[1])
+                .map(([tag]) => tag);
+
+            const allPill = document.createElement('button');
+            allPill.className = 'tag-pill active';
+            allPill.textContent = 'all';
+            allPill.setAttribute('aria-pressed', 'true');
+            allPill.addEventListener('click', () => setTag(null, allPill));
+            tagBar.appendChild(allPill);
+
+            for (const tag of sorted) {
+                const pill = document.createElement('button');
+                pill.className = 'tag-pill';
+                pill.textContent = tag;
+                pill.setAttribute('aria-pressed', 'false');
+                pill.addEventListener('click', () => setTag(tag, pill));
+                tagBar.appendChild(pill);
+            }
+        }
+
+        function setTag(tag, pillEl) {
+            activeTag = tag;
+            document.querySelectorAll('.tag-pill').forEach(p => {
+                p.classList.remove('active');
+                p.setAttribute('aria-pressed', 'false');
+            });
+            pillEl.classList.add('active');
+            pillEl.setAttribute('aria-pressed', 'true');
+            applyFilters();
+        }
+
+        // ── Search wiring ─────────────────────────────────────────────
+        function wireSearch() {
+            const input = document.getElementById('search-input');
+            const clear = document.getElementById('search-clear');
+
+            input.addEventListener('input', () => {
+                searchQuery = input.value;
+                clear.classList.toggle('visible', searchQuery.length > 0);
+                applyFilters();
+            });
+
+            clear.addEventListener('click', () => {
+                input.value = '';
+                searchQuery = '';
+                clear.classList.remove('visible');
+                input.focus();
+                applyFilters();
+            });
+        }
+
+        // ── Bootstrap ─────────────────────────────────────────────────
+        async function init() {
+            wireSearch();
+
+            try {
+                const res = await fetch('posts/index.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const manifest = await res.json();
+
+                // Fetch each .md file in parallel — read frontmatter + body
+                const enriched = await Promise.all(manifest.map(async entry => {
+                    try {
+                        const mdRes = await fetch(entry.file);
+                        if (!mdRes.ok) return { ...entry };
+                        const raw = await mdRes.text();
+                        const { meta, body } = parseFrontmatter(raw);
+
+                        // Auto-excerpt from body only if index.json didn't supply one
+                        const _autoExcerpt = entry.excerpt ? '' : autoExcerpt(body);
+
+                        return { ...entry, ...meta, _autoExcerpt };
+                    } catch {
+                        return { ...entry };
+                    }
+                }));
+
+                // Filter drafts, sort newest first
+                allPosts = enriched
+                    .filter(p => p.draft !== 'true' && p.draft !== true)
+                    .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+                buildTagBar();
+                renderArchive(allPosts);
+
+            } catch (err) {
+                document.getElementById('archive').innerHTML = `
+          <p class="blog-state">
+            Could not load posts. (${err.message})<br>
+            Make sure <code>posts/index.json</code> exists.
+          </p>`;
+            }
+        }
+
+        init();
+    </script>
+
+</body>
+
+</html>

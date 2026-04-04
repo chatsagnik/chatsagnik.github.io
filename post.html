@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Unbounded:wght@600&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine&effect=emboss">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Post — Sagnik Chatterjee</title>
+    <link rel="icon" href="/assets/cat.png" type="image/x-icon">
+    <script src="js/theme.js"></script>
+
+    <!-- marked.js: Markdown → HTML parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+
+    <style>
+        .post-wrap {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem clamp(1rem, 5vw, 1.5rem) 4rem;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* ── Back link ───────────────────────────────────────────── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: var(--fs-300);
+            color: var(--clr-objects);
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            /* Generous touch target */
+            padding: 0.25rem 0;
+        }
+
+        .back-link:hover {
+            color: var(--clr-hover);
+        }
+
+        /* ── Post header ─────────────────────────────────────────── */
+        .post-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--clr-bg-inverse-trans);
+        }
+
+        .post-header h1 {
+            font-family: var(--ff-heading);
+            font-size: clamp(var(--fs-600), 6vw, var(--fs-700));
+            color: var(--clr-txt);
+            margin: 0 0 0.4rem;
+            line-height: 1.2;
+            overflow-wrap: break-word;
+        }
+
+        .post-header .meta {
+            font-size: var(--fs-300);
+            color: var(--clr-bg-inverse);
+            margin-bottom: 0.6rem;
+        }
+
+        .post-header .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
+        }
+
+        .post-header .tag {
+            font-size: var(--fs-300);
+            color: var(--clr-objects);
+            background: var(--clr-bg-inverse-darker-trans);
+            border-radius: 999px;
+            padding: 0.1em 0.65em;
+            font-family: var(--ff-body);
+        }
+
+        /* ── Rendered Markdown ───────────────────────────────────── */
+        .md-body {
+            color: var(--clr-txt);
+            font-family: var(--ff-body);
+            font-size: var(--fs-400);
+            line-height: 1.8;
+            /* Prevent wide code blocks or tables from breaking layout */
+            overflow-x: hidden;
+        }
+
+        .md-body h1,
+        .md-body h2,
+        .md-body h3,
+        .md-body h4 {
+            font-family: var(--ff-heading);
+            color: var(--clr-txt);
+            margin: 2rem 0 0.75rem;
+            line-height: 1.25;
+            overflow-wrap: break-word;
+        }
+
+        .md-body h1 {
+            font-size: clamp(var(--fs-550), 5vw, var(--fs-650));
+        }
+
+        .md-body h2 {
+            font-size: clamp(var(--fs-500), 4vw, var(--fs-550));
+            border-bottom: 1px solid var(--clr-bg-inverse-trans);
+            padding-bottom: 0.3rem;
+        }
+
+        .md-body h3 {
+            font-size: var(--fs-500);
+        }
+
+        .md-body h4 {
+            font-size: var(--fs-400);
+            font-weight: var(--fw-semi-bold);
+        }
+
+        .md-body p {
+            margin: 0 0 1rem;
+            overflow-wrap: break-word;
+        }
+
+        .md-body a {
+            color: var(--clr-objects);
+            text-decoration: underline;
+        }
+
+        .md-body a:hover {
+            color: var(--clr-hover);
+        }
+
+        .md-body strong {
+            font-weight: var(--fw-semi-bold);
+        }
+
+        .md-body em {
+            font-style: italic;
+        }
+
+        .md-body blockquote {
+            border-left: 3px solid var(--clr-objects);
+            margin: 1.5rem 0;
+            padding: 0.5rem 1rem;
+            color: var(--clr-bg-inverse);
+            font-style: italic;
+            background: var(--clr-bg-inverse-trans);
+            border-radius: 0 0.3rem 0.3rem 0;
+        }
+
+        .md-body code {
+            background: var(--clr-bg-inverse-darker-trans);
+            padding: 0.15em 0.4em;
+            border-radius: 0.3rem;
+            font-size: 0.88em;
+            font-family: 'Courier New', monospace;
+            /* Allow long inline code to wrap rather than overflow */
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .md-body pre {
+            background: var(--clr-bg-inverse-darker-trans);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            /* Scroll horizontally for wide code blocks */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+
+        .md-body pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.9em;
+            /* Pre code must NOT wrap — scrolling handles it */
+            overflow-wrap: normal;
+            word-break: normal;
+        }
+
+        .md-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            display: block;
+        }
+
+        .md-body hr {
+            border: none;
+            border-top: 1px solid var(--clr-bg-inverse-trans);
+            margin: 2rem 0;
+        }
+
+        .md-body ul,
+        .md-body ol {
+            padding-left: 1.5rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .md-body li {
+            margin: 0.35rem 0;
+            overflow-wrap: break-word;
+        }
+
+        /* ── Footnotes ───────────────────────────────────────────── */
+        .md-body .footnotes {
+            font-size: var(--fs-300);
+            color: var(--clr-bg-inverse);
+            border-top: 1px solid var(--clr-bg-inverse-trans);
+            margin-top: 3rem;
+            padding-top: 1rem;
+        }
+
+        .md-body sup a {
+            color: var(--clr-objects);
+            text-decoration: none;
+            font-size: 0.8em;
+        }
+
+        /* ── Tables ──────────────────────────────────────────────── */
+        /*
+     * On narrow screens tables scroll horizontally inside a wrapper
+     * injected by resolveRelativePaths() after rendering.
+     */
+        .md-body .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+        }
+
+        .md-body table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--fs-300);
+            /* min-width keeps columns readable; scroll wrapper handles overflow */
+            min-width: 480px;
+        }
+
+        .md-body th,
+        .md-body td {
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid var(--clr-bg-inverse-trans);
+        }
+
+        .md-body th {
+            font-weight: var(--fw-semi-bold);
+            color: var(--clr-objects);
+        }
+
+        /* ── Loading / error states ──────────────────────────────── */
+        .post-state {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--clr-bg-inverse);
+            font-size: var(--fs-400);
+            line-height: 1.6;
+        }
+
+        /* ── Responsive ──────────────────────────────────────────── */
+        @media (max-width: 850px) {
+            .post-wrap {
+                padding-top: 1.5rem;
+                padding-bottom: 3rem;
+            }
+
+            .md-body {
+                font-size: var(--fs-400);
+                line-height: 1.75;
+            }
+
+            .md-body pre {
+                padding: 0.75rem 1rem;
+                border-radius: 0.35rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-link {
+                margin-bottom: 1.5rem;
+            }
+
+            .post-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .md-body ul,
+            .md-body ol {
+                padding-left: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="body flex">
+
+    <div id="site-header"></div>
+
+    <main class="mainbody">
+        <article class="post-wrap post delay6">
+
+            <a class="back-link" href="blog.html">
+                <i class="uil uil-arrow-left"></i> All posts
+            </a>
+
+            <div id="post-header" class="post-header" style="display:none">
+                <h1 id="post-title"></h1>
+                <p class="meta" id="post-date"></p>
+                <div class="tags" id="post-tags"></div>
+            </div>
+
+            <div id="post-content" class="md-body">
+                <p class="post-state">Loading…</p>
+            </div>
+
+        </article>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/layout.js"></script>
+    <script>
+        initLayout([
+            { href: './index.html', label: 'main', delay: 'delay2', icon: 'uil-external-link-alt', external: true },
+            { href: './blog.html', label: 'blog', delay: 'delay3', icon: 'uil-pen' },
+            { href: './misc.html', label: 'misc.', delay: 'delay4', icon: 'uil-external-link-alt', external: true },
+            { href: './assets/SagnikCV.pdf', label: 'CV', delay: 'delay5', icon: 'uil-download-alt', download: true },
+        ]);
+
+        // ── Frontmatter parser ────────────────────────────────────────
+        // Returns { meta: {title, date, tags, ...}, body: '<md without frontmatter>' }
+        function parseFrontmatter(raw) {
+            const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+            if (!match) return { meta: {}, body: raw };
+
+            const body = raw.slice(match[0].length);
+            const meta = {};
+
+            for (const line of match[1].split('\n')) {
+                const sep = line.indexOf(':');
+                if (sep === -1) continue;
+                const key = line.slice(0, sep).trim();
+                const val = line.slice(sep + 1).trim();
+                if (!key) continue;
+                if (val.startsWith('[') && val.endsWith(']')) {
+                    meta[key] = val.slice(1, -1).split(',').map(s =>
+                        s.trim().replace(/^["']|["']$/g, '')
+                    );
+                } else {
+                    meta[key] = val.replace(/^["']|["']$/g, '');
+                }
+            }
+
+            return { meta, body };
+        }
+
+        function formatDate(iso) {
+            return new Date(iso).toLocaleDateString('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+        }
+
+        // ── Footnote preprocessor ─────────────────────────────────────
+        // marked.js doesn't support [^label] footnotes natively.
+        function processFootnotes(md) {
+            const defs = {};
+            const defRegex = /^\[\^([^\]]+)\]:\s+(.+)$/gm;
+            let m;
+            while ((m = defRegex.exec(md)) !== null) defs[m[1]] = m[2];
+            if (Object.keys(defs).length === 0) return md;
+
+            let counter = 0;
+            const refMap = {};
+            let result = md.replace(/\[\^([^\]]+)\]/g, (_, label) => {
+                if (!refMap[label]) refMap[label] = ++counter;
+                const n = refMap[label];
+                return `<sup><a href="#fn-${n}" id="ref-${n}">[${n}]</a></sup>`;
+            });
+
+            result = result.replace(/^\[\^([^\]]+)\]:\s+.+$/gm, '');
+
+            const fnItems = Object.entries(refMap)
+                .sort((a, b) => a[1] - b[1])
+                .map(([label, n]) => {
+                    const text = defs[label] || label;
+                    return `<li id="fn-${n}">${text} <a href="#ref-${n}" title="Back">↩</a></li>`;
+                }).join('\n');
+
+            result += `\n\n<div class="footnotes"><hr><ol>\n${fnItems}\n</ol></div>`;
+            return result;
+        }
+
+        // ── Relative path resolver ────────────────────────────────────
+        //
+        // Problem: post.html lives at the site root. When a post is at
+        //   posts/reductions/index.md
+        // and contains:
+        //   ![fig](reductions.png)
+        //   [data](data.csv)
+        //
+        // The browser resolves those relative paths against post.html's
+        // location (the root), so it looks for /reductions.png — wrong.
+        //
+        // Fix: after marked renders the HTML, walk every img[src] and
+        // a[href] that is a relative path and prepend the post's folder.
+        //
+        // Absolute paths (/foo), protocol URLs (https://), anchors (#),
+        // and data URIs are left untouched.
+        //
+        // Tables are also wrapped in a scroll div here for mobile.
+        //
+        function resolveRelativePaths(container, postFolder) {
+            // postFolder is e.g. "posts/reductions/" (always trailing slash)
+
+            // img src
+            container.querySelectorAll('img[src]').forEach(el => {
+                const src = el.getAttribute('src');
+                if (isRelative(src)) el.setAttribute('src', postFolder + src);
+            });
+
+            // a href — only rewrite non-anchor relative links
+            container.querySelectorAll('a[href]').forEach(el => {
+                const href = el.getAttribute('href');
+                if (isRelative(href) && !href.startsWith('#')) {
+                    el.setAttribute('href', postFolder + href);
+                }
+            });
+
+            // Wrap tables in a scroll container for mobile
+            container.querySelectorAll('table').forEach(table => {
+                if (table.parentElement.classList.contains('table-scroll')) return;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-scroll';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            });
+        }
+
+        function isRelative(url) {
+            if (!url) return false;
+            return (
+                !url.startsWith('http://') &&
+                !url.startsWith('https://') &&
+                !url.startsWith('//') &&
+                !url.startsWith('/') &&
+                !url.startsWith('#') &&
+                !url.startsWith('data:') &&
+                !url.startsWith('mailto:')
+            );
+        }
+
+        // Derive the folder prefix from a file path.
+        // "posts/reductions/index.md" → "posts/reductions/"
+        // "posts/reductions.md"       → "posts/"  (flat file, no change needed)
+        function folderOf(filePath) {
+            const lastSlash = filePath.lastIndexOf('/');
+            return lastSlash === -1 ? '' : filePath.slice(0, lastSlash + 1);
+        }
+
+        // ── Main ──────────────────────────────────────────────────────
+        async function loadPost() {
+            const content = document.getElementById('post-content');
+            const params = new URLSearchParams(location.search);
+            const file = params.get('file');
+
+            // Guard: no file param
+            if (!file) {
+                content.innerHTML = `<p class="post-state">
+          No post specified.<br>
+          <a href="blog.html">← Back to all posts</a>
+        </p>`;
+                return;
+            }
+
+            // Security: strip any path traversal and enforce posts/ + .md
+            const safePath = file.replace(/\.\.\//g, '').replace(/\/\//g, '/');
+            if (!safePath.startsWith('posts/') || !safePath.endsWith('.md')) {
+                content.innerHTML = `<p class="post-state">Invalid post path.</p>`;
+                return;
+            }
+
+            try {
+                const mdRes = await fetch(safePath);
+                if (!mdRes.ok) throw new Error(`HTTP ${mdRes.status} — file not found`);
+                const raw = await mdRes.text();
+
+                // Parse frontmatter
+                const { meta, body } = parseFrontmatter(raw);
+
+                // ── Populate post header ──────────────────────────────
+                const header = document.getElementById('post-header');
+
+                if (meta.title) {
+                    document.title = `${meta.title} — Sagnik Chatterjee`;
+                    document.getElementById('post-title').textContent = meta.title;
+                }
+
+                if (meta.date) {
+                    document.getElementById('post-date').textContent = formatDate(meta.date);
+                }
+
+                const tags = Array.isArray(meta.tags) ? meta.tags : [];
+                const tagsEl = document.getElementById('post-tags');
+                if (tags.length) {
+                    tagsEl.innerHTML = tags
+                        .map(t => `<span class="tag">${t}</span>`)
+                        .join('');
+                } else {
+                    tagsEl.style.display = 'none';
+                }
+
+                if (meta.title || meta.date) header.style.display = '';
+
+                // ── Render markdown ───────────────────────────────────
+                marked.use({ gfm: true, breaks: false });
+                const processed = processFootnotes(body);
+                content.innerHTML = marked.parse(processed);
+
+                // ── Fix relative image/link paths ─────────────────────
+                // Only needed when the post lives in a subfolder
+                // (e.g. posts/reductions/index.md → folder = "posts/reductions/")
+                // For flat files (posts/foo.md) folderOf returns "posts/" which
+                // is already the correct base, so the rewrite is harmless.
+                const postFolder = folderOf(safePath);
+                resolveRelativePaths(content, postFolder);
+
+                // ── Re-run MathJax ────────────────────────────────────
+                if (window.MathJax) {
+                    MathJax.typesetPromise([content]).catch(console.error);
+                }
+
+            } catch (err) {
+                content.innerHTML = `<p class="post-state">
+          Could not load post. (${err.message})<br>
+          Make sure <code>${safePath}</code> exists in your project.
+        </p>`;
+            }
+        }
+
+        loadPost();
+    </script>
+
+</body>
+
+</html>
