@@ -284,7 +284,7 @@ In the context of languages in NP, self-reducibility essentially states that if 
 
 ## Conclusion
 
-This write-up aims to demystify a core technique used in theoretical computer science and provide a few contexts for its usage. For a more rigorous and formal introduction to this topic, please check out Michael Sipser's excellent book "An Introduction to the Theory of Computation." There are many more things to say about reductions, and this article barely scratches the surface on any of the topics it touches. However, I feel it would be prudent to stop at this point before it becomes any more of a rambling mess than it already is.
+This write-up aims to demystify a core technique used in theoretical computer science and provide a few contexts for its usage. For a more rigorous and formal introduction to this topic, please check out Michael Sipser's excellent book "An Introduction to the Theory of Computation." There are many more things to say about reductions, and this article barely scratches the surface on any of the topics it touches. However, I feel it would be prudent to stop at this point before it becomes any more of a rambling mess than it already is.[^halt]
 
 [^1]: Formally, we consider problems $O$ and $N$ to be _languages_ or sets of strings corresponding to decision problems, i.e., YES/NO problems.
 
@@ -293,3 +293,5 @@ This write-up aims to demystify a core technique used in theoretical computer sc
 [^note3]: We will look at weaker notions of reductions in another post.
 
 [^note2]: We will look at the notions of self-reducibility and downward self-reducibility [in another post](../selfreductions/index.md).
+
+[^halt]: Whether this post itself [halts](../halts/index.md) is left as an exercise to the reader.
