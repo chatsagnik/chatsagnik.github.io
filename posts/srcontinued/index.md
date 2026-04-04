@@ -142,7 +142,7 @@ The complexity class **UniqueEOPL** (Unique End of Potential Line) captures sear
 
 [^UEOPL]:
     If the graph instance in the `EOPL` problem has a unique sink, then the problem (and the related complexity class) is known as **UEOPL**. It is an open question if the `UEOPL` is complete for **PPAD** $\cap$ **PLS**.[^harsha23]
-    Once again, we note that we overload the notations **EOPL** and **UEOPL** to refer to both the problems and their corresponding complexity class.
+    Once again, we note that we overload the notations **EOPL** and **UEOPL** to refer to both the problems and their corresponding complexity class. 
 
 [^Brouwer]: **Brouwer's fixed-point theorem** states that for any continuous function $f$ mapping a nonempty compact convex set to itself, there is a point $x_0$ such that $f(x_0)=x_0$.
 
