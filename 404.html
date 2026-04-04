@@ -1,25 +1,316 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uncertainty with Coffee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css">
   <link rel="stylesheet" href="css/main.css">
+  <title>404 — Page Not Found</title>
+  <link rel="icon" href="/assets/cat.png" type="image/x-icon">
+  <script src="js/theme.js"></script>
+
+  <style>
+    /* ── Layout ──────────────────────────────────────────────── */
+    .page-404 {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      gap: 0;
+    }
+
+    /* ── Turing machine tape ─────────────────────────────────── */
+    /*
+     * A single row of tape cells scrolls left indefinitely,
+     * suggesting a TM that never halts — a nod to undecidability.
+     * Pure CSS, no JS needed.
+     */
+    .tape-wrap {
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      position: relative;
+      /* fade edges */
+      -webkit-mask-image: linear-gradient(to right,
+          transparent 0%,
+          black 15%,
+          black 85%,
+          transparent 100%);
+      mask-image: linear-gradient(to right,
+          transparent 0%,
+          black 15%,
+          black 85%,
+          transparent 100%);
+    }
+
+    .tape {
+      display: flex;
+      width: max-content;
+      animation: scroll-tape 12s linear infinite;
+    }
+
+    .tape-cell {
+      width: 2.75rem;
+      height: 2.75rem;
+      border: 1.5px solid var(--clr-bg-inverse-trans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: var(--clr-bg-inverse);
+      flex-shrink: 0;
+      transition: background 0.3s;
+      position: relative;
+    }
+
+    /* The "read head" sits over the centre cell */
+    .tape-head {
+      position: absolute;
+      /* horizontally centred over the tape */
+      left: 50%;
+      transform: translateX(-50%);
+      top: -0.6rem;
+      width: 2.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .tape-head-arrow {
+      width: 0;
+      height: 0;
+      border-left: 0.55rem solid transparent;
+      border-right: 0.55rem solid transparent;
+      border-top: 0.65rem solid var(--clr-objects);
+      animation: blink-head 1.4s ease-in-out infinite;
+    }
+
+    /* Highlight the cell currently under the head */
+    .tape-cell.active {
+      background: var(--clr-bg-inverse-trans);
+      color: var(--clr-objects);
+      font-weight: 600;
+    }
+
+    @keyframes scroll-tape {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes blink-head {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* ── 404 number ──────────────────────────────────────────── */
+    .error-code {
+      font-family: 'Fira Sans', sans-serif;
+      font-size: clamp(5rem, 20vw, 9rem);
+      font-weight: 700;
+      color: var(--clr-objects);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      /* subtle ghost behind the number */
+      text-shadow:
+        0.08em 0.08em 0 var(--clr-bg-inverse-trans),
+        0.16em 0.16em 0 var(--clr-bg-inverse-darker-trans);
+      animation: fadeInUp 0.5s ease 0.1s both;
+    }
+
+    /* ── Tagline ─────────────────────────────────────────────── */
+    .error-title {
+      font-family: 'Fira Sans', sans-serif;
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      font-weight: 500;
+      color: var(--clr-txt);
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.5s ease 0.25s both;
+    }
+
+    .error-subtitle {
+      font-family: 'Inter', 'Inter var', sans-serif;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: var(--clr-bg-inverse);
+      line-height: 1.7;
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      animation: fadeInUp 0.5s ease 0.4s both;
+    }
+
+    /* Inline code style matching the blog */
+    .error-subtitle code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      background: var(--clr-bg-inverse-darker-trans);
+      padding: 0.1em 0.4em;
+      border-radius: 0.25rem;
+      color: var(--clr-txt);
+    }
+
+    /* ── Navigation links ────────────────────────────────────── */
+    .error-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      animation: fadeInUp 0.5s ease 0.55s both;
+    }
+
+    .error-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Inter', 'Inter var', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--clr-objects);
+      text-decoration: none;
+      border: 1.5px solid var(--clr-objects);
+      border-radius: 999px;
+      padding: 0.45em 1.1em;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .error-link:hover {
+      background: var(--clr-objects);
+      color: var(--clr-txt-inverse);
+      text-decoration: none;
+    }
+
+    /* ── Footnote ────────────────────────────────────────────── */
+    .error-footnote {
+      position: fixed;
+      bottom: 3.5rem;
+      /* clear the sticky footer */
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 0.72rem;
+      color: var(--clr-bg-inverse-trans);
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      animation: fadeInUp 0.5s ease 0.8s both;
+    }
+
+    /* reuse the site's fadeInUp keyframe */
+  </style>
 </head>
 
-<body class="flex">
-  <main class="mainbody">
-    <div class="card__content">
-      <h2 class="card-title">Uncertainty with Coffee</h2>
-      <p class="card-description">
-        Oops...This page is currently under construction! In the meantime, consider visiting the website of <a
-          href="https://sites.google.com/view/manuj-mukherjee/home?pli=1" target="_blank"
-          rel="noopener noreferrer">Prof. Manuj Mukherjee</a>, who heads this group. Otherwise, you can navigate back to
-        <a href="/index.html" rel="noopener noreferrer">chatsagnik.github.io</a>.
-      </p>
+<body class="body flex">
+
+  <div id="site-header"></div>
+
+  <main class="page-404">
+
+    <!-- ── Turing machine tape ──────────────────────────────── -->
+    <div class="tape-wrap" aria-hidden="true">
+      <!-- read-head arrow sits above the tape, centred -->
+      <div class="tape-head">
+        <div class="tape-head-arrow"></div>
+      </div>
+      <!--
+        Two copies of the same symbol sequence back-to-back so the
+        CSS scroll animation loops seamlessly.
+      -->
+      <div class="tape" id="tape"></div>
     </div>
+
+    <!-- ── Content ─────────────────────────────────────────── -->
+    <div class="error-code" aria-label="Error 404">404</div>
+
+    <h1 class="error-title">This page did not halt.</h1>
+
+    <p class="error-subtitle">
+      The URL you requested entered an infinite loop and never
+      returned a result.
+      <br><br>
+      The page you are looking for does not exist, or may have moved.
+    </p>
+
+    <nav class="error-nav" aria-label="Helpful links">
+      <a class="error-link" href="/index.html">
+        <i class="uil uil-estate" aria-hidden="true"></i> Home
+      </a>
+      <a class="error-link" href="/blog.html">
+        <i class="uil uil-pen" aria-hidden="true"></i> Blog
+      </a>
+      <a class="error-link" href="/misc.html">
+        <i class="uil uil-books" aria-hidden="true"></i> Misc
+      </a>
+    </nav>
+
   </main>
+
+  <div id="site-footer"></div>
+
+  <!-- quiet undecidable footnote -->
+  <p class="error-footnote" aria-hidden="true">
+    whether this page exists is left as an exercise to the reader
+  </p>
+
+  <script src="js/layout.js"></script>
+  <script>
+    initLayout([
+      { href: '/index.html', label: 'home', delay: 'delay2', icon: 'uil-estate' },
+      { href: '/blog.html', label: 'blog', delay: 'delay3', icon: 'uil-pen' },
+      { href: '/misc.html', label: 'misc', delay: 'delay4', icon: 'uil-external-link-alt', external: true },
+    ]);
+
+    // ── Generate the tape symbols ─────────────────────────────
+    // A mix of 0s, 1s, blanks (□), and the occasional B (blank symbol)
+    // that looks like something a TM might actually read.
+    (function () {
+      const SYMBOLS = ['0', '1', '1', '0', '□', '1', '0', 'B', '1', '0', '0', '1', '□', '1', '0'];
+      const ACTIVE = 7; // which index is under the read head (0-based)
+      const REPEAT = 3; // how many times to tile the symbols
+      const tape = document.getElementById('tape');
+
+      // Build two identical copies for seamless looping
+      for (let copy = 0; copy < 2; copy++) {
+        for (let r = 0; r < REPEAT; r++) {
+          SYMBOLS.forEach((sym, i) => {
+            const cell = document.createElement('div');
+            cell.className = 'tape-cell' +
+              (copy === 0 && r === 0 && i === ACTIVE ? ' active' : '');
+            cell.textContent = sym;
+            tape.appendChild(cell);
+          });
+        }
+      }
+    })();
+  </script>
+
 </body>
 
 </html>
