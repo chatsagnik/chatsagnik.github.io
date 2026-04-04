@@ -4,7 +4,7 @@
     "excerpt": "Five definitions of the matrix trace (from eigenvalue sums to Jordan forms to Dirac notation), and its role in quantum mechanics via density matrices, the Born rule, and partial trace."
   },
   {
-    "file": "posts/qary/index.md",
+    "file": "posts/lattices/index.md",
     "excerpt": "An introduction to q-ary lattices and their central role in lattice-based cryptography, including the SIS problem, worst-case to average-case reductions, and collision-resistant hash functions."
   },
   {
