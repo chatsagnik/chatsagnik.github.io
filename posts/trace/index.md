@@ -46,7 +46,7 @@ $$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr}\, M_B)}
 
 > **Exercise:** Check for yourself that the coefficient of the degree 0 term of the characteristic polynomial is indeed $\det M_B$.
 
-Recall that if a polynomial $p(x)$ has roots $\{r_i\}$, then the polynomials $\{x-r_i\}_i$ divide $p(x)$.[^factor] Also recall that by definition, the roots of the characteristic polynomial are the eigenvalues of $A$.[^charpoly] Hence, $p(M_B)=\prod_i (x-\lambda_i)$. By [Vieta's formula](https://en.wikipedia.org/wiki/Vieta%27s_formulas), given a monic polynomial[^monic] $$p(x)=x^n+ \sum_{i<n}c_{i}x^{i}$, $c_{n-1}=-\sum_{i} r_i.$$ Hence, we have
+Recall that if a polynomial $p(x)$ has roots $\{r_i\}$, then the polynomials $\{x-r_i\}_i$ divide $p(x)$.[^factor] Also recall that by definition, the roots of the characteristic polynomial are the eigenvalues of $A$.[^charpoly] Hence, $p(M_B)=\prod_i (x-\lambda_i)$. By [Vieta's formula](https://en.wikipedia.org/wiki/Vieta%27s_formulas), given a monic polynomial[^monic] $$ p(x)=x^n + \sum_{i<n}c_{i} x^{i}$, $c*{n-1}=-\sum\_{i} r_i.$$ Hence, we have
 
 $$\textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)} = \textcolor{red}{(\mathrm{tr}\, M_B)} = \sum_{i=1}^{n} \lambda_i.\;\; \text{\small(Hence Definitions 1 and 2 are equivalent)}$$
 

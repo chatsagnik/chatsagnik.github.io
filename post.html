@@ -564,10 +564,36 @@
 
                 if (meta.title || meta.date) header.style.display = '';
 
+                // ── Math-safe marked rendering ────────────────────────────
+                // Extracts math blocks before marked processes the markdown,
+                // renders with marked, then restores math for KaTeX.
+                // Prevents marked from interpreting _ and * inside LaTeX.
+                function renderMarkdown(md) {
+                    const stash = [];
+
+                    // Stash display math first ($$...$$), then inline ($...$)
+                    md = md.replace(/\$\$[\s\S]*?\$\$/g, match => {
+                        stash.push(match);
+                        return `%%MATH_${stash.length - 1}%%`;
+                    });
+                    md = md.replace(/\$[^\$\n]+?\$/g, match => {
+                        stash.push(match);
+                        return `%%MATH_${stash.length - 1}%%`;
+                    });
+
+                    // Run marked on math-free markdown
+                    let html = marked.parse(md);
+
+                    // Restore math expressions
+                    html = html.replace(/%%MATH_(\d+)%%/g, (_, i) => stash[+i]);
+
+                    return html;
+                }
+
                 // ── Render markdown ───────────────────────────────────
                 marked.use({ gfm: true, breaks: false });
                 const processed = processFootnotes(body);
-                content.innerHTML = marked.parse(processed);
+                content.innerHTML = renderMarkdown(processed);
 
                 // ── Fix relative image/link paths ─────────────────────
                 // Only needed when the post lives in a subfolder
