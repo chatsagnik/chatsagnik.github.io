@@ -1,6 +1,6 @@
 # Personal Academic Website
 
-A static personal website built with vanilla HTML, CSS, and JavaScript. No build step, no framework — just files you can open with a local server or deploy anywhere.
+A static personal website built with vanilla HTML, CSS, and JavaScript.
 
 ---
 
@@ -14,6 +14,8 @@ A static personal website built with vanilla HTML, CSS, and JavaScript. No build
 ├── timeline.html           # News/timeline data (consumed by index.html)
 ├── blog.html               # Blog post index (search, tag filter, archive)
 ├── post.html               # Single post template (shared by all posts)
+├── 404.html                # Custom 404 page
+├── .nojekyll               # Disables Jekyll — required for GitHub Pages to serve .md files
 │
 ├── posts/
 │   ├── index.json          # Blog manifest — one entry per post
@@ -160,10 +162,6 @@ This is the only file you edit when adding a post. Each entry needs a `file` pat
   },
   {
     "file": "posts/another-post/index.md"
-  },
-  {
-    "file": "posts/flat-post.md",
-    "excerpt": "Optional. If omitted, one is generated from the post body."
   }
 ]
 ```
@@ -216,6 +214,215 @@ The post is immediately live at:
 post.html?file=posts/my-post/index.md
 ```
 
+---
+
+## Writing Posts
+
+This section is a complete style guide for authoring blog posts for this site. The rendering pipeline is: **YAML frontmatter** stripped → **marked.js** renders markdown → **KaTeX** renders math → **custom preprocessor** renders footnotes.
+
+### Markdown
+
+Standard GitHub-flavoured Markdown (GFM) is supported:
+
+```markdown
+**bold**, _italic_, ~~strikethrough~~
+`inline code`
+[link text](url)
+![alt text](image.png)
+
+> blockquote
+> --- (horizontal rule)
+```
+
+**Headings** — use `##` and below. The post title comes from frontmatter, so `#` inside the body will create a second `h1` and look wrong. Start sections at `##`.
+
+**Lists** — standard ordered and unordered lists work. Nested lists work too but use 2-space indentation, not tabs.
+
+**Tables** — GFM tables are supported and automatically wrapped in a horizontal scroll container on mobile:
+
+```markdown
+| Column A | Column B | Column C |
+| -------- | -------- | -------- |
+| value    | value    | value    |
+```
+
+**Code blocks** — fenced with triple backticks and an optional language tag for syntax highlighting (highlighting is handled by the browser's default monospace rendering — no syntax highlighter is loaded):
+
+````markdown
+```python
+def f(x):
+    return x + 1
+```
+````
+
+**Inline HTML** is supported — useful for coloured text spans that markdown can't express:
+
+```html
+<span style="color: red;">This is a warning.</span>
+```
+
+---
+
+### Math — KaTeX
+
+Math is rendered by [KaTeX](https://katex.org/) after marked.js processes the markdown. KaTeX is fast, synchronous, and supports the full range of LaTeX needed for complexity theory, linear algebra, and cryptography posts.
+
+#### Delimiters
+
+| Type            | Syntax    | Renders as                   |
+| --------------- | --------- | ---------------------------- |
+| Inline          | `$...$`   | inline equation              |
+| Display (block) | `$$...$$` | centred, full-width equation |
+| Inline (alt)    | `\(...\)` | inline equation              |
+| Display (alt)   | `\[...\]` | centred, full-width equation |
+
+Prefer `$...$` and `$$...$$` — they are the most readable in raw markdown.
+
+#### Escaping — the most important rule
+
+Because marked.js processes the markdown **before** KaTeX sees it, backslashes get consumed by the markdown renderer. This means you must **double every backslash** that is meant for LaTeX.
+
+| You want                 | Write in markdown |
+| ------------------------ | ----------------- |
+| `\{` (set brace)         | `\\{`             |
+| `\}` (set brace)         | `\\}`             |
+| `\[` (display math, alt) | `\\[`             |
+| `\mathbb{Z}`             | `\\mathbb{Z}`     |
+| `\mathrm{NP}`            | `\\mathrm{NP}`    |
+| `\subseteq`              | `\\subseteq`      |
+| `\leq`                   | `\\leq`           |
+| `\sum_{i=1}^{n}`         | `\\sum_{i=1}^{n}` |
+
+**The single exception:** inside `$$...$$` display blocks, backslash-newline for line breaking (`\\`) becomes `\\\\` since two backslashes are needed and each gets halved. Use `\\\\ ` (four backslashes) if you need a forced line break inside a display equation.
+
+**Practical rule of thumb:** every `\` in LaTeX becomes `\\` in the markdown source. If math is not rendering, the first thing to check is missing double backslashes.
+
+#### Examples
+
+Inline equation:
+
+```markdown
+The complexity class $\\mathrm{NP}$ contains all problems verifiable in polynomial time.
+```
+
+Display equation:
+
+```markdown
+$$\\mathcal{L}(B) = \\left\\{\\sum_{i=1}^{n} x_i \\mathrm{b}_i : x_i \\in \\mathbb{Z}\\right\\}$$
+```
+
+Set notation:
+
+```markdown
+We define $\\Lambda_q^\\perp(A) = \\{z \\in \\mathbb{Z}^m : Az = 0 \\mod{q}\\}$.
+```
+
+Aligned equations — use the `aligned` environment:
+
+```markdown
+$$
+\\begin{aligned}
+p(M_B) &= \\det(M_B - \\lambda I) \\\\
+       &= (-1)^n \\left(\\lambda^n - \\mathrm{tr}(M_B)\\,\\lambda^{n-1} + \\cdots\\right)
+\\end{aligned}
+$$
+```
+
+#### KaTeX limitations vs MathJax
+
+KaTeX does not support every LaTeX package. Things that work: standard math mode, `amsmath` environments (`aligned`, `cases`, `pmatrix`, etc.), `\mathbb`, `\mathcal`, `\mathrm`, `\mathbf`, `\text`, `\operatorname`, `\DeclareMathOperator`, colour via `\textcolor`. Things that do not work: `\usepackage`, `tikz`, `pgfplots`, custom theorem environments. For diagrams, use an image instead.
+
+---
+
+### Footnotes
+
+Footnotes are processed by a custom preprocessor (marked.js does not support them natively).
+
+**Definition syntax** — at the end of the document, one per line:
+
+```markdown
+[^label]: Footnote text goes here. Can include **markdown** and $\\mathrm{math}$.
+```
+
+**Inline reference** — anywhere in the body:
+
+```markdown
+This is a claim.[^label]
+```
+
+Labels can be any string without spaces: `[^1]`, `[^note]`, `[^ajtai96]`. They render as numbered superscripts in order of first appearance, regardless of the label name. The footnote section is appended automatically at the bottom of the post with back-links.
+
+**Example:**
+
+```markdown
+This follows from Ajtai'96.[^ajtai96]
+
+[^ajtai96]: M. Ajtai. Generating hard instances of lattice problems. STOC 1996.
+```
+
+---
+
+### Cross-references Between Posts
+
+To link from one post to another, use a relative path from the current post's folder:
+
+```markdown
+[notion of reductions](../reductions/index.md)
+[completeness](../reductions/index.md#completeness)
+```
+
+The `#anchor` syntax links to a specific heading. KaTeX anchors use the heading text lowercased with spaces replaced by hyphens, which is standard GFM behaviour.
+
+Do **not** use absolute URLs like `https://chatsagnik.github.io/posts/reductions` for internal links — these break locally and are harder to maintain.
+
+---
+
+### Images
+
+Place images in the same folder as the post's `index.md` and reference them with a relative path:
+
+```markdown
+![Caption text](my-diagram.png)
+```
+
+`post.html` automatically prepends the post's folder path so the image resolves correctly from the site root.
+
+Supported formats: PNG, JPG/JPEG, SVG, WebP, GIF. For diagrams and figures, prefer SVG (scales perfectly on all screens) or PNG. Avoid JPG for anything with text or sharp edges.
+
+There is no automatic caption rendering — the alt text is for accessibility only and does not appear visually below the image. If you want a visible caption, use an HTML `<figure>`:
+
+```html
+<figure>
+  <img src="diagram.png" alt="Reduction diagram" />
+  <figcaption>Figure 1: The reduction from A to B.</figcaption>
+</figure>
+```
+
+---
+
+### Inline HTML
+
+Inline HTML is passed through by marked.js and renders in the post. Useful for things markdown cannot express:
+
+```html
+<!-- Coloured text -->
+<span style="color: red;">Warning: this loop may not terminate.</span>
+
+<!-- Emoji bullets (used in reductions.md) -->
+🔴 This step requires exponential time. 🟣 Hence T halts iff x is satisfiable.
+
+<!-- Centred content -->
+<div style="text-align: center;">...</div>
+```
+
+Avoid using inline HTML for layout — stick to markdown structure and let `post.html`'s CSS handle the presentation.
+
+---
+
+**Draft workflow** — set `draft: true` in frontmatter while writing. The post won't appear on the blog index but is accessible via direct URL for review. Set to `false` when ready to publish.
+
+---
+
 ### Blog Index Features (`blog.html`)
 
 - **Fuzzy search** — powered by [Fuse.js](https://fusejs.io/). Searches across title, tags, and excerpt simultaneously, tolerates typos and partial matches.
@@ -244,27 +451,7 @@ When a post lives in a subfolder (`posts/reductions/index.md`), any relative ima
 
 `post.html` fixes this automatically: after rendering, it walks all `img[src]` and `a[href]` elements, detects relative paths, and prepends the post's folder (`posts/reductions/`). Absolute paths, protocol URLs, anchors (`#`), and data URIs are left untouched.
 
-Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout.
-
-### Supported Markdown Features
-
-- GitHub-flavoured Markdown (tables, fenced code blocks, strikethrough)
-- Inline and display LaTeX via MathJax (`$...$` and `$$...$$`)
-- Footnotes (`[^label]` refs + `[^label]: definition` — processed by a custom preprocessor since marked.js doesn't support them natively)
-- Images with relative paths (resolved to post folder automatically)
-- Blockquotes, inline HTML, links
-
-### Migrating from Hugo
-
-Posts exported from Hugo work as-is:
-
-- Full ISO 8601 timestamps with timezone offsets are parsed correctly
-- Quoted/unquoted string values handled
-- Inline array syntax: `tags: [tag1, tag2, tag3]`
-- `draft: false/true` respected
-- Hugo-specific fields ignored harmlessly
-
-> **Image paths from Hugo:** Hugo uses absolute paths like `/posts/image.png`. These work fine on GitHub Pages. If you switch to the folder structure (`posts/slug/index.md`), update image references to relative paths (`image.png`) so they benefit from automatic path resolution.
+Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
 
 ---
 
@@ -284,7 +471,9 @@ python3 -m http.server 8080
 
 ## Deployment
 
-The site is fully static and hosted on GitHub Pages via the `chatsagnik.github.io` repository. Push to main and changes are live within a minute or two.
+The site is fully static and hosted on GitHub Pages via the `chatsagnik.github.io` repository. The `.nojekyll` file at the repo root is required — without it, GitHub Pages' Jekyll processor intercepts `.md` files and the blog's `fetch()` calls return 404.
+
+Push to main and changes are live within a minute or two.
 
 ```bash
 git add posts/my-post/ posts/index.json
@@ -298,11 +487,11 @@ No build step. No CI pipeline. No configuration needed.
 
 ## Dependencies (all via CDN, no install)
 
-| Library                                                  | Used in                  | Purpose         |
-| -------------------------------------------------------- | ------------------------ | --------------- |
-| [Inter](https://rsms.me/inter/)                          | all pages                | Body font       |
-| [Fira Sans](https://fonts.google.com/specimen/Fira+Sans) | all pages                | Heading font    |
-| [Unicons](https://iconscout.com/unicons)                 | all pages                | Icons           |
-| [MathJax 3](https://www.mathjax.org/)                    | `post.html`, `misc.html` | LaTeX rendering |
-| [marked.js](https://marked.js.org/)                      | `post.html`              | Markdown → HTML |
-| [Fuse.js](https://fusejs.io/)                            | `blog.html`              | Fuzzy search    |
+| Library                                                  | Used in     | Purpose              |
+| -------------------------------------------------------- | ----------- | -------------------- |
+| [Inter](https://rsms.me/inter/)                          | all pages   | Body font            |
+| [Fira Sans](https://fonts.google.com/specimen/Fira+Sans) | all pages   | Heading font         |
+| [Unicons](https://iconscout.com/unicons)                 | all pages   | Icons                |
+| [KaTeX 0.16](https://katex.org/)                         | `post.html` | LaTeX math rendering |
+| [marked.js](https://marked.js.org/)                      | `post.html` | Markdown → HTML      |
+| [Fuse.js](https://fusejs.io/)                            | `blog.html` | Fuzzy search         |
