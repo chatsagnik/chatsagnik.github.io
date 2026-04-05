@@ -40,11 +40,24 @@
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
     <style>
         .post-wrap {
-            max-width: 720px;
+            /*
+             * Matches .blog-wrap's max-width in blog.css — gives the post body
+             * generous breathing room on large screens.
+             * Reading-comfortable line length peaks around 75–85ch; at 860px
+             * with Inter at ~1rem that sits right in that range.
+             */
+            max-width: 860px;
             margin: 0 auto;
-            padding: 2rem clamp(1rem, 5vw, 1.5rem) 4rem;
+            padding: 2rem clamp(1rem, 5vw, 2rem) 4rem;
             width: 100%;
             overflow-x: hidden;
+            /*
+             * .post (main.css) sets align-items: center, which collapses every
+             * flex child to its intrinsic width and defeats the wider max-width.
+             * Override so the back-link, header, and body all stretch to fill
+             * the available container width.
+             */
+            align-items: stretch;
         }
 
         /* ── Back link ───────────────────────────────────────────── */

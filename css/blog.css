@@ -28,6 +28,13 @@
   width: 100%;
   /* Prevent any child from bleeding outside on small screens */
   overflow-x: hidden;
+  /*
+   * .post (from main.css) sets align-items: center, which shrinks every
+   * flex child to its intrinsic width and defeats the max-width expansion.
+   * Override here so search bar, tag bar, archive, etc. all stretch to
+   * fill the available container width instead of collapsing inward.
+   */
+  align-items: stretch;
 }
 
 /* ── Page heading ─────────────────────────────────────────────────────── */

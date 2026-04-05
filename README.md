@@ -443,7 +443,9 @@ Five breakpoints (four shared with `main.css`, plus one desktop-only addition):
 | `≤ 480px`  | Small phone          | Minimum year column, touch-safe interactions, excerpt clamped to 4 lines                             |
 | `≤ 360px`  | Very small / compact | Year label collapses above entries (single column), tag bar scrolls horizontally                     |
 
-**Why `.blog-wrap` is wider than the index/misc card grids:** Blog post cards hold multi-line excerpts, metadata rows, and tag pills — they need more horizontal room than the compact index cards which serve a different (at-a-glance) purpose. The 860 px cap keeps prose line lengths comfortable while eliminating the squished feel on large screens.
+**Why `.blog-wrap` sets `align-items: stretch`:** The shared `.post` class (from `main.css`) sets `align-items: center` on all flex children, which collapses each child to its intrinsic width — defeating the wider `max-width`. `.blog-wrap` overrides this with `align-items: stretch` so the search bar, tag bar, year groups, and archive all expand to fill the container. `.post-wrap` in `post.html` applies the same override for the same reason.
+
+**Why `.blog-wrap` / `.post-wrap` are wider than the index/misc card grids:** Blog post cards and post body text need more horizontal room than the compact index cards, which serve a different (at-a-glance) purpose. The 860 px cap keeps prose line lengths comfortable while eliminating the squished feel on large screens.
 
 Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card interactions, horizontal scroll on tag bar at very small sizes.
 
