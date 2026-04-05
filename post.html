@@ -453,7 +453,8 @@
                 .sort((a, b) => a[1] - b[1])
                 .map(([label, n]) => {
                     const text = defs[label] || label;
-                    return `<li id="fn-${n}">${text} <a href="#ref-${n}" title="Back">↩</a></li>`;
+                    const html = marked.parseInline(text);
+                    return `<li id="fn-${n}">${html} <a href="#ref-${n}" title="Back">↩</a></li>`;
                 }).join('\n');
 
             result += `\n\n<div class="footnotes"><hr><ol>\n${fnItems}\n</ol></div>`;
@@ -714,8 +715,8 @@
                         delimiters: [
                             { left: '$$', right: '$$', display: true },
                             { left: '$', right: '$', display: false },
-                            { left: '\\(', right: '\\)', display: false },
-                            { left: '\\[', right: '\\]', display: true },
+                            { left: '\(', right: '\)', display: false },
+                            { left: '\[', right: '\]', display: true },
                         ],
                         throwOnError: false,
                     });
