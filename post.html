@@ -460,24 +460,24 @@
             return result;
         }
 
+        // Slug a heading's text — must stay in sync with the h.id assignment in loadPost().
+        function slugify(text) {
+            return text
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '')
+                .trim()
+                .replace(/[\s_]+/g, '-');
+        }
+
         // ── Relative path resolver ────────────────────────────────────
         //
-        // Problem: post.html lives at the site root. When a post is at
+        // post.html lives at the site root. When a post is at
         //   posts/reductions/index.md
-        // and contains:
-        //   ![fig](reductions.png)
-        //   [data](data.csv)
-        //
-        // The browser resolves those relative paths against post.html's
-        // location (the root), so it looks for /reductions.png — wrong.
-        //
-        // Fix: after marked renders the HTML, walk every img[src] and
-        // a[href] that is a relative path and prepend the post's folder.
-        //
-        // Absolute paths (/foo), protocol URLs (https://), anchors (#),
-        // and data URIs are left untouched.
-        //
-        // Tables are also wrapped in a scroll div here for mobile.
+        // relative assets like ![fig](reductions.png) resolve against the
+        // root. Fix: walk img[src] and a[href] after rendering and prepend
+        // the post folder for relative paths. Also handles external links
+        // (new tab) and same-page anchors (smooth scroll).
+        // Tables are wrapped in a scroll container for mobile.
         //
         function resolveRelativePaths(container, postFolder) {
             // postFolder is e.g. "posts/reductions/" (always trailing slash)
@@ -492,13 +492,40 @@
                 if (isRelative(src)) el.setAttribute('src', postFolder + src);
             });
 
-
-            // a href — fix any remaining relative non-.md links (e.g. PDFs)
+            // a href — handle three cases:
+            //   1. External URLs  → open in new tab
+            //   2. Same-page anchors (#...)  → scroll to slugified heading id
+            //   3. Relative file paths (./  ../) → prepend postFolder
             container.querySelectorAll('a[href]').forEach(el => {
                 const href = el.getAttribute('href');
+                if (!href) return;
 
-                // Only rewrite true relative paths like ./ or ../
-                if (!href || !href.match(/^(\.\.?\/)/)) return;
+                // 1. External links
+                if (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('//')) {
+                    el.setAttribute('target', '_blank');
+                    el.setAttribute('rel', 'noopener noreferrer');
+                    return;
+                }
+
+                // 2. Same-page anchor links
+                if (href.startsWith('#')) {
+                    el.addEventListener('click', e => {
+                        e.preventDefault();
+                        // Decode percent-encoding, then slugify to match heading ids
+                        const rawHash = decodeURIComponent(href.slice(1));
+                        const slug = slugify(rawHash);
+                        const target = document.getElementById(slug);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            // Update URL fragment without a hard jump
+                            history.replaceState(null, '', '#' + slug);
+                        }
+                    });
+                    return;
+                }
+
+                // 3. Relative file paths like ./ or ../
+                if (!href.match(/^(\.\.?\/)/)) return;
 
                 const hashIdx = href.indexOf('#');
                 const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
@@ -507,15 +534,7 @@
                 el.setAttribute('href', resolvePath(postFolder, hrefPath) + fragment);
             });
 
-            // container.querySelectorAll('a[href]').forEach(el => {
-            //     const href = el.getAttribute('href');
-            //     // Skip anchors, absolute URLs, and links already rewritten by rewriteMdLinks
-            //     if (!isRelative(href) || href.startsWith('#') || href.startsWith('post.html')) return;
-            //     const hashIdx = href.indexOf('#');
-            //     const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
-            //     const fragment = hashIdx === -1 ? '' : href.slice(hashIdx);
-            //     el.setAttribute('href', resolvePath(postFolder, hrefPath) + fragment);
-            // });
+
 
             // Wrap tables in a scroll container for mobile
             container.querySelectorAll('table').forEach(table => {
