@@ -658,7 +658,7 @@
                         (_, linkText, hrefPath, fragment) => {
                             const resolved = resolvePath(postFolder, hrefPath);
                             const frag = fragment || '';
-                            return `[${linkText}](post.html?file=${encodeURIComponent(resolved)}${frag})`;
+                            return `[${linkText}](post.html?file=${resolved}${frag})`;
                         }
                     );
                 }
