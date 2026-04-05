@@ -25,25 +25,25 @@ tags:
 
 In an earlier post, we familiarised ourselves with the [notion of reductions](../reductions/index.md). Towards the end, we introduced the notion of **self-reducibility** which is our main topic of focus today. We start by familiarising ourselves with a few concepts.
 
-In the world of complexity and computability, a _language_ is a set of strings formed out of some alphabet. Formally, $L\subseteq\Sigma^{\*}$, where the alphabet $\Sigma$ is a finite set of symbols, and $\Sigma^{\*}$ refers to the [Kleene closure](https://en.wikipedia.org/wiki/Kleene_star#Definition) of $\Sigma$.
+In the world of complexity and computability, a _language_ is a set of strings formed out of some alphabet. Formally, $L\subseteq\Sigma^\star$, where the alphabet $\Sigma$ is a finite set of symbols, and $\Sigma^\star$ refers to the [Kleene closure](https://en.wikipedia.org/wiki/Kleene_star#Definition) of $\Sigma$.
 
-[Last time we formalized reductions in terms of Turing Machines](../reductions/index.md). We now explicitly define mapping reductions (equivalent to Karp reductions for TMs) in terms of languages. Let $L_1 \subseteq \Sigma_1^{\*}$ and $L_2 \subseteq \Sigma_2^{\*}$ be languages. Recall that $L_1\leq_m L_2$ (or, $L_1$ reduces to $L_2$), if there exists a computable function $f: \Sigma_1^{\*}\mapsto\Sigma_2^{\*}$ s.t. for every $w\in\Sigma_1^{\*}$, $w\in L_1\iff f(w)\in L_2$. We sometimes use the notation $A\leq^p_m B$ to denote that the function $f$ is polynomial time constructible.
+[Last time we formalized reductions in terms of Turing Machines](../reductions/index.md). We now explicitly define mapping reductions (equivalent to Karp reductions for TMs) in terms of languages. Let $L_1 \subseteq \Sigma_1^\star$ and $L_2 \subseteq \Sigma_2^\star$ be languages. Recall that $L_1\leq_m L_2$ (or, $L_1$ reduces to $L_2$), if there exists a computable function $f: \Sigma_1^\star\mapsto\Sigma_2^\star$ s.t. for every $w\in\Sigma_1^\star$, $w\in L_1\iff f(w)\in L_2$. We sometimes use the notation $A\leq^p_m B$ to denote that the function $f$ is polynomial time constructible.
 
 ---
 
-A **decision problem** is a Boolean-valued function $D:\Sigma^{\*}\mapsto\\{0,1\\}$. We can view $D$ as a language $L_D = \\{ x\in\Sigma^{\*} : D(x)=1\\}$. Conversely, every language $L\subseteq\Sigma^{\*}$ can be uniquely associated with a unique decision problem $D_L$ called the **membership problem**. Here, $x\in L\iff D_L(x)=1$. A Turing machine $T$ computes/solves the decision problem $D$ if for any input $x\in\Sigma^{\*}$, $T$ halts on any input $x$ and produces output $T(x)=D(x)$.
+A **decision problem** is a Boolean-valued function $D:\Sigma^\star\mapsto\\{0,1\\}$. We can view $D$ as a language $L_D = \\{ x\in\Sigma^\star : D(x)=1\\}$. Conversely, every language $L\subseteq\Sigma^\star$ can be uniquely associated with a unique decision problem $D_L$ called the **membership problem**. Here, $x\in L\iff D_L(x)=1$. A Turing machine $T$ computes/solves the decision problem $D$ if for any input $x\in\Sigma^\star$, $T$ halts on any input $x$ and produces output $T(x)=D(x)$.
 
-Recall that complexity classes **P** and **NP** are defined w.r.t. decision problems. $L$ is in **P** if $\exists$ an efficient decider for the membership problem of any string in $\Sigma^{\*}$. $L$ is in **NP** if there exists an efficient verifier and a polynomial sized certificate for the membership problem of any string in $\Sigma^{\*}$.
+Recall that complexity classes **P** and **NP** are defined w.r.t. decision problems. $L$ is in **P** if $\exists$ an efficient decider for the membership problem of any string in $\Sigma^\star$. $L$ is in **NP** if there exists an efficient verifier and a polynomial sized certificate for the membership problem of any string in $\Sigma^\star$.
 
 In complexity theory, many problems can be naturally expressed as **search problems** (for example, TSP, HamCycle, etc.), but are shoehorned into the above model of **decision problems** in order for us to easily classify them into classes like **P** and **NP**.
 
 ---
 
-**Search Problems:** A search problem is a relation $R\subset\Sigma_{in}^{\*}\times\Sigma_{out}^{\*}$, i.e., $(x,y)\in R$, where $x\in\Sigma_{in},y\in\Sigma_{out}$ are strings belonging to the input and output alphabets respectively. Search problems are also known as relational problems / optimization problems.
+**Search Problems:** A search problem is a relation $R\subset\Sigma_{in}^\star\times\Sigma_{out}^\star$, i.e., $(x,y)\in R$, where $x\in\Sigma_{in},y\in\Sigma_{out}$ are strings belonging to the input and output alphabets respectively. Search problems are also known as relational problems / optimization problems.
 
 A Turing machine $T$ decides/computes/solves $R$, if for any input $x\in\Sigma_{in}$, $T(x)$ halts and produces $y\in\Sigma_{out}$ s.t. $(x,y)\in R$, or correctly states that no such $y$ exists.
 
-We remark here that a relation $R\subset\Sigma_{in}^{\*}\times\Sigma_{out}^{\*}$ is said to be polynomially-balanced if for any $(x,y)\in R$, $|y|=\text{poly}(|x|)$.
+We remark here that a relation $R\subset\Sigma_{in}^\star\times\Sigma_{out}^\star$ is said to be polynomially-balanced if for any $(x,y)\in R$, $|y|=\text{poly}(|x|)$.
 
 ---
 
@@ -88,7 +88,7 @@ In this section, we see some examples of search-to-decision reductions / self-re
 
 ## Search-to-Decision Reduction for SAT
 
-Formally, let $O_D^p$ be a decision oracle for a search problem $R\subset\Sigma_{in}^{\*}\times\Sigma_{out}^{\*}$ s.t. querying $O_D^p$ produces $\mathbb{I}[ \exists x\in\Sigma_{in}\;|\; x \text{ has property } p]$; i.e., querying $O_D$ with an appropriate parameter for a _property_ $p$ outputs a <span style="color:blue">yes</span> or a <span style="color:red">no</span> indicating if there exists any input that satisfies the property $p$ (usually taken to be some bound on the input size). Our goal now is to produce $y\in\Sigma_{out}$ s.t. $(x,y)\in R$, using oracle calls to $O_D^p$.
+Formally, let $O_D^p$ be a decision oracle for a search problem $R\subset\Sigma_{in}^\star\times\Sigma_{out}^\star$ s.t. querying $O_D^p$ produces $\mathbb{I}[ \exists x\in\Sigma_{in}\;|\; x \text{ has property } p]$; i.e., querying $O_D$ with an appropriate parameter for a _property_ $p$ outputs a <span style="color:blue">yes</span> or a <span style="color:red">no</span> indicating if there exists any input that satisfies the property $p$ (usually taken to be some bound on the input size). Our goal now is to produce $y\in\Sigma_{out}$ s.t. $(x,y)\in R$, using oracle calls to $O_D^p$.
 
 There are two inputs to the `FSATSearchToDecision()` reduction
 
@@ -166,7 +166,7 @@ This is still an interesting question, since we note that the optimal solution t
 
 ## Downward-self-reduciblility for Search Problems
 
-A search problem $R$ is **downward-self-reducible** (d.s.r) if there is a polynomial time oracle algorithm for $R$ that on input $x \in \Sigma^{\*}$ makes queries to an $R$-oracle of size strictly less than $|x|$.
+A search problem $R$ is **downward-self-reducible** (d.s.r) if there is a polynomial time oracle algorithm for $R$ that on input $x \in \Sigma^\star$ makes queries to an $R$-oracle of size strictly less than $|x|$.
 
 In other words, a language $L$ is _d.s.r._ if there exists a polynomial time algorithm $A^O$ deciding $x\overset{?}{\in} L$ with a membership oracle $O$ for $L$ that can handle subqueries for strings $z\overset{?}{\in} L$ s.t. $|z|<|x|$.
 
@@ -178,7 +178,7 @@ Before we dive deeper into this topic, we digress and familiarise ourselves with
 
 ### Downward-self-reduciblility for Decision Problems
 
-We can extend the notion of downward self-reducibility to _functions_ or decision problems as follows: A function $f:\Sigma^{\*}\mapsto \\{0,1\\}$ is downward self-reducible if there exists a polynomial time algorithm $A^{O_f}$ s.t. on any input of length $n$, $A$ only makes queries of length $<n$ to the membership oracle ${O_f}$, and for every input $x$, $A^{O_f}(x)=f(x)$.
+We can extend the notion of downward self-reducibility to _functions_ or decision problems as follows: A function $f:\Sigma^\star\mapsto \\{0,1\\}$ is downward self-reducible if there exists a polynomial time algorithm $A^{O_f}$ s.t. on any input of length $n$, $A$ only makes queries of length $<n$ to the membership oracle ${O_f}$, and for every input $x$, $A^{O_f}(x)=f(x)$.
 
 It is easy to see that SAT is _d.s.r._ (in the decisional sense) since given any formula $\phi$ on $n$-variables, one can consider only querying on restrictions of $\phi$ to figure out if $\phi$ is satisfiable. Note that `FSAT` can be shown to be _d.s.r._ (in the search sense) by using the downward-self-reducibility of `SAT`.
 

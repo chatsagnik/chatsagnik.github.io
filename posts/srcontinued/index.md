@@ -95,7 +95,7 @@ The complexity class **PLS** (also known as **Polynomial Local Search**), is a s
 
 > **FP** $\subseteq$ **PLS** $\subseteq$ **TFNP** $\subseteq$ **FNP**.
 
-**Remark:** From our discussions above, it may be unclear why search problems in **FP** have to be _total_. To see why, consider $R\in$ **FP** and fix a special string $y_0$ s.t. $\forall x\in\Sigma_{in}^{\*}$ s.t. $(x,y_0)\notin R$. An easy way to construct $y_0$ is to append every $y\in\Sigma_{out}^{\*}$ with a $1$, and set $y_0$ as the all zero string.
+**Remark:** From our discussions above, it may be unclear why search problems in **FP** have to be _total_. To see why, consider $R\in$ **FP** and fix a special string $y_0$ s.t. $\forall x\in\Sigma_{in}^\star$ s.t. $(x,y_0)\notin R$. An easy way to construct $y_0$ is to append every $y\in\Sigma_{out}^\star$ with a $1$, and set $y_0$ as the all zero string.
 
 Examples of **PLS-complete problems** include search versions of `Set-Cover`, `Metric-TSP`, and `Weighted Independent-Set` (among many many others).
 

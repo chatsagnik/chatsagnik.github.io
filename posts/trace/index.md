@@ -125,7 +125,7 @@ where in the last step we used the **cyclic property** of trace (which we will s
 
 **Independence of the choice of ONB.** We already know from our earlier arguments that the trace is basis-independent, but let us see this directly in Dirac notation. Let $C = \{\ket{e_1}, \ldots, \ket{e_n}\}$ be a second ONB. The change of basis is effected by a **unitary** matrix $U$ (since both bases are orthonormal), so $\ket{e_i} = \sum_j U_{ji} \ket{j}$. Then:
 
-$$\sum_i \bra{e_i} A \ket{e_i} = \sum_i \sum_{j,k} U_{ji}^* U_{ki} \bra{j} A \ket{k} = \sum_{j,k} \underbrace{\left(\sum_i U_{ji}^* U_{ki}\right)}_{(U^\dagger U)_{jk} = \delta_{jk}} \bra{j} A \ket{k} = \sum_j \bra{j} A \ket{j}.$$
+$$\sum_i \bra{e_i} A \ket{e_i} = \sum_i \sum_{j,k} U_{ji}^\star U_{ki} \bra{j} A \ket{k} = \sum_{j,k} \underbrace{\left(\sum_i U_{ji}^\star U_{ki}\right)}_{(U^\dagger U)_{jk} = \delta_{jk}} \bra{j} A \ket{k} = \sum_j \bra{j} A \ket{j}.$$
 
 ---
 
