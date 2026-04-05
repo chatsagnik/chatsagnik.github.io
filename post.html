@@ -649,10 +649,6 @@
                         stash.push(match);
                         return `%%MATH_${stash.length - 1}%%`;
                     });
-                    // md = md.replace(/\$[^\$\n]+\$/g, match => {
-                    //     stash.push(match);
-                    //     return `%%MATH_${stash.length - 1}%%`;
-                    // });
                     md = md.replace(/\$[^\$]+?\$/g, match => {
                         stash.push(match);
                         return `%%MATH_${stash.length - 1}%%`;
@@ -667,22 +663,6 @@
                     return html;
                 }
 
-                // marked.use({
-                //     extensions: [{
-                //         name: 'math',
-                //         level: 'inline',
-                //         start(src) { return src.indexOf('$'); },
-                //         tokenizer(src) {
-                //             const display = src.match(/^\$\$([^$]*?)\$\$/s);
-                //             if (display) return { type: 'math', raw: display[0], text: display[1], display: true };
-                //             const inline = src.match(/^\$([^$\n]+?)\$/);
-                //             if (inline) return { type: 'math', raw: inline[0], text: inline[1], display: false };
-                //         },
-                //         renderer(token) {
-                //             return token.raw;
-                //         }
-                //     }]
-                // });
 
                 // ── Render markdown ───────────────────────────────────
                 // Rewrite cross-post .md links in the markdown string before
@@ -708,7 +688,6 @@
                 marked.use({ gfm: true, breaks: false });
                 const processed = processFootnotes(rewriteMdLinks(body, postFolder));
                 content.innerHTML = renderMarkdown(processed);
-                // content.innerHTML = marked.parse(processed);
                 console.log("FINAL HTML:", content.innerHTML);
 
                 // ── Add heading ids for in-post #anchor links ─────────
