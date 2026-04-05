@@ -24,17 +24,6 @@
 
     <!-- marked.js: Markdown → HTML parser (pinned — API changed across major versions) -->
     <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
-
-    <!-- MathJax for LaTeX rendering -->
-    <!-- <script>
-        window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
-            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
-        };
-    </script>
-    <script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-        </script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
@@ -654,7 +643,7 @@
                         return `%%MATH_${stash.length - 1}%%`;
                     });
                     // Run marked on math-free markdown
-                    console.log("STASHED MD:", md);
+                    // console.log("STASHED MD:", md);
                     let html = marked.parse(md);
 
                     // Restore math expressions
@@ -688,7 +677,7 @@
                 marked.use({ gfm: true, breaks: false });
                 const processed = processFootnotes(rewriteMdLinks(body, postFolder));
                 content.innerHTML = renderMarkdown(processed);
-                console.log("FINAL HTML:", content.innerHTML);
+                // console.log("FINAL HTML:", content.innerHTML);
 
                 // ── Add heading ids for in-post #anchor links ─────────
                 // marked does not generate id attributes on headings in newer

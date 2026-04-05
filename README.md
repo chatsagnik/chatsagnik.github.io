@@ -218,7 +218,7 @@ post.html?file=posts/my-post/index.md
 
 ## Writing Posts
 
-This section is a complete style guide for authoring blog posts for this site. The rendering pipeline is: **YAML frontmatter** stripped → **marked.js** renders markdown → **KaTeX** renders math → **custom preprocessor** renders footnotes.
+This section is a complete style guide for authoring blog posts for this site. The rendering pipeline is: **YAML frontmatter** stripped → **footnote preprocessor** runs → **math stash** extracts `$...$` and `$$...$$` → **marked.js** renders markdown → math restored → **KaTeX** renders math.
 
 ### Markdown
 
@@ -265,7 +265,7 @@ def f(x):
 
 ### Math — KaTeX
 
-Math is rendered by [KaTeX](https://katex.org/) after marked.js processes the markdown. KaTeX is fast, synchronous, and supports the full range of LaTeX needed for complexity theory, linear algebra, and cryptography posts.
+Math is rendered by [KaTeX](https://katex.org/). Math expressions are extracted from the markdown **before** marked.js processes it, so marked never sees `$...$` content. This means underscores and asterisks inside math are safe — they will not be interpreted as italic or bold markers.
 
 #### Delimiters
 
@@ -278,53 +278,47 @@ Math is rendered by [KaTeX](https://katex.org/) after marked.js processes the ma
 
 Prefer `$...$` and `$$...$$` — they are the most readable in raw markdown.
 
-#### Escaping — the most important rule
+#### Escaping
 
-Because marked.js processes the markdown **before** KaTeX sees it, backslashes get consumed by the markdown renderer. This means you must **double every backslash** that is meant for LaTeX.
+Because math is stashed before marked runs, **you do not need to double backslashes inside math expressions**. Write LaTeX exactly as you would normally:
 
-| You want                 | Write in markdown |
-| ------------------------ | ----------------- |
-| `\{` (set brace)         | `\\{`             |
-| `\}` (set brace)         | `\\}`             |
-| `\[` (display math, alt) | `\\[`             |
-| `\mathbb{Z}`             | `\\mathbb{Z}`     |
-| `\mathrm{NP}`            | `\\mathrm{NP}`    |
-| `\subseteq`              | `\\subseteq`      |
-| `\leq`                   | `\\leq`           |
-| `\sum_{i=1}^{n}`         | `\\sum_{i=1}^{n}` |
-
-**The single exception:** inside `$$...$$` display blocks, backslash-newline for line breaking (`\\`) becomes `\\\\` since two backslashes are needed and each gets halved. Use `\\\\ ` (four backslashes) if you need a forced line break inside a display equation.
-
-**Practical rule of thumb:** every `\` in LaTeX becomes `\\` in the markdown source. If math is not rendering, the first thing to check is missing double backslashes.
+| You want             | Write in markdown    |
+| -------------------- | -------------------- |
+| `\mathbb{Z}`         | `\mathbb{Z}`         |
+| `\mathrm{NP}`        | `\mathrm{NP}`        |
+| `\subseteq`          | `\subseteq`          |
+| `\sum_{i=1}^{n}`     | `\sum_{i=1}^{n}`     |
+| `\{` (set brace)     | `\{`                 |
+| `\\` (line break)    | `\\`                 |
 
 #### Examples
 
 Inline equation:
 
 ```markdown
-The complexity class $\\mathrm{NP}$ contains all problems verifiable in polynomial time.
+The complexity class $\mathrm{NP}$ contains all problems verifiable in polynomial time.
 ```
 
 Display equation:
 
 ```markdown
-$$\\mathcal{L}(B) = \\left\\{\\sum_{i=1}^{n} x_i \\mathrm{b}_i : x_i \\in \\mathbb{Z}\\right\\}$$
+$$\mathcal{L}(B) = \left\{\sum_{i=1}^{n} x_i \mathrm{b}_i : x_i \in \mathbb{Z}\right\}$$
 ```
 
 Set notation:
 
 ```markdown
-We define $\\Lambda_q^\\perp(A) = \\{z \\in \\mathbb{Z}^m : Az = 0 \\mod{q}\\}$.
+We define $\Lambda_q^\perp(A) = \{z \in \mathbb{Z}^m : Az = 0 \mod{q}\}$.
 ```
 
 Aligned equations — use the `aligned` environment:
 
 ```markdown
 $$
-\\begin{aligned}
-p(M_B) &= \\det(M_B - \\lambda I) \\\\
-       &= (-1)^n \\left(\\lambda^n - \\mathrm{tr}(M_B)\\,\\lambda^{n-1} + \\cdots\\right)
-\\end{aligned}
+\begin{aligned}
+p(M_B) &= \det(M_B - \lambda I) \\
+       &= (-1)^n \left(\lambda^n - \mathrm{tr}(M_B)\,\lambda^{n-1} + \cdots\right)
+\end{aligned}
 $$
 ```
 
@@ -336,12 +330,12 @@ KaTeX does not support every LaTeX package. Things that work: standard math mode
 
 ### Footnotes
 
-Footnotes are processed by a custom preprocessor (marked.js does not support them natively).
+Footnotes are processed by a custom preprocessor (marked.js does not support them natively). Footnote definition text is parsed with `marked.parseInline`, so markdown formatting — including links and bold/italic — works inside footnote definitions.
 
 **Definition syntax** — at the end of the document, one per line:
 
 ```markdown
-[^label]: Footnote text goes here. Can include **markdown** and $\\mathrm{math}$.
+[^label]: Footnote text goes here. Can include **markdown**, $\mathrm{math}$, and [links](https://example.com).
 ```
 
 **Inline reference** — anywhere in the body:
@@ -453,7 +447,7 @@ Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card in
 
 When a post lives in a subfolder (`posts/reductions/index.md`), relative image paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404.
 
-`post.html` fixes this automatically for images: after rendering, it prepends the post's folder to any relative `img[src]` path. Links (`a[href]`) are left untouched — authors write them as absolute URLs (`https://…`) or site-root-relative `post.html?file=…` paths, both of which resolve correctly without modification.
+`post.html` fixes this automatically for images: after rendering, it prepends the post's folder to any relative `img[src]` path. It also handles `a[href]` links in three ways: external URLs (`https://…`) get `target="_blank"` so they open in a new tab; same-page anchor links (`#heading`) smooth-scroll to the target heading; and relative file paths (`./` or `../`) get the post folder prepended.
 
 Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
 
