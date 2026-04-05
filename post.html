@@ -641,48 +641,48 @@
                 // Extracts math blocks before marked processes the markdown,
                 // renders with marked, then restores math for KaTeX.
                 // Prevents marked from interpreting _ and * inside LaTeX.
-                // function renderMarkdown(md) {
-                //     const stash = [];
+                function renderMarkdown(md) {
+                    const stash = [];
 
-                //     // Stash display math first ($$...$$), then inline ($...$)
-                //     md = md.replace(/\$\$[\s\S]*?\$\$/g, match => {
-                //         stash.push(match);
-                //         return `%%MATH_${stash.length - 1}%%`;
-                //     });
-                //     // md = md.replace(/\$[^\$\n]+\$/g, match => {
-                //     //     stash.push(match);
-                //     //     return `%%MATH_${stash.length - 1}%%`;
-                //     // });
-                //     md = md.replace(/\$[^\$]+?\$/g, match => {
-                //         stash.push(match);
-                //         return `%%MATH_${stash.length - 1}%%`;
-                //     });
-                //     // Run marked on math-free markdown
-                //     console.log("STASHED MD:", md);
-                //     let html = marked.parse(md);
+                    // Stash display math first ($$...$$), then inline ($...$)
+                    md = md.replace(/\$\$[\s\S]*?\$\$/g, match => {
+                        stash.push(match);
+                        return `%%MATH_${stash.length - 1}%%`;
+                    });
+                    // md = md.replace(/\$[^\$\n]+\$/g, match => {
+                    //     stash.push(match);
+                    //     return `%%MATH_${stash.length - 1}%%`;
+                    // });
+                    md = md.replace(/\$[^\$]+?\$/g, match => {
+                        stash.push(match);
+                        return `%%MATH_${stash.length - 1}%%`;
+                    });
+                    // Run marked on math-free markdown
+                    console.log("STASHED MD:", md);
+                    let html = marked.parse(md);
 
-                //     // Restore math expressions
-                //     html = html.replace(/%%MATH_(\d+)%%/g, (_, i) => stash[+i]);
+                    // Restore math expressions
+                    html = html.replace(/%%MATH_(\d+)%%/g, (_, i) => stash[+i]);
 
-                //     return html;
-                // }
+                    return html;
+                }
 
-                marked.use({
-                    extensions: [{
-                        name: 'math',
-                        level: 'inline',
-                        start(src) { return src.indexOf('$'); },
-                        tokenizer(src) {
-                            const display = src.match(/^\$\$([^$]*?)\$\$/s);
-                            if (display) return { type: 'math', raw: display[0], text: display[1], display: true };
-                            const inline = src.match(/^\$([^$\n]+?)\$/);
-                            if (inline) return { type: 'math', raw: inline[0], text: inline[1], display: false };
-                        },
-                        renderer(token) {
-                            return token.raw;
-                        }
-                    }]
-                });
+                // marked.use({
+                //     extensions: [{
+                //         name: 'math',
+                //         level: 'inline',
+                //         start(src) { return src.indexOf('$'); },
+                //         tokenizer(src) {
+                //             const display = src.match(/^\$\$([^$]*?)\$\$/s);
+                //             if (display) return { type: 'math', raw: display[0], text: display[1], display: true };
+                //             const inline = src.match(/^\$([^$\n]+?)\$/);
+                //             if (inline) return { type: 'math', raw: inline[0], text: inline[1], display: false };
+                //         },
+                //         renderer(token) {
+                //             return token.raw;
+                //         }
+                //     }]
+                // });
 
                 // ── Render markdown ───────────────────────────────────
                 // Rewrite cross-post .md links in the markdown string before
@@ -707,8 +707,8 @@
                 const postFolder = folderOf(safePath);
                 marked.use({ gfm: true, breaks: false });
                 const processed = processFootnotes(rewriteMdLinks(body, postFolder));
-                // content.innerHTML = renderMarkdown(processed);
-                content.innerHTML = marked.parse(processed);
+                content.innerHTML = renderMarkdown(processed);
+                // content.innerHTML = marked.parse(processed);
                 console.log("FINAL HTML:", content.innerHTML);
 
                 // ── Add heading ids for in-post #anchor links ─────────
