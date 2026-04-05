@@ -422,16 +422,20 @@
             while ((m = defRegex.exec(md)) !== null) defs[m[1]] = m[2];
             if (Object.keys(defs).length === 0) return md;
 
+            // ── Strip definitions FIRST, before any other processing ──
+            let result = md.replace(/^\[\^([^\]]+)\]:\s+.+$\n?/gm, '');
+            result = result.replace(/\n{3,}/g, '\n\n');
+
+            // ── Then replace inline refs ───────────────────────────────
             let counter = 0;
             const refMap = {};
-            let result = md.replace(/\[\^([^\]]+)\]/g, (_, label) => {
+            result = result.replace(/\[\^([^\]]+)\]/g, (_, label) => {
                 if (!refMap[label]) refMap[label] = ++counter;
                 const n = refMap[label];
                 return `<sup><a href="#fn-${n}" id="ref-${n}">[${n}]</a></sup>`;
             });
 
-            result = result.replace(/^\[\^([^\]]+)\]:\s+.+$/gm, '');
-
+            // ── Append formatted footnote section ─────────────────────
             const fnItems = Object.entries(refMap)
                 .sort((a, b) => a[1] - b[1])
                 .map(([label, n]) => {

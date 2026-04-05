@@ -14,11 +14,17 @@
 /* ── Layout ──────────────────────────────────────────────────────────── */
 
 .blog-wrap {
-  max-width: 740px;
+  /*
+   * Wider than the index/misc card grids — blog post cards contain
+   * multi-line excerpts, metadata, and tags, so they benefit from
+   * extra horizontal breathing room on large screens.
+   * 860px keeps line lengths comfortable without becoming unwieldy.
+   */
+  max-width: 860px;
   margin: 0 auto;
   /* Horizontal padding uses clamp so it scales gracefully from
      320 px phones up to wide viewports without a hard breakpoint */
-  padding: 2.5rem clamp(1rem, 5vw, 1.5rem) 5rem;
+  padding: 2.5rem clamp(1rem, 5vw, 2rem) 5rem;
   width: 100%;
   /* Prevent any child from bleeding outside on small screens */
   overflow-x: hidden;
@@ -314,6 +320,14 @@
   color: var(--clr-bg-inverse);
   font-size: var(--fs-400);
   line-height: 1.6;
+}
+
+/* On large screens, give post-card titles a bit more presence now that
+   the wrap is wider — matches the extra breathing room in .blog-wrap */
+@media (min-width: 851px) {
+  .post-card-title {
+    font-size: var(--fs-550);
+  }
 }
 
 /* ── Responsive: tablet / large phone (≤ 850px) ───────────────────────── */

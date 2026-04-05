@@ -434,14 +434,16 @@ Avoid using inline HTML for layout — stick to markdown structure and let `post
 
 ### Blog Index Responsiveness (`css/blog.css`)
 
-Four breakpoints mirroring `main.css`:
+Five breakpoints (four shared with `main.css`, plus one desktop-only addition):
 
-| Breakpoint | Target               | Key changes                                                                      |
-| ---------- | -------------------- | -------------------------------------------------------------------------------- |
-| `> 850px`  | Desktop              | Full year-rail grid, sticky year labels, hover effects on cards                  |
-| `≤ 850px`  | Tablet / large phone | Narrower year column, tighter padding, smaller labels                            |
-| `≤ 480px`  | Small phone          | Minimum year column, touch-safe interactions, excerpt clamped to 4 lines         |
-| `≤ 360px`  | Very small / compact | Year label collapses above entries (single column), tag bar scrolls horizontally |
+| Breakpoint | Target               | Key changes                                                                                          |
+| ---------- | -------------------- | ---------------------------------------------------------------------------------------------------- |
+| `> 850px`  | Desktop              | `.blog-wrap` expands to `max-width: 860px`; post card titles scale up to `--fs-550` for readability |
+| `≤ 850px`  | Tablet / large phone | Narrower year column, tighter padding, smaller labels, card titles revert to `--fs-400`              |
+| `≤ 480px`  | Small phone          | Minimum year column, touch-safe interactions, excerpt clamped to 4 lines                             |
+| `≤ 360px`  | Very small / compact | Year label collapses above entries (single column), tag bar scrolls horizontally                     |
+
+**Why `.blog-wrap` is wider than the index/misc card grids:** Blog post cards hold multi-line excerpts, metadata rows, and tag pills — they need more horizontal room than the compact index cards which serve a different (at-a-glance) purpose. The 860 px cap keeps prose line lengths comfortable while eliminating the squished feel on large screens.
 
 Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card interactions, horizontal scroll on tag bar at very small sizes.
 
