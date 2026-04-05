@@ -706,15 +706,14 @@
                 // ── Fix relative image paths and other relative assets ──
                 resolveRelativePaths(content, postFolder);
 
-                // ── Re-run MathJax ────────────────────────────────────
-                // if (window.MathJax) {
-                //     MathJax.typesetPromise([content]).catch(console.error);
-                // }
+
                 if (window.renderMathInElement) {
                     renderMathInElement(content, {
                         delimiters: [
                             { left: '$$', right: '$$', display: true },
                             { left: '$', right: '$', display: false },
+                            { left: '\\[', right: '\\]', display: true },
+                            { left: '\\(', right: '\\)', display: false },
                         ],
                         throwOnError: false,
                     });

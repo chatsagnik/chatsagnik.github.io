@@ -250,7 +250,7 @@ A more formal definition of completeness is as follows:
 
 For example, an $\mathrm{NP}$-complete problem is in $\mathrm{NP}$, and all problems in $\mathrm{NP}$ are Karp-reducible to it. The notions of $\mathrm{PSPACE}$-completeness and $\mathrm{EXPTIME}$-completeness are similarly defined under Karp-reductions.
 
-The role of reductions in this context can be understood through $\mathrm{P}$-completeness. Consider any non-trivial decision problem in $\mathrm{P}$ (trivial problems are akin to constant functions). Every other non-trivial decision problem is Karp-reducible to it. Therefore every non-trivial decision problem is $\mathrm{P}$-complete under Karp-reductions. In other words, $\mathrm{P}$-completeness under Karp-reductions collapses to $\mathrm{P}$ itself, making the notion of a "hardest problem in $\mathrm{P}$" meaningless. This definition is essentially the same as $\mathrm{P}$ (minus the empty language and $\Sigma^*$).
+The role of reductions in this context can be understood through $\mathrm{P}$-completeness. Consider any non-trivial decision problem in $\mathrm{P}$ (trivial problems are akin to constant functions). Every other non-trivial decision problem is Karp-reducible to it. Therefore every non-trivial decision problem is $\mathrm{P}$-complete under Karp-reductions. In other words, $\mathrm{P}$-completeness under Karp-reductions collapses to $\mathrm{P}$ itself, making the notion of a "hardest problem in $\mathrm{P}$" meaningless. This definition is essentially the same as $\mathrm{P}$ (minus the empty language and $\Sigma^\star$).
 
 Therefore, we come to the following conclusion:
 
