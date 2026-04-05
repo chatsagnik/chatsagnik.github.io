@@ -466,6 +466,7 @@
         //   posts/reductions/index.md
         // and contains:
         //   ![fig](reductions.png)
+        //   [data](data.csv)
         //
         // The browser resolves those relative paths against post.html's
         // location (the root), so it looks for /reductions.png — wrong.
@@ -481,18 +482,40 @@
         function resolveRelativePaths(container, postFolder) {
             // postFolder is e.g. "posts/reductions/" (always trailing slash)
             //
-            // Only images need the folder prepended: a post at posts/reductions/
-            // may reference ./diagram.png, which the browser would resolve against
-            // post.html's root location instead of the post's folder.
-            //
-            // Links (a[href]) are intentionally left alone. Authors write them
-            // as either absolute URLs (https://…) or site-root-relative paths
-            // (post.html?file=…), both of which resolve correctly already.
+            // Cross-post .md links are already rewritten to post.html?file=...
+            // by rewriteMdLinks() before marked renders the HTML, so this
+            // function only needs to handle images and other relative assets.
 
+            // img src
             container.querySelectorAll('img[src]').forEach(el => {
                 const src = el.getAttribute('src');
                 if (isRelative(src)) el.setAttribute('src', postFolder + src);
             });
+
+
+            // a href — fix any remaining relative non-.md links (e.g. PDFs)
+            container.querySelectorAll('a[href]').forEach(el => {
+                const href = el.getAttribute('href');
+
+                // Only rewrite true relative paths like ./ or ../
+                if (!href || !href.match(/^(\.\.?\/)/)) return;
+
+                const hashIdx = href.indexOf('#');
+                const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
+                const fragment = hashIdx === -1 ? '' : href.slice(hashIdx);
+
+                el.setAttribute('href', resolvePath(postFolder, hrefPath) + fragment);
+            });
+
+            // container.querySelectorAll('a[href]').forEach(el => {
+            //     const href = el.getAttribute('href');
+            //     // Skip anchors, absolute URLs, and links already rewritten by rewriteMdLinks
+            //     if (!isRelative(href) || href.startsWith('#') || href.startsWith('post.html')) return;
+            //     const hashIdx = href.indexOf('#');
+            //     const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
+            //     const fragment = hashIdx === -1 ? '' : href.slice(hashIdx);
+            //     el.setAttribute('href', resolvePath(postFolder, hrefPath) + fragment);
+            // });
 
             // Wrap tables in a scroll container for mobile
             container.querySelectorAll('table').forEach(table => {
@@ -502,6 +525,21 @@
                 table.parentNode.insertBefore(wrapper, table);
                 wrapper.appendChild(table);
             });
+        }
+
+        // Resolve a relative path against a base folder, collapsing ../ segments.
+        // resolvePath("posts/reductions/", "../selfreductions/index.md")
+        //   → "posts/selfreductions/index.md"
+        function resolvePath(base, rel) {
+            const parts = base.split('/').filter(Boolean);
+            for (const seg of rel.split('/')) {
+                if (seg === '..') {
+                    parts.pop();
+                } else if (seg !== '.') {
+                    parts.push(seg);
+                }
+            }
+            return parts.join('/');
         }
 
         function isRelative(url) {
@@ -606,16 +644,44 @@
                 }
 
                 // ── Render markdown ───────────────────────────────────
+                // Rewrite cross-post .md links in the markdown string before
+                // marked sees them. This is simpler and more version-safe than
+                // a custom marked renderer, and avoids DOM walking for links.
+                //
+                //   [text](../foo/index.md)          →  [text](post.html?file=posts/foo/index.md)
+                //   [text](../foo/index.md#section)  →  [text](post.html?file=posts/foo/index.md#section)
+                //
+                function rewriteMdLinks(md, postFolder) {
+                    // Match [text](../path/to/post.md) or [text](../path/to/post.md#anchor)
+                    return md.replace(
+                        /\[([^\]]*)\]\((\.\.[^)#]*\.md)(#[^)]*)?\)/g,
+                        (_, linkText, hrefPath, fragment) => {
+                            const resolved = resolvePath(postFolder, hrefPath);
+                            const frag = fragment || '';
+                            return `[${linkText}](post.html?file=${encodeURIComponent(resolved)}${frag})`;
+                        }
+                    );
+                }
+
                 const postFolder = folderOf(safePath);
                 marked.use({ gfm: true, breaks: false });
-                const processed = processFootnotes(body);
+                const processed = processFootnotes(rewriteMdLinks(body, postFolder));
                 content.innerHTML = renderMarkdown(processed);
 
-                // ── Fix relative image/link paths ─────────────────────
-                // post.html lives at the site root, so relative paths in
-                // markdown (e.g. images next to the post file) need the
-                // post's folder prepended. resolveRelativePaths handles
-                // this after marked has rendered the HTML.
+                // ── Add heading ids for in-post #anchor links ─────────
+                // marked does not generate id attributes on headings in newer
+                // versions. Walk rendered headings and add them after the fact.
+                // Slug matches the standard GFM convention authors would use.
+                content.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => {
+                    if (h.id) return; // already set by this or an older marked version
+                    h.id = h.textContent
+                        .toLowerCase()
+                        .replace(/[^\w\s-]/g, '')
+                        .trim()
+                        .replace(/[\s_]+/g, '-');
+                });
+
+                // ── Fix relative image paths and other relative assets ──
                 resolveRelativePaths(content, postFolder);
 
                 // ── Re-run MathJax ────────────────────────────────────
