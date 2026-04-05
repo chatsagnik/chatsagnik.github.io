@@ -493,19 +493,21 @@
                 const href = el.getAttribute('href');
                 if (!isRelative(href) || href.startsWith('#')) return;
 
-                // Resolve the raw path (handles ../ traversals correctly)
-                const resolved = resolvePath(postFolder, href);
+                // Split off any #fragment BEFORE resolving, so it doesn't
+                // become a path segment and break .endsWith('.md') detection
+                const hashIdx = href.indexOf('#');
+                const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
+                const fragment = hashIdx === -1 ? '' : href.slice(hashIdx);
+
+                // Resolve ../ traversals against the post's folder
+                const resolved = resolvePath(postFolder, hrefPath);
 
                 if (resolved.endsWith('.md')) {
-                    // Cross-post link: rewrite to post.html?file=<path>
-                    // Split off any #anchor fragment
-                    const hashIdx = resolved.indexOf('#');
-                    const mdPath = hashIdx === -1 ? resolved : resolved.slice(0, hashIdx);
-                    const fragment = hashIdx === -1 ? '' : resolved.slice(hashIdx);
-                    el.setAttribute('href', `post.html?file=${encodeURIComponent(mdPath)}${fragment}`);
+                    // Cross-post link: open via post.html renderer
+                    el.setAttribute('href', `post.html?file=${encodeURIComponent(resolved)}${fragment}`);
                 } else {
-                    // Non-markdown relative link (e.g. a PDF or image link)
-                    el.setAttribute('href', resolved);
+                    // Other relative link (PDF, image, etc.)
+                    el.setAttribute('href', resolved + fragment);
                 }
             });
 
@@ -519,11 +521,10 @@
             });
         }
 
-        // Resolve a relative href against a base folder, collapsing ../ segments.
+        // Resolve a relative path against a base folder, collapsing ../ segments.
         // resolvePath("posts/reductions/", "../selfreductions/index.md")
         //   → "posts/selfreductions/index.md"
         function resolvePath(base, rel) {
-            // Split base into segments (drop the trailing empty string from trailing /)
             const parts = base.split('/').filter(Boolean);
             for (const seg of rel.split('/')) {
                 if (seg === '..') {
@@ -637,7 +638,31 @@
                 }
 
                 // ── Render markdown ───────────────────────────────────
-                marked.use({ gfm: true, breaks: false });
+                // marked.js does not generate id attributes on headings by
+                // default, so #anchor links in posts go nowhere. Add a
+                // custom heading renderer that slugifies the text and adds
+                // an id, matching standard GFM anchor behaviour.
+                function slugify(text) {
+                    return text
+                        .toLowerCase()
+                        .replace(/[^\w\s-]/g, '')   // strip non-word chars
+                        .trim()
+                        .replace(/[\s_]+/g, '-');    // spaces/underscores → hyphens
+                }
+
+                marked.use({
+                    gfm: true,
+                    breaks: false,
+                    renderer: {
+                        heading({ tokens, depth }) {
+                            const text = this.parser.parseInline(tokens);
+                            // Strip any HTML tags to get plain text for the slug
+                            const plain = text.replace(/<[^>]+>/g, '');
+                            const id = slugify(plain);
+                            return `<h${depth} id="${id}">${text}</h${depth}>\n`;
+                        }
+                    }
+                });
                 const processed = processFootnotes(body);
                 content.innerHTML = renderMarkdown(processed);
 
