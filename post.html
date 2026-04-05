@@ -658,6 +658,7 @@
                         return `%%MATH_${stash.length - 1}%%`;
                     });
                     // Run marked on math-free markdown
+                    console.log("STASHED MD:", md);
                     let html = marked.parse(md);
 
                     // Restore math expressions
