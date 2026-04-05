@@ -127,8 +127,6 @@ If `Factoring` is downward self-reducible, then `Factoring`$\in$**UEOPL**$\subse
 
 The complexity class **UniqueEOPL** (Unique End of Potential Line) captures search problems with the property that their solution space forms an _exponentially_ large line with increasing cost.[^EOPL][^UEOPL] From one candidate solution we can calculate another candidate solution in polynomial time. The end of that line is the (unique) solution of the search problem. This implies (according to a whole host of complexity theoretic assumptions) that **no efficient factoring algorithm exists using the factorization of smaller numbers**.
 
----
-
 # Footnotes
 
 [^semantic]: A complexity class is called a **semantic class** if the Turing Machine (TM) defining this class has a property that is undecidable. See [Papadimitrou's original paper](https://www.karlin.mff.cuni.cz/~krajicek/papadim1.pdf) and [this Stackexchange link](https://cstheory.stackexchange.com/questions/1233/semantic-vs-syntactic-complexity-classes) for a more formal discussion on this topic. In a nutshell, promise classes such as **RP**, **ZPP**, **BPP** are semantic.
@@ -142,8 +140,7 @@ The complexity class **UniqueEOPL** (Unique End of Potential Line) captures sear
 [^EOPL]: One interesting subclass of **EOL** is **End-Of-Potential-Line** (**EOPL**) where we add the following constraint addition to the `EOL` problem instance: we are also given a potential function that increases along each edge. It is known that the `EOPL` problem is complete for **PPAD** $\cap$ **PLS**. Hence **EOPL** = **CLS**, suggesting an equivalence between purely combinatorially defined search problems and real-valued continuous optimisation problems. [See this thesis](https://ora.ox.ac.uk/objects/uuid:67e2d80b-76bf-4b49-9b7d-8bbd91633dd7) for a detailed perspective on this equivalence.
 
 [^UEOPL]:
-    If the graph instance in the `EOPL` problem has a unique sink, then the problem (and the related complexity class) is known as **UEOPL**. It is an open question if the `UEOPL` is complete for **PPAD** $\cap$ **PLS**.[^harsha23]
-    Once again, we note that we overload the notations **EOPL** and **UEOPL** to refer to both the problems and their corresponding complexity class.
+    If the graph instance in the `EOPL` problem has a unique sink, then the problem (and the related complexity class) is known as **UEOPL**. It is an open question if the `UEOPL` is complete for **PPAD** $\cap$ **PLS**.[^harsha23] Once again, we note that we overload the notations **EOPL** and **UEOPL** to refer to both the problems and their corresponding complexity class.
 
 [^Brouwer]: **Brouwer's fixed-point theorem** states that for any continuous function $f$ mapping a nonempty compact convex set to itself, there is a point $x_0$ such that $f(x_0)=x_0$.
 
@@ -162,13 +159,10 @@ The complexity class **UniqueEOPL** (Unique End of Potential Line) captures sear
 [^harsha23]: Prahladh Harsha, Daniel Mitropolsky, and Alon Rosen. Downward Self-Reducibility in TFNP. ITCS 2023. [DOI](https://doi.org/10.4230/LIPIcs.ITCS.2023.67).
 
 [^PPA]:
-    The **Complexity class PPA** (also known as **Polynomial Parity Argument**) captures computational search problems whose totality is rooted in the handshaking lemma for undirected graphs: "all graphs of maximum degree 2 have an even number of leaves."
-    More precisely, **PPA** captures search problems for which there is a polynomial-time algorithm that, given any string, computes its 'neighbor' strings (of which there are at most two). Then given a leaf string (i.e. one with only one neighbor), the problem is to output another leaf string.
+    The **Complexity class PPA** (also known as **Polynomial Parity Argument**) captures computational search problems whose totality is rooted in the handshaking lemma for undirected graphs: "all graphs of maximum degree 2 have an even number of leaves." More precisely, **PPA** captures search problems for which there is a polynomial-time algorithm that, given any string, computes its 'neighbor' strings (of which there are at most two). Then given a leaf string (i.e. one with only one neighbor), the problem is to output another leaf string.
 
 [^beame98]:
-    Paul Beame, Stephen Cook, Jeff Edmonds, Russell Impagliazzo, and Toniann
-    Pitassi. 1998. The Relative Complexity of NP Search Problems. J. Comput. System
-    Sci. 57, 1 (1998), 3–19. https://doi.org/10.1145/225058.225147
+    Paul Beame, Stephen Cook, Jeff Edmonds, Russell Impagliazzo, and Toniann Pitassi. 1998. The Relative Complexity of NP Search Problems. J. Comput. System Sci. 57, 1 (1998), 3–19. https://doi.org/10.1145/225058.225147
 
 [^oppenheim]: Josh Buresh-Oppenheim, Tsuyoshi Morioka: **Relativized NP Search Problems and Propositional Proof Systems**. CCC 2004: 54-67.
 

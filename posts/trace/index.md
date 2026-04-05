@@ -264,6 +264,8 @@ To see why "first order" is the right frame: note that for a _scalar_ $a$, $(1 +
 
 > **Exercise:** Prove that $\det(e^A) = e^{\mathrm{tr}(A)}$ for any square matrix $A$, using the Jordan normal form.
 
+# Footnotes
+
 [^linmap]: **Linear Operator:** Let $V$ be a vector space over some field $\mathbb{F}$. A function $A:V\mapsto V$ is a linear operator on $V$ if $\forall \lambda,\sigma\in\mathbb{F}$ and $\forall v,w\in V$, $A(\lambda v + \sigma w) = \lambda A(v) + \sigma A(w)$.
 
 [^bounded]: **Matrix Representation:** A linear operator on an infinite-dimensional vector space will not have a matrix representation if it is not _bounded_. For the purposes of our discussion, requiring that $V$ is finite-dimensional suffices and also avoids unnecessary complications.

@@ -168,6 +168,8 @@ This is the only file you edit when adding a post. Each entry needs a `file` pat
 
 **`excerpt` is optional.** If you omit it, `blog.html` generates one automatically by stripping markdown syntax from the first ~160 characters of the post body. You can always override it by adding `excerpt` to `index.json` — useful when the opening paragraph isn't a good teaser (e.g. it starts with a blockquote or a definition).
 
+The order of entries in `index.json` also determines prev/next navigation order in `post.html`. Put the newest post first (index position 0).
+
 ### Frontmatter Fields
 
 Every post must have a YAML frontmatter block at the top of the `.md` file:
@@ -200,7 +202,7 @@ Hugo-specific fields (`categories`, `slug`, etc.) are silently ignored.
    posts/my-post/index.md
    ```
 
-2. Add one entry to `posts/index.json`:
+2. Add one entry to `posts/index.json` at the top (newest first):
 
    ```json
    { "file": "posts/my-post/index.md" }
@@ -246,7 +248,7 @@ Standard GitHub-flavoured Markdown (GFM) is supported:
 | value    | value    | value    |
 ```
 
-**Code blocks** — fenced with triple backticks and an optional language tag for syntax highlighting (highlighting is handled by the browser's default monospace rendering — no syntax highlighter is loaded):
+**Code blocks** — fenced with triple backticks and an optional language tag for syntax highlighting (highlighting is handled by the browser's default monospace rendering — no syntax highlighter is loaded). Each code block gets a hover-activated copy button automatically:
 
 ````markdown
 ```python
@@ -383,7 +385,7 @@ Place images in the same folder as the post's `index.md` and reference them with
 
 Supported formats: PNG, JPG/JPEG, SVG, WebP, GIF. For diagrams and figures, prefer SVG (scales perfectly on all screens) or PNG. Avoid JPG for anything with text or sharp edges.
 
-There is no automatic caption rendering — the alt text is for accessibility only and does not appear visually below the image. If you want a visible caption, use an HTML `<figure>`:
+Alt text is for accessibility only and does not appear visually. For a visible caption, use an HTML `<figure>` — `post.html` styles these automatically:
 
 ```html
 <figure>
@@ -443,13 +445,21 @@ Five breakpoints (four shared with `main.css`, plus one desktop-only addition):
 
 Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card interactions, horizontal scroll on tag bar at very small sizes.
 
-### `post.html` — Relative Path Resolution
+### `post.html` — Post Features
 
-When a post lives in a subfolder (`posts/reductions/index.md`), relative image paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404.
+`post.html` is the shared single-post template. Beyond rendering markdown, it provides several automatic features:
 
-`post.html` fixes this automatically for images: after rendering, it prepends the post's folder to any relative `img[src]` path. It also handles `a[href]` links in three ways: external URLs (`https://…`) get `target="_blank"` so they open in a new tab; same-page anchor links (`#heading`) smooth-scroll to the target heading; and relative file paths (`./` or `../`) get the post folder prepended.
+- **Scroll progress bar** — a thin accent-coloured bar fixed at the top of the viewport that fills as you scroll down the post.
+- **Reading time** — word-counts the markdown body and displays "X min read" next to the date in the post header (assumes ~200 wpm).
+- **Collapsible table of contents** — auto-generated from `##`, `###`, and `####` headings, rendered as a `<details>`/`<summary>` block just below the post header. Only shown when a post has 2 or more such headings.
+- **Anchor links on headings** — a `¶` symbol appears on hover next to each heading, linking to that heading's ID. Hidden on mobile.
+- **Copy button on code blocks** — appears on hover over every fenced code block, copies the code to the clipboard, and briefly shows a `✓` confirmation.
+- **Figure captions** — `<figure>`/`<figcaption>` blocks (written as inline HTML in the markdown) are styled automatically. See the Images section for the syntax.
+- **Prev/Next navigation** — a three-slot footer nav (previous post on the left, "← All posts" centred, next post on the right), wired dynamically from `index.json`. Order follows the manifest — index position 0 is treated as the newest post.
 
-Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
+**Relative path resolution** — when a post lives in a subfolder (`posts/reductions/index.md`), relative image paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404. `post.html` fixes this automatically: after rendering, it prepends the post's folder to any relative `img[src]`. It also handles `a[href]` links in three ways: external URLs (`https://…`) get `target="_blank"` so they open in a new tab; same-page anchor links (`#heading`) smooth-scroll to the target heading; and relative file paths (`./` or `../`) get the post folder prepended.
+
+Tables are automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
 
 ---
 
