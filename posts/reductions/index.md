@@ -204,10 +204,6 @@ In this section, the reader is assumed to have familiarity with concepts of deci
 
 Let $A\subseteq B$, and they are decision problems.
 
-- If $A$ is decidable, what can we say about $B$?
-- If $A$ is semi-decidable, what can we say about $B$?
-- If $A$ is undecidable, what can we say about $B$?
-
 | If $A$ is...   | Then $B$ may be...                        |
 | -------------- | ----------------------------------------- |
 | decidable      | decidable, semi-decidable, or undecidable |
