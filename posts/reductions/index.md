@@ -136,10 +136,10 @@ Let us finally have a look at how we would reduce $\mathrm{SAT}$ to $\mathrm{HAL
 
 1. Our input $x$ is a Boolean formula. We want to output if this formula is satisfiable.
 2. We construct a TM (Turing Machine) $T$ which accepts $x$ and does the following:
-   - $T$ iterates over all possible assignments to find a satisfying assignment. 🔴 This may require exponential runtime in the size of the formula.
-     - If $T$ finds a satisfying assignment, halt and return 1. 🟣 Hence, if $x$ is satisfiable, $T$ halts.
-   - Otherwise, we put $T$ into an infinite loop. 🟣 Hence, $T$ halts iff $x$ is satisfiable.
-3. Our reduction $R(x)=\langle\langle T\rangle,x\rangle$ takes the $\mathrm{SAT}$ formula $x$ and returns an **encoding** of the above Turing machine $T$ coupled with $x$, such that yes instances of $\mathrm{SAT}$ map to yes instances of $\mathrm{HALT}_{TM}$, and no instances of $\mathrm{SAT}$ map to no instances of $\mathrm{HALT}_{TM}$. 🟣 Note that $R(x)$ at this point can be compared to a compiled binary which has not yet been executed.
+   - $T$ iterates over all possible assignments to find a satisfying assignment. This may require exponential runtime in the size of the formula.
+     - If $T$ finds a satisfying assignment, halt and return 1. Hence, if $x$ is satisfiable, $T$ halts.
+   - Otherwise, we put $T$ into an infinite loop. Hence, $T$ halts iff $x$ is satisfiable.
+3. Our reduction $R(x)=\langle\langle T\rangle,x\rangle$ takes the $\mathrm{SAT}$ formula $x$ and returns an **encoding** of the above Turing machine $T$ coupled with $x$, such that yes instances of $\mathrm{SAT}$ map to yes instances of $\mathrm{HALT}_{TM}$, and no instances of $\mathrm{SAT}$ map to no instances of $\mathrm{HALT}_{TM}$. Note that $R(x)$ at this point can be compared to a compiled binary which has not yet been executed.
 4. We pass $R(x)$ to $O_{\mathrm{HALT}_{TM}}$.
    - If $O_{\mathrm{HALT}_{TM}}(R(x))$ returns yes, this implies $T$ halts on input $x$, which in turn implies $x$ has a satisfying assignment. Therefore $R(x)\in\mathrm{HALT}_{TM}\implies x\in\mathrm{SAT}$.
    - If $O_{\mathrm{HALT}_{TM}}(R(x))$ returns no, then $T$ does not halt on input $x$, which implies that $x$ does not have a satisfying assignment. Therefore $R(x)\notin\mathrm{HALT}_{TM}\implies x\notin\mathrm{SAT}$. We can take the contrapositive to obtain $x\in\mathrm{SAT}\implies R(x)\in\mathrm{HALT}_{TM}$.
