@@ -668,6 +668,7 @@
                 const processed = processFootnotes(rewriteMdLinks(body, postFolder));
                 // content.innerHTML = renderMarkdown(processed);
                 content.innerHTML = marked.parse(processed);
+                console.log("FINAL HTML:", content.innerHTML);
 
                 // ── Add heading ids for in-post #anchor links ─────────
                 // marked does not generate id attributes on headings in newer
