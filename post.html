@@ -649,11 +649,14 @@
                         stash.push(match);
                         return `%%MATH_${stash.length - 1}%%`;
                     });
-                    md = md.replace(/\$[^\$\n]+\$/g, match => {
+                    // md = md.replace(/\$[^\$\n]+\$/g, match => {
+                    //     stash.push(match);
+                    //     return `%%MATH_${stash.length - 1}%%`;
+                    // });
+                    md = md.replace(/\$[^\$\n]+?\$(?!\d)/g, match => {
                         stash.push(match);
                         return `%%MATH_${stash.length - 1}%%`;
                     });
-
                     // Run marked on math-free markdown
                     let html = marked.parse(md);
 
