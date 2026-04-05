@@ -481,6 +481,10 @@
         //
         function resolveRelativePaths(container, postFolder) {
             // postFolder is e.g. "posts/reductions/" (always trailing slash)
+            //
+            // Cross-post .md links are already rewritten to post.html?file=...
+            // by rewriteMdLinks() before marked renders the HTML, so this
+            // function only needs to handle images and other relative assets.
 
             // img src
             container.querySelectorAll('img[src]').forEach(el => {
@@ -488,27 +492,15 @@
                 if (isRelative(src)) el.setAttribute('src', postFolder + src);
             });
 
-            // a href — only rewrite non-anchor relative links
+            // a href — fix any remaining relative non-.md links (e.g. PDFs)
             container.querySelectorAll('a[href]').forEach(el => {
                 const href = el.getAttribute('href');
-                if (!isRelative(href) || href.startsWith('#')) return;
-
-                // Split off any #fragment BEFORE resolving, so it doesn't
-                // become a path segment and break .endsWith('.md') detection
+                // Skip anchors, absolute URLs, and links already rewritten by rewriteMdLinks
+                if (!isRelative(href) || href.startsWith('#') || href.startsWith('post.html')) return;
                 const hashIdx = href.indexOf('#');
                 const hrefPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
                 const fragment = hashIdx === -1 ? '' : href.slice(hashIdx);
-
-                // Resolve ../ traversals against the post's folder
-                const resolved = resolvePath(postFolder, hrefPath);
-
-                if (resolved.endsWith('.md')) {
-                    // Cross-post link: open via post.html renderer
-                    el.setAttribute('href', `post.html?file=${encodeURIComponent(resolved)}${fragment}`);
-                } else {
-                    // Other relative link (PDF, image, etc.)
-                    el.setAttribute('href', resolved + fragment);
-                }
+                el.setAttribute('href', resolvePath(postFolder, hrefPath) + fragment);
             });
 
             // Wrap tables in a scroll container for mobile
@@ -638,61 +630,44 @@
                 }
 
                 // ── Render markdown ───────────────────────────────────
-                // marked.js does not generate id attributes on headings in
-                // v6+, so #anchor links in posts go nowhere without a custom
-                // renderer.
+                // Rewrite cross-post .md links in the markdown string before
+                // marked sees them. This is simpler and more version-safe than
+                // a custom marked renderer, and avoids DOM walking for links.
                 //
-                // The heading renderer API changed across versions:
-                //   v4/v5: heading(text, depth, raw, slugger)  ← positional strings
-                //   v6+:   heading({ tokens, depth, raw, ... }) ← token object
+                //   [text](../foo/index.md)          →  [text](post.html?file=posts/foo/index.md)
+                //   [text](../foo/index.md#section)  →  [text](post.html?file=posts/foo/index.md#section)
                 //
-                // We detect which calling convention is in use at runtime so
-                // this works regardless of which marked version the CDN serves.
-                function slugify(raw) {
-                    return raw
+                function rewriteMdLinks(md, postFolder) {
+                    // Match [text](../path/to/post.md) or [text](../path/to/post.md#anchor)
+                    return md.replace(
+                        /\[([^\]]*)\]\((\.\.[^)#]*\.md)(#[^)]*)?\)/g,
+                        (_, linkText, hrefPath, fragment) => {
+                            const resolved = resolvePath(postFolder, hrefPath);
+                            const frag = fragment || '';
+                            return `[${linkText}](post.html?file=${encodeURIComponent(resolved)}${frag})`;
+                        }
+                    );
+                }
+
+                const postFolder = folderOf(safePath);
+                marked.use({ gfm: true, breaks: false });
+                const processed = processFootnotes(rewriteMdLinks(body, postFolder));
+                content.innerHTML = renderMarkdown(processed);
+
+                // ── Add heading ids for in-post #anchor links ─────────
+                // marked does not generate id attributes on headings in newer
+                // versions. Walk rendered headings and add them after the fact.
+                // Slug matches the standard GFM convention authors would use.
+                content.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => {
+                    if (h.id) return; // already set by this or an older marked version
+                    h.id = h.textContent
                         .toLowerCase()
                         .replace(/[^\w\s-]/g, '')
                         .trim()
                         .replace(/[\s_]+/g, '-');
-                }
-
-                marked.use({
-                    gfm: true,
-                    breaks: false,
-                    mangle: false,      // suppress deprecation warnings in v5
-                    headerIds: false,   // we handle ids ourselves
-                    renderer: {
-                        heading(tokenOrText, depthArg, rawArg) {
-                            // Detect API version by argument type
-                            let text, depth, raw;
-                            if (tokenOrText !== null && typeof tokenOrText === 'object') {
-                                // v6+ object token
-                                depth = tokenOrText.depth;
-                                raw = tokenOrText.raw || tokenOrText.text || '';
-                                // parseInline converts inline tokens → HTML
-                                text = this.parser
-                                    ? this.parser.parseInline(tokenOrText.tokens)
-                                    : (tokenOrText.text || '');
-                            } else {
-                                // v4/v5 positional strings
-                                text = tokenOrText || '';
-                                depth = depthArg;
-                                raw = rawArg || text;
-                            }
-                            const id = slugify(raw.replace(/<[^>]+>/g, ''));
-                            return `<h${depth} id="${id}">${text}</h${depth}>\n`;
-                        }
-                    }
                 });
-                const processed = processFootnotes(body);
-                content.innerHTML = renderMarkdown(processed);
 
-                // ── Fix relative image/link paths ─────────────────────
-                // Only needed when the post lives in a subfolder
-                // (e.g. posts/reductions/index.md → folder = "posts/reductions/")
-                // For flat files (posts/foo.md) folderOf returns "posts/" which
-                // is already the correct base, so the rewrite is harmless.
-                const postFolder = folderOf(safePath);
+                // ── Fix relative image paths and other relative assets ──
                 resolveRelativePaths(content, postFolder);
 
                 // ── Re-run MathJax ────────────────────────────────────
