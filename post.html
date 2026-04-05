@@ -666,7 +666,8 @@
                 const postFolder = folderOf(safePath);
                 marked.use({ gfm: true, breaks: false });
                 const processed = processFootnotes(rewriteMdLinks(body, postFolder));
-                content.innerHTML = renderMarkdown(processed);
+                // content.innerHTML = renderMarkdown(processed);
+                content.innerHTML = marked.parse(processed);
 
                 // ── Add heading ids for in-post #anchor links ─────────
                 // marked does not generate id attributes on headings in newer
