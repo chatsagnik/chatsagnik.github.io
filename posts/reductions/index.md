@@ -266,7 +266,7 @@ In the context of languages in $\mathrm{NP}$, self-reducibility essentially stat
 
 > The search version of a problem Cook-reduces (polynomial-time Turing-reduces) to the decision version of the problem.
 
-**Fact:** Every $\mathrm{NP}$-complete problem is self-reducible and _downward_ self-reducible (informally, the search space can be pruned by making queries on smaller instances)[^note2].
+**Fact:** Every $\mathrm{NP}$-complete problem is self-reducible and _downward_ self-reducible (informally, the search space can be pruned by making queries on smaller instances)[^note2]. [Google](https://google.com)
 
 ## Conclusion
 
@@ -284,4 +284,4 @@ This write-up aims to demystify a core technique used in theoretical computer sc
 
 [^contrapositive]: Explicitly: if $A$ is not decidable then $B$ is not decidable, and if $A$ is not semi-decidable then $B$ is not semi-decidable. The proof of the third statement is as follows: $x\in \bar{A} \iff x\notin A \iff R(x)\notin B \iff R(x)\in\bar{B}$, and therefore $x\in \bar{A} \iff R(x)\in\bar{B}$, establishing $\bar{A}\subseteq\bar{B}$.
 
-[^halt]: Whether this post itself [halts](https://chatsagnik.github.io/halts/index.md) is left as an exercise to the reader.
+[^halt]: Whether this post itself [halts](https://chatsagnik.github.io/halts/index.md) is left as an exercise to the reader. [Google](https://google.com)
