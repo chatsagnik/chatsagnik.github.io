@@ -653,7 +653,7 @@
                     //     stash.push(match);
                     //     return `%%MATH_${stash.length - 1}%%`;
                     // });
-                    md = md.replace(/\$[^\$\n]+?\$(?!\d)/g, match => {
+                    md = md.replace(/\$[^\$]+?\$/g, match => {
                         stash.push(match);
                         return `%%MATH_${stash.length - 1}%%`;
                     });
