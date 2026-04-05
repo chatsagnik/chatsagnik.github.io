@@ -453,7 +453,12 @@ Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card in
 
 When a post lives in a subfolder (`posts/reductions/index.md`), any relative image or link paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404.
 
-`post.html` fixes this automatically: after rendering, it walks all `img[src]` and `a[href]` elements, detects relative paths, and prepends the post's folder (`posts/reductions/`). Absolute paths, protocol URLs, anchors (`#`), and data URIs are left untouched.
+`post.html` fixes this automatically: after rendering, it walks all `img[src]` and `a[href]` elements, resolves relative paths against the post's folder (correctly collapsing `../` traversals), and rewrites them in one of two ways:
+
+- **Images and non-markdown links** — the resolved path is set directly (e.g. `posts/reductions/diagram.png`).
+- **Cross-post `.md` links** — rewritten to `post.html?file=<resolved-path>` so the link opens in the reader rather than downloading raw markdown. `#anchor` fragments are preserved. Example: `../selfreductions/index.md#completeness` in a post at `posts/reductions/` becomes `post.html?file=posts%2Fselfreductions%2Findex.md#completeness`.
+
+Absolute paths, protocol URLs (`https://`), root-relative paths (`/`), anchors (`#`), and data URIs are left untouched.
 
 Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
 

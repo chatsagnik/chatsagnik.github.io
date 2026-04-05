@@ -274,7 +274,7 @@ This write-up aims to demystify a core technique used in theoretical computer sc
 
 [^1]: Formally, we consider problems $O$ and $N$ to be _languages_ or sets of strings corresponding to decision problems, i.e., YES/NO problems.
 
-[^note]: We will look at the notion of _randomized_ reductions in another post.
+[^note]: We will look at the notion of *randomized* reductions in another post.
 
 [^note3]: We will look at weaker notions of reductions in another post.
 

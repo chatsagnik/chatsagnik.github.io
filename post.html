@@ -491,8 +491,21 @@
             // a href — only rewrite non-anchor relative links
             container.querySelectorAll('a[href]').forEach(el => {
                 const href = el.getAttribute('href');
-                if (isRelative(href) && !href.startsWith('#')) {
-                    el.setAttribute('href', postFolder + href);
+                if (!isRelative(href) || href.startsWith('#')) return;
+
+                // Resolve the raw path (handles ../ traversals correctly)
+                const resolved = resolvePath(postFolder, href);
+
+                if (resolved.endsWith('.md')) {
+                    // Cross-post link: rewrite to post.html?file=<path>
+                    // Split off any #anchor fragment
+                    const hashIdx = resolved.indexOf('#');
+                    const mdPath = hashIdx === -1 ? resolved : resolved.slice(0, hashIdx);
+                    const fragment = hashIdx === -1 ? '' : resolved.slice(hashIdx);
+                    el.setAttribute('href', `post.html?file=${encodeURIComponent(mdPath)}${fragment}`);
+                } else {
+                    // Non-markdown relative link (e.g. a PDF or image link)
+                    el.setAttribute('href', resolved);
                 }
             });
 
@@ -504,6 +517,22 @@
                 table.parentNode.insertBefore(wrapper, table);
                 wrapper.appendChild(table);
             });
+        }
+
+        // Resolve a relative href against a base folder, collapsing ../ segments.
+        // resolvePath("posts/reductions/", "../selfreductions/index.md")
+        //   → "posts/selfreductions/index.md"
+        function resolvePath(base, rel) {
+            // Split base into segments (drop the trailing empty string from trailing /)
+            const parts = base.split('/').filter(Boolean);
+            for (const seg of rel.split('/')) {
+                if (seg === '..') {
+                    parts.pop();
+                } else if (seg !== '.') {
+                    parts.push(seg);
+                }
+            }
+            return parts.join('/');
         }
 
         function isRelative(url) {
