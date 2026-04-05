@@ -28,7 +28,7 @@ Since the notion of hardness as described above is quite subjective and non-rigo
 
 > Throughout this post, we assume that the notion of _hard_ and _easy_ depends only on the computational resources available to the problem solver.
 
-Access to powerful computational models might allow us (the problem solver) to efficiently find solutions to previously **hard-to-solve** problems. For example, $\mathrm{SAT}$ can be easily solved if we know how to solve the $\mathrm{Halting}$ problem. We shall expand on this example [later in this post](#reducing-sat-to-the-halting-problem).
+Access to powerful computational models might allow us (the problem solver) to efficiently find solutions to previously **hard-to-solve** problems. For example, $\mathrm{SAT}$ can be easily solved if we know how to solve the $\mathrm{Halting}$ problem. We shall expand on this example later in this post.
 
 Take two problems[^1], $O$ (_an old problem_) and $N$ (_a new problem_). Suppose we make the astute observation that the underlying mathematical structure of $N$ is similar to $O$. Therefore, instead of trying to solve $N$ from scratch, we can hope to somehow use $O$ to solve $N$. We write $A \subseteq B$ to mean "$A$ reduces to $B$", i.e., instances of $A$ can be transformed into instances of $B$. Consider the following situations of interest that might arise where we would ideally like to avoid reinventing the wheel.
 
@@ -278,10 +278,10 @@ This write-up aims to demystify a core technique used in theoretical computer sc
 
 [^note3]: We will look at weaker notions of reductions in another post.
 
-[^note2]: We will look at the notions of self-reducibility and downward self-reducibility [in another post](../selfreductions/index.md).
+[^note2]: We will look at the notions of self-reducibility and downward self-reducibility [in another post](https://chatsagnik.github.io/post.html?file=posts%2Fselfreductions%2Findex.md).
 
 [^note4]: We will look at the notion of randomized reductions and their combination functions in another post.
 
 [^contrapositive]: Explicitly: if $A$ is not decidable then $B$ is not decidable, and if $A$ is not semi-decidable then $B$ is not semi-decidable. The proof of the third statement is as follows: $x\in \bar{A} \iff x\notin A \iff R(x)\notin B \iff R(x)\in\bar{B}$, and therefore $x\in \bar{A} \iff R(x)\in\bar{B}$, establishing $\bar{A}\subseteq\bar{B}$.
 
-[^halt]: Whether this post itself [halts](../halts/index.md) is left as an exercise to the reader.
+[^halt]: Whether this post itself [halts](https://chatsagnik.github.io/halts/index.md) is left as an exercise to the reader.

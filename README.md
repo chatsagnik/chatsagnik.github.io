@@ -364,16 +364,16 @@ This follows from Ajtai'96.[^ajtai96]
 
 ### Cross-references Between Posts
 
-To link from one post to another, use a relative path from the current post's folder:
+To link from one post to another, use a `post.html?file=` URL with the path to the target post percent-encoded:
 
 ```markdown
-[notion of reductions](../reductions/index.md)
-[completeness](../reductions/index.md#completeness)
+[notion of reductions](post.html?file=posts%2Freductions%2Findex.md)
+[completeness](post.html?file=posts%2Freductions%2Findex.md#completeness)
 ```
 
-The `#anchor` syntax links to a specific heading. KaTeX anchors use the heading text lowercased with spaces replaced by hyphens, which is standard GFM behaviour.
+The `%2F` is a percent-encoded `/`. The `#anchor` fragment links to a specific heading — use the heading text lowercased with spaces replaced by hyphens (standard GFM slug).
 
-Do **not** use absolute URLs like `https://chatsagnik.github.io/posts/reductions` for internal links — these break locally and are harder to maintain.
+Do **not** use `../relative/paths` for cross-post links — these are not resolved by `post.html` and will not render as clickable links.
 
 ---
 
@@ -451,14 +451,9 @@ Touch-specific fixes: iOS zoom prevention on search input, `hover`-gated card in
 
 ### `post.html` — Relative Path Resolution
 
-When a post lives in a subfolder (`posts/reductions/index.md`), any relative image or link paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404.
+When a post lives in a subfolder (`posts/reductions/index.md`), relative image paths in the markdown (e.g. `![fig](reductions.png)`) would otherwise resolve against `post.html`'s location at the site root and 404.
 
-`post.html` fixes this automatically: after rendering, it walks all `img[src]` and `a[href]` elements, resolves relative paths against the post's folder (correctly collapsing `../` traversals), and rewrites them in one of two ways:
-
-- **Images and non-markdown links** — the resolved path is set directly (e.g. `posts/reductions/diagram.png`).
-- **Cross-post `.md` links** — rewritten to `post.html?file=<resolved-path>` so the link opens in the reader rather than downloading raw markdown. `#anchor` fragments are preserved. Example: `../selfreductions/index.md#completeness` in a post at `posts/reductions/` becomes `post.html?file=posts%2Fselfreductions%2Findex.md#completeness`.
-
-Absolute paths, protocol URLs (`https://`), root-relative paths (`/`), anchors (`#`), and data URIs are left untouched.
+`post.html` fixes this automatically for images: after rendering, it prepends the post's folder to any relative `img[src]` path. Links (`a[href]`) are left untouched — authors write them as absolute URLs (`https://…`) or site-root-relative `post.html?file=…` paths, both of which resolve correctly without modification.
 
 Tables are also automatically wrapped in a scroll container (`<div class="table-scroll">`) so they scroll horizontally on narrow screens rather than breaking the layout. Display math (`.katex-display`) also scrolls horizontally on mobile.
 
