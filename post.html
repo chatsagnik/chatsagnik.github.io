@@ -22,8 +22,8 @@
     <link rel="icon" href="/assets/cat.png" type="image/x-icon">
     <script src="js/theme.js"></script>
 
-    <!-- marked.js: Markdown → HTML parser -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- marked.js: Markdown → HTML parser (pinned — API changed across major versions) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
     <!-- MathJax for LaTeX rendering -->
     <!-- <script>
@@ -638,27 +638,48 @@
                 }
 
                 // ── Render markdown ───────────────────────────────────
-                // marked.js does not generate id attributes on headings by
-                // default, so #anchor links in posts go nowhere. Add a
-                // custom heading renderer that slugifies the text and adds
-                // an id, matching standard GFM anchor behaviour.
-                function slugify(text) {
-                    return text
+                // marked.js does not generate id attributes on headings in
+                // v6+, so #anchor links in posts go nowhere without a custom
+                // renderer.
+                //
+                // The heading renderer API changed across versions:
+                //   v4/v5: heading(text, depth, raw, slugger)  ← positional strings
+                //   v6+:   heading({ tokens, depth, raw, ... }) ← token object
+                //
+                // We detect which calling convention is in use at runtime so
+                // this works regardless of which marked version the CDN serves.
+                function slugify(raw) {
+                    return raw
                         .toLowerCase()
-                        .replace(/[^\w\s-]/g, '')   // strip non-word chars
+                        .replace(/[^\w\s-]/g, '')
                         .trim()
-                        .replace(/[\s_]+/g, '-');    // spaces/underscores → hyphens
+                        .replace(/[\s_]+/g, '-');
                 }
 
                 marked.use({
                     gfm: true,
                     breaks: false,
+                    mangle: false,      // suppress deprecation warnings in v5
+                    headerIds: false,   // we handle ids ourselves
                     renderer: {
-                        heading({ tokens, depth }) {
-                            const text = this.parser.parseInline(tokens);
-                            // Strip any HTML tags to get plain text for the slug
-                            const plain = text.replace(/<[^>]+>/g, '');
-                            const id = slugify(plain);
+                        heading(tokenOrText, depthArg, rawArg) {
+                            // Detect API version by argument type
+                            let text, depth, raw;
+                            if (tokenOrText !== null && typeof tokenOrText === 'object') {
+                                // v6+ object token
+                                depth = tokenOrText.depth;
+                                raw = tokenOrText.raw || tokenOrText.text || '';
+                                // parseInline converts inline tokens → HTML
+                                text = this.parser
+                                    ? this.parser.parseInline(tokenOrText.tokens)
+                                    : (tokenOrText.text || '');
+                            } else {
+                                // v4/v5 positional strings
+                                text = tokenOrText || '';
+                                depth = depthArg;
+                                raw = rawArg || text;
+                            }
+                            const id = slugify(raw.replace(/<[^>]+>/g, ''));
                             return `<h${depth} id="${id}">${text}</h${depth}>\n`;
                         }
                     }
