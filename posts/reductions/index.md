@@ -190,11 +190,7 @@ We denote these three kinds of reductions as follows, where $\subseteq_{m}$ deno
 
 > $A\subseteq_{m} B \implies A\subseteq_{t} B \implies A\subseteq_{T} B$
 
-**\< Start of Digression \>**
-
-From the nature of the examples, we can see that Karp reductions only extend to decision problems (problems with yes/no outputs). In contrast, Cook reductions can accommodate search/relation/optimization problems (problems with a set of outputs).
-
-**\< End of Digression \>**
+**Note:** From the nature of the examples, we can see that Karp reductions only extend to decision problems (problems with yes/no outputs). In contrast, Cook reductions can accommodate search/relation/optimization problems (problems with a set of outputs).
 
 ---
 
@@ -262,7 +258,7 @@ In the context of languages in $\mathrm{NP}$, self-reducibility essentially stat
 
 > The search version of a problem Cook-reduces (polynomial-time Turing-reduces) to the decision version of the problem.
 
-**Fact:** Every $\mathrm{NP}$-complete problem is self-reducible and _downward_ self-reducible (informally, the search space can be pruned by making queries on smaller instances)[^note2]. [Google](https://google.com)
+**Fact:** Every $\mathrm{NP}$-complete problem is self-reducible and _downward_ self-reducible (informally, the search space can be pruned by making queries on smaller instances)[^note2].
 
 ## Conclusion
 
@@ -282,4 +278,4 @@ This write-up aims to demystify a core technique used in theoretical computer sc
 
 [^contrapositive]: Explicitly: if $A$ is not decidable then $B$ is not decidable, and if $A$ is not semi-decidable then $B$ is not semi-decidable. The proof of the third statement is as follows: $x\in \bar{A} \iff x\notin A \iff R(x)\notin B \iff R(x)\in\bar{B}$, and therefore $x\in \bar{A} \iff R(x)\in\bar{B}$, establishing $\bar{A}\subseteq\bar{B}$.
 
-[^halt]: Whether this post itself [halts](https://chatsagnik.github.io/halts/index.md) is left as an exercise to the reader. [Google](https://google.com)
+[^halt]: Whether this post itself [halts](https://chatsagnik.github.io/halts/index.md) is left as an exercise to the reader.
