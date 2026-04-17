@@ -2,7 +2,7 @@
   {
     "file": "posts/calibration/index.md",
     "excerpt": "What does it mean for a predictor to be calibrated, how far can it stray from perfect calibration, and why does a cheap online algorithm plus a single weak learner get you most of the way to multicalibration? A tour via La Masia."
-  }
+  },
   {
     "file": "posts/trace/index.md",
     "excerpt": "Five definitions of the matrix trace (from eigenvalue sums to Jordan forms to Dirac notation), and its role in quantum mechanics via density matrices, the Born rule, and partial trace."
