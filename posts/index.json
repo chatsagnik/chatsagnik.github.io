@@ -1,5 +1,9 @@
 [
   {
+    "file": "posts/robust/index.md",
+    "excerpt": "An introduction to robust statistics and contamination models."
+  },
+  {
     "file": "posts/calibration/index.md",
     "excerpt": "What does it mean for a predictor to be calibrated, how far can it stray from perfect calibration, and why does a cheap online algorithm plus a single weak learner get you most of the way to multicalibration? A tour via La Masia."
   },
