@@ -112,6 +112,8 @@ Huber contamination, TV distance, and strong contamination are closely related a
 
 The notation $C \implies C'$ between two contamination models has a precise meaning in terms of adversaries. Suppose adversary $\mathcal{A}$ operates under model $C$, and adversary $\mathcal{A}'$ operates under model $C'$. Then $C \implies C'$ means that any corruption producible by $\mathcal{A}$ under $C$ is also a valid corruption under $C'$, i.e. $\mathcal{A}'$ is at least as powerful as $\mathcal{A}$. As a consequence, any estimator that is robust against $\mathcal{A}'$ (i.e. robust under $C'$) is automatically robust against $\mathcal{A}$ (i.e. robust under $C$). In other words, robustness guarantees transfer from stronger models to weaker ones for free.
 
+---
+
 ### Huber $\Rightarrow$ TV
 **Proposition.** $P = (1-\epsilon)P_* + \epsilon Q \implies d_{TV}(P, P_*) \leq \epsilon.$
 
@@ -121,23 +123,28 @@ $$\begin{aligned} P(A) - P_*(A) &= \epsilon\bigl(Q(A) - P_*(A)\bigr). \end{align
 
 Taking absolute values and using $|Q(A) - P_*(A)| \leq 1$ (since both are probabilities in $[0,1]$), we get $|P(A) - P_*(A)| \leq \epsilon$. Taking the supremum over $A$ gives $d_{TV}(P, P_*) \leq \epsilon.$ $\square$
 
+---
+
 ### TV $\Rightarrow$ Huber-type Decomposition
 
 **Proposition.** If $d_{TV}(P, P_*) \leq \epsilon$, then there exist distributions $P_{\mathrm{good}}$ and $Q$ and a number $\epsilon' \leq \epsilon$ such that $P = (1-\epsilon')P_{\mathrm{good}} + \epsilon' Q,$ $P_{\mathrm{good}} \ll P_*,$ and $\forall A$, $P_{\mathrm{good}}(A) \leq \frac{1}{1-\epsilon'} P_*(A)$.
 
 **Proof.** Define $\mu = P + P_*$. Since $P \ll \mu$ and $P_* \ll \mu$, the Radon–Nikodym theorem[^rn] gives densities[^density] $p = dP/d\mu$ and $p_* = dP_*/d\mu$ defined $\mu$-a.e. Set $\epsilon' := d_{TV}(P, P_*) \leq \epsilon$ and define
-$$r(x) := \min\{p(x), p_*(x)\} \leq p_*(x) \quad \mu\text{-a.e.}$$
+$$r(x) := \min\{p(x), p_*(x)\}.$$
 Using the identity $\min(a,b) = \frac{a+b-|a-b|}{2}$,
 
-$$\begin{aligned} \int r \, d\mu &= \frac{1}{2}\left(\int p \, d\mu + \int p_* \, d\mu - \int |p - p_*| \, d\mu\right) = 1 - \frac{1}{2}\int |p - p_*| \, d\mu = 1 - \epsilon'. \end{aligned}$$
+$$\begin{aligned} \int r \, d\mu &= \frac{1}{2}\left(\int p \, d\mu + \int p_* \, d\mu - \int |p - p_*| \, d\mu\right)\\ &= 1 - \frac{1}{2}\int |p - p_*| \, d\mu\\ &= 1 - \epsilon'. \end{aligned}$$
 
 Define
 $$p_{\mathrm{good}}(x) := \frac{r(x)}{1-\epsilon'}, \quad q(x) := \frac{p(x) - r(x)}{\epsilon'},$$
 so that $p = (1-\epsilon')p_{\mathrm{good}} + \epsilon' q$. Let $P_{\mathrm{good}}$ and $Q$ be the corresponding distributions. Since $r(x) \leq p_*(x)$ $\mu$-a.e.,
 
-$$P_{\mathrm{good}}(A) = \int_A p_{\mathrm{good}} \, d\mu \leq \frac{1}{1-\epsilon'} \int_A p_* \, d\mu = \frac{P_*(A)}{1-\epsilon'}, \quad \therefore \quad P_{\mathrm{good}} \ll P_*. \quad \square$$
+$$P_{\mathrm{good}}(A) = \int_A p_{\mathrm{good}} \, d\mu \leq \frac{1}{1-\epsilon'} \int_A p_* \, d\mu = \frac{P_*(A)}{1-\epsilon'},$$
+$$\therefore \quad P_{\mathrm{good}} \ll P_*. \quad \square$$
 
 This shows that if $d_{TV}(P, P_*) \leq \epsilon$, at most an $\epsilon$ fraction of the probability mass can behave arbitrarily, while the remaining $(1-\epsilon)$ fraction comes from a re-weighted $P_*$ that is almost "clean." In other words, TV closeness forces an approximate Huber decomposition.
+
+---
 
 ### TV $\Rightarrow$ Approximate Strong Contamination (w.h.p.)
 
@@ -169,7 +176,9 @@ Therefore $\Pr(S_n \leq \epsilon n) \geq 1 - \exp(-n\epsilon/6)$, i.e. the conta
 
 Combining with the earlier results, we obtain the following chain of inclusions w.h.p.:
 
-$$\mathrm{Huber}(\epsilon) \equiv \mathrm{TV}(\epsilon) \subseteq \mathrm{SAC}\!\left((1+\delta)\frac{\epsilon}{2}\right), \qquad \mathcal{C}_{KL}(\mathcal{B}_0, \epsilon) \subseteq \mathrm{TV}\!\left(\sqrt{\frac{\epsilon}{2}}\right) \subseteq \mathrm{SAC}\!\left((1+\delta)\sqrt{\frac{\epsilon}{2}}\right).$$
+$$\mathrm{Huber}(\epsilon) \equiv \mathrm{TV}(\epsilon) \subseteq \mathrm{SAC}\!\left((1+\delta)\frac{\epsilon}{2}\right),$$
+
+$$\mathcal{C}_{KL}(\mathcal{B}_0, \epsilon) \subseteq \mathrm{TV}\!\left(\sqrt{\frac{\epsilon}{2}}\right) \subseteq \mathrm{SAC}\!\left((1+\delta)\sqrt{\frac{\epsilon}{2}}\right).$$
 
 ### Distortion and $f$-Divergence Contamination
 
@@ -187,11 +196,9 @@ For TV contamination, $g(\epsilon) = \epsilon$. For KL contamination, Pinsker's 
 
 # Footnotes
 
-[^rn]: The Radon–Nikodym theorem states that if $\nu$ is a $\sigma$-finite measure and $\mu$ is a $\sigma$-finite measure with $\nu \ll \mu$ (i.e. $\nu$ is absolutely continuous[^ac] with respect to $\mu$, meaning $\mu(A) = 0 \implies \nu(A) = 0$), then there exists a measurable function $f \geq 0$ such that $\nu(A) = \int_A f \, d\mu$ for all measurable $A$. This $f$ is unique $\mu$-a.e. and is called the Radon–Nikodym derivative, written $f = d\nu/d\mu$.
+[^rn]: A measure $\nu$ is absolutely continuous with respect to a measure $\mu$, written $\nu \ll \mu$, if every set that has $\mu$-measure zero also has $\nu$-measure zero: $\mu(A) = 0 \implies \nu(A) = 0$. Intuitively, $\nu$ cannot assign positive mass to regions that $\mu$ considers negligible. In our setting, $P \ll \mu$ and $P_* \ll \mu$ hold trivially since $\mu = P + P_*$: any set with $\mu(A) = 0$ must have both $P(A) = 0$ and $P_*(A) = 0$. **The Radon–Nikodym theorem** states that if $\nu$ is a $\sigma$-finite measure and $\mu$ is a $\sigma$-finite measure with $\nu \ll \mu$ (i.e. $\nu$ is absolutely continuous with respect to $\mu$, meaning $\mu(A) = 0 \implies \nu(A) = 0$), then there exists a measurable function $f \geq 0$ such that $\nu(A) = \int_A f \, d\mu$ for all measurable $A$. This $f$ is unique $\mu$-a.e. and is called the Radon–Nikodym derivative, written $f = d\nu/d\mu$.
 
 [^density]: A density of a distribution $P$ with respect to a dominating measure $\mu$ is the Radon–Nikodym derivative $p = dP/d\mu$. It satisfies $P(A) = \int_A p \, d\mu$ for all measurable $A$, and $\int p \, d\mu = 1$. When $\mu$ is the Lebesgue measure, $p$ is the familiar probability density function. Here $\mu = P + P_*$ dominates both $P$ and $P_*$, so both densities $p$ and $p_*$ exist and satisfy $p, p_* \geq 0$ and $\int p \, d\mu = \int p_* \, d\mu = 1$.
-
-[^ac]: A measure $\nu$ is absolutely continuous with respect to a measure $\mu$, written $\nu \ll \mu$, if every set that has $\mu$-measure zero also has $\nu$-measure zero: $\mu(A) = 0 \implies \nu(A) = 0$. Intuitively, $\nu$ cannot assign positive mass to regions that $\mu$ considers negligible. In our setting, $P \ll \mu$ and $P_* \ll \mu$ hold trivially since $\mu = P + P_*$: any set with $\mu(A) = 0$ must have both $P(A) = 0$ and $P_*(A) = 0$.
 
 [^coupling]: A coupling of two distributions $P$ and $P_*$ is a joint distribution $\pi$ on $\mathcal{X} \times \mathcal{X}$ whose marginals recover $P$ and $P_*$, i.e. $\pi(A \times \mathcal{X}) = P(A)$ and $\pi(\mathcal{X} \times A) = P_*(A)$ for all measurable $A$. Intuitively, a coupling is a way of constructing two random variables $X \sim P$ and $X' \sim P_*$ on the same probability space, possibly with dependence between them.
 
