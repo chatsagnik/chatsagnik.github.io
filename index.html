@@ -94,6 +94,81 @@
         <h1 id="paperh1">Research (selected)</h1>
         <div class="publication-grid grid">
 
+          <!--Conv Basin-->
+          <div class="card stacked">
+            <div class="card__content">
+              <h3 class="paper__title">Convex Basins in Single-Index Model Loss Landscapes: Applications to Robust
+                Recovery
+                under Strong Adversarial Corruption.
+              </h3><br>
+              <hr><br>
+              <p class="card-description" id="QuantAgDTpara">
+                with
+                <a href="https://openreview.net/profile?id=~SANTANU_DAS3" target="_blank" rel="noopener noreferrer">
+                  Santanu Das
+                </a>
+                and
+                <a href="https://jatinbatra50.github.io/jatinbatra50/" target="_blank" rel="noopener noreferrer">
+                  Jatin Batra.</a>
+                <br><br>
+                <span class="highlight">Accepted at <span class="venue">ICML 2026</span>.</span> <br><br>
+
+                We obtain the first near-linear sample and time complexity robust recovery algorithm for a broad class
+                of SIMs with generative exponent at most 2. Our results are optimal (up to logarithmic factors), and the
+                first known efficient robust recovery algorithms for generic non-monotonic nonlinear SIMs.
+              </p><br>
+              <!-- <h4>
+                <i class="uil uil-file-info-alt"></i>
+                [coming soon....]
+              </h4><br> -->
+              <hr>
+              <a class="absbutton" onclick="mytoggle('abs5')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Abstract</a>&nbsp;&nbsp;
+              <a class="absbutton" onclick="mytoggle('bib5')"><i
+                  class="uil uil-plus-circle"></i>&nbsp;Citation</a>&nbsp;&nbsp;
+
+              <div class="abstract" id="abs5">
+                In this paper, we tackle a fundamental problem in high-dimensional
+                statistics, namely, learning Single Index Models (SIMs) robustly in
+                the presence of heavy-tailed noise and an adversary that can corrupt a
+                constant fraction of both covariates and responses. Prior research on
+                efficient robust recovery only focuses on monotonic link functions or
+                only limits itself to Phase Retrieval. Provable efficient robust
+                recovery guarantees for generic nonlinear link functions have remained
+                elusive. In this paper, we obtain the first near-linear time,
+                optimal-sample-complexity robust recovery algorithm for a wide class of
+                nonlinear non-monotonic link functions. Critical to our result is an
+                improved understanding of the squared-loss landscape: we identify a
+                sufficient condition under which a broad class of nonlinear link
+                functions admit a dimension-independent constant-radius convex basin
+                around the ground truth, establishing statistical identifiability
+                beyond previously known cases. We also leverage second-order Stein's
+                identities to identify a structural condition, that we term
+                <strong>Expected Squared Convexity</strong> (ESC), that acts as a sufficient
+                condition for spectral initialization techniques to obtain an estimator
+                within the convex basin with error $O(\epsilon^{1/4})$, even under
+                heavy-tailed noise and strong adversarial contamination. This robust
+                initialization technique can be combined with a robust gradient descent
+                phase to break the spectral error barrier, achieving an improved
+                estimation error of $O(\sigma\sqrt{\epsilon})$. Our non-convex
+                optimization framework gives the first efficient sample and time
+                complexity robust recovery results for activation functions such as
+                GeLU and Swish that act as building blocks of modern deep-learning
+                architectures.
+              </div>
+              <div class="abstract" id="bib5">
+                @inproceedings{das2026convexbasins,
+                title={Convex Basins in Single-Index Model Loss Landscapes: Applications to Robust Recovery under Strong
+                Adversarial
+                Corruption},<br>
+                author={Santanu Das and Sagnik Chatterjee and Jatin Batra},<br>
+                year={2026},<br>
+                booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},<br>
+                }
+              </div>
+            </div>
+          </div>
+
           <!--Gen Bound-->
           <div class="card stacked">
             <div class="card__content">
