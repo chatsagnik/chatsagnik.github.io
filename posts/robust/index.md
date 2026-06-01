@@ -30,12 +30,10 @@ Under the idealized model, $(x_i, y_i) \overset{iid}{\sim} P_{w_\star}$. A natur
 
 > Does this assumption hold exactly, or only approximately?
 
-The answer to the first question is almost always: only approximately. In fact, there are three distinct failure modes when it comes to the i.i.d. assumption.
+The answer is almost always: only approximately. In fact, there are three distinct failure modes when it comes to the i.i.d. assumption.
 
 - **Gross outliers (sparse corruption).** A small fraction $\epsilon > 0$ of data points are arbitrarily corrupted: $(x_i, y_i) \to (x_i', y_i')$, where the corrupted points may be adversarially chosen.
-
 - **Bounded errors (dense noise).** A large fraction of points are slightly perturbed: $(x_i, y_i) \approx (x_i', y_i')$. No single point is catastrophically wrong, but the aggregate deviation is non-negligible.
-
 - **Model misspecification.** The assumed linear relationship simply does not hold. As the saying goes, "all models are wrong, but some are useful."[^box] For example, assuming $X \sim \mathcal{N}(\mu, \Sigma)$ with a linear response, i.e. $Y = X^\top w_\star$, is common practice even when the true covariates are not known to be Gaussian or the true relationship is not known to be linear.
 
 ---
@@ -52,21 +50,29 @@ $$P = (1-\epsilon)P_* + \epsilon Q,$$
 
 where $Q$ is an arbitrary (possibly adversarial) distribution and $\epsilon$ is the contamination fraction.
 
+### Hampel Contamination Model
+
+The Hampel model (also called the *gross error model*) combines both addition and subtraction: the adversary may both inject and remove points. The **Hampel contamination model** combines both: the adversary may simultaneously inject and remove mass. Formally, $P$ is a Hampel $(\epsilon_+, \epsilon_-)$-contamination of $P_*$ if there exist distributions $Q$ and $R$ and non-negative weights $\epsilon_+, \epsilon_- \geq 0$ such that
+
+$$P = \frac{(1-\epsilon_+)P_* + \epsilon_+ Q - \epsilon_- R}{(1-\epsilon_+)(1 - \epsilon_-) + \epsilon_+(1-\epsilon_-)}$$
+
+where $\epsilon_+$ controls the fraction of foreign mass added and $\epsilon_-$ controls the fraction of clean mass removed.[^hampel] Huber contamination is the special case $\epsilon_- = 0$, and subtractive contamination is the special case $\epsilon_+ = 0$.
+
 ### Strong Contamination Model
 
-Draw a clean sample $S \sim P_*^n$. An adversary inspects the entire sample and replaces up to $\epsilon n$ points arbitrarily. Let $T$ denote the observed dataset. Then $|S \cap T| \geq (1-\epsilon)n.$
+Unlike the Huber or Hampel models, this model describes sparse corruption under an adaptive adversary. After we draw a clean sample $S \sim P_*^n$, an adversary inspects the entire sample and replaces up to $\epsilon n$ points arbitrarily. Let $T$ denote the observed dataset. Then $|S \cap T| \geq (1-\epsilon)n.$
 
-This is stronger than Huber contamination: the adversary sees the clean data before choosing corruptions and can respond adaptively. It is often used to derive worst-case robustness guarantees.
+This is stronger than Huber (or Hampel) contamination: the adversary sees the clean data before choosing corruptions and can respond adaptively. It is often used to derive worst-case robustness guarantees.
 
 ### Total Variation Contamination
 
-Samples are drawn i.i.d. from $P$, where $d_{TV}(P, P_*) \leq \epsilon$. Recall that
+The TV contamination model (and other models that follow below) describe dense corruptions, where every point can be corrupted to a small extent. In particular, for TV contamination, samples are drawn i.i.d. from $P$, where $d_{TV}(P, P_*) \leq \epsilon$. Recall that
 
 $$d_{TV}(P, P_*) = \sup_A |P(A) - P_*(A)| = \inf_\pi \Pr_{(X,Y)\sim\pi}(X \neq Y),$$
 
 where the infimum is over all couplings[^coupling] $\pi$ with marginals $P$ and $P_*$. TV distance measures the largest probability discrepancy over all measurable events, or equivalently, the minimum probability that two random variables drawn from $P$ and $P_*$ can be made to differ. A small TV distance means the two distributions are nearly indistinguishable.
 
-One could also study robustness under other notions of distance that capture different aspects of distributional closeness — Kolmogorov distance focuses on CDFs, while Wasserstein distance incorporates the geometry of the space. The choice of distance influences both the difficulty of the problem and the type of robustness guarantees achievable.
+One could also study robustness under other notions of distance that capture different aspects of distributional closeness. The choice of distance influences both the difficulty of the problem and the type of robustness guarantees achievable.
 
 ### Kolmogorov Contamination Model
 
@@ -89,14 +95,6 @@ where the infimum is over all couplings $\pi$ with marginals $P$ and $P_*$.[^was
 $$\mathcal{W}_k^\rho(P_*) := \{P \mid W_k(P, P_*) \leq \rho\}.$$
 
 Rather than concentrating all the adversarial budget on a small fraction of catastrophically corrupted points, the Wasserstein adversary is allowed to **move every single data point** by a small amount. The total "transport cost" of all these moves is bounded by $\rho$, but no individual point is immune. Unlike TV and Huber (or strong) contamination, displacement is penalized proportionally to distance.
-
-### Hampel Contamination Model
-
-The **Hampel model** (also called the *gross error model*) combines both addition and subtraction: the adversary may both inject and remove points. The **Hampel contamination model** combines both: the adversary may simultaneously inject and remove mass. Formally, $P$ is a Hampel $(\epsilon_+, \epsilon_-)$-contamination of $P_*$ if there exist distributions $Q$ and $R$ and non-negative weights $\epsilon_+, \epsilon_- \geq 0$ such that
-
-$$P = \frac{(1-\epsilon_+)P_* + \epsilon_+ Q - \epsilon_- R}{(1-\epsilon_+)(1 - \epsilon_-) + \epsilon_+(1-\epsilon_-)}$$
-
-where $\epsilon_+$ controls the fraction of foreign mass added and $\epsilon_-$ controls the fraction of clean mass removed.[^hampel] Huber contamination is the special case $\epsilon_- = 0$, and subtractive contamination is the special case $\epsilon_+ = 0$.
 
 ### General Probability Metric Contamination Model
 
