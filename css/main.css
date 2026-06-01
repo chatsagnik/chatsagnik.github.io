@@ -821,6 +821,14 @@ hr {
   color: var(--clr-txt);
 }
 
+/* ── Dark mode overrides ─────────────────────────────────────────── */
+[data-theme="dark"] .post-header .meta,
+[data-theme="dark"] .md-body blockquote,
+[data-theme="dark"] .md-body .footnotes,
+[data-theme="dark"] .post-state {
+  color: var(--clr-txt);
+}
+
 .socials svg {
   width: 1.75rem;
   height: 1.75rem;
