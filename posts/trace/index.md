@@ -40,9 +40,9 @@ We start by relating the eigenvalues of an operator to the entries of any of its
 
 $$p(M_B) = \det(M_B-\lambda\cdot I) = \prod_{i=1}^n (a_{ii} - \lambda) + \text{terms of degree }\leq n-2$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)}  \\,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)} \,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr}\\, M_B)} \\,\lambda^{n-1} + \dots + (-1)^n \det M_B\big)\\,.\;\; \text{\small(by Definition 2)}$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr}\, M_B)} \lambda^{n-1} + \dots + (-1)^n \det M_B\big)\,.\; \text{\small(by Definition 2)}$$
 
 > **Exercise:** Check for yourself that the coefficient of the degree 0 term of the characteristic polynomial is indeed $\det M_B$.
 
