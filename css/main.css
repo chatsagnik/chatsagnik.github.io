@@ -809,6 +809,18 @@ hr {
   border-color: #2e3440;
 }
 
+[data-theme="dark"] .blog-subtitle,
+[data-theme="dark"] .post-card-meta,
+[data-theme="dark"] .post-card-excerpt,
+[data-theme="dark"] .result-status,
+[data-theme="dark"] .tag-label,
+[data-theme="dark"] .blog-state,
+[data-theme="dark"] .search-icon,
+[data-theme="dark"] .search-input::placeholder,
+[data-theme="dark"] .search-clear {
+  color: var(--clr-txt);
+}
+
 .socials svg {
   width: 1.75rem;
   height: 1.75rem;
