@@ -1,5 +1,5 @@
 ---
-title: "An Introduction to Algorithmic Robust Statistics"
+title: "Contamination Models in Robust Statistics"
 date: 2026-04-01T00:00:00+05:30
 draft: false
 tags: [robust statistics, Huber contamination, linear regression, f-divergences, total variation distance, measure theory]
@@ -11,44 +11,32 @@ tags: [robust statistics, Huber contamination, linear regression, f-divergences,
 
 ## Introduction
 
-In statistics, a standard assumption is that data are drawn i.i.d. from some distribution $P_{w_\star}$. In practice, this assumption rarely holds exactly — data pipelines corrupt entries, sensors malfunction, and the true data-generating process is often more complicated than the assumed model. The field of **robust statistics** asks if we can design estimators that continue to work well even when the i.i.d. assumption holds only approximately.
+In statistics, a standard assumption is that data are drawn i.i.d. from some distribution $P_{w_\star}$. In practice, this assumption rarely holds exactly since data pipelines corrupt entries, sensors malfunction, and the true data-generating process is often more complicated than the assumed model. The field of **robust statistics** asks if we can design estimators that continue to work well even when the i.i.d. assumption holds only approximately.
 
 More precisely, robustness formalizes the idea that small perturbations in the input data should not lead to large changes in the estimator output. If two datasets are close, $D \approx D'$, then $A(D) \approx A(D')$, where $A$ is the estimator mapping data to an output. In particular, the estimator should be insensitive to a small fraction of corrupted samples.
 
-The **algorithmic** angle sharpens this further: we not only want robust estimators to exist, but want them to be efficiently computable.
+The **algorithmic** angle sharpens this further: we not only want robust estimators to exist, but want them to be efficiently computable. However, we defer discussions on computational aspects to a later post.
 
 ---
 
-## A Running Example: Linear Regression
+## Linear Regression and the i.i.d. Assumption
 
 Given a dataset $T = \{(x_i, y_i)\}_{i=1}^n$ where $x_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$, we seek to predict $y$ from $x$. In many applications, a linear relationship is assumed:
 
 $$Y = X^\top w_\star + Z, \quad \text{where} \quad \mathbb{E}[Z \mid X] = 0.$$
 
 Here $w_\star$ is the true underlying relationship between features and response, while $Z$ captures noise and unmodeled effects.[^noise] The goal is to estimate $w_\star$ from $T$.
+Under the idealized model, $(x_i, y_i) \overset{iid}{\sim} P_{w_\star}$. A natural questions arises:
 
-### The i.i.d. Assumption
+> Does this assumption hold exactly, or only approximately?
 
-Under the idealized model, $(x_i, y_i) \overset{iid}{\sim} P_{w_\star}$. Two natural questions arise:
+The answer to the first question is almost always: only approximately. In fact, there are three distinct failure modes when it comes to the i.i.d. assumption.
 
-- Does this assumption hold exactly, or only approximately?
-- If only approximately, does the estimator remain stable?
+- **Gross outliers (sparse corruption).** A small fraction $\epsilon > 0$ of data points are arbitrarily corrupted: $(x_i, y_i) \to (x_i', y_i')$, where the corrupted points may be adversarially chosen.
 
-For the first question, the answer is almost always: only approximately. There are three distinct failure modes.
+- **Bounded errors (dense noise).** A large fraction of points are slightly perturbed: $(x_i, y_i) \approx (x_i', y_i')$. No single point is catastrophically wrong, but the aggregate deviation is non-negligible.
 
-**Gross outliers (sparse corruption).** A small fraction $\epsilon > 0$ of data points are arbitrarily corrupted: $(x_i, y_i) \to (x_i', y_i')$, where the corrupted points may be adversarially chosen.
-
-**Bounded errors (dense noise).** A large fraction of points are slightly perturbed: $(x_i, y_i) \approx (x_i', y_i')$. No single point is catastrophically wrong, but the aggregate deviation is non-negligible.
-
-**Model misspecification.** The assumed linear relationship simply does not hold. As the saying goes, "all models are wrong, but some are useful."[^box] For example, assuming $X \sim \mathcal{N}(\mu, \Sigma)$ with a linear response, i.e. $Y = X^\top w_\star$, is common practice even when the true covariates are not known to be Gaussian or the true relationship is not known to be linear.
-
-### Instability of OLS
-
-The answer to the second question is uncomfortable. The Ordinary Least Squares estimator,
-
-$$\hat{w}_{\mathrm{OLS}} = \arg\min_w \sum_{(x_i, y_i) \in T} (y_i - x_i^\top w)^2,$$
-
-is extremely sensitive to corruptions. Suppose an adversary wishes to force the learner to recover $w_{\mathrm{adv}} \in \mathbb{R}^d$ instead of the true $w_\star$. The adversary injects a single point $(\tilde{x}, \tilde{y})$ into the dataset, choosing $\tilde{x}$ with very large norm and setting $\tilde{y} = \tilde{x}^\top w_{\mathrm{adv}}$. Since squared loss grows quadratically with the residual, the term $(\tilde{y} - \tilde{x}^\top w)^2$ dominates the entire objective for large $\|\tilde{x}\|$, and the minimizer is forced to satisfy $\tilde{x}^\top w = \tilde{y} = \tilde{x}^\top w_{\mathrm{adv}}$, i.e. $\hat{w}_{\mathrm{OLS}} = w_{\mathrm{adv}}$. Since $w_{\mathrm{adv}}$ is arbitrary, a single corrupted point suffices to send the estimator anywhere in $\mathbb{R}^d$. Classical estimators like OLS rely heavily on the exact correctness of the i.i.d. assumption. Robust statistics seeks estimators whose performance degrades gracefully when this assumption is only approximately satisfied.
+- **Model misspecification.** The assumed linear relationship simply does not hold. As the saying goes, "all models are wrong, but some are useful."[^box] For example, assuming $X \sim \mathcal{N}(\mu, \Sigma)$ with a linear response, i.e. $Y = X^\top w_\star$, is common practice even when the true covariates are not known to be Gaussian or the true relationship is not known to be linear.
 
 ---
 
@@ -92,9 +80,23 @@ $$\mathcal{K}^\epsilon(P_*) := \{P \mid d_K(P, P_*) \leq \epsilon\}.$$
 
 ### Wasserstein Contamination Model
 
-Let $P$ and $P_*$ have finite $k$-th moments. The Wasserstein contamination class of radius $\rho$ is
+Let $P$ and $P_*$ be distributions on $\mathbb{R}^d$ with finite $k$-th moments. Recall that the $k$-th order Wasserstein distance is
+
+$$W_k(P, P_*) = \left(\inf_{\pi \in \Pi(P, P_*)} \mathbb{E}_{(X,Y) \sim \pi} \|X - Y\|_2^k\right)^{1/k},$$
+
+where the infimum is over all couplings $\pi$ with marginals $P$ and $P_*$.[^wass] The Wasserstein contamination class of radius $\rho$ is
 
 $$\mathcal{W}_k^\rho(P_*) := \{P \mid W_k(P, P_*) \leq \rho\}.$$
+
+Rather than concentrating all the adversarial budget on a small fraction of catastrophically corrupted points, the Wasserstein adversary is allowed to **move every single data point** by a small amount. The total "transport cost" of all these moves is bounded by $\rho$, but no individual point is immune. Unlike TV and Huber (or strong) contamination, displacement is penalized proportionally to distance.
+
+### Hampel Contamination Model
+
+The **Hampel model** (also called the *gross error model*) combines both addition and subtraction: the adversary may both inject and remove points. The **Hampel contamination model** combines both: the adversary may simultaneously inject and remove mass. Formally, $P$ is a Hampel $(\epsilon_+, \epsilon_-)$-contamination of $P_*$ if there exist distributions $Q$ and $R$ and non-negative weights $\epsilon_+, \epsilon_- \geq 0$ such that
+
+$$P = \frac{(1-\epsilon_+)P_* + \epsilon_+ Q - \epsilon_- R}{(1-\epsilon_+)(1 - \epsilon_-) + \epsilon_+(1-\epsilon_-)}$$
+
+where $\epsilon_+$ controls the fraction of foreign mass added and $\epsilon_-$ controls the fraction of clean mass removed.[^hampel] Huber contamination is the special case $\epsilon_- = 0$, and subtractive contamination is the special case $\epsilon_+ = 0$.
 
 ### General Probability Metric Contamination Model
 
@@ -103,6 +105,32 @@ More generally, given any probability metric[^probmetric] $d(\cdot, \cdot)$ and 
 $$\mathcal{B}_d^\epsilon(P_*) := \{P \mid d(P, P_*) \leq \epsilon\}.$$
 
 The TV, Kolmogorov, and Wasserstein contamination models are all instances of this general framework. The choice of metric influences both the difficulty of the estimation problem and the type of robustness guarantees achievable.
+
+---
+
+## Stability under contamination
+
+There is a second elephant in the room. Namely,
+
+> If the i.i.d. assumption is only approximately satisfied, does the estimator remain stable?
+
+Before, we answer the second question, we first take a look at a textbook estimator: The Ordinary Least Squares estimator.
+
+$$\hat{w}_{\mathrm{OLS}} = \arg\min_w \sum_{(x_i, y_i) \in T} (y_i - x_i^\top w)^2,$$
+
+The OLS is extremely sensitive to corruptions. Suppose an adversary wishes to force the learner to recover $w_{\mathrm{adv}} \in \mathbb{R}^d$ instead of the true $w_\star$. The adversary injects a single point $(\tilde{x}, \tilde{y})$ into the dataset, choosing $\tilde{x}$ with very large norm and setting $\tilde{y} = \tilde{x}^\top w_{\mathrm{adv}}$. Since squared loss grows quadratically with the residual, the term $(\tilde{y} - \tilde{x}^\top w)^2$ dominates the entire objective for large $\|\tilde{x}\|$, and the minimizer is forced to satisfy $\tilde{x}^\top w = \tilde{y} = \tilde{x}^\top w_{\mathrm{adv}}$, i.e. $\hat{w}_{\mathrm{OLS}} = w_{\mathrm{adv}}$. Since $w_{\mathrm{adv}}$ is arbitrary, a single corrupted point suffices to send the estimator anywhere in $\mathbb{R}^d$. Classical estimators like OLS rely heavily on the exact correctness of the i.i.d. assumption. Robust statistics seeks estimators whose performance degrades gracefully when this assumption is only approximately satisfied.
+
+We see that the OLS is extremely unstable even w.r.t. the presence of a single outlier. This is concerning since even under the mild-sounding Huber model (where only a constant fraction $\epsilon$ of the data is corrupted) a single adversarially chosen distribution $Q$ can shift the mean and variance of the observed distribution by an **arbitrarily large** amount. We can see an example of this behaviour even with respect to Gaussian distributions.
+
+> **Claim.** Let $P_* = \mathcal{N}(\mu, \sigma^2)$ and $P = (1-\epsilon)P_* + \epsilon Q$. Then for any $M > 0$, there exists a choice of $Q$ such that $|\mathbb{E}_P[X] - \mu| \geq M$ and $\mathrm{Var}_P(X) \geq M$.
+
+**Proof.** Let $Q = \delta_t$, a point mass at $t \in \mathbb{R}$. Then
+$$\mathbb{E}_P[X] = (1-\epsilon)\mu + \epsilon t.$$
+As $t \to \infty$, the mean diverges without bound, so $|\mathbb{E}_P[X] - \mu| = \epsilon|t - \mu|$ can be made arbitrarily large. For the variance,
+$$\mathrm{Var}_P(X) = \mathbb{E}_P[X^2] - (\mathbb{E}_P[X])^2 = (1-\epsilon)(\sigma^2 + \mu^2) + \epsilon t^2 - \bigl((1-\epsilon)\mu + \epsilon t\bigr)^2.$$
+Expanding and keeping only the leading term in $t$, $\mathrm{Var}_P(X) \sim \epsilon(1-\epsilon)t^2 \to \infty$. $\square$
+
+So even though only an $\epsilon$ fraction of the data comes from $Q$, the corruption is unbounded in reach. A point mass placed far enough away warps both the first and second moments without any limit. The sample mean and sample variance, being plug-in estimators of these moments, inherit this fragility completely. Since the Huber model bounds the *fraction* of corruption, not its *magnitude*, **designing robust estimators** becomes non-trivial even in the mildest contamination regime. Once again, I offer no solutions at the moment, and only focus on giving the reader a motivation for the field of robust statistics.
 
 ---
 
@@ -166,19 +194,19 @@ $$S_n := \sum_{i=1}^n Z_i \sim \mathrm{Binomial}(n, p).$$
 
 It remains to show $S_n \leq \epsilon n$ with high probability. We want $S_n \leq \epsilon n$. Recall $X \sim \mathrm{Binomial}(n, p)$, so $\mathbb{E}[Z_i] = p$ and $\mathbb{E}[S_n] = np$. By a Chernoff bound with $\delta = 1$,
 
-$$\Pr\left(S_n \geq (1+\delta) \mathbb{E}[S_n]\right) \leq \exp\!\left(-\frac{\delta^2}{2+\delta} \mathbb{E}[S_n]\right).$$
+$$\Pr\left(S_n \geq (1+\delta) \mathbb{E}[S_n]\right) \leq \exp\left(-\frac{\delta^2}{2+\delta} \mathbb{E}[S_n]\right).$$
 
 Substituting $\delta = 1$ and $\mathbb{E}[S_n] = np \leq n\epsilon/2$,
 
-$$\Pr(S_n \geq \epsilon n) \leq \exp\!\left(-\frac{n\epsilon}{6}\right).$$
+$$\Pr(S_n \geq \epsilon n) \leq \exp\left(-\frac{n\epsilon}{6}\right).$$
 
 Therefore $\Pr(S_n \leq \epsilon n) \geq 1 - \exp(-n\epsilon/6)$, i.e. the contamination fraction is at most $\epsilon$ with high probability. $\square$
 
 Combining with the earlier results, we obtain the following chain of inclusions w.h.p.:
 
-$$\mathrm{Huber}(\epsilon) \equiv \mathrm{TV}(\epsilon) \subseteq \mathrm{SAC}\!\left((1+\delta)\frac{\epsilon}{2}\right),$$
+$$\mathrm{Huber}(\epsilon) \equiv \mathrm{TV}(\epsilon) \subseteq \mathrm{SAC}\left((1+\delta)\frac{\epsilon}{2}\right),$$
 
-$$\mathcal{C}_{KL}(\mathcal{B}_0, \epsilon) \subseteq \mathrm{TV}\!\left(\sqrt{\frac{\epsilon}{2}}\right) \subseteq \mathrm{SAC}\!\left((1+\delta)\sqrt{\frac{\epsilon}{2}}\right).$$
+$$\mathcal{C}_{KL}(\mathcal{B}_0, \epsilon) \subseteq \mathrm{TV}\left(\sqrt{\frac{\epsilon}{2}}\right) \subseteq \mathrm{SAC}\left((1+\delta)\sqrt{\frac{\epsilon}{2}}\right).$$
 
 ### Distortion and $f$-Divergence Contamination
 
@@ -207,3 +235,5 @@ For TV contamination, $g(\epsilon) = \epsilon$. For KL contamination, Pinsker's 
 [^noise]: The condition $\mathbb{E}[Z \mid X] = 0$ says the noise is mean-zero *conditional* on the features — the model is correct on average for any given $x$, but the noise may still depend on $x$ in other ways (e.g., its variance may scale with $\|x\|$). A stronger assumption, often made for cleaner theory, is $Z \perp X$ with $\mathbb{E}[Z] = 0$: the noise is entirely independent of the features, not just uncorrelated with them conditionally. The weaker condition suffices for OLS consistency; the stronger one is needed for, e.g., valid prediction intervals.
 
 [^box]: The longer form of the quote, due to George E. P. Box and Norman Draper, reads: "The fact that the polynomial is an approximation does not necessarily detract from its usefulness because all models are approximations. Essentially, all models are wrong, but some are useful." Box, G. E. P.; Draper, N. R. (1987). *Empirical Model-Building and Response Surfaces*. John Wiley & Sons. p. 424.
+
+[^wass]: For $k = 1$, Kantorovich duality gives $W_1(P, P_*) = \sup_{\|f\|_L \leq 1} \mathbb{E}_P[f(X)] - \mathbb{E}_{P_*}[f(X)]$, where the supremum is over all 1-Lipschitz functions. This dual form is what makes $W_1$ computationally tractable and directly connects Wasserstein contamination to the W-GAN objective.

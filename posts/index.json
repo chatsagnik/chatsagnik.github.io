@@ -1,7 +1,7 @@
 [
   {
     "file": "posts/robust/index.md",
-    "excerpt": "An introduction to robust statistics and contamination models."
+    "excerpt": "An introduction to contamination models in robust statistics."
   },
   {
     "file": "posts/calibration/index.md",

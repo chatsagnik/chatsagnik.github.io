@@ -40,9 +40,9 @@ We start by relating the eigenvalues of an operator to the entries of any of its
 
 $$p(M_B) = \det(M_B-\lambda\cdot I) = \prod_{i=1}^n (a_{ii} - \lambda) + \text{terms of degree }\leq n-2$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)} \lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{\Bigg(\sum_{i=1}^n a_{ii}\Bigg)}\lambda^{n-1} + \dots + (-1)^n \det M_B\big)$$
 
-$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr} M_B)} \lambda^{n-1} + \dots + (-1)^n \det M_B\big). \text{\small(by Definition 2)}$$
+$$\implies p(M_B) = (-1)^n \big(\lambda^n - \textcolor{red}{(\mathrm{tr} M_B)} \lambda^{n-1} + \dots + (-1)^n \det M_B\big).\quad \text{\small(by Definition 2)}$$
 
 > **Exercise:** Check for yourself that the coefficient of the degree 0 term of the characteristic polynomial is indeed $\det M_B$.
 
@@ -56,11 +56,11 @@ It is also straightforward to show that the **trace is invariant** using argumen
 
 Let $B,C$ be different bases of $V$. Denote the matrix representations of $A:V\mapsto V$ w.r.t. $B,C$ as $M_B,M_C$ respectively. By definition, $M_B$ and $M_C$ are **similar** matrices with $S$ being the (invertible) change of basis matrix from $B$ to $C$.
 
-> $$p(M_C) = \det(M_C - \lambda I) = \det(S\cdot M_B\cdot S^{-1} - S\cdot \lambda I\cdot S^{-1})$$
+$$p(M_C) = \det(M_C - \lambda I) = \det(S\cdot M_B\cdot S^{-1} - S\cdot \lambda I\cdot S^{-1})$$
 
-> $$\implies p(M_C)= \det(S\cdot (M_B-\lambda I)\cdot S^{-1}) = \det(S)\cdot p(M_B)\cdot\det(S^{-1})$$
+$$\implies p(M_C)= \det(S\cdot (M_B-\lambda I)\cdot S^{-1}) = \det(S)\cdot p(M_B)\cdot\det(S^{-1})$$
 
-> $$\implies p(M_C)= p(M_B).$$
+$$\implies p(M_C)= p(M_B).$$
 
 Hence, the characteristic polynomial is invariant under change of basis. This implies that **the roots of the characteristic polynomial are invariant under basis transformations**. Therefore, the trace (the sum of the roots of the characteristic polynomial by Definition 1) is also invariant under basis change. This also closes the loop on the exercise from earlier: we have now proved the full equivalence $\sum_i M_1(i,i) = \sum_i M_2(i,i) = \sum_i \lambda_i(A)$ in complete generality.
 
@@ -86,9 +86,9 @@ $$B_{\lambda,3} = \begin{bmatrix}\lambda& 1& 0 \\ 0&\lambda& 1 \\ 0&0&\lambda\en
 
 Note that $B_{\lambda,3} e_1 = \lambda e_1$, $B_{\lambda,3} e_2 = e_1+\lambda e_2$, and $B_{\lambda,3} e_3 = e_2+\lambda e_3$. Let $B_\lambda=B_{\lambda,3}-\lambda\cdot I$. This gives us $B_{\lambda} e_1 = 0$, implying that $e_1$ is an eigenvector of $B_{\lambda,3}$ with eigenvalue $\lambda$ (recall [^charpoly]), along with the following relations on $e_2$ and $e_3$.
 
-$$B_{\lambda} e_2 = e_1\\implies {\big(B_{\lambda}\big)}^2 e_2=0$$
+$$B_{\lambda} e_2 = e_1 \implies {\big(B_{\lambda}\big)}^2 e_2=0$$
 
-$$B_{\lambda} e_3 = e_2\\implies {\big(B_{\lambda}\big)}^3 e_3=0$$
+$$B_{\lambda} e_3 = e_2 \implies {\big(B_{\lambda}\big)}^3 e_3=0$$
 
 We denote $e_2$ and $e_3$ as _generalized eigenvectors_ of $B_{\lambda,3}$. One can similarly extend the above argument to any $B_{\lambda_i,m_i}$ to obtain a set of generalized eigenvectors $\{e_1,\ldots,e_{m_i}\}$. Note that the set of generalized eigenvectors is independent. This indicates that there is a basis of generalized eigenvectors that spans the subspace on which $B_{\lambda_i,m_i}$ is an operator.[^block]
 
@@ -206,7 +206,7 @@ The unit trace condition is a normalisation condition, analogous to requiring $\
 
 The **Born rule** is the fundamental postulate that connects the mathematical formalism of quantum mechanics to measurable probabilities. Suppose we perform a measurement on a system described by density matrix $\rho$. A measurement is described by a collection of **measurement operators** $\{M_k\}$ satisfying the completeness relation $\sum_k M_k^\dagger M_k = I$. The probability of obtaining outcome $k$ is:
 
-$$p(k) = \mathrm{tr}(M_k^\dagger M_k \ \rho).$$
+$$p(k) = \mathrm{tr}(M_k^\dagger M_k \rho).$$
 
 In a projective measurement (where $M_k = \Pi_k$ are orthogonal projectors onto eigenspaces of some observable $\hat{O} = \sum_k \lambda_k \Pi_k$). Here, the probability of obtaining outcome $k$ this simplifies to:
 
@@ -214,7 +214,7 @@ $$p(k) = \mathrm{tr}(\Pi_k \rho).$$
 
 The expected value (expectation) of the observable $\hat{O}$ in state $\rho$ is then:
 
-$$\langle \hat{O} \rangle_\rho = \sum_k \lambda_k\ p(k) = \sum_k \lambda_k \ \mathrm{tr}(\Pi_k \rho) = \mathrm{tr}\!\left(\sum_k \lambda_k \Pi_k \cdot \rho \right) = \mathrm{tr}(\hat{O}\\rho),$$
+$$\langle \hat{O} \rangle_\rho = \sum_k \lambda_k\ p(k) = \sum_k \lambda_k \ \mathrm{tr}(\Pi_k \rho) = \mathrm{tr}\!\left(\sum_k \lambda_k \Pi_k \cdot \rho \right) = \mathrm{tr}(\hat{O}\rho),$$
 
 where we used linearity of trace and the definition $\hat{O} = \sum_k \lambda_k \Pi_k$. Every measurable quantity is therefore expressible as a trace. This is precisely why the invariance and linearity of trace are so important in physics: probabilities and expectation values are independent of the choice of basis used to describe the Hilbert space!
 
@@ -248,7 +248,11 @@ What, then, is the geometric meaning of the trace?
 
 ### Infinitesimal Volume Change
 
-The cleanest geometric interpretation of trace comes from thinking about **infinitesimal deformations** of the identity. Consider the one-parameter family of operators $A(t) = I + tB$ for small $t \in \mathbb{R}$. Then by the characteristic polynomial argument, we have $\det(I + tB) = \prod_i (1 + t\lambda_i) = 1 + t\sum_i \lambda_i + O(t^2) = 1 + t\cdot\mathrm{tr}(B) + O(t^2)$.
+The cleanest geometric interpretation of trace comes from thinking about **infinitesimal deformations** of the identity. Consider the one-parameter family of operators $A(t) = I + tB$ for small $t \in \mathbb{R}$. Then by the characteristic polynomial argument, we have
+
+$$\det(I + tB) = \prod_i (1 + t\lambda_i) = 1 + t\sum_i \lambda_i + O(t^2),$$
+
+$$\implies \det(I + tB) = 1 + t\cdot\mathrm{tr}(B) + O(t^2).$$
 
 Geometrically: if you perturb the identity by a small amount $tB$, the **first-order change in volume** (i.e., in the determinant) is exactly $t \cdot \mathrm{tr}(B)$. The trace of $B$ is thus the **infinitesimal volume distortion rate** induced by $B$. This can be made even more precise.
 
